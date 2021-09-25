@@ -4,7 +4,7 @@ import { useEffect } from "react"
 const Home: NextPage = () => {
   // TODO: Perform check for authentication
   useEffect(() => {
-    window.history.pushState(null, null, "/login")
+    window.history.pushState(null, "", "/login")
     window.location.reload()
   }, [])
 

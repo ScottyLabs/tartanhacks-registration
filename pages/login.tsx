@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import React, { ReactElement } from "react"
 import AuthenticationDialog from "src/components/auth/AuthenticationDialog"
-import { BaseLayout } from "src/layouts"
+import { DialogLayout } from "src/layouts"
 
 const LoginPage: NextPage = (): ReactElement => {
   return (
@@ -11,4 +11,4 @@ const LoginPage: NextPage = (): ReactElement => {
   )
 }
 
-export default BaseLayout(LoginPage)
+export default DialogLayout(LoginPage)

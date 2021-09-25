@@ -3,11 +3,15 @@ import { makeStyles } from "@material-ui/core/styles"
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    // add root styles
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }))
 
-const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
+const DialogLayout = (Page: FunctionComponent) => (): ReactElement => {
   const classes = useStyles({})
 
   return (
@@ -19,4 +23,4 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
   )
 }
 
-export default AuthenticatedLayout
+export default DialogLayout

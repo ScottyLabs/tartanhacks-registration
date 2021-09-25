@@ -14,6 +14,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "baseUrl": ".",
+    "paths": {
+      "types/*": ["src/_types/*"],
+      "enums/*": ["src/_enums/*"]
+    }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

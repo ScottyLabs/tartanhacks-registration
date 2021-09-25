@@ -1,8 +1,10 @@
-import type { AppProps } from "next/app"
-import { ThemeProvider } from "@material-ui/styles"
-import { theme } from "src/themes/theme"
-import Head from "next/head"
-import "styles/globals.css"
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@material-ui/styles";
+import { theme } from "src/themes/theme";
+import Head from "next/head";
+import "styles/globals.css";
+import { Provider } from "react-redux";
+import store from "src/store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -13,10 +15,12 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeProvider theme={theme}>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </ThemeProvider>
     </>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;

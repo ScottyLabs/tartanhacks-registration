@@ -1,0 +1,4 @@
+export enum DispatchActionType {
+  REQUEST_REGISTER = "REQUEST_REGISTER",
+  REQUEST_LOGIN = "REQUEST_LOGIN"
+}

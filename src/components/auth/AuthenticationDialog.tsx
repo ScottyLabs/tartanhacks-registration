@@ -1,13 +1,17 @@
-import { ReactElement, useState } from "react"
-import axios from "axios"
 import {
   Button,
+  Collapse,
+  LinearProgress,
   Link,
   makeStyles,
   TextField,
-  Typography,
-} from "@material-ui/core"
-import { useTheme } from "@material-ui/styles"
+  Typography
+} from "@material-ui/core";
+import { useTheme } from "@material-ui/styles";
+import { ReactElement, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import actions from "src/actions";
+import { RootState } from "types/RootState";
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -15,49 +19,70 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "30%",
+    width: "25%",
     borderRadius: "1em",
     padding: "1em",
-    margin: "0 auto",
+    margin: "0 auto"
   },
   registrationForm: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "column"
   },
   switchAuth: {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    marginTop: "1em",
+    marginTop: "1em"
   },
   link: {
     "&:hover": {
       textDecoration: "none",
-      filter: "brightness(85%)",
-    },
-  },
-}))
+      filter: "brightness(85%)"
+    }
+  }
+}));
 
 const AuthenticationDialog = ({ registration = false }): ReactElement => {
-  const theme = useTheme()
-  const classes = useStyles(theme)
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const classes = useStyles(theme);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const register = () => {}
-  const login = () => {}
+  const loggedInEmail = useSelector(
+    (state: RootState) => state?.auth?.data?.email
+  );
+
+  const register = async () => {
+    setLoading(true);
+    dispatch(actions.auth.register(email, password));
+    setLoading(false);
+  };
+  const login = async () => {
+    setLoading(true);
+    dispatch(actions.auth.login(email, password));
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    dispatch(actions.auth.login());
+  }, []);
 
   return (
     <div className={classes.dialog}>
+      <Collapse in={loading}>
+        <LinearProgress />
+      </Collapse>
       <form
         className={classes.registrationForm}
         onSubmit={(e) => {
-          e.preventDefault()
+          e.preventDefault();
 
           if (registration) {
-            register()
+            register();
           } else {
-            login()
+            login();
           }
         }}
       >
@@ -71,7 +96,7 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           variant="outlined"
           value={email}
           onChange={(e) => {
-            setEmail(e.target.value)
+            setEmail(e.target.value);
           }}
         />
         <TextField
@@ -84,10 +109,19 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           variant="outlined"
           value={password}
           onChange={(e) => {
-            setPassword(e.target.value)
+            setPassword(e.target.value);
           }}
         />
-        <Button variant="outlined">
+        <Button
+          variant="outlined"
+          onClick={() => {
+            if (registration) {
+              register();
+            } else {
+              login();
+            }
+          }}
+        >
           {registration ? "Register" : "Login"}
         </Button>
         <div className={classes.switchAuth}>
@@ -105,7 +139,7 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default AuthenticationDialog
+export default AuthenticationDialog;
