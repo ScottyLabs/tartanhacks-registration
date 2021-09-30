@@ -1,5 +1,5 @@
-import { createTheme } from "@material-ui/core";
-import { green } from "@material-ui/core/colors";
+import { createTheme } from "@material-ui/core"
+import { green } from "@material-ui/core/colors"
 
 export const theme = createTheme({
   palette: {
@@ -13,4 +13,4 @@ export const theme = createTheme({
   typography: {
     fontFamily: "Poppins, sans-serif"
   }
-});
+})
