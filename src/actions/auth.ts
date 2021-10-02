@@ -1,6 +1,6 @@
-import { DispatchActionType } from "enums/DispatchActionType";
-import { RequestStatus } from "enums/RequestStatus";
-import { DispatchAction } from "types/DispatchAction";
+import { DispatchActionType } from "enums/DispatchActionType"
+import { RequestStatus } from "enums/RequestStatus"
+import { DispatchAction } from "types/DispatchAction"
 
 export const register = (email: string, password: string): DispatchAction => ({
   type: DispatchActionType.REQUEST_REGISTER,
@@ -11,7 +11,7 @@ export const register = (email: string, password: string): DispatchAction => ({
     body: { email, password }
   },
   status: RequestStatus.PENDING
-});
+})
 
 export const verify = (token: string): DispatchAction => ({
   type: DispatchActionType.REQUEST_VERIFY,
@@ -33,4 +33,4 @@ export const login = (email?: string, password?: string): DispatchAction => ({
     body: { email, password }
   },
   status: RequestStatus.PENDING
-});
+})

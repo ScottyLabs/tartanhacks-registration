@@ -6,12 +6,12 @@ import {
   makeStyles,
   TextField,
   Typography
-} from "@material-ui/core";
-import { useTheme } from "@material-ui/styles";
-import { ReactElement, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import actions from "src/actions";
-import { RootState } from "types/RootState";
+} from "@material-ui/core"
+import { useTheme } from "@material-ui/styles"
+import { ReactElement, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -40,34 +40,34 @@ const useStyles = makeStyles((theme) => ({
       filter: "brightness(85%)"
     }
   }
-}));
+}))
 
 const AuthenticationDialog = ({ registration = false }): ReactElement => {
-  const dispatch = useDispatch();
-  const theme = useTheme();
-  const classes = useStyles(theme);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch()
+  const theme = useTheme()
+  const classes = useStyles(theme)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
 
   const loggedInEmail = useSelector(
     (state: RootState) => state?.auth?.data?.email
-  );
+  )
 
   const register = async () => {
-    setLoading(true);
-    dispatch(actions.auth.register(email, password));
-    setLoading(false);
-  };
+    setLoading(true)
+    dispatch(actions.auth.register(email, password))
+    setLoading(false)
+  }
   const login = async () => {
-    setLoading(true);
-    dispatch(actions.auth.login(email, password));
-    setLoading(false);
-  };
+    setLoading(true)
+    dispatch(actions.auth.login(email, password))
+    setLoading(false)
+  }
 
   useEffect(() => {
-    dispatch(actions.auth.login());
-  }, []);
+    dispatch(actions.auth.login())
+  }, [])
 
   return (
     <div className={classes.dialog}>
@@ -77,12 +77,12 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
       <form
         className={classes.registrationForm}
         onSubmit={(e) => {
-          e.preventDefault();
+          e.preventDefault()
 
           if (registration) {
-            register();
+            register()
           } else {
-            login();
+            login()
           }
         }}
       >
@@ -96,7 +96,7 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           variant="outlined"
           value={email}
           onChange={(e) => {
-            setEmail(e.target.value);
+            setEmail(e.target.value)
           }}
         />
         <TextField
@@ -109,16 +109,16 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           variant="outlined"
           value={password}
           onChange={(e) => {
-            setPassword(e.target.value);
+            setPassword(e.target.value)
           }}
         />
         <Button
           variant="outlined"
           onClick={() => {
             if (registration) {
-              register();
+              register()
             } else {
-              login();
+              login()
             }
           }}
         >
@@ -139,7 +139,7 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
         </div>
       </form>
     </div>
-  );
-};
+  )
+}
 
-export default AuthenticationDialog;
+export default AuthenticationDialog

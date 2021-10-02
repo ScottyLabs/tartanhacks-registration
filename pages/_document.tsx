@@ -1,14 +1,10 @@
-import { ServerStyleSheets } from "@material-ui/styles";
-import Document, { Head, Html, Main, NextScript } from "next/document";
-import React, { ReactElement, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import actions from "src/actions";
-import { theme } from "src/themes/theme";
-
+import { ServerStyleSheets } from "@material-ui/styles"
+import Document, { Head, Html, Main, NextScript } from "next/document"
+import React, { ReactElement } from "react"
+import { theme } from "src/themes/theme"
 
 class MyDocument extends Document {
   render(): ReactElement {
-
     return (
       <Html>
         <Head>
@@ -35,24 +31,24 @@ class MyDocument extends Document {
           <NextScript />
         </body>
       </Html>
-    );
+    )
   }
 }
 
 // eslint-disable-next-line
 MyDocument.getInitialProps = async (ctx): Promise<any> => {
-  const sheets = new ServerStyleSheets();
-  const originalRenderPage = ctx.renderPage;
+  const sheets = new ServerStyleSheets()
+  const originalRenderPage = ctx.renderPage
 
   // eslint-disable-next-line
   ctx.renderPage = (): any =>
     originalRenderPage({
       // eslint-disable-next-line
       enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
-    });
+    })
 
-  const isProduction = process.env.NODE_ENV === "production";
-  const initialProps = await Document.getInitialProps(ctx);
+  const isProduction = process.env.NODE_ENV === "production"
+  const initialProps = await Document.getInitialProps(ctx)
 
   return {
     ...initialProps,
@@ -63,7 +59,7 @@ MyDocument.getInitialProps = async (ctx): Promise<any> => {
         {sheets.getStyleElement()}
       </>
     )
-  };
-};
+  }
+}
 
-export default MyDocument;
+export default MyDocument
