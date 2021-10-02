@@ -3,6 +3,31 @@ import { DispatchAction } from "types/DispatchAction"
 import { RequestStatus } from "enums/RequestStatus"
 import { Middleware } from "redux"
 
+/**
+ * Inject URL parameters into a URL for GET requests with "body" parameters specified.
+ * This looks for any instances of {key} (including curly braces) in the URL, for every key specified in the body.
+ * It then replaces {key} with the corresponding value
+ * @param path path to transform
+ * @param method  HTTP method
+ * @param body dictionary of URL params (string keys to string values) to replace in the path
+ * @returns transformed path, if possible
+ */
+const transformPath = (
+  path: string,
+  method: string,
+  body: { [key: string]: string }
+): string => {
+  if (method == "GET" && body != null) {
+    for (const key of Object.keys(body)) {
+      path = path.replaceAll(`{${key}}`, body[key])
+    }
+  }
+  return path
+}
+
+/**
+ * Middleware to send calls to the backend from DispatchActions, as necessary
+ */
 const apiMiddleware: Middleware<any, any> =
   ({ dispatch }) =>
   (next) =>
@@ -21,7 +46,8 @@ const apiMiddleware: Middleware<any, any> =
     dispatch({ type, status: RequestStatus.PENDING })
 
     // Initialize request params
-    const { path, method, body } = request
+    const { method, body } = request
+    const path = transformPath(request.path, method, body)
     const url = `${process.env.BACKEND_URL}${path}`
     const accessToken = window.localStorage.getItem("accessToken")
 
