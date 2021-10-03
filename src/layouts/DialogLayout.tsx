@@ -11,6 +11,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+/**
+ * A basic centered layout containing a dialog centered to the middle of the page
+ */
 const DialogLayout = (Page: FunctionComponent) => (): ReactElement => {
   const classes = useStyles({})
 

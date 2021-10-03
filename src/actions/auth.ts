@@ -3,7 +3,7 @@ import { RequestStatus } from "enums/RequestStatus"
 import { DispatchAction } from "types/DispatchAction"
 
 export const register = (email: string, password: string): DispatchAction => ({
-  type: DispatchActionType.REQUEST_REGISTER,
+  type: DispatchActionType.AUTH_REGISTER,
   useAPI: true,
   request: {
     path: "/auth/register",
@@ -14,12 +14,22 @@ export const register = (email: string, password: string): DispatchAction => ({
 })
 
 export const login = (email?: string, password?: string): DispatchAction => ({
-  type: DispatchActionType.REQUEST_LOGIN,
+  type: DispatchActionType.AUTH_LOGIN,
   useAPI: true,
   request: {
     path: "/auth/login",
     method: "POST",
     body: { email, password }
+  },
+  status: RequestStatus.PENDING
+})
+
+export const loginWithToken = (): DispatchAction => ({
+  type: DispatchActionType.AUTH_LOGIN_TOKEN,
+  useAPI: true,
+  request: {
+    path: "/auth/login",
+    method: "POST"
   },
   status: RequestStatus.PENDING
 })
