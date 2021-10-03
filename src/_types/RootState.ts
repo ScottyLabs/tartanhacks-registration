@@ -1,7 +1,7 @@
 import { RequestStatus } from "enums/RequestStatus"
 
 export interface RootState {
-  auth: {
+  accounts: {
     data: any
     status: RequestStatus
   }

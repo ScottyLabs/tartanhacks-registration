@@ -31,7 +31,7 @@ const transformPath = (
 const apiMiddleware: Middleware<any, any> =
   ({ dispatch }) =>
   (next) =>
-  async (action: DispatchAction): Promise<void> => {
+  async (action: DispatchAction): Promise<any> => {
     const { type, useAPI, request } = action
     if (!useAPI) {
       next(action)
@@ -66,14 +66,21 @@ const apiMiddleware: Middleware<any, any> =
       const { data } = response
       // Mark request status as success with resolved data
       dispatch({ type, status: RequestStatus.SUCCESS, data })
+      return Promise.resolve({ type, status: RequestStatus.SUCCESS, data })
     } catch (err: any) {
       // Mark request status as error
       if (axios.isAxiosError(err)) {
         const message = (err as AxiosError).message || err
         dispatch({ type, status: RequestStatus.ERROR, data: message })
+        return Promise.reject({
+          type,
+          status: RequestStatus.ERROR,
+          data: message
+        })
       } else {
         console.error(err)
         dispatch({ type, status: RequestStatus.ERROR, data: err })
+        return Promise.reject({ type, status: RequestStatus.ERROR, data: err })
       }
     }
   }

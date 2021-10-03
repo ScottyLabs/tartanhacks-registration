@@ -5,8 +5,9 @@ import { DispatchAction } from "types/DispatchAction"
 
 const data = (state = {}, action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.REQUEST_LOGIN:
-    case DispatchActionType.REQUEST_REGISTER:
+    case DispatchActionType.AUTH_LOGIN:
+    case DispatchActionType.AUTH_REGISTER:
+    case DispatchActionType.AUTH_LOGIN_TOKEN:
       if (action.status == RequestStatus.SUCCESS) {
         if (action.data.token) {
           window.localStorage.setItem("accessToken", action.data.token)
@@ -20,8 +21,9 @@ const data = (state = {}, action: DispatchAction) => {
 
 const status = (state = null, action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.REQUEST_LOGIN:
-    case DispatchActionType.REQUEST_REGISTER:
+    case DispatchActionType.AUTH_LOGIN:
+    case DispatchActionType.AUTH_REGISTER:
+    case DispatchActionType.AUTH_LOGIN_TOKEN:
       return action.status
   }
   return state
