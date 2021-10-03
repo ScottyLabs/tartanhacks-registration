@@ -6,4 +6,4 @@ const Home: NextPage = () => {
   return <></>
 }
 
-export default AuthenticatedLayout(Home);
+export default AuthenticatedLayout(Home)
