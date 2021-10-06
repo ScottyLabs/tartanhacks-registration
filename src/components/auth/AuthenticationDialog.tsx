@@ -8,6 +8,7 @@ import {
   Typography
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
+import { useRouter } from "next/dist/client/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
@@ -45,23 +46,32 @@ const useStyles = makeStyles((theme) => ({
 const AuthenticationDialog = ({ registration = false }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
+  const router = useRouter()
   const classes = useStyles(theme)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
 
-  const loggedInEmail = useSelector(
-    (state: RootState) => state?.auth?.data?.email
-  )
-
   const register = async () => {
     setLoading(true)
-    dispatch(actions.auth.register(email, password))
+    try {
+      const { data } = await dispatch(actions.auth.register(email, password))
+      console.log("Registered user", data)
+      router.push("/")
+    } catch (err) {
+      console.error(err)
+    }
     setLoading(false)
   }
   const login = async () => {
     setLoading(true)
-    dispatch(actions.auth.login(email, password))
+    try {
+      const { data } = await dispatch(actions.auth.login(email, password))
+      console.log("Logged in", data)
+      router.push("/")
+    } catch (err) {
+      console.error(err)
+    }
     setLoading(false)
   }
 
