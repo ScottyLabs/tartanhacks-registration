@@ -14,10 +14,10 @@ export const register = (email: string, password: string): DispatchAction => ({
 })
 
 export const verify = (token: string): DispatchAction => ({
-  type: DispatchActionType.REQUEST_VERIFY,
+  type: DispatchActionType.AUTH_LOGIN_TOKEN,
   useAPI: true,
   request: {
-    path: "/auth/verify",
+    path: "/auth/verify/" + token,
     method: "GET",
     body: { token }
   }, 
