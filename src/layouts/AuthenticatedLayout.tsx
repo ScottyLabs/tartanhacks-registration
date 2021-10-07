@@ -4,17 +4,10 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { makeStyles } from "@material-ui/core/styles"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { useRouter } from "next/dist/client/router"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    // add root styles
-  }
-}))
 
 /**
  * Layout to hide content that requires authentication.
@@ -22,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
  * login the user using the stored login token in the browser
  */
 const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
-  const classes = useStyles({})
   const dispatch = useDispatch()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -47,13 +39,7 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
     return <></>
   }
 
-  return (
-    <>
-      <div className={classes.root}>
-        <Page />
-      </div>
-    </>
-  )
+  return <Page />
 }
 
 export default AuthenticatedLayout
