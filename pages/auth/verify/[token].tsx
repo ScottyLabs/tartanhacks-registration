@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const Post = () => {
+const Verification = () => {
 
   const dispatch = useDispatch()
   const theme = useTheme();
@@ -121,4 +121,4 @@ const Post = () => {
 
 }
 
-export default DialogLayout(Post)
+export default DialogLayout(Verification)
