@@ -14,7 +14,7 @@ export const register = (email: string, password: string): DispatchAction => ({
 })
 
 export const verify = (token: string): DispatchAction => ({
-  type: DispatchActionType.AUTH_LOGIN_TOKEN,
+  type: DispatchActionType.AUTH_VERIFY,
   useAPI: true,
   request: {
     path: "/auth/verify/" + token,

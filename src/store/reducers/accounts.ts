@@ -8,6 +8,7 @@ const data = (state = {}, action: DispatchAction) => {
   case DispatchActionType.AUTH_LOGIN:
   case DispatchActionType.AUTH_REGISTER:
   case DispatchActionType.AUTH_LOGIN_TOKEN:
+  case DispatchActionType.AUTH_VERIFY:
     if (action.status == RequestStatus.SUCCESS) {
       if (action.data.token) {
         window.localStorage.setItem("accessToken", action.data.token)
@@ -24,6 +25,7 @@ const status = (state = null, action: DispatchAction) => {
   case DispatchActionType.AUTH_LOGIN:
   case DispatchActionType.AUTH_REGISTER:
   case DispatchActionType.AUTH_LOGIN_TOKEN:
+  case DispatchActionType.AUTH_VERIFY:
     return action.status
   }
   return state
