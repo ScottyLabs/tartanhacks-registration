@@ -1,5 +1,4 @@
 import {
-  Button,
   Collapse,
   LinearProgress,
   Link,
@@ -9,25 +8,40 @@ import {
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
-import { ReactElement, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { ReactElement, useState } from "react"
+import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { RootState } from "types/RootState"
+import RoundedButton from "../design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
-    border: "solid black 1px",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "25%",
-    borderRadius: "1em",
+    width: "20%",
     padding: "1em",
-    margin: "0 auto"
+    margin: "0 auto",
+    textAlign: "center",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "50%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "80%"
+    }
   },
   registrationForm: {
     display: "flex",
-    flexDirection: "column"
+    flexDirection: "column",
+    gap: "1em",
+    width: "100%"
+  },
+  header: {
+    fontWeight: 600,
+    backgroundImage: `linear-gradient(180deg, ${theme.palette.gradient.start} 19.64%, ${theme.palette.gradient.end} 69.64%)`,
+    backgroundClip: "text",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    marginBottom: "1em"
   },
   switchAuth: {
     display: "flex",
@@ -43,7 +57,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const AuthenticationDialog = ({ registration = false }): ReactElement => {
+const AuthenticationDialog = ({
+  registration = false
+}: {
+  registration: boolean
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const router = useRouter()
@@ -55,8 +73,7 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
   const register = async () => {
     setLoading(true)
     try {
-      const { data } = await dispatch(actions.auth.register(email, password))
-      console.log("Registered user", data)
+      await dispatch(actions.auth.register(email, password))
       router.push("/")
     } catch (err) {
       console.error(err)
@@ -66,18 +83,13 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
   const login = async () => {
     setLoading(true)
     try {
-      const { data } = await dispatch(actions.auth.login(email, password))
-      console.log("Logged in", data)
+      await dispatch(actions.auth.login(email, password))
       router.push("/")
     } catch (err) {
       console.error(err)
     }
     setLoading(false)
   }
-
-  useEffect(() => {
-    dispatch(actions.auth.login())
-  }, [])
 
   return (
     <div className={classes.dialog}>
@@ -96,14 +108,16 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           }
         }}
       >
-        <Typography variant="h4">TartanHacks 2021</Typography>
+        <Typography variant="h4" className={classes.header}>
+          Welcome
+        </Typography>
         <TextField
           required
           name="email"
-          size="small"
-          margin="dense"
+          size="medium"
           label="Email"
           variant="outlined"
+          fullWidth={true}
           value={email}
           onChange={(e) => {
             setEmail(e.target.value)
@@ -113,27 +127,18 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           required
           type="password"
           name="password"
-          size="small"
-          margin="dense"
+          size="medium"
           label="Password"
           variant="outlined"
+          fullWidth={true}
           value={password}
           onChange={(e) => {
             setPassword(e.target.value)
           }}
         />
-        <Button
-          variant="outlined"
-          onClick={() => {
-            if (registration) {
-              register()
-            } else {
-              login()
-            }
-          }}
-        >
+        <RoundedButton type="submit">
           {registration ? "Register" : "Login"}
-        </Button>
+        </RoundedButton>
         <div className={classes.switchAuth}>
           <Typography variant="body1">
             {registration
@@ -146,6 +151,9 @@ const AuthenticationDialog = ({ registration = false }): ReactElement => {
           >
             {registration ? "Log In" : "Sign Up"}
           </Link>
+          {registration ? null : (
+            <Link href="/password-reset">Forgot password</Link>
+          )}
         </div>
       </form>
     </div>
