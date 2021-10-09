@@ -8,9 +8,29 @@ export const theme = createTheme({
     },
     secondary: {
       main: green[100]
-    }
+    },
+    gradient: {
+      start: "#AA5418",
+      end: "#F6C744",
+    },
+    waveGradient: {
+      start: "#F6C744",
+      end: "#F68F44"
+    },
   },
   typography: {
-    fontFamily: "Poppins, sans-serif"
+    fontFamily: "Poppins, Roboto, sans-serif"
+  },
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+      mobile: 450,
+      tablet: 800,
+      desktop: 1200
+    }
   }
 })
