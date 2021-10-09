@@ -1,4 +1,3 @@
-import { makeStyles } from "@material-ui/core"
 import React, { ReactElement } from "react"
 
 const ScottyLabsLogo = ({ className }: { className: string }): ReactElement => {

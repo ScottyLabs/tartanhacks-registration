@@ -20,18 +20,17 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
   const [loading, setLoading] = useState(false)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
 
-  const loginWithToken = async () => {
-    setLoading(true)
-    try {
-      await dispatch(actions.auth.loginWithToken())
-    } catch (err) {
-      // Login token expired or invalid
-      router.push("/login")
-    }
-    setLoading(false)
-  }
-
   useEffect(() => {
+    const loginWithToken = async () => {
+      setLoading(true)
+      try {
+        await dispatch(actions.auth.loginWithToken())
+      } catch (err) {
+        // Login token expired or invalid
+        router.push("/login")
+      }
+      setLoading(false)
+    }
     loginWithToken()
   }, [])
 

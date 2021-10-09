@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
-import { ReactElement, useEffect, useState } from "react"
+import { ReactElement, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
 
@@ -50,7 +50,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const AuthenticationDialog = ({ registration = false }): ReactElement => {
+const AuthenticationDialog = ({
+  registration = false
+}: {
+  registration: boolean
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const router = useRouter()

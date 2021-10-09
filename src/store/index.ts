@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux"
 import reducers from "./reducers"
 import api from "./middleware/api"
-import logger from "redux-logger"
+// import logger from "redux-logger"
 
 const middleware = [api /*logger*/]
 
