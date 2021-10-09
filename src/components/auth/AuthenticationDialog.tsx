@@ -131,13 +131,7 @@ const AuthenticationDialog = ({
         />
         <Button
           variant="outlined"
-          onClick={() => {
-            if (registration) {
-              register()
-            } else {
-              login()
-            }
-          }}
+          type="submit"
         >
           {registration ? "Register" : "Login"}
         </Button>
