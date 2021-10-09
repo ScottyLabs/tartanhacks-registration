@@ -16,6 +16,10 @@ export const theme = createTheme({
     waveGradient: {
       start: "#F6C744",
       end: "#F68F44"
+    },
+    lightGradient: {
+      start: "#FFFFFF",
+      end: "#FFE3E3"
     }
   },
   typography: {

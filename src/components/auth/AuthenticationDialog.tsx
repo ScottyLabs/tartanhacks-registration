@@ -12,21 +12,29 @@ import { useRouter } from "next/dist/client/router"
 import { ReactElement, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
+import RoundedButton from "../design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "50%",
+    width: "20%",
     padding: "1em",
     margin: "0 auto",
-    textAlign: "center"
+    textAlign: "center",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "50%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "80%"
+    }
   },
   registrationForm: {
     display: "flex",
     flexDirection: "column",
-    gap: "1em"
+    gap: "1em",
+    width: "100%"
   },
   header: {
     fontWeight: 600,
@@ -129,12 +137,9 @@ const AuthenticationDialog = ({
             setPassword(e.target.value)
           }}
         />
-        <Button
-          variant="outlined"
-          type="submit"
-        >
+        <RoundedButton type="submit">
           {registration ? "Register" : "Login"}
-        </Button>
+        </RoundedButton>
         <div className={classes.switchAuth}>
           <Typography variant="body1">
             {registration
@@ -147,6 +152,9 @@ const AuthenticationDialog = ({
           >
             {registration ? "Log In" : "Sign Up"}
           </Link>
+          {registration ? null : (
+            <Link href="/password-reset">Forgot password</Link>
+          )}
         </div>
       </form>
     </div>
