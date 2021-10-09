@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "10em",
     boxSizing: "border-box",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingTop: "3em",
+      paddingTop: "3em"
     }
   },
   scottyContainer: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     bottom: 0,
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: "100%"
-    },
+    }
   }
 }))
 

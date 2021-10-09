@@ -11,12 +11,12 @@ export const theme = createTheme({
     },
     gradient: {
       start: "#AA5418",
-      end: "#F6C744",
+      end: "#F6C744"
     },
     waveGradient: {
       start: "#F6C744",
       end: "#F68F44"
-    },
+    }
   },
   typography: {
     fontFamily: "Poppins, Roboto, sans-serif"

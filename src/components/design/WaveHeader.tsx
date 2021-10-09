@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       height: "10em"
-    },
+    }
   }
 }))
 
@@ -46,7 +46,9 @@ const WaveHeader = (): ReactElement => {
   return (
     <>
       <div className={classes.waveContainer}>
-        <Typography variant="h1" className={classes.title}>TartanHacks</Typography>
+        <Typography variant="h1" className={classes.title}>
+          TartanHacks
+        </Typography>
         <svg
           className={classes.waveSvg}
           viewBox="0 0 1440 420"
@@ -66,7 +68,11 @@ const WaveHeader = (): ReactElement => {
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor={theme.palette.waveGradient.start} />
-              <stop offset="1" stopColor={theme.palette.waveGradient.end} stopOpacity="0.88" />
+              <stop
+                offset="1"
+                stopColor={theme.palette.waveGradient.end}
+                stopOpacity="0.88"
+              />
             </linearGradient>
           </defs>
         </svg>

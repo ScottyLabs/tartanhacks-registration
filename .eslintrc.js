@@ -35,7 +35,7 @@ module.exports = {
     "object-curly-spacing": ["error", "always"],
     semi: ["warn", "never"],
     "import/no-anonymous-default-export": ["off"],
-    "react-hooks/rules-of-hooks": ["warn"]
+    "react-hooks/rules-of-hooks": ["off"]
   },
   settings: {
     react: {
