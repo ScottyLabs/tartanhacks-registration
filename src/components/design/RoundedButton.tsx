@@ -1,4 +1,4 @@
-import { Button, makeStyles, Typography, useTheme } from "@material-ui/core"
+import { Button, makeStyles } from "@material-ui/core"
 import React, { ReactElement } from "react"
 
 const useStyles = makeStyles((theme) => ({
@@ -19,7 +19,6 @@ const RoundedButton = ({
   type: "button" | "reset" | "submit" | undefined
 }): ReactElement => {
   const classes = useStyles()
-  const theme = useTheme()
   return (
     <>
       <Button

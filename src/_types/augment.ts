@@ -11,7 +11,7 @@ declare module "@material-ui/core/styles/createPalette" {
     waveGradient?: {
       start: string
       end: string
-    },
+    }
     lightGradient?: {
       start: string
       end: string
@@ -26,7 +26,7 @@ declare module "@material-ui/core/styles/createPalette" {
     waveGradient: {
       start: string
       end: string
-    },
+    }
     lightGradient: {
       start: string
       end: string
