@@ -1,10 +1,8 @@
 import {
-    Button,
     Collapse,
     LinearProgress,
     Link,
     makeStyles,
-    TextField,
     Typography
   } from "@material-ui/core";
   import { useTheme } from "@material-ui/styles";
@@ -19,7 +17,7 @@ import {
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      width: "25%",
+      width: "50%",
       borderRadius: "1em",
       padding: "1em",
       margin: "0 auto"
