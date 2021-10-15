@@ -1,12 +1,13 @@
-import type { AppProps } from "next/app";
-import { ThemeProvider } from "@material-ui/styles";
-import { theme } from "src/themes/theme";
-import Head from "next/head";
-import "styles/globals.css";
-import { Provider } from "react-redux";
-import store from "src/store";
+import type { AppProps } from "next/app"
+import { ThemeProvider } from "@material-ui/styles"
+import { theme } from "src/themes/theme"
+import Head from "next/head"
+import "styles/globals.css"
+import { Provider } from "react-redux"
+import store from "src/store"
+import { ReactElement } from "react"
 
-function MyApp({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
     <>
       <Head>
@@ -20,7 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Provider>
       </ThemeProvider>
     </>
-  );
+  )
 }
 
-export default MyApp;
+export default App

@@ -1,8 +1,8 @@
-import { RequestStatus } from "enums/RequestStatus";
+import { RequestStatus } from "enums/RequestStatus"
 
 export interface RootState {
-  auth: {
-    data: any;
-    status: RequestStatus;
-  };
+  accounts: {
+    data: any
+    status: RequestStatus
+  }
 }

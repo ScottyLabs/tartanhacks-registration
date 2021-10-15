@@ -33,8 +33,11 @@ module.exports = {
     "no-unexpected-multiline": 2,
     "no-unreachable": "error",
     "object-curly-spacing": ["error", "always"],
-    semi: ["error", "never"],
-    "import/no-anonymous-default-export": ["off"]
+    semi: ["warn", "never"],
+    "import/no-anonymous-default-export": ["off"],
+    "react-hooks/rules-of-hooks": ["off"],
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "react/display-name": ["off"]
   },
   settings: {
     react: {
@@ -68,4 +71,4 @@ module.exports = {
       }
     }
   }
-};
+}
