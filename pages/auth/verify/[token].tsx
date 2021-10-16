@@ -1,7 +1,4 @@
-import {
-  Button, makeStyles, Typography
-} from "@material-ui/core"
-import { useTheme } from "@material-ui/styles"
+import { Button, makeStyles, Typography } from "@material-ui/core"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -33,8 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Verification = () => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
+  const classes = useStyles()
   const router = useRouter()
   const { token } = router.query
   const [loading, setLoading] = useState(true)
@@ -47,9 +43,7 @@ const Verification = () => {
 
     const verify = async () => {
       try {
-        const { type, status, data } = await dispatch(
-          actions.auth.verify(token as string)
-        )
+        const { status } = await dispatch(actions.auth.verify(token as string))
         setVerificationStatus(status)
       } catch (err) {
         setVerificationStatus("ERROR")

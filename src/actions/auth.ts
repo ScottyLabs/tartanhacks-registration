@@ -17,9 +17,8 @@ export const verify = (token: string): DispatchAction => ({
   type: DispatchActionType.AUTH_VERIFY,
   useAPI: true,
   request: {
-    path: "/auth/verify/" + token,
-    method: "GET",
-    body: { token }
+    path: `/auth/verify/${token}`,
+    method: "GET"
   },
   status: RequestStatus.PENDING
 })
