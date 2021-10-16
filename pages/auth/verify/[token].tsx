@@ -18,6 +18,15 @@ import { DialogLayout } from "src/layouts";
 const useStyles = makeStyles((theme) => ({
   failure: {
     border: "solid #D8000C 1px",
+    background: "#FFBABA",
+  },
+
+  success: {
+    border: "solid #04AA6D 1px",
+    background: "#DFF2BF",
+  },
+  
+  dialog: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -26,11 +35,10 @@ const useStyles = makeStyles((theme) => ({
     padding: "1em",
     margin: "0 auto",
     flexDirection: "column",
-    background: "#FFBABA",
   },
 }))
 
-const Post = () => {
+const Verification = () => {
 
   const dispatch = useDispatch()
   const theme = useTheme();
@@ -63,18 +71,34 @@ const Post = () => {
     verify();
   }, [token]);
   
-    const failure = () => {
-      return (
-        <div className={classes.failure}>
-          <Typography variant="h4">This is an invalid token</Typography>
-          <Typography variant="body1">Please request a new one</Typography>
-        </div>
-      );
-    }
+  const failure = () => {
+    return (
+      <div className={`${classes.dialog} ${classes.failure}`}>
+        <Typography variant="h4">This is an invalid token</Typography>
+        <Typography variant="body1">Please request a new one</Typography>
+      </div>
+    );
+  }
+
+  const success = () => {
+    return (
+      <div className={`${classes.dialog} ${classes.success}`}>
+        <Typography variant="h4">You are verified!</Typography>
+        <Button
+          variant="outlined"
+          onClick={() => {
+            router.push('/');
+          }}
+        >
+          Back to login
+        </Button>
+      </div>
+    );
+  }
     
-    const expired = () => {
+    const expired = () => { 
       return (
-        <div className={classes.failure}>
+        <div className={`${classes.dialog}, ${classes.failure}`}>
           <Typography variant="h4">This token has expired</Typography>
           <Typography variant="body1">Please request a new one</Typography>
         </div>
@@ -86,8 +110,7 @@ const Post = () => {
   }
 
   if (verificationStatus === "SUCCESS") {
-    router.push('/');
-    return <></>
+    return success();
   }
   
   if (verificationStatus === "EXPIRED") {
@@ -98,4 +121,4 @@ const Post = () => {
 
 }
 
-export default DialogLayout(Post)
+export default DialogLayout(Verification)

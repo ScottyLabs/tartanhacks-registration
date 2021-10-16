@@ -5,14 +5,13 @@ import { DispatchAction } from "types/DispatchAction"
 
 const data = (state = {}, action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.AUTH_LOGIN:
-    case DispatchActionType.AUTH_REGISTER:
-    case DispatchActionType.AUTH_LOGIN_TOKEN:
-      if (action.status == RequestStatus.SUCCESS) {
-        if (action.data.token) {
-          window.localStorage.setItem("accessToken", action.data.token)
-        }
-        return action.data
+  case DispatchActionType.AUTH_LOGIN:
+  case DispatchActionType.AUTH_REGISTER:
+  case DispatchActionType.AUTH_LOGIN_TOKEN:
+  case DispatchActionType.AUTH_VERIFY:
+    if (action.status == RequestStatus.SUCCESS) {
+      if (action.data.token) {
+        window.localStorage.setItem("accessToken", action.data.token)
       }
       break
   }
@@ -21,10 +20,11 @@ const data = (state = {}, action: DispatchAction) => {
 
 const status = (state = null, action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.AUTH_LOGIN:
-    case DispatchActionType.AUTH_REGISTER:
-    case DispatchActionType.AUTH_LOGIN_TOKEN:
-      return action.status
+  case DispatchActionType.AUTH_LOGIN:
+  case DispatchActionType.AUTH_REGISTER:
+  case DispatchActionType.AUTH_LOGIN_TOKEN:
+  case DispatchActionType.AUTH_VERIFY:
+    return action.status
   }
   return state
 }
