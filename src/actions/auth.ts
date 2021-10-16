@@ -13,6 +13,16 @@ export const register = (email: string, password: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
+export const verify = (token: string): DispatchAction => ({
+  type: DispatchActionType.AUTH_VERIFY,
+  useAPI: true,
+  request: {
+    path: `/auth/verify/${token}`,
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
+
 export const login = (email?: string, password?: string): DispatchAction => ({
   type: DispatchActionType.AUTH_LOGIN,
   useAPI: true,
