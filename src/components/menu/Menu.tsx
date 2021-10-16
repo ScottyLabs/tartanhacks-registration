@@ -1,8 +1,6 @@
 import {
-    Hidden,
-    Link,
     makeStyles,
-    Typography,
+    Modal,
   } from "@material-ui/core";
   import { useTheme } from "@material-ui/styles";
   import { ReactElement, useState } from "react";
@@ -10,12 +8,6 @@ import {
   import MenuLine from "./MenuLine";
   
   const useStyles = makeStyles((theme) => ({
-    menuWrapper: {
-        position: "absolute",
-        top: "0",
-        width: "100%",
-        zIndex: 3,
-    },
     burgerLine: {
         width: "3rem",
         height: "0.25rem",
@@ -36,6 +28,12 @@ import {
         border: "none",
         cursor: "pointer",
         padding: "0",
+        zIndex: 2000,
+    },
+    menuWrapper: {
+        position: "absolute",
+        top: "0",
+        width: "100%",
     },
     menuBox: {
         display: "flex",
@@ -47,22 +45,14 @@ import {
         background: `${theme.palette.primary.main}`,
         boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
         borderRadius: "10px",
-    },
-    menuOpen: {
         position: "absolute",
         top: "8em",
         right: "5em",
-    },
-    menuClosed: {
-        visibility: "hidden",
     },
     menuLine: {
         position: "relative",
         width: "422px",
         height: "7px"
-    },
-    backContainer: {
-        width: "100%",
     }
   }));
   
@@ -72,7 +62,7 @@ import {
     const [open, setOpen] = useState(false);
   
     return (
-        <div className={classes.menuWrapper}>
+        <div>
             <div
             className={classes.burgerWrapper}
             onClick={() => setOpen(!open)}
@@ -81,19 +71,25 @@ import {
                 <div className={classes.burgerLine}></div>
                 <div className={classes.burgerLine}></div>
             </div>
-            <div className={open ? classes.menuOpen : classes.menuClosed}>
-                <div className={classes.menuBox}>
-                    <MenuItem text="REGISTER" url=""/>
-                    <MenuLine/>
-                    <MenuItem text="TEAM" url=""/>
-                    <MenuLine/>
-                    <MenuItem text="BACK" url=""/>
-                    <MenuLine/>
-                    <MenuItem text="MESSAGES" url=""/>
-                    <MenuLine/>
-                    <MenuItem text="LOGOUT" url=""/>
+            <Modal
+                open={open}
+            >
+                <div className={classes.menuWrapper}>
+                    {/* <div className={open ? classes.menuOpen : classes.menuClosed}> */}
+                        <div className={classes.menuBox}>
+                            <MenuItem text="REGISTER" url=""/>
+                            <MenuLine/>
+                            <MenuItem text="TEAM" url=""/>
+                            <MenuLine/>
+                            <MenuItem text="BACK" url=""/>
+                            <MenuLine/>
+                            <MenuItem text="MESSAGES" url=""/>
+                            <MenuLine/>
+                            <MenuItem text="LOGOUT" url=""/>
+                        </div>
+                    {/* </div> */}
                 </div>
-            </div>
+            </Modal>
         </div>
     );
   };

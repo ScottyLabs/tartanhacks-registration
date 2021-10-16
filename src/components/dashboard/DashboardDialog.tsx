@@ -11,11 +11,9 @@ import {
   import actions from "src/actions";
   import { RootState } from "types/RootState";
   import RectangleButton from "../design/RectangleButton";
-  // import RoundedButton from "../design/RoundedButo";
   
   const useStyles = makeStyles((theme) => ({
       dialog: {
-        // border: "solid black 1px",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -57,11 +55,43 @@ import {
     }, []);
 
     function logUser() {
-      console.log(theme);
+      console.log(currentUser);
     }
   
     if (applicationComplete) {
-      return <></>
+      return (
+        <div className={classes.dialog}>
+          <Collapse in={loading}>
+              <LinearProgress />
+          </Collapse>
+          <div className={classes.dialogContent}>
+              <div className={classes.dialogItem}>
+                <Typography variant="h4">
+                    Your Status:
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="h4">
+                    COMPLETE
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="body1">
+                  Welcome back!
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="body1">
+                  If you do not complete your application by _ _ _, you will not be admitted!
+                </Typography>
+              </div>
+          </div>
+          <RectangleButton type="submit">
+            COMPLETE YOUR APPLICATION
+          </RectangleButton>
+          {/* <button onClick={logUser}>log user</button> */}
+        </div>
+      );
     }
     return (
       <div className={classes.dialog}>

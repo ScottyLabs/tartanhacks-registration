@@ -21,10 +21,11 @@ const DashboardPage: NextPage = (): ReactElement => {
   return (
     <>
       <WaveBackground/>
-      <Menu/>
+      {/* <Menu/> */}
       <div className={classes.dialog}>
         <DashboardDialog/>
-      </div>  
+      </div> 
+      <Menu/> 
     </>
   )
 }
