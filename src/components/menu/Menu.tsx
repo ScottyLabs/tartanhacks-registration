@@ -1,4 +1,5 @@
 import {
+    Hidden,
     Link,
     makeStyles,
     Typography,
@@ -16,11 +17,9 @@ import {
     burgerLine: {
         width: "3rem",
         height: "0.25rem",
-        backgroundColor: "#F3964A",
+        backgroundColor: `${theme.palette.primary.main}`,
         borderRadius: "10px",
-        // transition: "all 0.3s linear",
         position: "relative",
-        // transformOrigin: "1px",
         marginBottom: "2px",
     },
     burgerWrapper: {
