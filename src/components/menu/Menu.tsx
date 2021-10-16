@@ -7,12 +7,14 @@ import {
   import { useTheme } from "@material-ui/styles";
   import { ReactElement, useState } from "react";
   import MenuItem from "./MenuItem";
+  import MenuLine from "./MenuLine";
   
   const useStyles = makeStyles((theme) => ({
     menuWrapper: {
         position: "absolute",
         top: "0",
         width: "100%",
+        zIndex: 3,
     },
     burgerLine: {
         width: "3rem",
@@ -58,6 +60,9 @@ import {
         position: "relative",
         width: "422px",
         height: "7px"
+    },
+    backContainer: {
+        width: "100%",
     }
   }));
   
@@ -79,21 +84,13 @@ import {
             <div className={open ? classes.menuOpen : classes.menuClosed}>
                 <div className={classes.menuBox}>
                     <MenuItem text="REGISTER" url=""/>
-                    <svg className={classes.menuLine} viewBox="0 0 422 7">
-                        <line x1="3.5" y1="3.5" x2="418.5" y2="3.5" stroke="white" strokeOpacity="0.3" strokeWidth="7" strokeLinecap="round"/>
-                    </svg>
+                    <MenuLine/>
                     <MenuItem text="TEAM" url=""/>
-                    <svg className={classes.menuLine} viewBox="0 0 422 7">
-                        <line x1="3.5" y1="3.5" x2="418.5" y2="3.5" stroke="white" strokeOpacity="0.3" strokeWidth="7" strokeLinecap="round"/>
-                    </svg>
+                    <MenuLine/>
                     <MenuItem text="BACK" url=""/>
-                    <svg className={classes.menuLine} viewBox="0 0 422 7">
-                        <line x1="3.5" y1="3.5" x2="418.5" y2="3.5" stroke="white" strokeOpacity="0.3" strokeWidth="7" strokeLinecap="round"/>
-                    </svg>
+                    <MenuLine/>
                     <MenuItem text="MESSAGES" url=""/>
-                    <svg className={classes.menuLine} viewBox="0 0 422 7">
-                        <line x1="3.5" y1="3.5" x2="418.5" y2="3.5" stroke="white" strokeOpacity="0.3" strokeWidth="7" strokeLinecap="round"/>
-                    </svg>
+                    <MenuLine/>
                     <MenuItem text="LOGOUT" url=""/>
                 </div>
             </div>

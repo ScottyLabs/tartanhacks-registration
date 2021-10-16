@@ -15,11 +15,6 @@ import {
         },
         color: "white",
         width: "100%",
-      },
-    menuLine: {
-        position: "relative",
-        width: "422px",
-        height: "7px"
     },
     menuItem: {
         textAlign: "center",
@@ -40,9 +35,9 @@ import {
     return (
         <Link className={classes.link}>
         <div className={classes.menuItem}>
-                <Typography variant="h5">
-                    {text}
-                </Typography>
+            <Typography variant="h5">
+                {text}
+            </Typography>
         </div>
         </Link>
     );

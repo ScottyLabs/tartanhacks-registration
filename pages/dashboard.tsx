@@ -13,11 +13,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    // paddingTop: "10em",
-    // boxSizing: "border-box",
-    // [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-    //   paddingTop: "3em"
-    // }
   }
 }))
 
@@ -26,10 +21,10 @@ const DashboardPage: NextPage = (): ReactElement => {
   return (
     <>
       <WaveBackground/>
+      <Menu/>
       <div className={classes.dialog}>
         <DashboardDialog/>
-      </div>
-      <Menu/>
+      </div>  
     </>
   )
 }
