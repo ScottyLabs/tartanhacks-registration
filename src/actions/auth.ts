@@ -20,9 +20,9 @@ export const verify = (token: string): DispatchAction => ({
     path: "/auth/verify/" + token,
     method: "GET",
     body: { token }
-  }, 
+  },
   status: RequestStatus.PENDING
-});
+})
 
 export const login = (email?: string, password?: string): DispatchAction => ({
   type: DispatchActionType.AUTH_LOGIN,

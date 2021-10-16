@@ -13,7 +13,8 @@ const data = (state = {}, action: DispatchAction) => {
       if (action.data.token) {
         window.localStorage.setItem("accessToken", action.data.token)
       }
-      break
+      return action.data
+    }
   }
   return state
 }

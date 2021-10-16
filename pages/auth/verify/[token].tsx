@@ -1,31 +1,24 @@
 import {
-  Button,
-  Collapse,
-  LinearProgress,
-  Link,
-  makeStyles,
-  TextField,
-  Typography
+  Button, makeStyles, Typography
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
-import { imageConfigDefault } from "next/dist/server/image-config";
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import actions from 'src/actions';
-import { DialogLayout } from "src/layouts";
+import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import actions from "src/actions"
+import { DialogLayout } from "src/layouts"
 
 const useStyles = makeStyles((theme) => ({
   failure: {
     border: "solid #D8000C 1px",
-    background: "#FFBABA",
+    background: "#FFBABA"
   },
 
   success: {
     border: "solid #04AA6D 1px",
-    background: "#DFF2BF",
+    background: "#DFF2BF"
   },
-  
+
   dialog: {
     display: "flex",
     alignItems: "center",
@@ -34,50 +27,48 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "1em",
     padding: "1em",
     margin: "0 auto",
-    flexDirection: "column",
-  },
+    flexDirection: "column"
+  }
 }))
 
 const Verification = () => {
-
   const dispatch = useDispatch()
-  const theme = useTheme();
-  const classes = useStyles(theme);
-  const router = useRouter();
-  const { token } = router.query;
-  const [loading, setLoading] = useState(true);
-  const [verificationStatus, setVerificationStatus] = useState("");
+  const theme = useTheme()
+  const classes = useStyles(theme)
+  const router = useRouter()
+  const { token } = router.query
+  const [loading, setLoading] = useState(true)
+  const [verificationStatus, setVerificationStatus] = useState("")
 
   useEffect(() => {
-    if(token === undefined) {
-      return;
+    if (token === undefined) {
+      return
     }
 
     const verify = async () => {
       try {
         const { type, status, data } = await dispatch(
           actions.auth.verify(token as string)
-        );
-        setVerificationStatus(status);
+        )
+        setVerificationStatus(status)
       } catch (err) {
-        setVerificationStatus("ERROR");
-        console.log(err);
-      }
-      finally {
-        setLoading(false);
+        setVerificationStatus("ERROR")
+        console.log(err)
+      } finally {
+        setLoading(false)
       }
     }
 
-    verify();
-  }, [token]);
-  
+    verify()
+  }, [token])
+
   const failure = () => {
     return (
       <div className={`${classes.dialog} ${classes.failure}`}>
         <Typography variant="h4">This is an invalid token</Typography>
         <Typography variant="body1">Please request a new one</Typography>
       </div>
-    );
+    )
   }
 
   const success = () => {
@@ -87,38 +78,37 @@ const Verification = () => {
         <Button
           variant="outlined"
           onClick={() => {
-            router.push('/');
+            router.push("/")
           }}
         >
           Back to login
         </Button>
       </div>
-    );
+    )
   }
-    
-    const expired = () => { 
-      return (
-        <div className={`${classes.dialog}, ${classes.failure}`}>
-          <Typography variant="h4">This token has expired</Typography>
-          <Typography variant="body1">Please request a new one</Typography>
-        </div>
-      );
-    }
+
+  const expired = () => {
+    return (
+      <div className={`${classes.dialog}, ${classes.failure}`}>
+        <Typography variant="h4">This token has expired</Typography>
+        <Typography variant="body1">Please request a new one</Typography>
+      </div>
+    )
+  }
 
   if (loading) {
-    return <></>;
+    return <></>
   }
 
   if (verificationStatus === "SUCCESS") {
-    return success();
+    return success()
   }
-  
+
   if (verificationStatus === "EXPIRED") {
-    return expired();
+    return expired()
   }
 
-  return failure();
-
+  return failure()
 }
 
 export default DialogLayout(Verification)
