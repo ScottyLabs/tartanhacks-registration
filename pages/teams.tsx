@@ -1,5 +1,4 @@
-import { makeStyles, Typography } from "@material-ui/core"
-import { alpha } from "@material-ui/core"
+import { Hidden, makeStyles, Typography } from "@material-ui/core"
 import React, {
   ReactElement,
   FunctionComponent,
@@ -11,34 +10,35 @@ import actions from "src/actions"
 import { useRouter } from "next/dist/client/router"
 import { AuthenticatedLayout } from "src/layouts";
 import { viewTeams } from "src/actions/teams"
+import WaveFooter from "src/components/design/WaveFooter"
 import WaveHeader from "src/components/design/WaveHeader"
+import ScottyLabsLogo from "src/components/design/ScottyLabsLogo"
 import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
+import EnvelopeEmpty from "src/components/design/EnvelopeEmpty"
 import RoundedButton from "src/components/design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
   teamListDiv: {
     position: "relative",
-    top: "23.667%",
+    top: "20%",
     width: "77.639%",
     margin: "auto",
     display: "flex",
     alignItems: "start",
     justifyContent: "center",
-    paddingTop: "0",
     boxSizing: "border-box",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingTop: "3em"
-    },
     backgroundImage: `linear-gradient(316.54deg, rgba(255, 255, 255, 0.85) 
                       35.13%, rgba(255, 227, 227, 0.7565) 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
     backdropFilter: "blur(4px)",
     borderRadius: "25px",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "92.754%"
+      width: "92.754%",
+      top: "15%"
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "92.754%"
+      width: "92.754%",
+      top: "15%"
     }
   },
   teamList: {
@@ -90,13 +90,13 @@ const useStyles = makeStyles((theme) => ({
     background: theme.palette.gradient.end,
     color: "#FFFFFF",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "16px",
-      lineHeight: "17px",
+      fontSize: "25px",
+      lineHeight: "25px",
       width: "60%",
       height: "56px"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "14px",
+      fontSize: "16px",
       lineHeight: "17px",
       width: "60%",
       height: "56px"
@@ -107,6 +107,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     textAlign: "center",
     position: "relative",
+    paddingTop: "42px"
   },
   header: {
     fontWeight: 600,
@@ -117,13 +118,21 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     display: "block",
-    width: "100%"
+    width: "100%",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "16px",
+      lineHeight: "17px",
+    },
   },
   envelope: {
+    paddingTop: "42px",
     width: "64px",
     position: "absolute",
     right: "0",
     top: "0%",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "42px"
+    },
   },
   hrDivider: {
     width: "26.565%",
@@ -135,49 +144,59 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
+    paddingTop: "35px",
   },
   tableBody: {
-    display: "grid"
+    display: "grid",
   },
   tableData: {
     tableLayout: "fixed",
     width: "100%",
-    textAlign: "left"
+    textAlign: "left",
+    borderCollapse: "separate",
+    borderSpacing: "0 33px"
   },
   tableEntry: {
-    display: "flex",
-    justifyContent: "space-between",
+    display: "block",
+    width: "100%",
   },
   tableEntryButton: {
-    height: "100%",
+    width: "100%",
     fontSize: "30px",
-    lineHeight: "45px",
     fontWeight: 600,
-    alignItems: "center",
     textAlign: "center",
     textTransform: "uppercase",
     borderRadius: "10px",
     background: theme.palette.gradient.end,
     color: "#FFFFFF",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      fontSize: "20px",
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "16px",
-      lineHeight: "17px",
-      width: "60%",
       height: "56px"
     },
   },
   teamNameCell: {
-    width: "57%"
+    width: "50%",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "40%",
+      height: "100%"
+    },
   },
   viewDetailCell: {
-    width: "27%"
+    width: "30%"
   },
   teamName: {
-    height: "100%"
+    height: "100%",
   },
   joinButton: {
     paddingRight: "15px",
-    textAlign: "right"
+    textAlign: "right",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "16px",
+      lineHeight: "17px",
+    },
   },
   description: {
     fontWeight: 400,
@@ -189,7 +208,10 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     display: "block",
-    width: "100%"
+    width: "100%",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      height: "0%"
+    },
   },
   tableHeaderText: {
     fontWeight: 400,
@@ -207,11 +229,19 @@ const useStyles = makeStyles((theme) => ({
   link: {
     background: "none",
     border: "none",
-    textDecoration: "underline"
+    textDecoration: "underline",
+    cursor: "pointer"
   },
-  viewDetailButton: {
-    width: "100%"
-  }
+  pageHeader: {
+    position: "absolute",
+    left: "2.917%",
+    top: "4.097%",
+    whiteSpace: "nowrap",
+    width: "42.569%",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "81.643%"
+    },
+  },
 }))
 
 
@@ -224,21 +254,24 @@ const TableEntry = (props: any) => {
           <Typography noWrap variant="h4" className={props.classes.header}>
             {props.teamName}
           </Typography>
+          <Hidden xsDown> 
           <Typography noWrap variant="subtitle1"
             className={props.classes.description}>
             {props.description}
           </Typography>
+          </Hidden>
         </div>
       </td>
       <td className={props.classes.joinButton}>
-        <RoundedButton type="submit" className={props.classes.tableEntryButton}>
+        <RoundedButton type="submit" className={props.classes.tableEntryButton}
+        onClick = {async () => {
+          
+        }}>
           Join
         </RoundedButton>
       </td>
       <td className={props.classes.viewDetailCell}>
-        <RoundedButton type="submit" className=
-          {`${props.classes.tableEntryButton} 
-          ${props.classes.viewDetailButton}`}>
+        <RoundedButton type="submit" className={props.classes.tableEntryButton}>
           View Detail
         </RoundedButton>
       </td>
@@ -257,99 +290,45 @@ const ViewTeams = () => {
   useEffect(() => {
     const getTeams = async () => {
       try {
-        // const { viewTeams } = await dispatch(actions.teams.viewTeams());
-        // setTeams(viewTeams);
-        setTeams([{
-          name: "tes1",
-          description: "test1descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2verylongnamesdfsdfassdfasdfasdfasdfasdfasd",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descrverylongdescriptionaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2dsdfs",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }, {
-          name: "test2",
-          description: "test2descr"
-        }])
+         const viewTeams = await dispatch(actions.teams.viewTeams());
+         setTeams(viewTeams.data);
+        //  setTeams([{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"testaaaaaaaaaaaaaaaaa",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //   name:"test",
+        //   description: "test"
+        // },{
+        //    name:"test",
+        //    description: "test"
+        //  },{
+        //   name:"test",
+        //   description: "test"
+        // },])
       } catch (err) {
         console.log(err)
         router.push('/login');
@@ -360,17 +339,15 @@ const ViewTeams = () => {
 
   return (
     <div>
-      <WaveHeader />
-      <div className={classes.scottyContainer}>
-        <ScottyLabsIcon className={classes.scottyIcon} />
-      </div>
+      <ScottyLabsLogo className={classes.pageHeader}/>
+      <WaveFooter />
       <div className={classes.teamListDiv}>
         <div className={classes.teamList}>
           <div className={classes.headerDiv}>
             <Typography variant="h4" className={classes.header}>
               Team
             </Typography>
-            <ScottyLabsIcon className={classes.envelope} />
+            <EnvelopeEmpty className={classes.envelope} />
           </div>
           <hr className={classes.hrDivider} />
           <RoundedButton type="submit" className={classes.newTeamButton}>
@@ -406,5 +383,3 @@ const ViewTeams = () => {
 }
 
 export default AuthenticatedLayout(ViewTeams);
-
-
