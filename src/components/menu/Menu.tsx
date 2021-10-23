@@ -53,21 +53,26 @@ import {
         position: "relative",
         width: "422px",
         height: "7px"
-    }
+    },
+    menuBurgerContainer: {
+        position: "absolute",
+        top: "0",
+        left: "0"
+    },
   }));
   
   const Menu = (): ReactElement => {
     const theme = useTheme();
     const classes = useStyles(theme);
     const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
+    const handleSwitch = () => setOpen(!open);
     const handleClose = () => setOpen(false);
   
     return (
-        <div>
+        <div className={classes.menuBurgerContainer}>
             <div
             className={classes.burgerWrapper}
-            onClick={handleOpen}
+            onClick={handleSwitch}
             >
                 <div className={classes.burgerLine}></div>
                 <div className={classes.burgerLine}></div>
@@ -78,19 +83,17 @@ import {
                 onClose={handleClose}
             >
                 <div className={classes.menuWrapper}>
-                    {/* <div className={open ? classes.menuOpen : classes.menuClosed}> */}
-                        <div className={classes.menuBox}>
-                            <MenuItem text="REGISTER" url=""/>
-                            <MenuLine/>
-                            <MenuItem text="TEAM" url=""/>
-                            <MenuLine/>
-                            <MenuItem text="BACK" url=""/>
-                            <MenuLine/>
-                            <MenuItem text="MESSAGES" url=""/>
-                            <MenuLine/>
-                            <MenuItem text="LOGOUT" url=""/>
-                        </div>
-                    {/* </div> */}
+                    <div className={classes.menuBox}>
+                        <MenuItem text="REGISTER" url=""/>
+                        <MenuLine/>
+                        <MenuItem text="TEAM" url=""/>
+                        <MenuLine/>
+                        <MenuItem text="BACK" url=""/>
+                        <MenuLine/>
+                        <MenuItem text="MESSAGES" url=""/>
+                        <MenuLine/>
+                        <MenuItem text="LOGOUT" url=""/>
+                    </div>
                 </div>
             </Modal>
         </div>
