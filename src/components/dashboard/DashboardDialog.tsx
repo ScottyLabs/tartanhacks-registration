@@ -40,6 +40,13 @@ import {
       dialogItem: {
           marginBottom: "1em",
       },
+      buttonBox: {
+        display: "flex",
+        flexDirection: "row",
+      },
+      buttonSpacer: {
+        width: "10px"
+      }
   }));
   
   const DashboardDialog = (): ReactElement => {
@@ -48,17 +55,19 @@ import {
     const classes = useStyles(theme);
     const [loading, setLoading] = useState(false);
     const currentUser = useSelector((state: RootState) => state?.accounts?.data)
-    const applicationComplete = false;
+    const [status, setStatus] = useState("");
   
     useEffect(() => {
       dispatch(actions.auth.login());
+      const { completedProfile } = dispatch(actions.user.getStatus(currentUser._id));
+      if (completedProfile) {
+        setStatus("complete");
+      } else {
+        setStatus("incomplete");
+      }
     }, []);
 
-    function logUser() {
-      // console.log(currentUser);
-    }
-  
-    if (applicationComplete) {
+    const complete = () => {
       return (
         <div className={classes.dialog}>
           <Collapse in={loading}>
@@ -82,6 +91,52 @@ import {
               </div>
               <div className={classes.dialogItem}>
                 <Typography variant="body1">
+                  You can edit your confirmation information until _ _ _.
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="body1">
+                  Welcome to Tartanhacks!
+                </Typography>
+              </div>
+          </div>
+          <div className={classes.buttonBox}>
+            <RectangleButton type="submit">
+              EDIT CONFIRMATION INFO
+            </RectangleButton>
+            <div className={classes.buttonSpacer}></div>
+            <RectangleButton type="submit">
+              SORRY, I CAN'T MAKE IT
+            </RectangleButton>
+          </div>
+        </div>
+      );
+    }
+
+    const incomplete = () => {
+      return (
+        <div className={classes.dialog}>
+          <Collapse in={loading}>
+              <LinearProgress />
+          </Collapse>
+          <div className={classes.dialogContent}>
+              <div className={classes.dialogItem}>
+                <Typography variant="h4">
+                    Your Status:
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="h4">
+                    INCOMPLETE
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="body1">
+                  You still need to complete your application!
+                </Typography>
+              </div>
+              <div className={classes.dialogItem}>
+                <Typography variant="body1">
                   If you do not complete your application by _ _ _, you will not be admitted!
                 </Typography>
               </div>
@@ -89,43 +144,18 @@ import {
           <RectangleButton type="submit">
             COMPLETE YOUR APPLICATION
           </RectangleButton>
-          {/* <button onClick={logUser}>log user</button> */}
         </div>
       );
     }
-    return (
-      <div className={classes.dialog}>
-        <Collapse in={loading}>
-            <LinearProgress />
-        </Collapse>
-        <div className={classes.dialogContent}>
-            <div className={classes.dialogItem}>
-              <Typography variant="h4">
-                  Your Status:
-              </Typography>
-            </div>
-            <div className={classes.dialogItem}>
-              <Typography variant="h4">
-                  INCOMPLETE
-              </Typography>
-            </div>
-            <div className={classes.dialogItem}>
-              <Typography variant="body1">
-                You still need to complete your application!
-              </Typography>
-            </div>
-            <div className={classes.dialogItem}>
-              <Typography variant="body1">
-                If you do not complete your application by _ _ _, you will not be admitted!
-              </Typography>
-            </div>
-        </div>
-        <RectangleButton type="submit">
-          COMPLETE YOUR APPLICATION
-        </RectangleButton>
-        {/* <button onClick={logUser}>log user</button> */}
-      </div>
-    );
+  
+    if (status == "complete") {
+      return complete();
+    } else if (status == "incomplete") {
+      return incomplete();
+    } else {
+      return <></>
+    }
+    
   };
   
   export default DashboardDialog;
