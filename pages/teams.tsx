@@ -252,23 +252,31 @@ const TableEntry = (props: any) => {
       <td className={props.classes.teamNameCell}>
         <div className={props.classes.teamName}>
           <Typography noWrap variant="h4" className={props.classes.header}>
-            {props.teamName}
+            {props.team.name}
           </Typography>
           <Hidden xsDown> 
           <Typography noWrap variant="subtitle1"
             className={props.classes.description}>
-            {props.description}
+            {props.team.description}
           </Typography>
           </Hidden>
         </div>
       </td>
       <td className={props.classes.joinButton}>
-        <RoundedButton type="submit" className={props.classes.tableEntryButton}
-        onClick = {async () => {
-          
+        <form onSubmit = {async (e) => {
+          e.preventDefault()
+          try {
+            await props.dispatch(actions.teams.joinTeamRequest(props.team._id));
+            props.router.push('/');
+          }
+          catch (err) {
+            console.log(err);
+          }
         }}>
-          Join
-        </RoundedButton>
+          <RoundedButton type="submit" className={props.classes.tableEntryButton}>
+            Join
+          </RoundedButton>
+        </form>
       </td>
       <td className={props.classes.viewDetailCell}>
         <RoundedButton type="submit" className={props.classes.tableEntryButton}>
@@ -292,43 +300,6 @@ const ViewTeams = () => {
       try {
          const viewTeams = await dispatch(actions.teams.viewTeams());
          setTeams(viewTeams.data);
-        //  setTeams([{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"testaaaaaaaaaaaaaaaaa",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //   name:"test",
-        //   description: "test"
-        // },{
-        //    name:"test",
-        //    description: "test"
-        //  },{
-        //   name:"test",
-        //   description: "test"
-        // },])
       } catch (err) {
         console.log(err)
         router.push('/login');
@@ -370,10 +341,12 @@ const ViewTeams = () => {
           <table className={classes.tableData}>
             <tbody>
               {teams.map((team, idx) => <TableEntry
-                teamName={team.name}
+                team={team}
                 classes={classes}
                 className={classes.tableEntry}
-                description={team.description} key={idx} />)}
+                dispatch={dispatch}
+                router={router}
+                key={idx} />)}
             </tbody>
           </table>
         </div>

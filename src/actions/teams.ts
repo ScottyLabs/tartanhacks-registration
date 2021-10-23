@@ -11,4 +11,15 @@ export const viewTeams = (): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const joinTeamRequest = (id: string): DispatchAction => ({
+  type: DispatchActionType.TEAMS_JOIN_REQUEST,
+  useAPI: true,
+  request: {
+    path: `/team/join/${id}`,
+    method: "POST",
+    body: { id }
+  },
+  status: RequestStatus.PENDING
+})
   
