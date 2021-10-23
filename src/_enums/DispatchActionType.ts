@@ -3,4 +3,5 @@ export enum DispatchActionType {
   AUTH_LOGIN = "AUTH_LOGIN",
   AUTH_LOGIN_TOKEN = "AUTH_LOGIN_TOKEN",
   TEAMS_VIEW = "TEAMS_TOKEN",
+  AUTH_VERIFY = "AUTH_VERIFY"
 }
