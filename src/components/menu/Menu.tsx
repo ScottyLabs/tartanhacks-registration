@@ -60,12 +60,14 @@ import {
     const theme = useTheme();
     const classes = useStyles(theme);
     const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
   
     return (
         <div>
             <div
             className={classes.burgerWrapper}
-            onClick={() => setOpen(!open)}
+            onClick={handleOpen}
             >
                 <div className={classes.burgerLine}></div>
                 <div className={classes.burgerLine}></div>
@@ -73,6 +75,7 @@ import {
             </div>
             <Modal
                 open={open}
+                onClose={handleClose}
             >
                 <div className={classes.menuWrapper}>
                     {/* <div className={open ? classes.menuOpen : classes.menuClosed}> */}
