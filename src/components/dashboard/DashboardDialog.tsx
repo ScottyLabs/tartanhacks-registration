@@ -55,7 +55,7 @@ import {
     }, []);
 
     function logUser() {
-      console.log(currentUser);
+      // console.log(currentUser);
     }
   
     if (applicationComplete) {
