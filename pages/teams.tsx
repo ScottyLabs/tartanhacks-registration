@@ -11,56 +11,19 @@ import { useRouter } from "next/dist/client/router"
 import { AuthenticatedLayout } from "src/layouts";
 import { viewTeams } from "src/actions/teams"
 import WaveFooter from "src/components/design/WaveFooter"
-import ScottyLabsLogo from "src/components/design/ScottyLabsLogo"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import EnvelopeEmpty from "src/components/design/EnvelopeEmpty"
 import RoundedButton from "src/components/design/RoundedButton"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
+import ContentHeader from "src/components/design/ContentHeader"
 
 const useStyles = makeStyles((theme) => ({
-  teamList: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "80%",
-    margin: "0 auto",
-    textAlign: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "80%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    },
-    flexDirection: "column",
-    gap: "1em",
-  },
-  scottyContainer: {
-    zIndex: -1,
-    opacity: 0.3,
-    bottom: 0,
-    width: "100%",
-    height: "100%",
-    position: "absolute",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "end"
-  },
-  scottyIcon: {
-    position: "relative",
-    width: "50%",
-    bottom: 0,
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "100%"
-    }
-  },
   newTeamButton: {
     width: "45%",
-    height: "10%",
     fontSize: "30px",
     fontWeight: 600,
-    display: "flex",
-    alignItems: "center",
-    textAlign: "center",
+    alignSelf: "center",
     textTransform: "uppercase",
     borderRadius: "10px",
     background: theme.palette.gradient.end,
@@ -68,49 +31,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "25px",
       width: "60%",
-      height: "56px"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "16px",
-      width: "60%",
-      height: "56px"
+      width: "75%",
     }
-  },
-  headerDiv: {
-    width: "100%",
-    alignItems: "center",
-    textAlign: "center",
-    position: "relative",
-    paddingTop: "42px"
-  },
-  header: {
-    fontWeight: 600,
-    color: theme.palette.gradient.start,
-    fontSize: "30px",
-    textOverflow: "ellipsis",
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    display: "block",
-    width: "100%",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px"
-    },
-  },
-  envelope: {
-    paddingTop: "42px",
-    width: "64px",
-    position: "absolute",
-    right: "0",
-    top: "0%",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "42px"
-    },
-  },
-  hrDivider: {
-    width: "25%",
-    border: 0,
-    height: "1px",
-    borderTop: `1px solid ${theme.palette.gradient.start}`,
   },
   tableHeader: {
     width: "100%",
@@ -149,16 +74,6 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "underline",
     cursor: "pointer"
   },
-  pageHeader: {
-    position: "absolute",
-    left: "3%",
-    top: "4%",
-    whiteSpace: "nowrap",
-    width: "45%",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    },
-  },
 }))
 
 const ViewTeams = () => {
@@ -185,41 +100,33 @@ const ViewTeams = () => {
 
   return (
     <div>
-      <ScottyLabsLogo className={classes.pageHeader} />
-        <WaveFooter />
+      <ScottyLabsHeader />
+      <WaveFooter />
       <FloatingDiv>
-        <div className={classes.teamList}>
-          <div className={classes.headerDiv}>
-            <Typography variant="h4" className={classes.header}>
-              Team
-            </Typography>
-            <EnvelopeEmpty className={classes.envelope} />
-          </div>
-          <hr className={classes.hrDivider} />
-          <RoundedButton type="submit" className={classes.newTeamButton}>
-            Create new team
-          </RoundedButton>
-          <div className={classes.tableHeader}>
+        <ContentHeader title="Team" />
+        <RoundedButton type="submit" className={classes.newTeamButton}>
+          Create new team
+        </RoundedButton>
+        <div className={classes.tableHeader}>
+          <Typography variant="h4" className={classes.tableHeaderText}>
+            VIEW OPEN TEAMS
+          </Typography>
+          <button className={classes.link} onClick={
+            (e) => {
+              console.log("filtered");
+            }
+          }>
             <Typography variant="h4" className={classes.tableHeaderText}>
-              VIEW OPEN TEAMS
+              Filter
             </Typography>
-            <button className={classes.link} onClick={
-              (e) => {
-                console.log("filtered");
-              }
-            }>
-              <Typography variant="h4" className={classes.tableHeaderText}>
-                Filter
-              </Typography>
-            </button>
-          </div>
-          <table className={classes.tableData}>
-            <tbody>
-              {teams.map((team, idx) => <TeamTableEntry
-                team={team} key={idx} />)}
-            </tbody>
-          </table>
+          </button>
         </div>
+        <table className={classes.tableData}>
+          <tbody>
+            {teams.map((team, idx) => <TeamTableEntry
+              team={team} key={idx} />)}
+          </tbody>
+        </table>
       </FloatingDiv>
     </div>
   )

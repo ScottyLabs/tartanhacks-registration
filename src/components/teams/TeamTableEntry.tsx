@@ -30,12 +30,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     color: theme.palette.gradient.start,
     fontSize: "20px",
-    paddingLeft: "27px",
+    paddingLeft: "5%",
+    width: "95%",
+    right: "27px",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
     overflow: "hidden",
     display: "block",
-    width: "100%",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       height: "0%"
     },
@@ -94,8 +95,7 @@ const TeamTableEntry = (props: any) => {
           try {
             await dispatch(actions.teams.joinTeamRequest(props.team._id));
             router.push('/');
-          }
-          catch (err) {
+          } catch (err) {
             console.log(err);
           }
         }}>
@@ -105,9 +105,18 @@ const TeamTableEntry = (props: any) => {
         </form>
       </td>
       <td className={classes.viewDetailCell}>
-        <RoundedButton type="submit" className={classes.tableEntryButton}>
-          View Detail
-        </RoundedButton>
+        <form onSubmit={ (e) => {
+          e.preventDefault()
+          try {
+            router.push('/teams/details/' + props.team._id)
+          } catch (err) {
+            console.log(err);
+          }
+        }}>
+          <RoundedButton type="submit" className={classes.tableEntryButton}>
+            View Detail
+          </RoundedButton>
+        </form>
       </td>
     </tr>
   )

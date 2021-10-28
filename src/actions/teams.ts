@@ -13,7 +13,7 @@ export const viewTeams = (): DispatchAction => ({
 })
 
 export const joinTeamRequest = (id: string): DispatchAction => ({
-  type: DispatchActionType.TEAMS_JOIN_REQUEST,
+  type: DispatchActionType.TEAM_JOIN,
   useAPI: true,
   request: {
     path: `/team/join/${id}`,
@@ -22,4 +22,17 @@ export const joinTeamRequest = (id: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const getTeamInfo = (teamId: string): DispatchAction => ({
+  type: DispatchActionType.TEAM_INFO,
+  useAPI: true,
+  request: {
+    path: `/team/${teamId}`,
+    method: "GET",
+    body: { teamId }
+  },
+  status: RequestStatus.PENDING
+})
+
+
   
