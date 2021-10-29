@@ -1,6 +1,6 @@
-import { DispatchActionType } from "enums/DispatchActionType"
-import { RequestStatus } from "enums/RequestStatus"
-import { DispatchAction } from "types/DispatchAction"
+  import { DispatchActionType } from "enums/DispatchActionType"
+  import { RequestStatus } from "enums/RequestStatus"
+  import { DispatchAction } from "types/DispatchAction"
 
 export const viewTeams = (): DispatchAction => ({
   type: DispatchActionType.TEAMS_VIEW,
@@ -34,5 +34,14 @@ export const getTeamInfo = (teamId: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
-
+export const leaveTeam = (): DispatchAction => ({
+  type: DispatchActionType.TEAM_LEAVE,
+  useAPI: true,
+  request: {
+    path: `/team/leave`,
+    method: "POST",
+    body: { }
+  },
+  status: RequestStatus.PENDING
+})
   

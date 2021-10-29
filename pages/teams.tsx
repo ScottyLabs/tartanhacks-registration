@@ -1,4 +1,4 @@
-import { Hidden, makeStyles, Typography } from "@material-ui/core"
+import { Hidden, makeStyles, Typography, Snackbar } from "@material-ui/core"
 import React, {
   ReactElement,
   FunctionComponent,
@@ -17,6 +17,7 @@ import RoundedButton from "src/components/design/RoundedButton"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
 import ContentHeader from "src/components/design/ContentHeader"
+import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   newTeamButton: {
@@ -83,7 +84,13 @@ const ViewTeams = () => {
     name: "",
     description: ""
   }])
+  const [loadError, setLoadError] = useState(false)
+  const [joinError, setJoinError] = useState(false)
   const classes = useStyles()
+
+  const checkJoinErrorCallback = ((isError: boolean) => {
+    setJoinError(isError);
+  })
 
   useEffect(() => {
     const getTeams = async () => {
@@ -91,44 +98,60 @@ const ViewTeams = () => {
         const viewTeams = await dispatch(actions.teams.viewTeams());
         setTeams(viewTeams.data);
       } catch (err) {
-        console.log(err)
-        router.push('/login');
+        setLoadError(true);
       }
     }
     getTeams();
   }, [])
 
+  if (loadError) {
+    return (
+      <Snackbar open={loadError}>
+        <Alert severity="error">
+          Cannot get the list of teams!
+        </Alert>
+      </Snackbar>
+    )
+  }
+
   return (
-    <div>
-      <ScottyLabsHeader />
-      <WaveFooter />
-      <FloatingDiv>
-        <ContentHeader title="Team" />
-        <RoundedButton type="submit" className={classes.newTeamButton}>
-          Create new team
-        </RoundedButton>
-        <div className={classes.tableHeader}>
-          <Typography variant="h4" className={classes.tableHeaderText}>
-            VIEW OPEN TEAMS
-          </Typography>
-          <button className={classes.link} onClick={
-            (e) => {
-              console.log("filtered");
-            }
-          }>
+    <>
+      <div>
+        <ScottyLabsHeader />
+        <WaveFooter />
+        <FloatingDiv>
+          <ContentHeader title="Team" />
+          <RoundedButton type="submit" className={classes.newTeamButton}>
+            Create new team
+          </RoundedButton>
+          <div className={classes.tableHeader}>
             <Typography variant="h4" className={classes.tableHeaderText}>
-              Filter
+              VIEW OPEN TEAMS
             </Typography>
-          </button>
-        </div>
-        <table className={classes.tableData}>
-          <tbody>
-            {teams.map((team, idx) => <TeamTableEntry
-              team={team} key={idx} />)}
-          </tbody>
-        </table>
-      </FloatingDiv>
-    </div>
+            <button className={classes.link} onClick={
+              (e) => {
+                console.log("filtered");
+              }
+            }>
+              <Typography variant="h4" className={classes.tableHeaderText}>
+                Filter
+              </Typography>
+            </button>
+          </div>
+          <table className={classes.tableData}>
+            <tbody>
+              {teams.map((team, idx) => <TeamTableEntry
+                team={team} key={idx} callback={checkJoinErrorCallback}/>)}
+            </tbody>
+          </table>
+        </FloatingDiv>
+      </div>
+      <Snackbar open={joinError}>
+        <Alert severity="error" onClose={() => {
+          setJoinError(false);
+        }}>Cannot join the team</Alert>
+      </Snackbar>
+    </>
   )
 }
 

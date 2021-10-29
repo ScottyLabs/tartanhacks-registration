@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme) => ({
     top: "20%",
     width: "80%",
     margin: "auto",
+    paddingBottom: "40px",
+    marginBottom: "250px",
     display: "flex",
     alignItems: "start",
     justifyContent: "center",
@@ -17,12 +19,14 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "25px",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "90%",
-      top: "15%"
+      top: "15%",
+      marginBottom: "50px"
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: "90%",
-      top: "15%"
-    }
+      top: "15%",
+      marginBottom: "150px"
+    },
   },
   content: {
     display: "flex",

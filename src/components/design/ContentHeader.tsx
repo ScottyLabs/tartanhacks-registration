@@ -11,14 +11,14 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     display: "block",
-    width: "100%",
+    width: "40%",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px"
+      fontSize: "22px"
     },
+    margin: "0 auto"
   },
   headerDiv: {
     width: "100%",
-    alignItems: "center",
     textAlign: "center",
     position: "relative",
     paddingTop: "42px"
