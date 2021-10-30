@@ -1,4 +1,5 @@
 import {
+  Button,
   Collapse,
   FormControl,
   FormControlLabel,
@@ -67,6 +68,10 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: "2em"
+  },
+  buttonContainer: {
+    display: "flex",
+    justifyContent: "center"
   }
 }))
 
@@ -92,6 +97,11 @@ const ApplicationForm = (): ReactElement => {
           <PortfolioSection />
           <EssaySection />
           <LogisticsSection />
+          <div className={classes.buttonContainer}>
+            <Button type="submit" variant="outlined">
+              Submit
+            </Button>
+          </div>
         </div>
       </form>
     </Paper>

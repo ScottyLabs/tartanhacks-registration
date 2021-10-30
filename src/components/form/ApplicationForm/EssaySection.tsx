@@ -31,7 +31,7 @@ const EssaySection = (): ReactElement => {
         Essays
       </Typography>
       <Typography variant="body1" className={classes.essayPrompt}>
-        1. Why do you want to join TartanHacks?
+        Why do you want to join TartanHacks?
       </Typography>
       <TextField
         label="Write answer here"
