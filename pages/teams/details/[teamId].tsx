@@ -103,14 +103,20 @@ const TeamDescription = () => {
       try {
         const info = await dispatch(actions.teams.getTeamInfo(teamId as string))
         setTeamInfo(info.data);
-        const ownTeam = await dispatch(actions.user.getOwnTeam());
-        setIsOwnTeam(ownTeam.data._id === (teamId as string))
       } catch (err) {
         setFetchError(true);
         //TODO: fetch error processing
       } finally {
-        setLoading(false);
-        return;
+        try {
+          const ownTeam = await dispatch(actions.user.getOwnTeam());
+          setIsOwnTeam(ownTeam.data._id === (teamId as string))
+        } catch (err) {
+          setIsOwnTeam(false);
+        }
+        finally {
+          setLoading(false);
+          return;
+        }
       }
     }
 

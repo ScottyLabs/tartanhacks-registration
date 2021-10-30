@@ -45,3 +45,13 @@ export const leaveTeam = (): DispatchAction => ({
   status: RequestStatus.PENDING
 })
   
+export const createTeam = (name: string, description: string): DispatchAction => ({
+  type: DispatchActionType.TEAM_CREATE,
+  useAPI: true,
+  request: {
+    path: `/team/`,
+    method: "POST",
+    body: { name, description }
+  },
+  status: RequestStatus.PENDING
+})

@@ -7,5 +7,6 @@ export enum DispatchActionType {
   TEAM_JOIN = "TEAM_JOIN",
   TEAM_INFO = "TEAM_INFO",
   USER_GET_TEAM = "USER_GET_TEAM",
-  TEAM_LEAVE = "TEAM_LEAVE"
+  TEAM_LEAVE = "TEAM_LEAVE",
+  TEAM_CREATE = "TEAM_CREATE"
 }

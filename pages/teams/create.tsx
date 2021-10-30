@@ -7,6 +7,8 @@ import FloatingDiv from "src/components/design/FloatingDiv"
 import ContentHeader from "src/components/design/ContentHeader"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
+import RoundedButton from "src/components/design/RoundedButton"
+import actions from "src/actions"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -42,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     padding: 0,
     margin: 0
   },
-  leaveButton: {
+  createButton: {
     width: "45%",
     fontSize: "30px",
     fontWeight: 600,
@@ -51,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     background: theme.palette.primary.main,
     color: "#FFFFFF",
+    padding: "20px",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "25px",
       width: "60%",
@@ -59,10 +62,6 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "16px",
       width: "75%",
     }
-  },
-  buttonForm: {
-    display: "inline-flex",
-    justifyContent: "center"
   },
   textField: {
     backgroundColor: "white",
@@ -79,9 +78,8 @@ const TeamCreate = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const classes = useStyles();
-  const [userName, setUserName] = useState("");
   const [teamName, setTeamName] = useState("");
-  const [TeamDescription, setTeamDescription] = useState("");
+  const [teamDescription, setTeamDescription] = useState("");
   const [addMembers, setAddMembers] = useState<any>();
   return (
     <>
@@ -94,21 +92,16 @@ const TeamCreate = () => {
             <Typography variant="h4" className={classes.title}>
               BASIC INFO
             </Typography>
-            <form>
-              <Typography variant="subtitle1" className={classes.annotation}>
-                Your Name*
-              </Typography>
-              <TextField required variant="outlined" fullWidth={true}
-                value={userName} className={classes.textField}
-                InputProps={{
-                  className: classes.textFieldInput,
-                  classes: { notchedOutline: classes.textFieldInput }
-                }}
-                onChange={(e) => {
-                  setUserName(e.target.value)
-                }}
-              />
-
+            <form onSubmit = { async (e) => {
+              e.preventDefault();
+              try {
+                await dispatch(actions.teams.createTeam(teamName, teamDescription));
+                router.push("/teams");
+              } catch (err) {
+                console.log(err);
+                //TODO: can't create team error handling
+              }
+            }}>
               <Typography variant="subtitle1" className={classes.annotation}>
                 Team Name*
               </Typography>
@@ -127,7 +120,7 @@ const TeamCreate = () => {
                 Team Description*
               </Typography>
               <TextField required variant="outlined" fullWidth={true}
-                value={TeamDescription} className={classes.textField}
+                value={teamDescription} className={classes.textField}
                 InputProps={{
                   className: classes.textFieldInput,
                   classes: { notchedOutline: classes.textFieldInput }
@@ -140,7 +133,7 @@ const TeamCreate = () => {
               <Typography variant="subtitle1" className={classes.annotation}>
                 Invite New Member
               </Typography>
-              <TextField required variant="outlined" fullWidth={true}
+              <TextField variant="outlined" fullWidth={true}
                 value={addMembers} className={classes.textField}
                 InputProps={{
                   className: classes.textFieldInput,
@@ -150,6 +143,9 @@ const TeamCreate = () => {
                   setAddMembers(e.target.value)
                 }}
               />
+              <RoundedButton type="submit" className={classes.createButton}>
+              CREATE NEW TEAM
+            </RoundedButton>
             </form>
           </div>
         </FloatingDiv>
