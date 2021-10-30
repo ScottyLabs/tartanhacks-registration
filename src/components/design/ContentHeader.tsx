@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from "@material-ui/core"
+import { Hidden, makeStyles, Typography } from "@material-ui/core"
 import EnvelopeEmpty from "./EnvelopeEmpty";
 
 
@@ -11,11 +11,18 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     display: "block",
-    width: "40%",
+    width: "50%",
+    margin: "0 auto",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "22px"
+      fontSize: "22px",
+      width: "80%",
+      paddingBottom: "20px"
     },
-    margin: "0 auto"
+  },
+  longTitle: {
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      marginLeft: "0"
+    }
   },
   headerDiv: {
     width: "100%",
@@ -47,12 +54,15 @@ const ContentHeader = (props: any) => {
   return (
     <>
       <div className={classes.headerDiv}>
-        <Typography variant="h4" className={classes.header}>
+        <Typography variant="h4" className={`${classes.header} 
+          ${props.longTitle == "true" ? classes.longTitle : ''}`}>
           {props.title}
         </Typography>
         <EnvelopeEmpty className={classes.envelope} />
       </div>
-      <hr className={classes.hrDivider} />
+      <Hidden xsDown>
+        <hr className={classes.hrDivider} />
+      </Hidden>
     </>
   )
 }

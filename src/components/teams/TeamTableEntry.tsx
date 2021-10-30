@@ -111,12 +111,8 @@ const TeamTableEntry = (props: any) => {
         </td>
         <td className={classes.viewDetailCell}>
           <form onSubmit={(e) => {
-            e.preventDefault()
-            try {
-              router.push('/teams/details/' + props.team._id)
-            } catch (err) {
-              console.log(err);
-            }
+            e.preventDefault();
+            router.push('/teams/details/' + props.team._id)
           }}>
             <RoundedButton type="submit" className={classes.tableEntryButton}>
               View Detail

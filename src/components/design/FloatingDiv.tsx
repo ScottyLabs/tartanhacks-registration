@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core"
 const useStyles = makeStyles((theme) => ({
   floatingDiv: {
     position: "relative",
-    top: "20%",
+    top: "25%",
     width: "80%",
     margin: "auto",
     paddingBottom: "40px",
@@ -12,8 +12,8 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "start",
     justifyContent: "center",
     boxSizing: "border-box",
-    backgroundImage: `linear-gradient(316.54deg, rgba(255, 255, 255, 0.85) 
-                        35.13%, rgba(255, 227, 227, 0.7565) 126.39%)`,
+    backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
+                        35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
     backdropFilter: "blur(4px)",
     borderRadius: "25px",

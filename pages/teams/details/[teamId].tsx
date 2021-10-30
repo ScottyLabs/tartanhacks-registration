@@ -1,7 +1,5 @@
-import { Hidden, makeStyles, Typography, Snackbar } from "@material-ui/core"
+import { makeStyles, Typography, Snackbar } from "@material-ui/core"
 import React, {
-  ReactElement,
-  FunctionComponent,
   useEffect,
   useState
 } from "react"
@@ -79,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
       width: "75%",
     }
   },
-  ButtonForm: {
+  buttonForm: {
     display: "inline-flex",
     justifyContent: "center"
   }
@@ -109,6 +107,7 @@ const TeamDescription = () => {
         setIsOwnTeam(ownTeam.data._id === (teamId as string))
       } catch (err) {
         setFetchError(true);
+        //TODO: fetch error processing
       } finally {
         setLoading(false);
         return;
@@ -164,13 +163,14 @@ const TeamDescription = () => {
               </li>)}
           </ul>
           {isOwnTeam ?
-          <form className={classes.ButtonForm} onSubmit={ async (e) => {
+          <form className={classes.buttonForm} onSubmit={ async (e) => {
             e.preventDefault();
             try {
               await dispatch(actions.teams.leaveTeam());
               router.push('/teams');
             } catch (err) {
               setLeaveError(true);
+              //TODO: leave error processing
             }
           }}>
             <RoundedButton type="submit" className={classes.leaveButton}>

@@ -75,6 +75,10 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: "underline",
     cursor: "pointer"
   },
+  buttonForm: {
+    display: "inline-flex",
+    justifyContent: "center"
+  }
 }))
 
 const ViewTeams = () => {
@@ -99,6 +103,7 @@ const ViewTeams = () => {
         setTeams(viewTeams.data);
       } catch (err) {
         setLoadError(true);
+        //TODO: load error processing
       }
     }
     getTeams();
@@ -121,9 +126,14 @@ const ViewTeams = () => {
         <WaveFooter />
         <FloatingDiv>
           <ContentHeader title="Team" />
-          <RoundedButton type="submit" className={classes.newTeamButton}>
-            Create new team
-          </RoundedButton>
+          <form className={classes.buttonForm} onClick={ async (e) => {
+            e.preventDefault();
+            router.push("/teams/create")
+          }}>
+            <RoundedButton type="submit" className={classes.newTeamButton}>
+              Create new team
+            </RoundedButton>
+          </form>
           <div className={classes.tableHeader}>
             <Typography variant="h4" className={classes.tableHeaderText}>
               VIEW OPEN TEAMS
@@ -141,7 +151,7 @@ const ViewTeams = () => {
           <table className={classes.tableData}>
             <tbody>
               {teams.map((team, idx) => <TeamTableEntry
-                team={team} key={idx} callback={checkJoinErrorCallback}/>)}
+                team={team} key={idx} callback={checkJoinErrorCallback} />)}
             </tbody>
           </table>
         </FloatingDiv>
