@@ -20,6 +20,10 @@ export const theme = createTheme({
     lightGradient: {
       start: "#FFFFFF",
       end: "#FFE3E3"
+    },
+    text: {
+      primary: "#AA5418",
+      secondary: "#F3964A"
     }
   },
   typography: {
