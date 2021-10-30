@@ -3,13 +3,15 @@ import {
   LinearProgress,
   Link,
   makeStyles,
+  Snackbar,
   TextField,
   Typography
 } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
 import { ReactElement, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import RoundedButton from "../design/RoundedButton"
 
@@ -69,6 +71,9 @@ const AuthenticationDialog = ({
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+
+  const errorMessage = useSelector((state) => state?.accounts?.status?.message)
 
   const register = async () => {
     setLoading(true)
@@ -77,16 +82,19 @@ const AuthenticationDialog = ({
       router.push("/")
     } catch (err) {
       console.error(err)
+      setError(true)
     }
     setLoading(false)
   }
   const login = async () => {
     setLoading(true)
+    window.localStorage.clear("accessToken")
     try {
       await dispatch(actions.auth.login(email, password))
       router.push("/")
     } catch (err) {
       console.error(err)
+      setError(true)
     }
     setLoading(false)
   }
@@ -96,6 +104,14 @@ const AuthenticationDialog = ({
       <Collapse in={loading}>
         <LinearProgress />
       </Collapse>
+      <Snackbar
+        open={error}
+        autoHideDuration={5000}
+        onClose={(e) => setError(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="error">{errorMessage}</Alert>
+      </Snackbar>
       <form
         className={classes.registrationForm}
         onSubmit={(e) => {
