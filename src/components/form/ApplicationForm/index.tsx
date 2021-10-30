@@ -1,37 +1,8 @@
-import {
-  Button,
-  Collapse,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  InputLabel,
-  LinearProgress,
-  Link,
-  makeStyles,
-  MenuItem,
-  Paper,
-  Select,
-  TextField,
-  Typography
-} from "@material-ui/core"
-import { Autocomplete } from "@material-ui/lab"
+import { Button, makeStyles, Paper, Typography } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
-import {
-  CMUCollege,
-  CollegeLevel,
-  Ethnicity,
-  Gender,
-  HackathonExperience,
-  Region,
-  ShirtSize,
-  WorkPermission
-} from "enums/Profile"
-import { ObjectId } from "mongodb"
 import { useRouter } from "next/dist/client/router"
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement } from "react"
 import { useDispatch } from "react-redux"
-import actions from "src/actions"
-import RoundedButton from "../../design/RoundedButton"
 import BasicSection from "./BasicSection"
 import EssaySection from "./EssaySection"
 import ExperienceSection from "./ExperienceSection"
@@ -78,12 +49,19 @@ const useStyles = makeStyles((theme) => ({
 const ApplicationForm = (): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
-  const router = useRouter()
   const classes = useStyles(theme)
+
+  const validateInput = () => {}
 
   return (
     <Paper className={classes.formDialog}>
-      <form className={classes.applicationForm}>
+      <form
+        className={classes.applicationForm}
+        onSubmit={(e) => {
+          e.preventDefault()
+          validateInput()
+        }}
+      >
         <div className={classes.headerContainer}>
           <Typography variant="h3" className={classes.header}>
             Application

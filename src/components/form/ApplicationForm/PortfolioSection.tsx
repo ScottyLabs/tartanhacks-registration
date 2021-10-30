@@ -1,15 +1,9 @@
 import {
-  Button,
-  FormControl,
-  FormControlLabel,
-  Input,
-  makeStyles,
+  Button, makeStyles,
   TextField,
   Typography
 } from "@material-ui/core"
-import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
-import { Ethnicity, Gender } from "enums/Profile"
 import React, { ReactElement, useState } from "react"
 import { useDispatch } from "react-redux"
 
