@@ -28,7 +28,7 @@ const BasicSection = (): ReactElement => {
   const [lastName, setLastName] = useState<string>()
   const [gender, setGender] = useState<Gender | null>()
   const [genderOther, setGenderOther] = useState<string>()
-  const [ethnicity, setEthnicity] = useState<Ethnicity>()
+  const [ethnicity, setEthnicity] = useState<Ethnicity | null>()
   const [ethnicityOther, setEthnicityOther] = useState<string>()
 
   return (

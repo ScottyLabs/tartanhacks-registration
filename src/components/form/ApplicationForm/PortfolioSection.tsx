@@ -1,4 +1,12 @@
-import { makeStyles, TextField, Typography } from "@material-ui/core"
+import {
+  Button,
+  FormControl,
+  FormControlLabel,
+  Input,
+  makeStyles,
+  TextField,
+  Typography
+} from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { Ethnicity, Gender } from "enums/Profile"
@@ -14,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
   },
   sectionHeader: {
     marginBottom: "1rem"
+  },
+  resumeUploadContainer: {
+    display: "flex",
+    alignItems: "center",
+    gap: "1em"
   }
 }))
 
@@ -44,15 +57,21 @@ const PortfolioSection = (): ReactElement => {
           setGithub(e.target.value)
         }}
       />
-      <TextField
-        label="Resume"
-        variant="outlined"
-        fullWidth
-        value={resume}
-        onChange={(e) => {
-          setResume(e.target.value)
-        }}
-      />
+      <div className={classes.resumeUploadContainer}>
+        <Button variant="outlined" component="label">
+          Upload Resume
+          <input
+            type="file"
+            hidden
+            value={resume}
+            onChange={(e) => {
+              console.log(e.target.value)
+              setResume(e.target.value)
+            }}
+          />
+        </Button>
+        <Typography variant="body2">{resume}</Typography>
+      </div>
       <TextField
         label="Design"
         variant="outlined"
