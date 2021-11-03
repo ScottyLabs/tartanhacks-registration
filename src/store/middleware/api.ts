@@ -48,12 +48,22 @@ const apiMiddleware: Middleware<any, any> =
           // Mark request status as error
           if (axios.isAxiosError(err)) {
             const message = (err as AxiosError).response?.data?.message || err
-            const action: DispatchAction = { type, useAPI: false, status: RequestStatus.ERROR, data: message }
+            const action: DispatchAction = {
+              type,
+              useAPI: false,
+              status: RequestStatus.ERROR,
+              data: message
+            }
             dispatch(action)
             return Promise.reject(action)
           } else {
             console.error(err)
-            const action: DispatchAction = { type, useAPI: false, status: RequestStatus.ERROR, data: err }
+            const action: DispatchAction = {
+              type,
+              useAPI: false,
+              status: RequestStatus.ERROR,
+              data: err
+            }
             dispatch(action)
             return Promise.reject(action)
           }

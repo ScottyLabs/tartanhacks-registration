@@ -13,6 +13,7 @@ import { useRouter } from "next/dist/client/router"
 import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import { RootState } from "types/RootState"
 import RoundedButton from "../design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +74,7 @@ const AuthenticationDialog = ({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const errorMessage = useSelector((state) => state?.accounts?.status?.message)
+  const errorMessage = useSelector((state: RootState) => state?.accounts?.error)
 
   const register = async () => {
     setLoading(true)

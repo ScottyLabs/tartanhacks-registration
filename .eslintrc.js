@@ -23,7 +23,7 @@ module.exports = {
     "@typescript-eslint/quotes": ["error", "double"],
     camelcase: "off",
     "comma-dangle": ["error", "never"],
-    indent: ["error", 2],
+    indent: ["error", 2, { SwitchCase: 1 }],
     "no-extra-semi": 2,
     "no-irregular-whitespace": 2,
     "no-lonely-if": 2,

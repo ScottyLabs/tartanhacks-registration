@@ -4,5 +4,6 @@ export interface RootState {
   accounts: {
     data: any
     status: RequestStatus
+    error: string
   }
 }
