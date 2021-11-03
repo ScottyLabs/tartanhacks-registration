@@ -11,4 +11,9 @@ export interface RootState {
     status: RequestStatus
     error: string
   }
+  application: {
+    data: any
+    status: RequestStatus
+    error: string
+  }
 }

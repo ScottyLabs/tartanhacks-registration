@@ -1,8 +1,16 @@
-import { Button, makeStyles, Paper, Typography } from "@material-ui/core"
+import {
+  Button,
+  makeStyles,
+  Paper,
+  Snackbar,
+  Typography
+} from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
-import React, { ReactElement } from "react"
-import { useDispatch } from "react-redux"
+import React, { ReactElement, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { RootState } from "types/RootState"
 import BasicSection from "./BasicSection"
 import EssaySection from "./EssaySection"
 import ExperienceSection from "./ExperienceSection"
@@ -26,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center"
   },
   headerContainer: {
-    width: "30%",
+    width: "40%",
     textAlign: "center",
     alignSelf: "center"
   },
@@ -51,10 +59,23 @@ const ApplicationForm = (): ReactElement => {
   const theme = useTheme()
   const classes = useStyles(theme)
 
+  const [error, setError] = useState(false)
+  const errorMessage = useSelector(
+    (state: RootState) => state?.application?.error
+  )
+
   const validateInput = () => {}
 
   return (
     <Paper className={classes.formDialog}>
+      <Snackbar
+        open={error}
+        autoHideDuration={5000}
+        onClose={(e) => setError(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="error">{errorMessage}</Alert>
+      </Snackbar>
       <form
         className={classes.applicationForm}
         onSubmit={(e) => {
@@ -68,13 +89,13 @@ const ApplicationForm = (): ReactElement => {
           </Typography>
         </div>
         <div className={classes.formContents}>
-          <BasicSection />
-          <SchoolSection />
-          <ExperienceSection />
-          <WorkAuthorizationSection />
-          <PortfolioSection />
-          <EssaySection />
-          <LogisticsSection />
+          <BasicSection setError={setError} />
+          <SchoolSection setError={setError} />
+          <ExperienceSection setError={setError} />
+          <WorkAuthorizationSection setError={setError} />
+          <PortfolioSection setError={setError} />
+          <EssaySection setError={setError} />
+          <LogisticsSection setError={setError} />
           <div className={classes.buttonContainer}>
             <Button type="submit" variant="outlined">
               Submit

@@ -13,7 +13,7 @@ const data = (state = [], action: DispatchAction) => {
   return state
 }
 
-const error = (state = {}, action: DispatchAction) => {
+const error = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.SPONSORS_LIST:
       if (action.status == RequestStatus.ERROR) {

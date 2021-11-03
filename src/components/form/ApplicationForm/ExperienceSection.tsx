@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ExperienceSection = (): ReactElement => {
+const ExperienceSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>> }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)

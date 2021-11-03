@@ -1,11 +1,9 @@
-import {
-  Button, makeStyles,
-  TextField,
-  Typography
-} from "@material-ui/core"
+import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import React, { ReactElement, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -24,7 +22,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const PortfolioSection = (): ReactElement => {
+const PortfolioSection = ({
+  setError
+}: {
+  setError: Dispatch<SetStateAction<boolean>>
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -32,14 +34,45 @@ const PortfolioSection = (): ReactElement => {
   // Portfolio
   const [github, setGithub] = useState<string>()
   const [resume, setResume] = useState<string>()
+  const [resumeFileName, setResumeFileName] = useState<string>()
   const [design, setDesign] = useState<string>()
   const [website, setWebsite] = useState<string>()
+  const [uploading, setUploading] = useState(false)
+
+  const uploadResume = async (file: File) => {
+    try {
+      setUploading(true)
+      const { data: fileId } = await dispatch(actions.application.uploadResume(file))
+      setResume(fileId)
+      setUploading(false)
+    } catch (err) {
+      console.error(err)
+      setError(true)
+    }
+  }
 
   return (
     <div className={classes.section}>
       <Typography variant="h5" className={classes.sectionHeader}>
         PORTFOLIO
       </Typography>
+      <div className={classes.resumeUploadContainer}>
+        <Button variant="outlined" component="label">
+          Upload Resume
+          <input
+            type="file"
+            hidden
+            onChange={(e) => {
+              console.log(e.target.files)
+              if (e.target.files && e.target.files.length > 0) {
+                uploadResume(e.target.files[0])
+                setResumeFileName(e.target.files[0].name)
+              }
+            }}
+          />
+        </Button>
+        <Typography variant="body2">{resumeFileName}</Typography>
+      </div>
       <TextField
         label="GitHub Username"
         variant="outlined"
@@ -51,21 +84,6 @@ const PortfolioSection = (): ReactElement => {
           setGithub(e.target.value)
         }}
       />
-      <div className={classes.resumeUploadContainer}>
-        <Button variant="outlined" component="label">
-          Upload Resume
-          <input
-            type="file"
-            hidden
-            value={resume}
-            onChange={(e) => {
-              console.log(e.target.value)
-              setResume(e.target.value)
-            }}
-          />
-        </Button>
-        <Typography variant="body2">{resume}</Typography>
-      </div>
       <TextField
         label="Design"
         variant="outlined"

@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CMU = "Carnegie Mellon University"
 
-const BasicSection = (): ReactElement => {
+const SchoolSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>> }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -83,7 +83,7 @@ const BasicSection = (): ReactElement => {
         )}
       />
       <Autocomplete
-        options={["2022", "2023", "2024", "2025", "2026"]}
+        options={["2022", "2023", "2024", "2025", "2026", "2027"]}
         value={graduationYear}
         onChange={(e, value) => setGraduationYear(value)}
         renderInput={(params) => (
@@ -108,4 +108,4 @@ const BasicSection = (): ReactElement => {
   )
 }
 
-export default BasicSection
+export default SchoolSection
