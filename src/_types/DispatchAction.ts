@@ -5,14 +5,15 @@ import { APIRequest } from "./APIRequest"
 export type DispatchAction =
   | {
       type: DispatchActionType
-      [data: string]: any
       useAPI: false
+      status: RequestStatus
+      data?: any
     }
   | {
       type: DispatchActionType
-      [data: string]: any
       useAPI: true
       // request fields required if using API
       request: APIRequest
       status: RequestStatus
+      data?: any
     }

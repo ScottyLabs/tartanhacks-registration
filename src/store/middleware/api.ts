@@ -47,17 +47,25 @@ const apiMiddleware: Middleware<any, any> =
         } catch (err: any) {
           // Mark request status as error
           if (axios.isAxiosError(err)) {
-            const message = (err as AxiosError).message || err
-            dispatch({ type, status: RequestStatus.ERROR, data: message })
-            return Promise.reject({
+            const message = (err as AxiosError).response?.data?.message || err
+            const action: DispatchAction = {
               type,
+              useAPI: false,
               status: RequestStatus.ERROR,
               data: message
-            })
+            }
+            dispatch(action)
+            return Promise.reject(action)
           } else {
             console.error(err)
-            dispatch({ type, status: RequestStatus.ERROR, data: err })
-            return Promise.reject({ type, status: RequestStatus.ERROR, data: err })
+            const action: DispatchAction = {
+              type,
+              useAPI: false,
+              status: RequestStatus.ERROR,
+              data: err
+            }
+            dispatch(action)
+            return Promise.reject(action)
           }
         }
       }
