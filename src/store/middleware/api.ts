@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios"
-import { DispatchAction } from "types/DispatchAction"
+import { DispatchAction, RemoteDispatchAction } from "types/DispatchAction"
 import { RequestStatus } from "enums/RequestStatus"
 import { Middleware } from "redux"
 
@@ -10,11 +10,13 @@ const apiMiddleware: Middleware<any, any> =
   ({ dispatch }) =>
     (next) =>
       async (action: DispatchAction): Promise<any> => {
-        const { type, useAPI, request } = action
+        const { type, useAPI } = action
         if (!useAPI) {
           next(action)
           return
         }
+
+        const { request } = action as RemoteDispatchAction
 
         if (!request) {
           throw new Error("Missing request in dispatch for " + type)
