@@ -89,7 +89,6 @@ const AuthenticationDialog = ({
   }
   const login = async () => {
     setLoading(true)
-    window.localStorage.clear("accessToken")
     try {
       await dispatch(actions.auth.login(email, password))
       router.push("/")
