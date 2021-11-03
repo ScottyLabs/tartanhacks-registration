@@ -1,6 +1,6 @@
 import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
-import React, { ReactElement, useState } from "react"
+import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"

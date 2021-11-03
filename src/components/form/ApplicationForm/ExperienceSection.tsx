@@ -2,7 +2,7 @@ import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { Ethnicity, Gender, HackathonExperience } from "enums/Profile"
-import React, { ReactElement, useState } from "react"
+import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
 import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +26,7 @@ const ExperienceSection = ({ setError }: { setError: Dispatch<SetStateAction<boo
   const [coursework, setCoursework] = useState<string>()
   const [language, setLanguage] = useState<string>()
   const [hackathonExperience, setHackathonExperience] =
-    useState<HackathonExperience>()
+    useState<HackathonExperience | null>()
 
   return (
     <div className={classes.section}>

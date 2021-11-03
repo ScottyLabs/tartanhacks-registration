@@ -9,7 +9,7 @@ import {
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { Ethnicity, Gender, Region, ShirtSize } from "enums/Profile"
-import React, { ReactElement, useState } from "react"
+import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
 import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
@@ -31,10 +31,10 @@ const LogisticsSection = ({ setError }: { setError: Dispatch<SetStateAction<bool
 
   // Logistics information
   const [dietaryRestrictions, setDietaryRestrictions] = useState<string>()
-  const [shirtSize, setShirtSize] = useState<ShirtSize>()
+  const [shirtSize, setShirtSize] = useState<ShirtSize | null>()
   const [wantsHardware, setWantsHardware] = useState<boolean>()
   const [address, setAddress] = useState<string>()
-  const [region, setRegion] = useState<Region>()
+  const [region, setRegion] = useState<Region | null>()
   const [phoneNumber, setPhoneNumber] = useState<string>()
 
   return (

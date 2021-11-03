@@ -33,7 +33,7 @@ const apiMiddleware: Middleware<any, any> =
 
         const options = {
           url,
-          method,
+          method: method === "FILE" ? "POST": method,
           headers: {
             "x-access-token": accessToken
           },
@@ -45,7 +45,6 @@ const apiMiddleware: Middleware<any, any> =
           const formData = new FormData()
           formData.append("file", body)
 
-          options.method = "POST"
           options.data = formData
         }
 

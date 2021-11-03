@@ -2,7 +2,7 @@ import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { CMUCollege, CollegeLevel, Ethnicity, Gender } from "enums/Profile"
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { getSchools } from "src/util/getSchools"
 
@@ -27,10 +27,10 @@ const SchoolSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean
 
   // School information
   const [schools, setSchools] = useState<string[]>()
-  const [school, setSchool] = useState<string>()
+  const [school, setSchool] = useState<string | null>()
   const [college, setCollege] = useState<CMUCollege | null>()
   const [level, setLevel] = useState<CollegeLevel | null>()
-  const [graduationYear, setGraduationYear] = useState<string>()
+  const [graduationYear, setGraduationYear] = useState<string | null>()
   const [major, setMajor] = useState<string>()
 
   useEffect(() => {

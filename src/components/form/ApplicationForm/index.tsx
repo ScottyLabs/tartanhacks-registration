@@ -64,8 +64,6 @@ const ApplicationForm = (): ReactElement => {
     (state: RootState) => state?.application?.error
   )
 
-  const validateInput = () => {}
-
   return (
     <Paper className={classes.formDialog}>
       <Snackbar
@@ -80,7 +78,6 @@ const ApplicationForm = (): ReactElement => {
         className={classes.applicationForm}
         onSubmit={(e) => {
           e.preventDefault()
-          validateInput()
         }}
       >
         <div className={classes.headerContainer}>

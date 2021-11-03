@@ -4,9 +4,10 @@ import { useTheme } from "@material-ui/styles"
 import axios from "axios"
 import { Ethnicity, Gender, WorkPermission } from "enums/Profile"
 import { ObjectId } from "mongodb"
-import React, { ReactElement, useEffect, useState } from "react"
+import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -31,11 +32,11 @@ const WorkAuthorizationSection = ({ setError }: { setError: Dispatch<SetStateAct
   const classes = useStyles(theme)
 
   // Work Authorization
-  const sponsors = useSelector((state) => state.sponsors.data) || []
-  const [workPermission, setWorkPermission] = useState<WorkPermission>()
+  const sponsors = useSelector((state: RootState) => state.sponsors.data) || []
+  const [workPermission, setWorkPermission] = useState<WorkPermission | null>()
   const [workLocation, setWorkLocation] = useState<string>()
   const [workStrengths, setWorkStrengths] = useState<string>()
-  const [sponsorRanking, setSponsorRanking] = useState<ObjectId[]>([])
+  const [sponsorRanking, setSponsorRanking] = useState<string[]>([])
 
   useEffect(() => {
     dispatch(actions.sponsors.list())
@@ -79,7 +80,7 @@ const WorkAuthorizationSection = ({ setError }: { setError: Dispatch<SetStateAct
       <Autocomplete
         multiple
         options={sponsors.map((sponsor: Sponsor) => sponsor.name)}
-        onChange={(e, value) => setSponsorRanking(value)}
+        onChange={(e, value) => setSponsorRanking(value as string[])}
         getOptionDisabled={(options) => sponsorRanking.length >= 5}
         renderInput={(params) => (
           <TextField

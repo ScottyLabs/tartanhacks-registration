@@ -2,7 +2,7 @@ import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { Ethnicity, Gender } from "enums/Profile"
-import React, { ReactElement, useState } from "react"
+import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
 import { useDispatch } from "react-redux"
 
 const useStyles = makeStyles((theme) => ({
@@ -30,7 +30,7 @@ const EssaySection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>
       <Typography variant="h5" className={classes.sectionHeader}>
         Essays
       </Typography>
-      <Typography variant="body1" className={classes.essayPrompt}>
+      <Typography variant="body1">
         Why do you want to join TartanHacks?
       </Typography>
       <TextField
