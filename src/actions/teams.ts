@@ -55,3 +55,14 @@ export const createTeam = (name: string, description: string): DispatchAction =>
   },
   status: RequestStatus.PENDING
 })
+
+export const inviteByEmail = (email: string): DispatchAction => ({
+  type: DispatchActionType.TEAM_INVITE_BY_EMAIL,
+  useAPI: true,
+  request: {
+    path: `/team/invite`,
+    method: "POST",
+    body: { email }
+  },
+  status: RequestStatus.PENDING
+})

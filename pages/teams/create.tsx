@@ -80,7 +80,7 @@ const TeamCreate = () => {
   const classes = useStyles();
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
-  const [addMembers, setAddMembers] = useState<any>();
+  const [addMembers, setAddMembers] = useState("");
   return (
     <>
       <div>
@@ -94,6 +94,7 @@ const TeamCreate = () => {
             </Typography>
             <form onSubmit = { async (e) => {
               e.preventDefault();
+              console.log(addMembers.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
               try {
                 await dispatch(actions.teams.createTeam(teamName, teamDescription));
                 router.push("/teams");

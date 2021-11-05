@@ -13,6 +13,7 @@ import ScottyLabsHeader from "src/components/design/ScottyLabsHeader";
 import ContentHeader from "src/components/design/ContentHeader";
 import { Alert } from "@material-ui/lab"
 import RoundedButton from "src/components/design/RoundedButton";
+import Notification from "src/components/design/Notification";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -88,8 +89,11 @@ const TeamDescription = () => {
   const router = useRouter();
   const { teamId } = router.query;
   const [teamInfo, setTeamInfo] = useState<any>();
-  const [fetchError, setFetchError] = useState(false);
-  const [leaveError, setLeaveError] = useState(false);
+  const [error, setError] = useState({
+    isOpen: false,
+    message: '',
+    type: ''
+  });
   const [loading, setLoading] = useState(true);
   const [isOwnTeam, setIsOwnTeam] = useState(false)
   const classes = useStyles()
@@ -104,7 +108,11 @@ const TeamDescription = () => {
         const info = await dispatch(actions.teams.getTeamInfo(teamId as string))
         setTeamInfo(info.data);
       } catch (err) {
-        setFetchError(true);
+        setError({
+          isOpen: true,
+          message: "Could not load the page",
+          type: 'error'
+        })
         //TODO: fetch error processing
       } finally {
         try {
@@ -125,15 +133,6 @@ const TeamDescription = () => {
 
   if (loading) {
     return <></>
-  }
-  if (fetchError) {
-    return (
-      <Snackbar open={true}>
-        <Alert severity="error">
-          Cannot get the details for the team!
-        </Alert>
-      </Snackbar>
-    )
   }
 
   return (
@@ -169,24 +168,32 @@ const TeamDescription = () => {
               </li>)}
           </ul>
           {isOwnTeam ?
-          <form className={classes.buttonForm} onSubmit={ async (e) => {
-            e.preventDefault();
-            try {
-              await dispatch(actions.teams.leaveTeam());
-              router.push('/teams');
-            } catch (err) {
-              setLeaveError(true);
-              //TODO: leave error processing
-            }
-          }}>
-            <RoundedButton type="submit" className={classes.leaveButton}>
-              LEAVE TEAM
-            </RoundedButton>
-          </form> :
+            <form className={classes.buttonForm} onSubmit={async (e) => {
+              e.preventDefault();
+              try {
+                await dispatch(actions.teams.leaveTeam());
+                router.push('/teams');
+              } catch (err) {
+                setError({
+                  isOpen: true,
+                  message: "Could not leave team",
+                  type: "error"
+                })
+                //TODO: leave error processing
+              }
+            }}>
+              <RoundedButton type="submit" className={classes.leaveButton}>
+                LEAVE TEAM
+              </RoundedButton>
+            </form> :
             null
           }
         </FloatingDiv>
       </div>
+      <Notification
+        notify={error}
+        setNotify={setError}
+      />
     </>
   )
 }

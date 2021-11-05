@@ -18,6 +18,9 @@ import FloatingDiv from "src/components/design/FloatingDiv"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
 import ContentHeader from "src/components/design/ContentHeader"
 import { Alert } from "@material-ui/lab"
+import Notification from "src/components/design/Notification"
+import { isAssetError } from "next/dist/client/route-loader"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   newTeamButton: {
@@ -88,12 +91,22 @@ const ViewTeams = () => {
     name: "",
     description: ""
   }])
-  const [loadError, setLoadError] = useState(false)
-  const [joinError, setJoinError] = useState(false)
+  const [notify, setNotify] = useState({ 
+    isOpen: false, 
+    message: '', 
+    type: '' 
+  })
   const classes = useStyles()
 
+  const errorMessage = useSelector((state: RootState) => state?.teams?.error)
+  
+
   const checkJoinErrorCallback = ((isError: boolean) => {
-    setJoinError(isError);
+    setNotify({
+      isOpen: true,
+      message: isError ? '' : 'Join request sent',
+      type: isError ? 'error' : 'success'
+    });
   })
 
   useEffect(() => {
@@ -102,21 +115,18 @@ const ViewTeams = () => {
         const viewTeams = await dispatch(actions.teams.viewTeams());
         setTeams(viewTeams.data);
       } catch (err) {
-        setLoadError(true);
-        //TODO: load error processing
+        setNotify({
+          isOpen: true,
+          message: '',
+          type: 'error'
+        });
       }
     }
     getTeams();
   }, [])
 
-  if (loadError) {
-    return (
-      <Snackbar open={loadError}>
-        <Alert severity="error">
-          Cannot get the list of teams!
-        </Alert>
-      </Snackbar>
-    )
+  if(notify.type === 'error') {
+    notify.message = errorMessage;
   }
 
   return (
@@ -126,7 +136,7 @@ const ViewTeams = () => {
         <WaveFooter />
         <FloatingDiv>
           <ContentHeader title="Team" />
-          <form className={classes.buttonForm} onClick={ async (e) => {
+          <form className={classes.buttonForm} onClick={async (e) => {
             e.preventDefault();
             router.push("/teams/create")
           }}>
@@ -156,11 +166,10 @@ const ViewTeams = () => {
           </table>
         </FloatingDiv>
       </div>
-      <Snackbar open={joinError}>
-        <Alert severity="error" onClose={() => {
-          setJoinError(false);
-        }}>Cannot join the team</Alert>
-      </Snackbar>
+      <Notification
+        notify={notify}
+        setNotify={setNotify}
+      />
     </>
   )
 }

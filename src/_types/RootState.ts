@@ -5,5 +5,15 @@ export interface RootState {
     data: any
     status: RequestStatus
     error: string
+  },
+  teams: {
+    data: any
+    status: RequestStatus
+    error: string
+  },
+  user: {
+    data: any
+    status: RequestStatus
+    error: string
   }
 }

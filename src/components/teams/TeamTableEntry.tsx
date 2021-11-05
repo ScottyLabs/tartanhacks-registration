@@ -75,7 +75,6 @@ const TeamTableEntry = (props: any) => {
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
-  const [error, setError] = useState(false);
   return (
     <>
       <tr>
@@ -97,11 +96,9 @@ const TeamTableEntry = (props: any) => {
             e.preventDefault()
             try {
               await dispatch(actions.teams.joinTeamRequest(props.team._id));
-              router.push('/');
+              props.callback(false);
             } catch (err) {
-              setError(true);
               props.callback(true);
-              console.log(err)
             }
           }}>
             <RoundedButton type="submit" className={classes.tableEntryButton}>
