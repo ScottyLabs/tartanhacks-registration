@@ -9,6 +9,9 @@ import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
 import RoundedButton from "src/components/design/RoundedButton"
 import actions from "src/actions"
+import { useSelector } from "react-redux"
+import { RootState } from "types/RootState"
+import Notification from "src/components/design/Notification"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -81,6 +84,17 @@ const TeamCreate = () => {
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
   const [addMembers, setAddMembers] = useState("");
+  const [notify, setNotify] = useState({
+    isOpen: false,
+    message: "",
+    type: ""
+  })
+  const errorMessage = useSelector((state: RootState) => state?.teams?.error)
+
+  if(notify.type === "error") {
+    notify.message = errorMessage
+  }
+
   return (
     <>
       <div>
@@ -99,8 +113,11 @@ const TeamCreate = () => {
                 await dispatch(actions.teams.createTeam(teamName, teamDescription));
                 router.push("/teams");
               } catch (err) {
-                console.log(err);
-                //TODO: can't create team error handling
+                setNotify({
+                  isOpen: true,
+                  message: "",
+                  type: "error"
+                })
               }
             }}>
               <Typography variant="subtitle1" className={classes.annotation}>
@@ -151,6 +168,10 @@ const TeamCreate = () => {
           </div>
         </FloatingDiv>
       </div>
+      <Notification 
+      notify={notify}
+      setNotify={setNotify}
+      />
     </>
   )
 }

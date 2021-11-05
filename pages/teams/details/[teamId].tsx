@@ -1,4 +1,4 @@
-import { makeStyles, Typography, Snackbar } from "@material-ui/core"
+import { makeStyles, Typography } from "@material-ui/core"
 import React, {
   useEffect,
   useState
@@ -11,9 +11,10 @@ import WaveFooter from "src/components/design/WaveFooter";
 import FloatingDiv from "src/components/design/FloatingDiv";
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader";
 import ContentHeader from "src/components/design/ContentHeader";
-import { Alert } from "@material-ui/lab"
 import RoundedButton from "src/components/design/RoundedButton";
 import Notification from "src/components/design/Notification";
+import { useSelector } from "react-redux";
+import { RootState } from "types/RootState";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -88,15 +89,26 @@ const TeamDescription = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { teamId } = router.query;
-  const [teamInfo, setTeamInfo] = useState<any>();
-  const [error, setError] = useState({
+  const [teamInfo, setTeamInfo] = useState({
+    _id: "",
+    members: [],
+    visible: true,
+    event: "",
+    name: "",
+    description: "",
+    admin: {},
+    createdAt: "",
+    updatedAt: "",
+    __v: 0
+  });
+  const [notify, setNotify] = useState({
     isOpen: false,
     message: '',
     type: ''
   });
-  const [loading, setLoading] = useState(true);
   const [isOwnTeam, setIsOwnTeam] = useState(false)
   const classes = useStyles()
+  const errorMessage = useSelector((state: RootState) => state?.teams?.error)
 
   useEffect(() => {
     if (teamId == undefined) {
@@ -108,22 +120,22 @@ const TeamDescription = () => {
         const info = await dispatch(actions.teams.getTeamInfo(teamId as string))
         setTeamInfo(info.data);
       } catch (err) {
-        setError({
+        setNotify({
           isOpen: true,
-          message: "Could not load the page",
+          message: "",
           type: 'error'
         })
-        //TODO: fetch error processing
       } finally {
         try {
           const ownTeam = await dispatch(actions.user.getOwnTeam());
           setIsOwnTeam(ownTeam.data._id === (teamId as string))
         } catch (err) {
           setIsOwnTeam(false);
-        }
-        finally {
-          setLoading(false);
-          return;
+          setNotify({
+            isOpen: true,
+            message: "",
+            type: 'error'
+          })
         }
       }
     }
@@ -131,10 +143,11 @@ const TeamDescription = () => {
     fetchTeamInfo();
   }, [teamId])
 
-  if (loading) {
-    return <></>
+  if(notify.type === "error") {
+    notify.message = errorMessage
   }
-
+  
+  console.log(teamInfo)
   return (
     <>
       <div>
@@ -174,9 +187,9 @@ const TeamDescription = () => {
                 await dispatch(actions.teams.leaveTeam());
                 router.push('/teams');
               } catch (err) {
-                setError({
+                setNotify({
                   isOpen: true,
-                  message: "Could not leave team",
+                  message: "",
                   type: "error"
                 })
                 //TODO: leave error processing
@@ -191,8 +204,8 @@ const TeamDescription = () => {
         </FloatingDiv>
       </div>
       <Notification
-        notify={error}
-        setNotify={setError}
+        notify={notify}
+        setNotify={setNotify}
       />
     </>
   )
