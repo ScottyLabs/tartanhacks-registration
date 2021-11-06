@@ -64,6 +64,23 @@ const ConfirmationDialog = (): ReactElement => {
     dispatch(actions.auth.login());
   }, []);
 
+  const confirm = async () => {
+    setLoading(true)
+    try {
+      await dispatch(actions.user.confirm(
+        signatureLiability,
+        signaturePhotoRelease,
+        signatureCodeOfConduct,
+        mlhCodeOfConduct,
+        mlhEventLogistics,
+        mlhPromotional
+      ))
+    } catch (err) {
+      console.error(err)
+    }
+    setLoading(false)
+  }
+
   const testCheckBoxes = () => {
     console.log("testing checkboxes");
     console.log(signatureLiability);
@@ -82,7 +99,8 @@ const ConfirmationDialog = (): ReactElement => {
         
         <form
           onSubmit={(e) => {
-            
+            e.preventDefault()
+            confirm()
           }}
         >
           <div className={classes.dialogContent}>

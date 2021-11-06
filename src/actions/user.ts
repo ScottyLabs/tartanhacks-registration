@@ -11,3 +11,28 @@ export const getStatus = (id: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const confirm = (
+  signatureLiability: boolean,
+  signaturePhotoRelease: boolean,
+  signatureCodeOfConduct: boolean,
+  mlhCodeOfConduct: boolean,
+  mlhEventLogistics: boolean,
+  mlhPromotional: boolean
+  ): DispatchAction => ({
+  type: DispatchActionType.USER_CONFIRM,
+  useAPI: true,
+  request: {
+    path: "/user/confirmation",
+    method: "PUT",
+    body: {
+      signatureLiability,
+      signaturePhotoRelease,
+      signatureCodeOfConduct,
+      mlhCodeOfConduct,
+      mlhEventLogistics,
+      mlhPromotional
+    }
+  },
+  status: RequestStatus.PENDING
+})
