@@ -19,7 +19,7 @@ export const confirm = (
   mlhCodeOfConduct: boolean,
   mlhEventLogistics: boolean,
   mlhPromotional: boolean
-  ): DispatchAction => ({
+): DispatchAction => ({
   type: DispatchActionType.USER_CONFIRM,
   useAPI: true,
   request: {

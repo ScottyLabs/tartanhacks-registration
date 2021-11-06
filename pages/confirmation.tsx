@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   }
 }))
 
@@ -20,11 +20,11 @@ const ConfirmationPage: NextPage = (): ReactElement => {
   const classes = useStyles()
   return (
     <>
-      <WaveBackground/>
-      <Menu/>
+      <WaveBackground />
+      <Menu />
       <div className={classes.dialog}>
-        <ConfirmationDialog/>
-      </div> 
+        <ConfirmationDialog />
+      </div>
     </>
   )
 }
