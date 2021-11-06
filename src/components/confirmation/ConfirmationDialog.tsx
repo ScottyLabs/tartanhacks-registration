@@ -1,7 +1,6 @@
 import {
     Collapse,
     LinearProgress,
-    Link,
     makeStyles,
     Typography,
     FormGroup,
@@ -10,9 +9,8 @@ import {
   } from "@material-ui/core";
 import { useTheme } from "@material-ui/styles";
 import { ReactElement, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import actions from "src/actions";
-import { RootState } from "types/RootState";
 import RectangleButton from "../design/RectangleButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,16 +77,6 @@ const ConfirmationDialog = (): ReactElement => {
       console.error(err)
     }
     setLoading(false)
-  }
-
-  const testCheckBoxes = () => {
-    console.log("testing checkboxes");
-    console.log(signatureLiability);
-    console.log(signaturePhotoRelease);
-    console.log(signatureCodeOfConduct);
-    console.log(mlhCodeOfConduct);
-    console.log(mlhEventLogistics);
-    console.log(mlhPromotional);
   }
 
   return (
@@ -164,7 +152,6 @@ const ConfirmationDialog = (): ReactElement => {
             </RectangleButton>
         </div>
       </form>
-      {/* <button onClick={testCheckBoxes}>test checkboxes</button> */}
     </div>
   );
   
