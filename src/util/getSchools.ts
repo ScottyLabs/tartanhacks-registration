@@ -5,7 +5,7 @@ const parseAsync = (inputStr: string): Promise<string[]> => {
   return new Promise((resolve, reject) => {
     parse(
       inputStr,
-      undefined,
+      {},
       (err: Error | undefined, records: any | undefined): void => {
         if (err) {
           reject(err)

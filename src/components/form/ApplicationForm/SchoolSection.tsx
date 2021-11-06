@@ -2,7 +2,13 @@ import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { CMUCollege, CollegeLevel, Ethnicity, Gender } from "enums/Profile"
-import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react"
+import React, {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch } from "react-redux"
 import { getSchools } from "src/util/getSchools"
 
@@ -20,7 +26,15 @@ const useStyles = makeStyles((theme) => ({
 
 const CMU = "Carnegie Mellon University"
 
-const SchoolSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>> }): ReactElement => {
+const SchoolSection = ({
+  validate,
+  setValidate,
+  setValid
+}: {
+  validate: boolean
+  setValidate: Dispatch<SetStateAction<boolean>>
+  setValid: Dispatch<SetStateAction<boolean>>
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -32,6 +46,9 @@ const SchoolSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean
   const [level, setLevel] = useState<CollegeLevel | null>()
   const [graduationYear, setGraduationYear] = useState<string | null>()
   const [major, setMajor] = useState<string>()
+
+  const [collegeErrorStatus, setCollegeErrorStatus] = useState(false)
+  const [majorErrorStatus, setMajorErrorStatus] = useState(false)
 
   useEffect(() => {
     const querySchools = async () => {

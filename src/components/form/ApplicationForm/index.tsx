@@ -8,8 +8,9 @@ import {
 import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
-import React, { ReactElement, useState } from "react"
+import React, { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
 import { RootState } from "types/RootState"
 import BasicSection from "./BasicSection"
 import EssaySection from "./EssaySection"
@@ -64,6 +65,41 @@ const ApplicationForm = (): ReactElement => {
     (state: RootState) => state?.application?.error
   )
 
+  const [validateBasic, setValidateBasic] = useState(false)
+  const [validateEssay, setValidateEssay] = useState(false)
+  const [validateExperience, setValidateExperience] = useState(false)
+  const [validateLogistics, setValidateLogistics] = useState(false)
+  const [validatePortfolio, setValidatePortfolio] = useState(false)
+  const [validateSchool, setValidateSchool] = useState(false)
+  const [validateWorkAuth, setValidateWorkAuth] = useState(false)
+
+  const [validBasic, setValidBasic] = useState(false)
+  const [validEssay, setValidEssay] = useState(false)
+  const [validExperience, setValidExperience] = useState(false)
+  const [validLogistics, setValidLogistics] = useState(false)
+  const [validPortfolio, setValidPortfolio] = useState(false)
+  const [validSchool, setValidSchool] = useState(false)
+  const [validWorkAuth, setValidWorkAuth] = useState(false)
+
+  const valid = validBasic
+
+  const validateForm = async () => {
+    // Trigger section validation
+    setValidateBasic(true)
+    setValidateEssay(true)
+    setValidateExperience(true)
+    setValidateLogistics(true)
+    setValidatePortfolio(true)
+    setValidateSchool(true)
+    setValidateWorkAuth(true)
+  }
+
+  useEffect(() => {
+    if (valid) {
+      console.log("Submitting form")
+    }
+  }, [valid])
+
   return (
     <Paper className={classes.formDialog}>
       <Snackbar
@@ -78,6 +114,7 @@ const ApplicationForm = (): ReactElement => {
         className={classes.applicationForm}
         onSubmit={(e) => {
           e.preventDefault()
+          validateForm()
         }}
       >
         <div className={classes.headerContainer}>
@@ -86,13 +123,17 @@ const ApplicationForm = (): ReactElement => {
           </Typography>
         </div>
         <div className={classes.formContents}>
-          <BasicSection setError={setError} />
-          <SchoolSection setError={setError} />
-          <ExperienceSection setError={setError} />
-          <WorkAuthorizationSection setError={setError} />
-          <PortfolioSection setError={setError} />
-          <EssaySection setError={setError} />
-          <LogisticsSection setError={setError} />
+          <BasicSection
+            validate={validateBasic}
+            setValidate={setValidateBasic}
+            setValid={setValidBasic}
+          />
+          <SchoolSection validate={validateSchool} setValidate={setValidateSchool} setValid={setValidSchool} />
+          {/* <ExperienceSection setError={setError} /> */}
+          {/* <WorkAuthorizationSection setError={setError} /> */}
+          {/* <PortfolioSection setError={setError} /> */}
+          {/* <EssaySection setError={setError} /> */}
+          {/* <LogisticsSection setError={setError} /> */}
           <div className={classes.buttonContainer}>
             <Button type="submit" variant="outlined">
               Submit
