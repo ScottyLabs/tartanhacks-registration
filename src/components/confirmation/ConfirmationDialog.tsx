@@ -12,6 +12,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import actions from "src/actions";
 import RectangleButton from "../design/RectangleButton";
+import HeaderUnderline from "../design/HeaderUnderline";
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -97,6 +98,7 @@ const ConfirmationDialog = (): ReactElement => {
                     Confirmation
                 </Typography>
             </div>
+            <HeaderUnderline/>
             <div className={classes.dialogText}>
                 <FormGroup>
                     <FormControlLabel
