@@ -6,12 +6,13 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "npm run lint:only && npm run lint:pretty && next lint",
+    "lint": "npm run lint:pretty && npm run lint:only && next lint",
     "lint:only": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "lint:pretty": "prettier --write ."
   },
   "dependencies": {
     "@material-ui/core": "^4.12.3",
+    "@material-ui/lab": "^4.0.0-alpha.60",
     "@material-ui/styles": "^4.11.4",
     "axios": "^0.21.1",
     "axios-middleware": "^0.3.1",

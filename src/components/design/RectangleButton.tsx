@@ -6,7 +6,7 @@ const useStyles = makeStyles((theme) => ({
     background: "#F7C062",
     borderRadius: "10px",
     boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
-    color: "white",
+    color: "white"
   }
 }))
 

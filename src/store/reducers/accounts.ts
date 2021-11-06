@@ -8,13 +8,26 @@ const data = (state = {}, action: DispatchAction) => {
     case DispatchActionType.AUTH_LOGIN:
     case DispatchActionType.AUTH_REGISTER:
     case DispatchActionType.AUTH_LOGIN_TOKEN:
+    case DispatchActionType.AUTH_VERIFY:
       if (action.status == RequestStatus.SUCCESS) {
         if (action.data.token) {
           window.localStorage.setItem("accessToken", action.data.token)
         }
         return action.data
       }
-      break
+  }
+  return state
+}
+
+const error = (state = {}, action: DispatchAction) => {
+  switch (action.type) {
+    case DispatchActionType.AUTH_LOGIN:
+    case DispatchActionType.AUTH_REGISTER:
+    case DispatchActionType.AUTH_LOGIN_TOKEN:
+    case DispatchActionType.AUTH_VERIFY:
+      if (action.status == RequestStatus.ERROR) {
+        return action.data
+      }
   }
   return state
 }
@@ -24,6 +37,7 @@ const status = (state = null, action: DispatchAction) => {
     case DispatchActionType.AUTH_LOGIN:
     case DispatchActionType.AUTH_REGISTER:
     case DispatchActionType.AUTH_LOGIN_TOKEN:
+    case DispatchActionType.AUTH_VERIFY:
       return action.status
   }
   return state
@@ -31,5 +45,6 @@ const status = (state = null, action: DispatchAction) => {
 
 export default combineReducers({
   data,
+  error,
   status
 })

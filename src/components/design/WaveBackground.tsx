@@ -7,14 +7,14 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     width: "100%",
     overflow: "hidden",
-    lineHeight: 0,
+    lineHeight: 0
   },
   titleBox: {
     position: "absolute",
     marginLeft: "2em",
     marginTop: "2em",
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   title: {
     bottom: "0",
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: "100%"
     },
-    marginRight: "1em",
+    marginRight: "1em"
   }
 }))
 
@@ -62,7 +62,7 @@ const WaveBackground = (): ReactElement => {
     <>
       <div className={classes.waveContainer}>
         <div className={classes.titleBox}>
-          <ScottyLabsSmallLogo className={classes.scottyIcon}/>
+          <ScottyLabsSmallLogo className={classes.scottyIcon} />
           <Typography variant="h2" className={classes.title}>
             Tartanhacks Scottylabs
           </Typography>
@@ -73,7 +73,7 @@ const WaveBackground = (): ReactElement => {
           preserveAspectRatio="none"
         >
           <path
-            d="M0 110.433C102.924 53.6918 304.348 55.6107 777.391 55.6107C1193.04 55.6107 1322.46 54.8729 1440 0V465H0V110.433Z" 
+            d="M0 110.433C102.924 53.6918 304.348 55.6107 777.391 55.6107C1193.04 55.6107 1322.46 54.8729 1440 0V465H0V110.433Z"
             fill="url(#paint0_linear)"
           />
           <defs>
