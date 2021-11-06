@@ -7,7 +7,7 @@ export const getStatus = (id: string): DispatchAction => ({
   useAPI: true,
   request: {
     path: `/user/status/${id}`,
-    method: "GET",
+    method: "GET"
   },
   status: RequestStatus.PENDING
 })
