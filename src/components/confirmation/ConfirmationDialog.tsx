@@ -34,30 +34,10 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
       alignItems: "center"
     },
-    link: {
-      "&:hover": {
-        textDecoration: "none",
-        filter: "brightness(85%)"
-      },
-    },
     dialogText: {
         marginBottom: "1em",
         color: `${theme.palette.gradient.start}`,
     },
-    bodyText: {
-      color: `${theme.palette.gradient.start}`
-    },
-    emphasisText: {
-      marginBottom: "1em",
-      color: `${theme.palette.primary.main}`
-    },
-    buttonBox: {
-      display: "flex",
-      flexDirection: "row",
-    },
-    buttonSpacer: {
-      width: "10px"
-    }
 }));
 
 const ConfirmationDialog = (): ReactElement => {
@@ -65,11 +45,18 @@ const ConfirmationDialog = (): ReactElement => {
   const theme = useTheme();
   const classes = useStyles(theme);
   const [loading, setLoading] = useState(false);
+
+  const [signatureLiability, setSignatureLiability] = useState(false);
+  const [signaturePhotoRelease, setSignaturePhotoRelease] = useState(false);
+  const [signatureCodeOfConduct, setSignatureCodeOfConduct] = useState(false);
+  const [mlhCodeOfConduct, setMlhCodeOfConduct] = useState(false);
+  const [mlhEventLogistics, setMlhEventLogistics] = useState(false);
+  const [mlhPromotional, setMlhPromotional] = useState(false);
   
-  const signatureLiabilityText = "Signature liability place holder."
-  const signaturePhotoReleaseText = "Signature photo release place holder."
-  const signatureCodeOfConductText = "Signature code of conduct place holder."
-  const mlhCodeOfConductText = "MLH Code of Conduct place holder."
+  const signatureLiabilityText = "Signature liability place holder.*"
+  const signaturePhotoReleaseText = "Signature photo release place holder.*"
+  const signatureCodeOfConductText = "Signature code of conduct place holder.*"
+  const mlhCodeOfConductText = "MLH Code of Conduct place holder.*"
   const mlhEventLogisticsText = "MLH Event Logistics place holder."
   const mlhPromotionalText = "MLH promotional place holder."
 
@@ -77,12 +64,28 @@ const ConfirmationDialog = (): ReactElement => {
     dispatch(actions.auth.login());
   }, []);
 
+  const testCheckBoxes = () => {
+    console.log("testing checkboxes");
+    console.log(signatureLiability);
+    console.log(signaturePhotoRelease);
+    console.log(signatureCodeOfConduct);
+    console.log(mlhCodeOfConduct);
+    console.log(mlhEventLogistics);
+    console.log(mlhPromotional);
+  }
+
   return (
     <div className={classes.dialog}>
         <Collapse in={loading}>
             <LinearProgress />
         </Collapse>
-        <div className={classes.dialogContent}>
+        
+        <form
+          onSubmit={(e) => {
+            
+          }}
+        >
+          <div className={classes.dialogContent}>
             <div className={classes.dialogText}>
                 <Typography variant="h4">
                     Confirmation
@@ -90,18 +93,60 @@ const ConfirmationDialog = (): ReactElement => {
             </div>
             <div className={classes.dialogText}>
                 <FormGroup>
-                    <FormControlLabel control={<Checkbox />} label={signatureLiabilityText} />
-                    <FormControlLabel control={<Checkbox />} label={signaturePhotoReleaseText} />
-                    <FormControlLabel control={<Checkbox />} label={signatureCodeOfConductText} />
-                    <FormControlLabel control={<Checkbox />} label={mlhCodeOfConductText} />
-                    <FormControlLabel control={<Checkbox />} label={mlhEventLogisticsText} />
-                    <FormControlLabel control={<Checkbox />} label={mlhPromotionalText} />
+                    <FormControlLabel
+                      control={<Checkbox 
+                        required
+                        checked={signatureLiability}
+                        onChange={(e) => setSignatureLiability(e.target.checked)}
+                      />}
+                      label={signatureLiabilityText}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox 
+                        required
+                        checked={signaturePhotoRelease}
+                        onChange={(e) => setSignaturePhotoRelease(e.target.checked)}
+                      />}
+                      label={signaturePhotoReleaseText}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox 
+                        required
+                        checked={signatureCodeOfConduct}
+                        onChange={(e) => setSignatureCodeOfConduct(e.target.checked)}
+                      />}
+                      label={signatureCodeOfConductText}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox 
+                        required
+                        checked={mlhCodeOfConduct}
+                        onChange={(e) => setMlhCodeOfConduct(e.target.checked)}
+                      />}
+                      label={mlhCodeOfConductText}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox 
+                        checked={mlhEventLogistics}
+                        onChange={(e) => setMlhEventLogistics(e.target.checked)}
+                      />}
+                      label={mlhEventLogisticsText}
+                    />
+                    <FormControlLabel
+                      control={<Checkbox 
+                        checked={mlhPromotional}
+                        onChange={(e) => setMlhPromotional(e.target.checked)}
+                      />}
+                      label={mlhPromotionalText}
+                    />
                 </FormGroup>
             </div>
             <RectangleButton type="submit">
-            COMPLETE YOUR APPLICATION
+              CONFIRM
             </RectangleButton>
         </div>
+      </form>
+      {/* <button onClick={testCheckBoxes}>test checkboxes</button> */}
     </div>
   );
   
