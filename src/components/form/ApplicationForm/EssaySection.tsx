@@ -1,9 +1,15 @@
 import { makeStyles, TextField, Typography } from "@material-ui/core"
-import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
-import { Ethnicity, Gender } from "enums/Profile"
-import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
+import React, {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch } from "react-redux"
+import actions from "src/actions"
+import { EssayFields } from "types/ApplicationFields"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -17,13 +23,34 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const EssaySection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>> }): ReactElement => {
+const EssaySection = ({
+  validate,
+  setValidate,
+  setValid
+}: {
+  validate: boolean
+  setValidate: Dispatch<SetStateAction<boolean>>
+  setValid: Dispatch<SetStateAction<boolean>>
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
 
   // Essays
-  const [essay1, setEssay1] = useState<string>()
+  const [essay, setEssay] = useState<string>("")
+
+  const validateForm = async () => {
+    const data: EssayFields = { essay }
+    await dispatch(actions.application.saveEssay(data))
+    setValid(true)
+    setValidate(false)
+  }
+
+  useEffect(() => {
+    if (validate) {
+      validateForm()
+    }
+  }, [validate])
 
   return (
     <div className={classes.section}>
@@ -39,9 +66,9 @@ const EssaySection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>
         required
         fullWidth
         multiline
-        value={essay1}
+        value={essay}
         onChange={(e) => {
-          setEssay1(e.target.value)
+          setEssay(e.target.value)
         }}
       />
     </div>

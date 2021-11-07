@@ -37,7 +37,7 @@ export enum Ethnicity {
 
 export enum HackathonExperience {
   ZERO = "0",
-  ONE_TO_THREE = "0-3",
+  ONE_TO_THREE = "1-3",
   FOUR_PLUS = "4+"
 }
 

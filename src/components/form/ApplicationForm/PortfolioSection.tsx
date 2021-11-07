@@ -1,8 +1,21 @@
-import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
+import {
+  Button,
+  FormControl,
+  makeStyles,
+  TextField,
+  Typography
+} from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
-import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
+import React, {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import { PortfolioFields } from "types/ApplicationFields"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -18,31 +31,40 @@ const useStyles = makeStyles((theme) => ({
   resumeUploadContainer: {
     display: "flex",
     alignItems: "center",
-    gap: "1em"
+    gap: "1em",
+    flexDirection: "row"
   }
 }))
 
 const PortfolioSection = ({
-  setError
+  setError,
+  validate,
+  setValidate,
+  setValid
 }: {
   setError: Dispatch<SetStateAction<boolean>>
+  validate: boolean
+  setValidate: Dispatch<SetStateAction<boolean>>
+  setValid: Dispatch<SetStateAction<boolean>>
 }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
 
   // Portfolio
-  const [github, setGithub] = useState<string>()
-  const [resume, setResume] = useState<string>()
+  const [github, setGithub] = useState<string>("")
+  const [resume, setResume] = useState<string>("")
   const [resumeFileName, setResumeFileName] = useState<string>()
-  const [design, setDesign] = useState<string>()
-  const [website, setWebsite] = useState<string>()
+  const [design, setDesign] = useState<string>("")
+  const [website, setWebsite] = useState<string>("")
   const [uploading, setUploading] = useState(false)
 
   const uploadResume = async (file: File) => {
     try {
       setUploading(true)
-      const { data: fileId } = await dispatch(actions.application.uploadResume(file))
+      const { data: fileId } = await dispatch(
+        actions.application.uploadResume(file)
+      )
       setResume(fileId)
       setUploading(false)
     } catch (err) {
@@ -51,6 +73,34 @@ const PortfolioSection = ({
     }
   }
 
+  const validateForm = async () => {
+    let valid = true
+    if (!resume || resume === "") {
+      valid = false
+      setError(true)
+      await dispatch(actions.application.errorMissingResume())
+    }
+
+    if (valid) {
+      const data: PortfolioFields = {
+        github,
+        resume,
+        design,
+        website
+      }
+      await dispatch(actions.application.savePortfolio(data))
+    }
+
+    setValid(valid)
+    setValidate(false)
+  }
+
+  useEffect(() => {
+    if (validate) {
+      validateForm()
+    }
+  }, [validate])
+
   return (
     <div className={classes.section}>
       <Typography variant="h5" className={classes.sectionHeader}>
@@ -58,7 +108,7 @@ const PortfolioSection = ({
       </Typography>
       <div className={classes.resumeUploadContainer}>
         <Button variant="outlined" component="label">
-          Upload Resume
+          Upload Resume *
           <input
             type="file"
             hidden

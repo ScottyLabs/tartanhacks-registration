@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
     padding: "2em",
     display: "flex",
     flexDirection: "column",
-    marginBottom: "3em"
+    marginBottom: "3em",
+    zIndex: 5,
+    backgroundImage: `linear-gradient(135deg, ${theme.palette.lightGradient.start} 0%, ${theme.palette.lightGradient.end} 189%)`
   },
   applicationForm: {
     width: "80%",
@@ -64,6 +66,7 @@ const ApplicationForm = (): ReactElement => {
   const errorMessage = useSelector(
     (state: RootState) => state?.application?.error
   )
+  const application = useSelector((state: RootState) => state?.application)
 
   const [validateBasic, setValidateBasic] = useState(false)
   const [validateEssay, setValidateEssay] = useState(false)
@@ -81,7 +84,14 @@ const ApplicationForm = (): ReactElement => {
   const [validSchool, setValidSchool] = useState(false)
   const [validWorkAuth, setValidWorkAuth] = useState(false)
 
-  const valid = validBasic
+  const valid =
+    validBasic &&
+    // validEssay &&
+    // validExperience &&
+    // validLogistics &&
+    // validPortfolio &&
+    validSchool
+  // validWorkAuth
 
   const validateForm = async () => {
     // Trigger section validation
@@ -97,6 +107,7 @@ const ApplicationForm = (): ReactElement => {
   useEffect(() => {
     if (valid) {
       console.log("Submitting form")
+      console.log(application)
     }
   }, [valid])
 
@@ -128,12 +139,37 @@ const ApplicationForm = (): ReactElement => {
             setValidate={setValidateBasic}
             setValid={setValidBasic}
           />
-          <SchoolSection validate={validateSchool} setValidate={setValidateSchool} setValid={setValidSchool} />
-          {/* <ExperienceSection setError={setError} /> */}
-          {/* <WorkAuthorizationSection setError={setError} /> */}
-          {/* <PortfolioSection setError={setError} /> */}
-          {/* <EssaySection setError={setError} /> */}
-          {/* <LogisticsSection setError={setError} /> */}
+          <SchoolSection
+            validate={validateSchool}
+            setValidate={setValidateSchool}
+            setValid={setValidSchool}
+          />
+          <ExperienceSection
+            validate={validateExperience}
+            setValidate={setValidateExperience}
+            setValid={setValidExperience}
+          />
+          <WorkAuthorizationSection
+            validate={validateWorkAuth}
+            setValidate={setValidateWorkAuth}
+            setValid={setValidWorkAuth}
+          />
+          <PortfolioSection
+            setError={setError}
+            validate={validatePortfolio}
+            setValidate={setValidatePortfolio}
+            setValid={setValidPortfolio}
+          />
+          <EssaySection
+            validate={validateEssay}
+            setValidate={setValidateEssay}
+            setValid={setValidEssay}
+          />
+          <LogisticsSection
+            validate={validateLogistics}
+            setValidate={setValidateLogistics}
+            setValid={setValidLogistics}
+          />
           <div className={classes.buttonContainer}>
             <Button type="submit" variant="outlined">
               Submit

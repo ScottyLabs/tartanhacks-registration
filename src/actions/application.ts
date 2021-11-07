@@ -1,5 +1,14 @@
 import { DispatchActionType } from "enums/DispatchActionType"
 import { RequestStatus } from "enums/RequestStatus"
+import {
+  BasicFields,
+  EssayFields,
+  ExperienceFields,
+  LogisticsFields,
+  PortfolioFields,
+  SchoolFields,
+  WorkAuthorizationFields
+} from "types/ApplicationFields"
 import { DispatchAction } from "types/DispatchAction"
 
 export const uploadResume = (file: File): DispatchAction => ({
@@ -13,51 +22,60 @@ export const uploadResume = (file: File): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
-export const validateBasic = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_BASIC,
+export const saveBasic = (data: BasicFields): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_BASIC,
   useAPI: false,
   status: RequestStatus.PENDING,
-  data: validate
+  data
 })
 
-export const validateEssay = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_ESSAY,
+export const saveEssay = (data: EssayFields): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_ESSAY,
   useAPI: false,
   status: RequestStatus.PENDING,
-  data: validate
+  data
 })
 
-export const validateExperience = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_EXPERIENCE,
+export const saveExperience = (data: ExperienceFields): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_EXPERIENCE,
   useAPI: false,
   status: RequestStatus.PENDING,
-  data: validate
+  data
 })
 
-export const validateLogistics = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_LOGISTICS,
+export const saveLogistics = (data: LogisticsFields): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_LOGISTICS,
   useAPI: false,
   status: RequestStatus.PENDING,
-  data: validate
+  data
 })
 
-export const validatePortfolio = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_PORTFOLIO,
+export const savePortfolio = (data: PortfolioFields): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_PORTFOLIO,
   useAPI: false,
   status: RequestStatus.PENDING,
-  data: validate
+  data
 })
 
-export const validateSchool = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_SCHOOL,
+export const errorMissingResume = (): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_MISSING_RESUME,
   useAPI: false,
-  status: RequestStatus.PENDING,
-  data: validate
+  status: RequestStatus.ERROR,
+  data: "Missing resume!"
 })
 
-export const validateWorkAuth = (validate: boolean): DispatchAction => ({
-  type: DispatchActionType.APPLICATION_VALIDATE_WORK_AUTH,
+export const saveSchool = (data: SchoolFields): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_SCHOOL,
   useAPI: false,
   status: RequestStatus.PENDING,
-  data: validate
+  data
+})
+
+export const saveWorkAuth = (
+  data: WorkAuthorizationFields
+): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_SAVE_WORK_AUTH,
+  useAPI: false,
+  status: RequestStatus.PENDING,
+  data
 })

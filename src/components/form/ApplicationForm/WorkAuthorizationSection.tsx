@@ -1,12 +1,18 @@
 import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
-import axios from "axios"
-import { Ethnicity, Gender, WorkPermission } from "enums/Profile"
+import { WorkPermission } from "enums/Profile"
 import { ObjectId } from "mongodb"
-import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react"
+import React, {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import { WorkAuthorizationFields } from "types/ApplicationFields"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -26,7 +32,15 @@ interface Sponsor {
   _id: ObjectId
 }
 
-const WorkAuthorizationSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>> }): ReactElement => {
+const WorkAuthorizationSection = ({
+  validate,
+  setValidate,
+  setValid
+}: {
+  validate: boolean
+  setValidate: Dispatch<SetStateAction<boolean>>
+  setValid: Dispatch<SetStateAction<boolean>>
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -34,9 +48,27 @@ const WorkAuthorizationSection = ({ setError }: { setError: Dispatch<SetStateAct
   // Work Authorization
   const sponsors = useSelector((state: RootState) => state.sponsors.data) || []
   const [workPermission, setWorkPermission] = useState<WorkPermission | null>()
-  const [workLocation, setWorkLocation] = useState<string>()
-  const [workStrengths, setWorkStrengths] = useState<string>()
+  const [workLocation, setWorkLocation] = useState<string>("")
+  const [workStrengths, setWorkStrengths] = useState<string>("")
   const [sponsorRanking, setSponsorRanking] = useState<string[]>([])
+
+  const validateForm = async () => {
+    const data: WorkAuthorizationFields = {
+      workPermission: workPermission as WorkPermission,
+      workLocation,
+      workStrengths,
+      sponsorRanking
+    }
+    await dispatch(actions.application.saveWorkAuth(data))
+    setValid(true)
+    setValidate(false)
+  }
+
+  useEffect(() => {
+    if (validate) {
+      validateForm()
+    }
+  }, [validate])
 
   useEffect(() => {
     dispatch(actions.sponsors.list())

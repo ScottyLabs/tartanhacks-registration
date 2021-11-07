@@ -5,6 +5,7 @@ import AuthenticationDialog from "src/components/auth/AuthenticationDialog"
 import WaveHeader from "src/components/design/WaveHeader"
 import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
 import ApplicationForm from "src/components/form/ApplicationForm"
+import WaveBackground from "src/components/design/WaveBackground"
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -15,19 +16,21 @@ const useStyles = makeStyles((theme) => ({
     boxSizing: "border-box",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       paddingTop: "3em"
-    },
-    backgroundColor: theme.palette.primary.main
+    }
   }
 }))
 
 const LoginPage: NextPage = (): ReactElement => {
   const classes = useStyles()
   return (
-    <div>
-      <div className={classes.background}>
-        <ApplicationForm />
+    <>
+      <WaveBackground />
+      <div>
+        <div className={classes.background}>
+          <ApplicationForm />
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

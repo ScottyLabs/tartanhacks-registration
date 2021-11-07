@@ -11,6 +11,7 @@ import React, {
 } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import { BasicFields } from "types/ApplicationFields"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -39,38 +40,27 @@ const BasicSection = ({
   const classes = useStyles(theme)
 
   // Basic information
-  const [displayName, setDisplayName] = useState<string>()
-  const [firstName, setFirstName] = useState<string>()
-  const [lastName, setLastName] = useState<string>()
+  const [displayName, setDisplayName] = useState<string>("")
+  const [firstName, setFirstName] = useState<string>("")
+  const [lastName, setLastName] = useState<string>("")
   const [gender, setGender] = useState<Gender | null>()
-  const [genderOther, setGenderOther] = useState<string>()
+  const [genderOther, setGenderOther] = useState<string>("")
   const [ethnicity, setEthnicity] = useState<Ethnicity | null>()
-  const [ethnicityOther, setEthnicityOther] = useState<string>()
+  const [ethnicityOther, setEthnicityOther] = useState<string>("")
 
   // Error fields
   const [displayNameErrorStatus, setDisplayNameErrorStatus] = useState(false)
-  const [firstNameErrorStatus, setFirstNameErrorStatus] = useState(false)
-  const [lastNameErrorStatus, setLastNameErrorStatus] = useState(false)
-  const [genderErrorStatus, setGenderErrorStatus] = useState(false)
-  const [ethnicityErrorStatus, setEthnicityErrorStatus] = useState(false)
-
-  // Error message fields
   const [displayNameHelper, setDisplayNameHelper] = useState<string>(
     "Your display name is used in your leaderboard ranking"
   )
-  const [firstNameHelper, setFirstNameHelper] = useState<string>("")
-  const [lastNameHelper, setLastNameHelper] = useState<string>("")
-  const [genderHelper, setGenderHelper] = useState<string>("")
-  const [ethnicityHelper, setEthnicityHelper] = useState<string>("")
 
-  const validateForm = () => {
-    if (!displayName || displayName === "") {
+  const validateForm = async () => {
+    let valid = true
+    if (displayName === "hello") {
       // TODO: check if display name is available
       setDisplayNameErrorStatus(true)
-      setDisplayNameHelper("Missing display name")
-    } else if (displayName === "hello") {
-      setDisplayNameErrorStatus(true)
       setDisplayNameHelper("That display name is taken!")
+      valid = false
     } else {
       setDisplayNameErrorStatus(false)
       setDisplayNameHelper(
@@ -78,18 +68,24 @@ const BasicSection = ({
       )
     }
 
-    if (
-      !(
-        displayNameErrorStatus ||
-        firstNameErrorStatus ||
-        lastNameErrorStatus ||
-        genderErrorStatus ||
-        ethnicityErrorStatus
-      )
-    ) {
-      setValid(true)
+    if (valid) {
+      const data: BasicFields = {
+        displayName,
+        firstName,
+        lastName,
+        gender: gender as Gender,
+        ethnicity: ethnicity as Ethnicity
+      }
+      if (gender === Gender.OTHER) {
+        data.genderOther = genderOther
+      }
+      if (ethnicity == Ethnicity.OTHER) {
+        data.ethnicityOther = ethnicityOther
+      }
+      await dispatch(actions.application.saveBasic(data))
     }
 
+    setValid(valid)
     setValidate(false)
   }
 
@@ -119,8 +115,6 @@ const BasicSection = ({
       <TextField
         label="First Name"
         variant="outlined"
-        error={firstNameErrorStatus}
-        helperText={firstNameHelper}
         required
         fullWidth
         value={firstName}
@@ -131,8 +125,6 @@ const BasicSection = ({
       <TextField
         label="Last Name"
         variant="outlined"
-        error={lastNameErrorStatus}
-        helperText={lastNameHelper}
         required
         fullWidth
         value={lastName}
@@ -142,8 +134,6 @@ const BasicSection = ({
       />
       <Autocomplete
         options={Object.values(Gender)}
-        error={genderErrorStatus}
-        helperText={genderHelper}
         value={gender}
         onChange={(e, value) => setGender(value)}
         renderInput={(params) => (
@@ -160,8 +150,6 @@ const BasicSection = ({
       ) : null}
       <Autocomplete
         options={Object.values(Ethnicity)}
-        error={ethnicityErrorStatus}
-        helperText={ethnicityHelper}
         value={ethnicity}
         onChange={(e, value) => setEthnicity(value)}
         renderInput={(params) => (

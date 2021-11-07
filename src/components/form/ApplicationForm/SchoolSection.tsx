@@ -1,7 +1,7 @@
 import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
-import { CMUCollege, CollegeLevel, Ethnicity, Gender } from "enums/Profile"
+import { CMUCollege, CollegeLevel } from "enums/Profile"
 import React, {
   Dispatch,
   ReactElement,
@@ -10,7 +10,9 @@ import React, {
   useState
 } from "react"
 import { useDispatch } from "react-redux"
+import actions from "src/actions"
 import { getSchools } from "src/util/getSchools"
+import { SchoolFields } from "types/ApplicationFields"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -45,10 +47,28 @@ const SchoolSection = ({
   const [college, setCollege] = useState<CMUCollege | null>()
   const [level, setLevel] = useState<CollegeLevel | null>()
   const [graduationYear, setGraduationYear] = useState<string | null>()
-  const [major, setMajor] = useState<string>()
+  const [major, setMajor] = useState<string>("")
 
-  const [collegeErrorStatus, setCollegeErrorStatus] = useState(false)
-  const [majorErrorStatus, setMajorErrorStatus] = useState(false)
+  const validateForm = async () => {
+    const data: SchoolFields = {
+      school: school as string,
+      level: level as CollegeLevel,
+      graduationYear: graduationYear as string,
+      major
+    }
+    if (school === "Carnegie Mellon University") {
+      data.college = college as CMUCollege
+    }
+    await dispatch(actions.application.saveSchool(data))
+    setValid(true)
+    setValidate(false)
+  }
+
+  useEffect(() => {
+    if (validate) {
+      validateForm()
+    }
+  }, [validate])
 
   useEffect(() => {
     const querySchools = async () => {
@@ -116,6 +136,7 @@ const SchoolSection = ({
         label="Major"
         variant="outlined"
         fullWidth
+        required
         value={major}
         onChange={(e) => {
           setMajor(e.target.value)

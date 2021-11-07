@@ -1,9 +1,11 @@
 import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
-import { Ethnicity, Gender, HackathonExperience } from "enums/Profile"
-import React, { Dispatch, ReactElement, SetStateAction, useState } from "react"
+import { HackathonExperience } from "enums/Profile"
+import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
+import actions from "src/actions"
+import { ExperienceFields } from "types/ApplicationFields"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -17,16 +19,41 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const ExperienceSection = ({ setError }: { setError: Dispatch<SetStateAction<boolean>> }): ReactElement => {
+const ExperienceSection = ({
+  validate,
+  setValidate,
+  setValid
+}: {
+  validate: boolean
+  setValidate: Dispatch<SetStateAction<boolean>>
+  setValid: Dispatch<SetStateAction<boolean>>
+}): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
 
   // Experience
-  const [coursework, setCoursework] = useState<string>()
-  const [language, setLanguage] = useState<string>()
+  const [coursework, setCoursework] = useState<string>("")
+  const [language, setLanguage] = useState<string>("")
   const [hackathonExperience, setHackathonExperience] =
     useState<HackathonExperience | null>()
+
+  const validateForm = async () => {
+    const data: ExperienceFields = {
+      coursework,
+      language,
+      hackathonExperience: hackathonExperience as HackathonExperience
+    }
+    await dispatch(actions.application.saveExperience(data))
+    setValid(true)
+    setValidate(false)
+  }
+
+  useEffect(() => {
+    if (validate) {
+      validateForm()
+    }
+  }, [validate])
 
   return (
     <div className={classes.section}>
@@ -60,6 +87,7 @@ const ExperienceSection = ({ setError }: { setError: Dispatch<SetStateAction<boo
             variant="outlined"
             {...params}
             label="Years of Hackathon Experience"
+            required
           />
         )}
       />
