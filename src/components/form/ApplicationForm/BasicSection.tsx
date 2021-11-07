@@ -9,10 +9,9 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import { BasicFields } from "types/ApplicationFields"
-import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -43,9 +42,9 @@ const BasicSection = ({
   const [displayName, setDisplayName] = useState<string>("")
   const [firstName, setFirstName] = useState<string>("")
   const [lastName, setLastName] = useState<string>("")
-  const [gender, setGender] = useState<Gender | null>()
+  const [gender, setGender] = useState<Gender | null>(null)
   const [genderOther, setGenderOther] = useState<string>("")
-  const [ethnicity, setEthnicity] = useState<Ethnicity | null>()
+  const [ethnicity, setEthnicity] = useState<Ethnicity | null>(null)
   const [ethnicityOther, setEthnicityOther] = useState<string>("")
 
   // Error fields

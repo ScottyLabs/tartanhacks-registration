@@ -1,11 +1,9 @@
 import { makeStyles } from "@material-ui/core"
 import { NextPage } from "next"
 import React, { ReactElement } from "react"
-import AuthenticationDialog from "src/components/auth/AuthenticationDialog"
-import WaveHeader from "src/components/design/WaveHeader"
-import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
-import ApplicationForm from "src/components/form/ApplicationForm"
 import WaveBackground from "src/components/design/WaveBackground"
+import ApplicationForm from "src/components/form/ApplicationForm"
+import { AuthenticatedLayout } from "src/layouts"
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -20,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const LoginPage: NextPage = (): ReactElement => {
+const ApplicationPage: NextPage = (): ReactElement => {
   const classes = useStyles()
   return (
     <>
@@ -34,4 +32,4 @@ const LoginPage: NextPage = (): ReactElement => {
   )
 }
 
-export default LoginPage
+export default AuthenticatedLayout(ApplicationPage)

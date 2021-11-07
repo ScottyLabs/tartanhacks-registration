@@ -36,7 +36,7 @@ const ExperienceSection = ({
   const [coursework, setCoursework] = useState<string>("")
   const [language, setLanguage] = useState<string>("")
   const [hackathonExperience, setHackathonExperience] =
-    useState<HackathonExperience | null>()
+    useState<HackathonExperience | null>(null)
 
   const validateForm = async () => {
     const data: ExperienceFields = {

@@ -47,7 +47,7 @@ const WorkAuthorizationSection = ({
 
   // Work Authorization
   const sponsors = useSelector((state: RootState) => state.sponsors.data) || []
-  const [workPermission, setWorkPermission] = useState<WorkPermission | null>()
+  const [workPermission, setWorkPermission] = useState<WorkPermission | null>(null)
   const [workLocation, setWorkLocation] = useState<string>("")
   const [workStrengths, setWorkStrengths] = useState<string>("")
   const [sponsorRanking, setSponsorRanking] = useState<string[]>([])

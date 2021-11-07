@@ -47,10 +47,10 @@ const LogisticsSection = ({
 
   // Logistics information
   const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
-  const [shirtSize, setShirtSize] = useState<ShirtSize | null>()
+  const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null)
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
   const [address, setAddress] = useState<string>("")
-  const [region, setRegion] = useState<Region | null>()
+  const [region, setRegion] = useState<Region | null>(null)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
 
   const validateForm = async () => {
@@ -89,9 +89,9 @@ const LogisticsSection = ({
         }}
       />
       <TextField
-        label="Address"
+        label="Mailing Address"
         variant="outlined"
-        helperText="We use this to send merch in case you aren't joining us in-person"
+        helperText="We use this to send swag if you aren't joining us in-person"
         fullWidth
         multiline
         value={address}
@@ -104,7 +104,13 @@ const LogisticsSection = ({
         value={region}
         onChange={(e, value) => setRegion(value)}
         renderInput={(params) => (
-          <TextField variant="outlined" {...params} label="Region" />
+          <TextField
+            variant="outlined"
+            {...params}
+            label="Home Region"
+            helperText="We use this to measure participation analytics from different regions"
+            required
+          />
         )}
       />
       <TextField

@@ -1,7 +1,5 @@
 import {
-  Button,
-  FormControl,
-  makeStyles,
+  Button, makeStyles,
   TextField,
   Typography
 } from "@material-ui/core"
@@ -13,10 +11,9 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import { PortfolioFields } from "types/ApplicationFields"
-import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {

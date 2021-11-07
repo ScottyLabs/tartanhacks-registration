@@ -1,7 +1,7 @@
 import { makeStyles, TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
-import { CMUCollege, CollegeLevel } from "enums/Profile"
+import { CMUCollege, CollegeLevel, GraduationYear, GraduationYears } from "enums/Profile"
 import React, {
   Dispatch,
   ReactElement,
@@ -42,11 +42,11 @@ const SchoolSection = ({
   const classes = useStyles(theme)
 
   // School information
-  const [schools, setSchools] = useState<string[]>()
-  const [school, setSchool] = useState<string | null>()
-  const [college, setCollege] = useState<CMUCollege | null>()
-  const [level, setLevel] = useState<CollegeLevel | null>()
-  const [graduationYear, setGraduationYear] = useState<string | null>()
+  const [schools, setSchools] = useState<string[]>([])
+  const [school, setSchool] = useState<string | null>(null)
+  const [college, setCollege] = useState<CMUCollege | null>(null)
+  const [level, setLevel] = useState<CollegeLevel | null>(null)
+  const [graduationYear, setGraduationYear] = useState<GraduationYear | null>(null)
   const [major, setMajor] = useState<string>("")
 
   const validateForm = async () => {
@@ -120,7 +120,7 @@ const SchoolSection = ({
         )}
       />
       <Autocomplete
-        options={["2022", "2023", "2024", "2025", "2026", "2027"]}
+        options={GraduationYears}
         value={graduationYear}
         onChange={(e, value) => setGraduationYear(value)}
         renderInput={(params) => (
