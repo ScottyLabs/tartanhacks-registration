@@ -18,7 +18,6 @@ import FloatingDiv from "src/components/design/FloatingDiv"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
 import ContentHeader from "src/components/design/ContentHeader"
 import { Alert } from "@material-ui/lab"
-import Notification from "src/components/design/Notification"
 import { isAssetError } from "next/dist/client/route-loader"
 import { RootState } from "types/RootState"
 
@@ -91,22 +90,18 @@ const ViewTeams = () => {
     name: "",
     description: ""
   }])
-  const [notify, setNotify] = useState({ 
-    isOpen: false, 
-    message: '', 
-    type: '' 
-  })
+  const [notify, setNotify] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
   const classes = useStyles()
 
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
-  
+
 
   const checkJoinErrorCallback = ((isError: boolean) => {
-    setNotify({
-      isOpen: true,
-      message: isError ? '' : 'Join request sent',
-      type: isError ? 'error' : 'success'
-    });
+    setNotify(isError ? 'error' : 'success');
+    if(!isError) {
+      setSuccessMessage('Join request sent successfully')
+    }
   })
 
   useEffect(() => {
@@ -115,19 +110,10 @@ const ViewTeams = () => {
         const viewTeams = await dispatch(actions.teams.viewTeams());
         setTeams(viewTeams.data);
       } catch (err) {
-        setNotify({
-          isOpen: true,
-          message: '',
-          type: 'error'
-        });
       }
     }
     getTeams();
   }, [])
-
-  if(notify.type === 'error') {
-    notify.message = errorMessage;
-  }
 
   return (
     <>
@@ -165,11 +151,17 @@ const ViewTeams = () => {
             </tbody>
           </table>
         </FloatingDiv>
+        <Snackbar
+          open={notify != ''}
+          autoHideDuration={5000}
+          onClose={(e) => setNotify('')}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <Alert severity={notify === 'error' ? 'error' : 'success'}>
+            {notify == 'error' ? errorMessage : successMessage}
+          </Alert>
+        </Snackbar>
       </div>
-      <Notification
-        notify={notify}
-        setNotify={setNotify}
-      />
     </>
   )
 }

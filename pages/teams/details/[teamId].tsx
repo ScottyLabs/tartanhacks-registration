@@ -1,4 +1,4 @@
-import { makeStyles, Typography } from "@material-ui/core"
+import { makeStyles, Typography, Snackbar } from "@material-ui/core"
 import React, {
   useEffect,
   useState
@@ -12,9 +12,9 @@ import FloatingDiv from "src/components/design/FloatingDiv";
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader";
 import ContentHeader from "src/components/design/ContentHeader";
 import RoundedButton from "src/components/design/RoundedButton";
-import Notification from "src/components/design/Notification";
 import { useSelector } from "react-redux";
 import { RootState } from "types/RootState";
+import { Alert } from "@material-ui/lab";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -101,15 +101,13 @@ const TeamDescription = () => {
     updatedAt: "",
     __v: 0
   });
-  const [notify, setNotify] = useState({
-    isOpen: false,
-    message: '',
-    type: ''
-  });
+  const [notify, setNotify] = useState('');
+  const [successMessage, setSuccessMessage] = useState('')
   const [isOwnTeam, setIsOwnTeam] = useState(false)
   const classes = useStyles()
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
-
+  const user = useSelector((state: RootState) => state?.accounts?.data)
+  const [isCaptain, setIsCaptain] = useState(false)
   useEffect(() => {
     if (teamId == undefined) {
       return
@@ -118,36 +116,22 @@ const TeamDescription = () => {
     const fetchTeamInfo = async () => {
       try {
         const info = await dispatch(actions.teams.getTeamInfo(teamId as string))
-        setTeamInfo(info.data);
+        setTeamInfo(info.data)
+        setIsCaptain(info.data.admin._id === user._id)
       } catch (err) {
-        setNotify({
-          isOpen: true,
-          message: "",
-          type: 'error'
-        })
       } finally {
         try {
           const ownTeam = await dispatch(actions.user.getOwnTeam());
           setIsOwnTeam(ownTeam.data._id === (teamId as string))
         } catch (err) {
           setIsOwnTeam(false);
-          setNotify({
-            isOpen: true,
-            message: "",
-            type: 'error'
-          })
         }
       }
     }
 
     fetchTeamInfo();
   }, [teamId])
-
-  if(notify.type === "error") {
-    notify.message = errorMessage
-  }
-  
-  console.log(teamInfo)
+  console.log(isCaptain)
   return (
     <>
       <div>
@@ -187,12 +171,7 @@ const TeamDescription = () => {
                 await dispatch(actions.teams.leaveTeam());
                 router.push('/teams');
               } catch (err) {
-                setNotify({
-                  isOpen: true,
-                  message: "",
-                  type: "error"
-                })
-                //TODO: leave error processing
+                setNotify('error')
               }
             }}>
               <RoundedButton type="submit" className={classes.leaveButton}>
@@ -202,11 +181,17 @@ const TeamDescription = () => {
             null
           }
         </FloatingDiv>
+        <Snackbar
+          open={notify != ''}
+          autoHideDuration={5000}
+          onClose={(e) => setNotify('')}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <Alert severity={notify === 'error' ? 'error' : 'success'}>
+            {notify == 'error' ? errorMessage : successMessage}
+          </Alert>
+        </Snackbar>
       </div>
-      <Notification
-        notify={notify}
-        setNotify={setNotify}
-      />
     </>
   )
 }

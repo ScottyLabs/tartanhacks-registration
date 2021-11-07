@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { makeStyles, Typography, TextField } from "@material-ui/core"
+import { makeStyles, Typography, TextField, Snackbar} from "@material-ui/core"
 import { AuthenticatedLayout } from "src/layouts"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
@@ -11,7 +11,7 @@ import RoundedButton from "src/components/design/RoundedButton"
 import actions from "src/actions"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
-import Notification from "src/components/design/Notification"
+import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -84,16 +84,8 @@ const TeamCreate = () => {
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
   const [addMembers, setAddMembers] = useState("");
-  const [notify, setNotify] = useState({
-    isOpen: false,
-    message: "",
-    type: ""
-  })
+  const [error, setError] = useState(false)
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
-
-  if(notify.type === "error") {
-    notify.message = errorMessage
-  }
 
   return (
     <>
@@ -101,23 +93,19 @@ const TeamCreate = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
-          <ContentHeader title="Create New Team" longTitle="true"/>
+          <ContentHeader title="Create New Team" longTitle="true" />
           <div className={classes.content}>
             <Typography variant="h4" className={classes.title}>
               BASIC INFO
             </Typography>
-            <form onSubmit = { async (e) => {
+            <form onSubmit={async (e) => {
               e.preventDefault();
               console.log(addMembers.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
               try {
                 await dispatch(actions.teams.createTeam(teamName, teamDescription));
                 router.push("/teams");
               } catch (err) {
-                setNotify({
-                  isOpen: true,
-                  message: "",
-                  type: "error"
-                })
+                setError(true)
               }
             }}>
               <Typography variant="subtitle1" className={classes.annotation}>
@@ -162,16 +150,20 @@ const TeamCreate = () => {
                 }}
               />
               <RoundedButton type="submit" className={classes.createButton}>
-              CREATE NEW TEAM
-            </RoundedButton>
+                CREATE NEW TEAM
+              </RoundedButton>
             </form>
           </div>
         </FloatingDiv>
       </div>
-      <Notification 
-      notify={notify}
-      setNotify={setNotify}
-      />
+      <Snackbar
+        open={error}
+        autoHideDuration={5000}
+        onClose={(e) => setError(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="error">{errorMessage}</Alert>
+      </Snackbar>
     </>
   )
 }
