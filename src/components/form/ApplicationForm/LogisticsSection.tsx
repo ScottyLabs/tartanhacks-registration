@@ -18,7 +18,8 @@ import React, {
 } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { LogisticsFields } from "types/ApplicationFields"
+import isValidPhoneNumber from "src/util/isValidPhoneNumber"
+import { LogisticsFields } from "types/ApplicationForm"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -53,17 +54,33 @@ const LogisticsSection = ({
   const [region, setRegion] = useState<Region | null>(null)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
 
+  const [phoneNumberErrorStatus, setPhoneNumberErrorStatus] = useState(false)
+  const [phoneNumberHelper, setPhoneNumberHelper] = useState("")
+
   const validateForm = async () => {
-    const data: LogisticsFields = {
-      dietaryRestrictions,
-      shirtSize: shirtSize as ShirtSize,
-      wantsHardware,
-      address,
-      region: region as Region,
-      phoneNumber
+    let valid = true
+    if (!isValidPhoneNumber(phoneNumber)) {
+      valid = false
+      setPhoneNumberErrorStatus(true)
+      setPhoneNumberHelper("The phone number format you entered is invalid.")
+    } else {
+      setPhoneNumberErrorStatus(false)
+      setPhoneNumberHelper("")
     }
-    await dispatch(actions.application.saveLogistics(data))
-    setValid(true)
+
+    if (valid) {
+      const data: LogisticsFields = {
+        dietaryRestrictions,
+        shirtSize: shirtSize as ShirtSize,
+        wantsHardware,
+        address,
+        region: region as Region,
+        phoneNumber
+      }
+      await dispatch(actions.application.saveLogistics(data))
+    }
+
+    setValid(valid)
     setValidate(false)
   }
 
@@ -81,6 +98,8 @@ const LogisticsSection = ({
       <TextField
         label="Phone Number"
         variant="outlined"
+        error={phoneNumberErrorStatus}
+        helperText={phoneNumberHelper}
         fullWidth
         required
         value={phoneNumber}

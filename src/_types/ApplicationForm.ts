@@ -50,3 +50,5 @@ export interface LogisticsFields {
   region: Region
   phoneNumber: string
 }
+
+export type ApplicationForm = BasicFields & SchoolFields & ExperienceFields & WorkAuthorizationFields & PortfolioFields &EssayFields & LogisticsFields

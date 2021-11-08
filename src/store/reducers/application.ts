@@ -1,7 +1,15 @@
 import { DispatchActionType } from "enums/DispatchActionType"
 import { RequestStatus } from "enums/RequestStatus"
 import { combineReducers } from "redux"
-import { BasicFields, EssayFields, ExperienceFields, LogisticsFields, PortfolioFields, SchoolFields, WorkAuthorizationFields } from "types/ApplicationFields"
+import {
+  BasicFields,
+  EssayFields,
+  ExperienceFields,
+  LogisticsFields,
+  PortfolioFields,
+  SchoolFields,
+  WorkAuthorizationFields
+} from "types/ApplicationFields"
 import { DispatchAction } from "types/DispatchAction"
 
 const resume = (state = {}, action: DispatchAction) => {
@@ -14,20 +22,14 @@ const resume = (state = {}, action: DispatchAction) => {
   return state
 }
 
-const basic = (
-  state: BasicFields | null = null,
-  action: DispatchAction
-) => {
+const basic = (state: BasicFields | null = null, action: DispatchAction) => {
   if (action.type === DispatchActionType.APPLICATION_SAVE_BASIC) {
     state = action.data
   }
   return state
 }
 
-const essay = (
-  state: EssayFields | null = null,
-  action: DispatchAction
-) => {
+const essay = (state: EssayFields | null = null, action: DispatchAction) => {
   if (action.type === DispatchActionType.APPLICATION_SAVE_ESSAY) {
     state = action.data
   }
@@ -64,10 +66,7 @@ const portfolio = (
   return state
 }
 
-const school = (
-  state: SchoolFields | null = null,
-  action: DispatchAction
-) => {
+const school = (state: SchoolFields | null = null, action: DispatchAction) => {
   if (action.type === DispatchActionType.APPLICATION_SAVE_SCHOOL) {
     state = action.data
   }
@@ -87,6 +86,8 @@ const workAuth = (
 const status = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.APPLICATION_UPLOAD_RESUME:
+    case DispatchActionType.APPLICATION_MISSING_RESUME:
+    case DispatchActionType.APPLICATION_SUBMIT_FORM:
     case DispatchActionType.APPLICATION_SAVE_BASIC:
     case DispatchActionType.APPLICATION_SAVE_ESSAY:
     case DispatchActionType.APPLICATION_SAVE_EXPERIENCE:
@@ -103,6 +104,7 @@ const error = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.APPLICATION_UPLOAD_RESUME:
     case DispatchActionType.APPLICATION_MISSING_RESUME:
+    case DispatchActionType.APPLICATION_SUBMIT_FORM:
     case DispatchActionType.APPLICATION_SAVE_BASIC:
     case DispatchActionType.APPLICATION_SAVE_ESSAY:
     case DispatchActionType.APPLICATION_SAVE_EXPERIENCE:

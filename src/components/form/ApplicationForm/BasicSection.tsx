@@ -11,7 +11,7 @@ import React, {
 } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { BasicFields } from "types/ApplicationFields"
+import { BasicFields } from "types/ApplicationForm"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -55,10 +55,14 @@ const BasicSection = ({
 
   const validateForm = async () => {
     let valid = true
-    if (displayName === "hello") {
-      // TODO: check if display name is available
+    const { data: displayNameAvailable } = await dispatch(
+      actions.application.checkDisplayName(displayName)
+    )
+    if (!displayNameAvailable) {
       setDisplayNameErrorStatus(true)
-      setDisplayNameHelper("That display name is taken!")
+      setDisplayNameHelper(
+        "That display name is taken. Please choose something else"
+      )
       valid = false
     } else {
       setDisplayNameErrorStatus(false)

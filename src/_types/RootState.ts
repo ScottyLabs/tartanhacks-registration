@@ -1,4 +1,13 @@
 import { RequestStatus } from "enums/RequestStatus"
+import {
+  BasicFields,
+  EssayFields,
+  ExperienceFields,
+  LogisticsFields,
+  PortfolioFields,
+  SchoolFields,
+  WorkAuthorizationFields
+} from "./ApplicationForm"
 
 export interface RootState {
   accounts: {
@@ -14,34 +23,13 @@ export interface RootState {
   application: {
     status: RequestStatus
     error: string
-    resume: any
-    basic: {
-      validate?: boolean
-      data?: any
-    }
-    essay: {
-      validate?: boolean
-      data?: any
-    }
-    experience: {
-      validate?: boolean
-      data?: any
-    }
-    logistics: {
-      validate?: boolean
-      data?: any
-    }
-    portfolio: {
-      validate?: boolean
-      data?: any
-    }
-    school: {
-      validate?: boolean
-      data?: any
-    }
-    workAuth: {
-      validate?: boolean
-      data?: any
-    }
+    resume: string
+    basic: BasicFields
+    essay: EssayFields
+    experience: ExperienceFields
+    logistics: LogisticsFields
+    portfolio: PortfolioFields
+    school: SchoolFields
+    workAuth: WorkAuthorizationFields
   }
 }

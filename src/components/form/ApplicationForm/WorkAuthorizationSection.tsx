@@ -12,7 +12,7 @@ import React, {
 } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
-import { WorkAuthorizationFields } from "types/ApplicationFields"
+import { WorkAuthorizationFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -46,8 +46,11 @@ const WorkAuthorizationSection = ({
   const classes = useStyles(theme)
 
   // Work Authorization
-  const sponsors = useSelector((state: RootState) => state.sponsors.data) || []
-  const [workPermission, setWorkPermission] = useState<WorkPermission | null>(null)
+  const sponsors: Sponsor[] =
+    useSelector((state: RootState) => state.sponsors.data) || []
+  const [workPermission, setWorkPermission] = useState<WorkPermission | null>(
+    null
+  )
   const [workLocation, setWorkLocation] = useState<string>("")
   const [workStrengths, setWorkStrengths] = useState<string>("")
   const [sponsorRanking, setSponsorRanking] = useState<string[]>([])
@@ -111,8 +114,11 @@ const WorkAuthorizationSection = ({
       />
       <Autocomplete
         multiple
-        options={sponsors.map((sponsor: Sponsor) => sponsor.name)}
-        onChange={(e, value) => setSponsorRanking(value as string[])}
+        options={sponsors}
+        getOptionLabel={(option: any) => option.name}
+        onChange={(e, ranking) =>
+          setSponsorRanking(ranking.map((sponsor) => sponsor._id.toString()))
+        }
         getOptionDisabled={(options) => sponsorRanking.length >= 5}
         renderInput={(params) => (
           <TextField

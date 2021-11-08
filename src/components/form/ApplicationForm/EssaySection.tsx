@@ -9,7 +9,7 @@ import React, {
 } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { EssayFields } from "types/ApplicationFields"
+import { EssayFields } from "types/ApplicationForm"
 
 const useStyles = makeStyles((theme) => ({
   section: {

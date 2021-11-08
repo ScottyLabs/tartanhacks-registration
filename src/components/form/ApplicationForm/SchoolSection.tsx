@@ -12,7 +12,7 @@ import React, {
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import { getSchools } from "src/util/getSchools"
-import { SchoolFields } from "types/ApplicationFields"
+import { SchoolFields } from "types/ApplicationForm"
 
 const useStyles = makeStyles((theme) => ({
   section: {

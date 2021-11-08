@@ -13,7 +13,8 @@ import React, {
 } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { PortfolioFields } from "types/ApplicationFields"
+import { PortfolioFields } from "types/ApplicationForm"
+import { DispatchAction } from "types/DispatchAction"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -35,11 +36,13 @@ const useStyles = makeStyles((theme) => ({
 
 const PortfolioSection = ({
   setError,
+  setErrorMessage,
   validate,
   setValidate,
   setValid
 }: {
   setError: Dispatch<SetStateAction<boolean>>
+  setErrorMessage: Dispatch<SetStateAction<string>>
   validate: boolean
   setValidate: Dispatch<SetStateAction<boolean>>
   setValid: Dispatch<SetStateAction<boolean>>
@@ -67,6 +70,7 @@ const PortfolioSection = ({
     } catch (err) {
       console.error(err)
       setError(true)
+      setErrorMessage((err as DispatchAction)?.data)
     }
   }
 
@@ -110,7 +114,6 @@ const PortfolioSection = ({
             type="file"
             hidden
             onChange={(e) => {
-              console.log(e.target.files)
               if (e.target.files && e.target.files.length > 0) {
                 uploadResume(e.target.files[0])
                 setResumeFileName(e.target.files[0].name)

@@ -75,7 +75,7 @@ const Menu = (): ReactElement => {
       <Modal open={open} onClose={handleClose}>
         <div className={classes.menuWrapper}>
           <div className={classes.menuBox}>
-            <MenuItem text="REGISTER" url="" />
+            <MenuItem text="APPLY" url="/apply" />
             <MenuLine />
             <MenuItem text="TEAM" url="" />
             <MenuLine />

@@ -5,7 +5,7 @@ import { HackathonExperience } from "enums/Profile"
 import React, { Dispatch, ReactElement, SetStateAction, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { ExperienceFields } from "types/ApplicationFields"
+import { ExperienceFields } from "types/ApplicationForm"
 
 const useStyles = makeStyles((theme) => ({
   section: {

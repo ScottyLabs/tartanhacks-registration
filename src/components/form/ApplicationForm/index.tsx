@@ -59,14 +59,13 @@ const useStyles = makeStyles((theme) => ({
 
 const ApplicationForm = (): ReactElement => {
   const dispatch = useDispatch()
+  const router = useRouter()
   const theme = useTheme()
   const classes = useStyles(theme)
+  const application = useSelector((state: RootState) => state?.application)
 
   const [error, setError] = useState(false)
-  const errorMessage = useSelector(
-    (state: RootState) => state?.application?.error
-  )
-  const application = useSelector((state: RootState) => state?.application)
+  const [errorMessage, setErrorMessage] = useState(application?.error)
 
   const [validateBasic, setValidateBasic] = useState(false)
   const [validateEssay, setValidateEssay] = useState(false)
@@ -84,14 +83,29 @@ const ApplicationForm = (): ReactElement => {
   const [validSchool, setValidSchool] = useState(false)
   const [validWorkAuth, setValidWorkAuth] = useState(false)
 
-  const valid =
-    validBasic &&
-    // validEssay &&
-    // validExperience &&
-    // validLogistics &&
-    // validPortfolio &&
-    validSchool
-  // validWorkAuth
+  const [calledValidate, setCalledValidate] = useState(false)
+
+  // Check that all validate requests are false (i.e. completed)
+  const validated = ![
+    validateBasic,
+    validateEssay,
+    validateExperience,
+    validateLogistics,
+    validatePortfolio,
+    validateSchool,
+    validateWorkAuth
+  ].some(Boolean)
+
+  // Check that all sections are valid
+  const valid = [
+    validBasic,
+    validEssay,
+    validExperience,
+    validLogistics,
+    validPortfolio,
+    validSchool,
+    validWorkAuth
+  ].every(Boolean)
 
   const validateForm = async () => {
     // Trigger section validation
@@ -102,14 +116,38 @@ const ApplicationForm = (): ReactElement => {
     setValidatePortfolio(true)
     setValidateSchool(true)
     setValidateWorkAuth(true)
+
+    setCalledValidate(true)
+  }
+
+  const submitForm = async () => {
+    const { basic, essay, experience, logistics, portfolio, school, workAuth } =
+      application
+    const data = {
+      ...basic,
+      ...essay,
+      ...experience,
+      ...logistics,
+      ...portfolio,
+      ...school,
+      ...workAuth
+    }
+    await dispatch(actions.application.submitForm(data))
+    router.push("/")
   }
 
   useEffect(() => {
-    if (valid) {
-      console.log("Submitting form")
-      console.log(application)
+    if (calledValidate && validated) {
+      if (valid) {
+        submitForm()
+      } else {
+        setError(true)
+        setErrorMessage(
+          "Some fields are incorrect. Please review to make sure you filled all required fields."
+        )
+      }
     }
-  }, [valid])
+  }, [valid, calledValidate, validated])
 
   return (
     <Paper className={classes.formDialog}>
@@ -156,6 +194,7 @@ const ApplicationForm = (): ReactElement => {
           />
           <PortfolioSection
             setError={setError}
+            setErrorMessage={setErrorMessage}
             validate={validatePortfolio}
             setValidate={setValidatePortfolio}
             setValid={setValidPortfolio}
