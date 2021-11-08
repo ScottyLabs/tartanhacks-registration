@@ -9,7 +9,7 @@ import {
   PortfolioFields,
   SchoolFields,
   WorkAuthorizationFields
-} from "types/ApplicationFields"
+} from "types/ApplicationForm"
 import { DispatchAction } from "types/DispatchAction"
 
 const resume = (state = {}, action: DispatchAction) => {
