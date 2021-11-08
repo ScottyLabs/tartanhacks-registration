@@ -6,6 +6,7 @@ import {
   Typography
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
+import { ApplicationStatus } from "enums/ApplicationStatus"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
@@ -37,9 +38,15 @@ const useStyles = makeStyles((theme) => ({
       filter: "brightness(85%)"
     }
   },
-  dialogText: {
+  statusText: {
     marginBottom: "1em",
     color: `${theme.palette.gradient.start}`
+  },
+  dialogText: {
+    marginBottom: "1em",
+    color: `${theme.palette.gradient.start}`,
+    width: "80%",
+    textAlign: "center"
   },
   bodyText: {
     color: `${theme.palette.gradient.start}`
@@ -57,107 +64,163 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const getDialogText = (
+  classes: any,
+  applicationStatus: ApplicationStatus
+): ReactElement => {
+  if (applicationStatus === ApplicationStatus.VERIFIED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            You still need to complete your application!
+          </Typography>
+        </div>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            If you do not complete your application by _ _ _, you will not be
+            admitted!
+          </Typography>
+        </div>
+      </>
+    )
+  } else if (applicationStatus == ApplicationStatus.APPLIED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">Welcome back!</Typography>
+        </div>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            You can edit your confirmation information until _ _ _.
+          </Typography>
+        </div>
+      </>
+    )
+  } else if (applicationStatus === ApplicationStatus.ADMITTED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">Welcome to Tartanhacks!</Typography>
+        </div>
+      </>
+    )
+  } else if (applicationStatus === ApplicationStatus.REJECTED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            Thanks for applying! We were unable to accommodate you this year.
+            Please apply again next year!
+          </Typography>
+        </div>
+      </>
+    )
+  } else {
+    return <></>
+  }
+}
+
+const getButtonBox = (
+  classes: any,
+  applicationStatus: ApplicationStatus
+): ReactElement => {
+  if (applicationStatus === ApplicationStatus.VERIFIED) {
+    return (
+      <Link href="/apply" className={classes.link}>
+        <RectangleButton type="submit">
+          COMPLETE YOUR APPLICATION
+        </RectangleButton>
+      </Link>
+    )
+  } else if (applicationStatus === ApplicationStatus.APPLIED) {
+    return (
+      <div className={classes.buttonBox}>
+        <Link href="/apply" className={classes.link}>
+          <RectangleButton type="submit">
+            EDIT CONFIRMATION INFO
+          </RectangleButton>
+        </Link>
+        <div className={classes.buttonSpacer}></div>
+        <RectangleButton type="submit">
+          SORRY, I CAN&apos;T MAKE IT
+        </RectangleButton>
+      </div>
+    )
+  } else if (applicationStatus === ApplicationStatus.ADMITTED) {
+    return (
+      <div className={classes.buttonBox}>
+        <Link href="/accept" className={classes.link}>
+          <RectangleButton type="submit">ACCEPT</RectangleButton>
+        </Link>
+        <div className={classes.buttonSpacer}></div>
+        <Link href="/reject" className={classes.link}>
+          <RectangleButton type="submit">DENY</RectangleButton>
+        </Link>
+      </div>
+    )
+  } else {
+    return <></>
+  }
+}
+
 const DashboardDialog = (): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
-  const [status, setStatus] = useState("")
+  const [applicationStatus, setApplicationStatus] = useState<ApplicationStatus>(
+    ApplicationStatus.UNVERIFIED
+  )
 
   const queryProfile = async () => {
+    setLoading(true)
     await dispatch(actions.auth.login())
-    const { data: completedProfile } = await dispatch(
+    const { data: status } = await dispatch(
       actions.user.getStatus(currentUser._id)
     )
-    if (completedProfile) {
-      setStatus("complete")
+    const { verified, completedProfile, admitted, confirmed } = status
+    if (confirmed) {
+      setApplicationStatus(ApplicationStatus.CONFIRMED)
+    } else if (admitted) {
+      setApplicationStatus(ApplicationStatus.ADMITTED)
+    } else if (admitted === false) {
+      setApplicationStatus(ApplicationStatus.REJECTED)
+    } else if (completedProfile) {
+      setApplicationStatus(ApplicationStatus.APPLIED)
+    } else if (verified) {
+      setApplicationStatus(ApplicationStatus.VERIFIED)
     } else {
-      setStatus("incomplete")
+      setApplicationStatus(ApplicationStatus.UNVERIFIED)
     }
+    setLoading(false)
   }
 
   useEffect(() => {
     queryProfile()
   }, [])
 
-  const complete = () => {
-    return (
-      <div className={classes.dialog}>
-        <Collapse in={loading}>
-          <LinearProgress />
-        </Collapse>
-        <div className={classes.dialogContent}>
-          <div className={classes.dialogText}>
-            <Typography variant="h4">Your Status:</Typography>
-          </div>
-          <div className={classes.emphasisText}>
-            <Typography variant="h4">COMPLETE</Typography>
-          </div>
-          <div className={classes.dialogText}>
-            <Typography variant="body1">Welcome back!</Typography>
-          </div>
-          <div className={classes.dialogText}>
-            <Typography variant="body1">
-              You can edit your confirmation information until _ _ _.
-            </Typography>
-          </div>
-          <div className={classes.dialogText}>
-            <Typography variant="body1">Welcome to Tartanhacks!</Typography>
-          </div>
-        </div>
-        <div className={classes.buttonBox}>
-          <RectangleButton type="submit">
-            EDIT CONFIRMATION INFO
-          </RectangleButton>
-          <div className={classes.buttonSpacer}></div>
-          <RectangleButton type="submit">
-            SORRY, I CAN&apos;T MAKE IT
-          </RectangleButton>
-        </div>
-      </div>
-    )
-  }
+  const dialogText = getDialogText(classes, applicationStatus)
+  const buttonBox = getButtonBox(classes, applicationStatus)
 
-  const incomplete = () => {
-    return (
-      <div className={classes.dialog}>
-        <Collapse in={loading}>
-          <LinearProgress />
-        </Collapse>
-        <div className={classes.dialogContent}>
-          <div className={classes.dialogText}>
-            <Typography variant="h4">Your Status:</Typography>
-          </div>
-          <div className={classes.emphasisText}>
-            <Typography variant="h4">INCOMPLETE</Typography>
-          </div>
-          <div className={classes.dialogText}>
-            <Typography variant="body1">
-              You still need to complete your application!
-            </Typography>
-          </div>
-          <div className={classes.dialogText}>
-            <Typography variant="body1">
-              If you do not complete your application by _ _ _, you will not be
-              admitted!
-            </Typography>
-          </div>
+  return (
+    <div className={classes.dialog}>
+      <Collapse in={loading}>
+        <LinearProgress />
+      </Collapse>
+      <div className={classes.dialogContent}>
+        <div className={classes.statusText}>
+          <Typography variant="h4">Your Status:</Typography>
         </div>
-        <RectangleButton type="submit">
-          COMPLETE YOUR APPLICATION
-        </RectangleButton>
+        <div className={classes.emphasisText}>
+          <Typography variant="h4">{applicationStatus}</Typography>
+        </div>
+        {dialogText}
+        {buttonBox}
       </div>
-    )
-  }
-
-  if (status == "complete") {
-    return complete()
-  } else if (status == "incomplete") {
-    return incomplete()
-  } else {
-    return <></>
-  }
+    </div>
+  )
 }
 
 export default DashboardDialog
