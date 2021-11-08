@@ -10,6 +10,7 @@ import { ApplicationStatus } from "enums/ApplicationStatus"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 
@@ -180,20 +181,7 @@ const DashboardDialog = (): ReactElement => {
     const { data: status } = await dispatch(
       actions.user.getStatus(currentUser._id)
     )
-    const { verified, completedProfile, admitted, confirmed } = status
-    if (confirmed) {
-      setApplicationStatus(ApplicationStatus.CONFIRMED)
-    } else if (admitted) {
-      setApplicationStatus(ApplicationStatus.ADMITTED)
-    } else if (admitted === false) {
-      setApplicationStatus(ApplicationStatus.REJECTED)
-    } else if (completedProfile) {
-      setApplicationStatus(ApplicationStatus.APPLIED)
-    } else if (verified) {
-      setApplicationStatus(ApplicationStatus.VERIFIED)
-    } else {
-      setApplicationStatus(ApplicationStatus.UNVERIFIED)
-    }
+    setApplicationStatus(getApplicationStatus(status ?? {}))
     setLoading(false)
   }
 
