@@ -2,6 +2,7 @@ import axios, { AxiosError } from "axios"
 import { DispatchAction, RemoteDispatchAction } from "types/DispatchAction"
 import { RequestStatus } from "enums/RequestStatus"
 import { Middleware } from "redux"
+import FormData from "form-data"
 
 /**
  * Middleware to send calls to the backend from DispatchActions, as necessary
@@ -32,11 +33,19 @@ const apiMiddleware: Middleware<any, any> =
 
         const options = {
           url,
-          method,
+          method: method === "FILE" ? "POST": method,
           headers: {
             "x-access-token": accessToken
           },
           data: body
+        }
+
+        if (method === "FILE") {
+          // Attach files
+          const formData = new FormData()
+          formData.append("file", body)
+
+          options.data = formData
         }
 
         try {
@@ -49,13 +58,16 @@ const apiMiddleware: Middleware<any, any> =
         } catch (err: any) {
           // Mark request status as error
           if (axios.isAxiosError(err)) {
-            const message = (err as AxiosError).response?.data?.message || err
+            const serverMessage = (err as AxiosError).response?.data?.message
+            const axiosMessage = (err as AxiosError).message
+            const message = serverMessage ?? axiosMessage ?? JSON.stringify(err)
             const action: DispatchAction = {
               type,
               useAPI: false,
               status: RequestStatus.ERROR,
               data: message
             }
+            console.log({ ...err, message: err.message })
             dispatch(action)
             return Promise.reject(action)
           } else {
@@ -64,7 +76,7 @@ const apiMiddleware: Middleware<any, any> =
               type,
               useAPI: false,
               status: RequestStatus.ERROR,
-              data: err
+              data: JSON.stringify(err)
             }
             dispatch(action)
             return Promise.reject(action)

@@ -4,7 +4,7 @@ import ScottyLabsSmallLogo from "./ScottyLabsSmallIcon"
 
 const useStyles = makeStyles((theme) => ({
   waveContainer: {
-    position: "absolute",
+    position: "fixed",
     width: "100%",
     overflow: "hidden",
     lineHeight: 0

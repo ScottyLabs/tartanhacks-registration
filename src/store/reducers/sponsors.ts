@@ -3,16 +3,10 @@ import { RequestStatus } from "enums/RequestStatus"
 import { DispatchActionType } from "enums/DispatchActionType"
 import { DispatchAction } from "types/DispatchAction"
 
-const data = (state = {}, action: DispatchAction) => {
+const data = (state = [], action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.AUTH_LOGIN:
-    case DispatchActionType.AUTH_REGISTER:
-    case DispatchActionType.AUTH_LOGIN_TOKEN:
-    case DispatchActionType.AUTH_VERIFY:
+    case DispatchActionType.SPONSORS_LIST:
       if (action.status == RequestStatus.SUCCESS) {
-        if (action.data.token) {
-          window.localStorage.setItem("accessToken", action.data.token)
-        }
         return action.data
       }
   }
@@ -21,10 +15,7 @@ const data = (state = {}, action: DispatchAction) => {
 
 const error = (state = null, action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.AUTH_LOGIN:
-    case DispatchActionType.AUTH_REGISTER:
-    case DispatchActionType.AUTH_LOGIN_TOKEN:
-    case DispatchActionType.AUTH_VERIFY:
+    case DispatchActionType.SPONSORS_LIST:
       if (action.status == RequestStatus.ERROR) {
         return action.data
       }
@@ -34,10 +25,7 @@ const error = (state = null, action: DispatchAction) => {
 
 const status = (state = null, action: DispatchAction) => {
   switch (action.type) {
-    case DispatchActionType.AUTH_LOGIN:
-    case DispatchActionType.AUTH_REGISTER:
-    case DispatchActionType.AUTH_LOGIN_TOKEN:
-    case DispatchActionType.AUTH_VERIFY:
+    case DispatchActionType.SPONSORS_LIST:
       return action.status
   }
   return state

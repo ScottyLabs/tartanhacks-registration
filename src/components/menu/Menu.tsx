@@ -1,6 +1,10 @@
 import { makeStyles, Modal } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
+import { ApplicationStatus } from "enums/ApplicationStatus"
 import { ReactElement, useState } from "react"
+import { useSelector } from "react-redux"
+import getApplicationStatus from "src/util/getApplicationStatus"
+import { RootState } from "types/RootState"
 import MenuItem from "./MenuItem"
 import MenuLine from "./MenuLine"
 
@@ -65,6 +69,9 @@ const Menu = (): ReactElement => {
   const handleSwitch = () => setOpen(!open)
   const handleClose = () => setOpen(false)
 
+  const status = useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+  const applicationStatus = getApplicationStatus(status)
+
   return (
     <div className={classes.menuBurgerContainer}>
       <div className={classes.burgerWrapper} onClick={handleSwitch}>
@@ -75,8 +82,24 @@ const Menu = (): ReactElement => {
       <Modal open={open} onClose={handleClose}>
         <div className={classes.menuWrapper}>
           <div className={classes.menuBox}>
-            <MenuItem text="REGISTER" url="" />
-            <MenuLine />
+            {applicationStatus === ApplicationStatus.VERIFIED ? (
+              <>
+                <MenuItem text="APPLY" url="/apply" />
+                <MenuLine />
+              </>
+            ) : null}
+            {applicationStatus === ApplicationStatus.APPLIED ? (
+              <>
+                <MenuItem text="EDIT" url="/apply" />
+                <MenuLine />
+              </>
+            ) : null}
+            {applicationStatus === ApplicationStatus.ADMITTED ? (
+              <>
+                <MenuItem text="CONFIRM" url="/confirm" />
+                <MenuLine />
+              </>
+            ) : null}
             <MenuItem text="TEAM" url="" />
             <MenuLine />
             <MenuItem text="BACK" url="" />

@@ -29,7 +29,7 @@ const MenuItem = ({
   const classes = useStyles(theme)
 
   return (
-    <Link className={classes.link}>
+    <Link className={classes.link} href={url}>
       <div className={classes.menuItem}>
         <Typography variant="h5">{text}</Typography>
       </div>
