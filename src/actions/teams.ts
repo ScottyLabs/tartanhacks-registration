@@ -66,3 +66,14 @@ export const inviteByEmail = (email: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const editTeamInfo = (name: string, description: string): DispatchAction => ({
+  type: DispatchActionType.TEAM_EDIT,
+  useAPI: true,
+  request: {
+    path: `/team/`,
+    method: "PATCH",
+    body: { name, description }
+  },
+  status: RequestStatus.PENDING
+})

@@ -11,6 +11,7 @@ const data = (state = {}, action: DispatchAction) => {
     case DispatchActionType.TEAM_INVITE_BY_EMAIL:
     case DispatchActionType.TEAM_JOIN:
     case DispatchActionType.TEAM_LEAVE:
+    case DispatchActionType.TEAM_EDIT:
       if (action.status == RequestStatus.SUCCESS) {
         return action.data
       }
@@ -26,6 +27,7 @@ const error = (state = {}, action: DispatchAction) => {
     case DispatchActionType.TEAM_INVITE_BY_EMAIL:
     case DispatchActionType.TEAM_JOIN:
     case DispatchActionType.TEAM_LEAVE:
+    case DispatchActionType.TEAM_EDIT:
       if (action.status == RequestStatus.ERROR) {
         return action.data
       }
@@ -41,6 +43,7 @@ const status = (state = null, action: DispatchAction) => {
     case DispatchActionType.TEAM_INVITE_BY_EMAIL:
     case DispatchActionType.TEAM_JOIN:
     case DispatchActionType.TEAM_LEAVE:
+    case DispatchActionType.TEAM_EDIT:
       return action.status
   }
   return state
