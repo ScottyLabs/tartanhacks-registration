@@ -2,7 +2,7 @@ import { NextPage } from "next"
 import { makeStyles } from "@material-ui/core"
 import React, { ReactElement } from "react"
 import { AuthenticatedLayout, DialogLayout } from "src/layouts"
-import DashboardDialog from "src/components/dashboard/DashboardDialog"
+import ConfirmationDialog from "src/components/confirmation/ConfirmationDialog"
 import Menu from "src/components/menu/Menu"
 import WaveBackground from "src/components/design/WaveBackground"
 
@@ -16,17 +16,17 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const Home: NextPage = (): ReactElement => {
+const ConfirmationPage: NextPage = (): ReactElement => {
   const classes = useStyles()
   return (
     <>
       <WaveBackground />
       <Menu />
       <div className={classes.dialog}>
-        <DashboardDialog />
+        <ConfirmationDialog />
       </div>
     </>
   )
 }
 
-export default AuthenticatedLayout(Home)
+export default AuthenticatedLayout(ConfirmationPage)

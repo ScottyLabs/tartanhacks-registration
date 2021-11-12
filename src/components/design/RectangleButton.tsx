@@ -3,14 +3,14 @@ import React, { ReactElement } from "react"
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
-    borderRadius: "1em",
-    boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    color: theme.palette.text.primary
+    background: "#F7C062",
+    borderRadius: "10px",
+    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
+    color: "white"
   }
 }))
 
-const RoundedButton = ({
+const RectangleButton = ({
   className,
   children,
   type
@@ -33,4 +33,4 @@ const RoundedButton = ({
   )
 }
 
-export default RoundedButton
+export default RectangleButton
