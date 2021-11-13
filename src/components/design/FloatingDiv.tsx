@@ -26,24 +26,21 @@ const useStyles = makeStyles((theme) => ({
       width: "90%",
       top: "15%",
       marginBottom: "150px"
-    },
+    }
   },
   content: {
     display: "flex",
     width: "80%",
     flexDirection: "column",
-    gap: "1em",
-  },
+    gap: "1em"
+  }
 }))
 
-
 const FloatingDiv = (props: any) => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <div className={classes.floatingDiv}>
-      <div className={classes.content}>
-        {props.children}
-      </div>
+      <div className={classes.content}>{props.children}</div>
     </div>
   )
 }

@@ -9,22 +9,19 @@ import {
   Button,
   TextField
 } from "@material-ui/core"
-import React, {
-  useEffect,
-  useState
-} from "react"
+import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
-import { useDispatch } from "react-redux";
-import actions from "src/actions";
-import { AuthenticatedLayout } from "src/layouts";
-import WaveFooter from "src/components/design/WaveFooter";
-import FloatingDiv from "src/components/design/FloatingDiv";
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader";
-import ContentHeader from "src/components/design/ContentHeader";
-import RoundedButton from "src/components/design/RoundedButton";
-import { useSelector } from "react-redux";
-import { RootState } from "types/RootState";
-import { Alert } from "@material-ui/lab";
+import { useDispatch } from "react-redux"
+import actions from "src/actions"
+import { AuthenticatedLayout } from "src/layouts"
+import WaveFooter from "src/components/design/WaveFooter"
+import FloatingDiv from "src/components/design/FloatingDiv"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import ContentHeader from "src/components/design/ContentHeader"
+import RoundedButton from "src/components/design/RoundedButton"
+import { useSelector } from "react-redux"
+import { RootState } from "types/RootState"
+import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -36,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "20px",
-    },
+      fontSize: "20px"
+    }
   },
   shortenedSubtitle: {
     width: "100%",
@@ -52,10 +49,10 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: "80%"
-    },
+    }
   },
   content: {
-    alignItems: "left",
+    alignItems: "left"
   },
   subtitle: {
     paddingTop: "30px",
@@ -67,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "100%"
-    },
+    }
   },
   memberList: {
     listStyleType: "none",
@@ -85,11 +82,11 @@ const useStyles = makeStyles((theme) => ({
     color: "#FFFFFF",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "25px",
-      width: "60%",
+      width: "60%"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "16px",
-      width: "75%",
+      width: "75%"
     }
   },
   editButton: {
@@ -114,7 +111,6 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: "25px",
       paddingLeft: "25px"
     }
-
   },
   buttonForm: {
     width: "100%",
@@ -122,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center"
   },
   editableText: {
-    display: 'flex',
+    display: "flex",
     justifyContent: "space-between",
     flexWrap: "wrap"
   },
@@ -133,7 +129,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "80%"
-    },
+    }
   },
   longText: {
     width: "50%",
@@ -142,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "80%"
-    },
+    }
   },
   editButtonForm: {
     display: "flex",
@@ -151,14 +147,14 @@ const useStyles = makeStyles((theme) => ({
   textField: {
     backgroundColor: "white",
     borderRadius: "10px",
-    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
+    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)"
   },
   textFieldInput: {
     border: "none",
     color: theme.palette.gradient.start
   },
   dialogHeader: {
-    color: theme.palette.gradient.start,
+    color: theme.palette.gradient.start
   }
 }))
 
@@ -170,9 +166,9 @@ enum dialogOpen {
 }
 
 const TeamDescription = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const { teamId } = router.query;
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const { teamId } = router.query
   const [teamInfo, setTeamInfo] = useState({
     _id: "",
     members: [],
@@ -184,9 +180,9 @@ const TeamDescription = () => {
     createdAt: "",
     updatedAt: "",
     __v: 0
-  });
-  const [notify, setNotify] = useState('');
-  const [successMessage, setSuccessMessage] = useState('')
+  })
+  const [notify, setNotify] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
   const [isOwnTeam, setIsOwnTeam] = useState(false)
   const classes = useStyles()
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
@@ -198,49 +194,53 @@ const TeamDescription = () => {
   const [invitations, setInvitations] = useState<any>([])
 
   const handleClose = () => {
-    setOpen(dialogOpen.No);
-    setChangedName(teamInfo.name);
-    setChangedDescription(teamInfo.description);
-    setInvitations([]);
+    setOpen(dialogOpen.No)
+    setChangedName(teamInfo.name)
+    setChangedDescription(teamInfo.description)
+    setInvitations([])
   }
 
   const handleCloseName = async () => {
-    setOpen(dialogOpen.No);
+    setOpen(dialogOpen.No)
     try {
-      await dispatch(actions.teams.editTeamInfo(changedName, undefined, undefined));
+      await dispatch(
+        actions.teams.editTeamInfo(changedName, undefined, undefined)
+      )
       setTeamInfo({
         ...teamInfo,
         name: changedName
-      });
+      })
     } catch (err) {
-      setNotify('error')
+      setNotify("error")
     }
   }
 
   const handleCloseDescription = async () => {
-    setOpen(dialogOpen.No);
+    setOpen(dialogOpen.No)
     try {
-      await dispatch(actions.teams.editTeamInfo(undefined, changedDescription, undefined));
+      await dispatch(
+        actions.teams.editTeamInfo(undefined, changedDescription, undefined)
+      )
       setTeamInfo({
         ...teamInfo,
         description: changedDescription
-      });
+      })
     } catch (err) {
-      setNotify('error')
+      setNotify("error")
     }
   }
 
   const handleCloseInvite = async () => {
-    setOpen(dialogOpen.No);
+    setOpen(dialogOpen.No)
     console.log(invitations)
     if (invitations) {
       invitations.forEach(async (elem: string) => {
         try {
           await dispatch(actions.teams.inviteByEmail(elem))
         } catch (err) {
-          setNotify('error')
+          setNotify("error")
         }
-      });
+      })
     }
   }
 
@@ -257,17 +257,18 @@ const TeamDescription = () => {
         setChangedDescription(info.data.description)
         setIsCaptain(info.data.admin._id === user._id)
       } catch (err) {
+        console.error(err)
       } finally {
         try {
-          const ownTeam = await dispatch(actions.user.getOwnTeam());
+          const ownTeam = await dispatch(actions.user.getOwnTeam())
           setIsOwnTeam(ownTeam.data._id === (teamId as string))
         } catch (err) {
-          setIsOwnTeam(false);
+          setIsOwnTeam(false)
         }
       }
     }
 
-    fetchTeamInfo();
+    fetchTeamInfo()
   }, [teamId])
   return (
     <>
@@ -286,21 +287,23 @@ const TeamDescription = () => {
                   {teamInfo.name}
                 </Typography>
               </div>
-              {isCaptain ?
-                <form className={classes.editButtonForm} onSubmit={async (e) => {
-                  e.preventDefault();
-                  try {
-                    setOpen(dialogOpen.Name)
-                  } catch (err) {
-                    setNotify('error')
-                  }
-                }}>
+              {isCaptain ? (
+                <form
+                  className={classes.editButtonForm}
+                  onSubmit={async (e) => {
+                    e.preventDefault()
+                    try {
+                      setOpen(dialogOpen.Name)
+                    } catch (err) {
+                      setNotify("error")
+                    }
+                  }}
+                >
                   <RoundedButton type="submit" className={classes.editButton}>
                     EDIT TEAM NAME
                   </RoundedButton>
-                </form> :
-                null
-              }
+                </form>
+              ) : null}
             </div>
             <div className={classes.editableText}>
               <div className={classes.longText}>
@@ -311,21 +314,23 @@ const TeamDescription = () => {
                   {teamInfo.description}
                 </Typography>
               </div>
-              {isCaptain ?
-                <form className={classes.editButtonForm} onSubmit={async (e) => {
-                  e.preventDefault();
-                  try {
-                    setOpen(dialogOpen.Description)
-                  } catch (err) {
-                    setNotify('error')
-                  }
-                }}>
+              {isCaptain ? (
+                <form
+                  className={classes.editButtonForm}
+                  onSubmit={async (e) => {
+                    e.preventDefault()
+                    try {
+                      setOpen(dialogOpen.Description)
+                    } catch (err) {
+                      setNotify("error")
+                    }
+                  }}
+                >
                   <RoundedButton type="submit" className={classes.editButton}>
                     EDIT DESCRIPTION
                   </RoundedButton>
-                </form> :
-                null
-              }
+                </form>
+              ) : null}
             </div>
             <div className={classes.editableText}>
               <div className={classes.shortenedText}>
@@ -333,65 +338,77 @@ const TeamDescription = () => {
                   TEAM MEMBERS
                 </Typography>
                 <ul className={classes.memberList}>
-                  {teamInfo.members.map((member: any, idx: number) =>
+                  {teamInfo.members.map((member: any, idx: number) => (
                     <li key={idx}>
-                      <Typography variant="subtitle1" className={classes.shortenedSubtitle}>
+                      <Typography
+                        variant="subtitle1"
+                        className={classes.shortenedSubtitle}
+                      >
                         {`${member.firstName} ${member.lastName} (${member.email})`}
                       </Typography>
-                    </li>)}
+                    </li>
+                  ))}
                 </ul>
               </div>
-              {isCaptain ?
-                <form className={classes.editButtonForm} onSubmit={async (e) => {
-                  e.preventDefault();
-                  try {
-                    setOpen(dialogOpen.Invite)
-                  } catch (err) {
-                    setNotify('error')
-                  }
-                }}>
+              {isCaptain ? (
+                <form
+                  className={classes.editButtonForm}
+                  onSubmit={async (e) => {
+                    e.preventDefault()
+                    try {
+                      setOpen(dialogOpen.Invite)
+                    } catch (err) {
+                      setNotify("error")
+                    }
+                  }}
+                >
                   <RoundedButton type="submit" className={classes.editButton}>
                     INVITE NEW MEMBERS
                   </RoundedButton>
-                </form> :
-                null
-              }
+                </form>
+              ) : null}
             </div>
           </div>
-          {isOwnTeam ?
-            <form className={classes.buttonForm} onSubmit={async (e) => {
-              e.preventDefault();
-              try {
-                await dispatch(actions.teams.leaveTeam());
-                router.push('/teams');
-              } catch (err) {
-                setNotify('error')
-              }
-            }}>
+          {isOwnTeam ? (
+            <form
+              className={classes.buttonForm}
+              onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                  await dispatch(actions.teams.leaveTeam())
+                  router.push("/teams")
+                } catch (err) {
+                  setNotify("error")
+                }
+              }}
+            >
               <RoundedButton type="submit" className={classes.leaveButton}>
                 LEAVE TEAM
               </RoundedButton>
-            </form> :
-            null
-          }
+            </form>
+          ) : null}
         </FloatingDiv>
         <Snackbar
-          open={notify != ''}
+          open={notify != ""}
           autoHideDuration={5000}
-          onClose={(e) => setNotify('')}
+          onClose={(e) => setNotify("")}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          <Alert severity={notify === 'error' ? 'error' : 'success'}>
-            {notify == 'error' ? errorMessage : successMessage}
+          <Alert severity={notify === "error" ? "error" : "success"}>
+            {notify == "error" ? errorMessage : successMessage}
           </Alert>
         </Snackbar>
 
-
         <Dialog open={open === dialogOpen.Name} onClose={handleClose}>
-          <DialogTitle className={classes.dialogHeader}>Edit Team Name</DialogTitle>
+          <DialogTitle className={classes.dialogHeader}>
+            Edit Team Name
+          </DialogTitle>
           <DialogContent>
-            <TextField variant="outlined" fullWidth={true}
-              value={changedName} className={classes.textField}
+            <TextField
+              variant="outlined"
+              fullWidth={true}
+              value={changedName}
+              className={classes.textField}
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
@@ -407,12 +424,16 @@ const TeamDescription = () => {
           </DialogActions>
         </Dialog>
 
-
         <Dialog open={open === dialogOpen.Description} onClose={handleClose}>
-          <DialogTitle className={classes.dialogHeader}>Edit Team Description</DialogTitle>
+          <DialogTitle className={classes.dialogHeader}>
+            Edit Team Description
+          </DialogTitle>
           <DialogContent>
-            <TextField variant="outlined" fullWidth={true}
-              value={changedDescription} className={classes.textField}
+            <TextField
+              variant="outlined"
+              fullWidth={true}
+              value={changedDescription}
+              className={classes.textField}
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
@@ -428,18 +449,25 @@ const TeamDescription = () => {
           </DialogActions>
         </Dialog>
 
-
         <Dialog open={open === dialogOpen.Invite} onClose={handleClose}>
-          <DialogTitle className={classes.dialogHeader}>Invite New Members</DialogTitle>
+          <DialogTitle className={classes.dialogHeader}>
+            Invite New Members
+          </DialogTitle>
           <DialogContent>
-            <TextField variant="outlined" fullWidth={true}
+            <TextField
+              variant="outlined"
+              fullWidth={true}
               className={classes.textField}
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
               }}
               onChange={(e) => {
-                setInvitations(e.target.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
+                setInvitations(
+                  e.target.value.match(
+                    /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi
+                  )
+                )
               }}
             />
           </DialogContent>
@@ -453,4 +481,4 @@ const TeamDescription = () => {
   )
 }
 
-export default AuthenticatedLayout(TeamDescription);
+export default AuthenticatedLayout(TeamDescription)

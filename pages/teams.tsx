@@ -8,7 +8,7 @@ import React, {
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { useRouter } from "next/dist/client/router"
-import { AuthenticatedLayout } from "src/layouts";
+import { AuthenticatedLayout } from "src/layouts"
 import { viewTeams } from "src/actions/teams"
 import WaveFooter from "src/components/design/WaveFooter"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
@@ -33,21 +33,21 @@ const useStyles = makeStyles((theme) => ({
     color: "#FFFFFF",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "25px",
-      width: "60%",
+      width: "60%"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "16px",
-      width: "75%",
+      width: "75%"
     }
   },
   tableHeader: {
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
-    paddingTop: "35px",
+    paddingTop: "35px"
   },
   tableBody: {
-    display: "grid",
+    display: "grid"
   },
   tableData: {
     tableLayout: "fixed",
@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tableEntry: {
     display: "block",
-    width: "100%",
+    width: "100%"
   },
   tableHeaderText: {
     fontWeight: 400,
@@ -68,8 +68,8 @@ const useStyles = makeStyles((theme) => ({
     WebkitTextFillColor: "transparent",
     fontSize: "28px",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "20px",
-    },
+      fontSize: "20px"
+    }
   },
   link: {
     background: "none",
@@ -86,33 +86,35 @@ const useStyles = makeStyles((theme) => ({
 const ViewTeams = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [teams, setTeams] = useState([{
-    name: "",
-    description: ""
-  }])
-  const [notify, setNotify] = useState('')
-  const [successMessage, setSuccessMessage] = useState('')
+  const [teams, setTeams] = useState([
+    {
+      name: "",
+      description: ""
+    }
+  ])
+  const [notify, setNotify] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
   const classes = useStyles()
 
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
 
-
-  const checkJoinErrorCallback = ((isError: boolean) => {
-    setNotify(isError ? 'error' : 'success');
-    if(!isError) {
-      setSuccessMessage('Join request sent successfully')
+  const checkJoinErrorCallback = (isError: boolean) => {
+    setNotify(isError ? "error" : "success")
+    if (!isError) {
+      setSuccessMessage("Join request sent successfully")
     }
-  })
+  }
 
   useEffect(() => {
     const getTeams = async () => {
       try {
-        const viewTeams = await dispatch(actions.teams.viewTeams());
-        setTeams(viewTeams.data);
+        const viewTeams = await dispatch(actions.teams.viewTeams())
+        setTeams(viewTeams.data)
       } catch (err) {
+        console.error(err)
       }
     }
-    getTeams();
+    getTeams()
   }, [])
 
   return (
@@ -122,10 +124,13 @@ const ViewTeams = () => {
         <WaveFooter />
         <FloatingDiv>
           <ContentHeader title="Team" />
-          <form className={classes.buttonForm} onClick={async (e) => {
-            e.preventDefault();
-            router.push("/teams/create")
-          }}>
+          <form
+            className={classes.buttonForm}
+            onClick={async (e) => {
+              e.preventDefault()
+              router.push("/teams/create")
+            }}
+          >
             <RoundedButton type="submit" className={classes.newTeamButton}>
               Create new team
             </RoundedButton>
@@ -134,11 +139,12 @@ const ViewTeams = () => {
             <Typography variant="h4" className={classes.tableHeaderText}>
               VIEW OPEN TEAMS
             </Typography>
-            <button className={classes.link} onClick={
-              (e) => {
-                console.log("filtered");
-              }
-            }>
+            <button
+              className={classes.link}
+              onClick={(e) => {
+                console.log("filtered")
+              }}
+            >
               <Typography variant="h4" className={classes.tableHeaderText}>
                 Filter
               </Typography>
@@ -146,19 +152,24 @@ const ViewTeams = () => {
           </div>
           <table className={classes.tableData}>
             <tbody>
-              {teams.map((team, idx) => <TeamTableEntry
-                team={team} key={idx} callback={checkJoinErrorCallback} />)}
+              {teams.map((team, idx) => (
+                <TeamTableEntry
+                  team={team}
+                  key={idx}
+                  callback={checkJoinErrorCallback}
+                />
+              ))}
             </tbody>
           </table>
         </FloatingDiv>
         <Snackbar
-          open={notify != ''}
+          open={notify != ""}
           autoHideDuration={5000}
-          onClose={(e) => setNotify('')}
+          onClose={(e) => setNotify("")}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          <Alert severity={notify === 'error' ? 'error' : 'success'}>
-            {notify == 'error' ? errorMessage : successMessage}
+          <Alert severity={notify === "error" ? "error" : "success"}>
+            {notify == "error" ? errorMessage : successMessage}
           </Alert>
         </Snackbar>
       </div>
@@ -166,4 +177,4 @@ const ViewTeams = () => {
   )
 }
 
-export default AuthenticatedLayout(ViewTeams);
+export default AuthenticatedLayout(ViewTeams)

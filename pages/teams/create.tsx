@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { makeStyles, Typography, TextField, Snackbar} from "@material-ui/core"
+import { makeStyles, Typography, TextField, Snackbar } from "@material-ui/core"
 import { AuthenticatedLayout } from "src/layouts"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
@@ -23,11 +23,11 @@ const useStyles = makeStyles((theme) => ({
     WebkitTextFillColor: "transparent",
     fontSize: "28px",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "20px",
-    },
+      fontSize: "20px"
+    }
   },
   content: {
-    alignItems: "left",
+    alignItems: "left"
   },
   annotation: {
     paddingTop: "30px",
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     width: "80%",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "100%"
-    },
+    }
   },
   memberList: {
     listStyleType: "none",
@@ -59,17 +59,17 @@ const useStyles = makeStyles((theme) => ({
     padding: "20px",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "25px",
-      width: "60%",
+      width: "60%"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "16px",
-      width: "75%",
+      width: "75%"
     }
   },
   textField: {
     backgroundColor: "white",
     borderRadius: "10px",
-    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
+    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)"
   },
   textFieldInput: {
     border: "none",
@@ -78,12 +78,12 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const TeamCreate = () => {
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const classes = useStyles();
-  const [teamName, setTeamName] = useState("");
-  const [teamDescription, setTeamDescription] = useState("");
-  const [addMembers, setAddMembers] = useState<any>([]);
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const classes = useStyles()
+  const [teamName, setTeamName] = useState("")
+  const [teamDescription, setTeamDescription] = useState("")
+  const [addMembers, setAddMembers] = useState<any>([])
   const [error, setError] = useState(false)
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
 
@@ -98,29 +98,37 @@ const TeamCreate = () => {
             <Typography variant="h4" className={classes.title}>
               BASIC INFO
             </Typography>
-            <form onSubmit={async (e) => {
-              e.preventDefault();
-              try {
-                await dispatch(actions.teams.createTeam(teamName, teamDescription));
-                if(addMembers) {
-                  addMembers.forEach(async (elem: string) => {
-                    try {
-                      await dispatch(actions.teams.inviteByEmail(elem))
-                    } catch (err) {
-                      setError(true);
-                    }
-                  });
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                  await dispatch(
+                    actions.teams.createTeam(teamName, teamDescription)
+                  )
+                  if (addMembers) {
+                    addMembers.forEach(async (elem: string) => {
+                      try {
+                        await dispatch(actions.teams.inviteByEmail(elem))
+                      } catch (err) {
+                        setError(true)
+                      }
+                    })
+                  }
+                  router.push("/teams")
+                } catch (err) {
+                  setError(true)
                 }
-                router.push("/teams");
-              } catch (err) {
-                setError(true)
-              }
-            }}>
+              }}
+            >
               <Typography variant="subtitle1" className={classes.annotation}>
                 Team Name*
               </Typography>
-              <TextField required variant="outlined" fullWidth={true}
-                value={teamName} className={classes.textField}
+              <TextField
+                required
+                variant="outlined"
+                fullWidth={true}
+                value={teamName}
+                className={classes.textField}
                 InputProps={{
                   className: classes.textFieldInput,
                   classes: { notchedOutline: classes.textFieldInput }
@@ -133,8 +141,12 @@ const TeamCreate = () => {
               <Typography variant="subtitle1" className={classes.annotation}>
                 Team Description*
               </Typography>
-              <TextField required variant="outlined" fullWidth={true}
-                value={teamDescription} className={classes.textField}
+              <TextField
+                required
+                variant="outlined"
+                fullWidth={true}
+                value={teamDescription}
+                className={classes.textField}
                 InputProps={{
                   className: classes.textFieldInput,
                   classes: { notchedOutline: classes.textFieldInput }
@@ -147,14 +159,20 @@ const TeamCreate = () => {
               <Typography variant="subtitle1" className={classes.annotation}>
                 Invite New Member
               </Typography>
-              <TextField variant="outlined" fullWidth={true}
+              <TextField
+                variant="outlined"
+                fullWidth={true}
                 className={classes.textField}
                 InputProps={{
                   className: classes.textFieldInput,
                   classes: { notchedOutline: classes.textFieldInput }
                 }}
                 onChange={(e) => {
-                  setAddMembers(e.target.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
+                  setAddMembers(
+                    e.target.value.match(
+                      /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi
+                    )
+                  )
                 }}
               />
               <RoundedButton type="submit" className={classes.createButton}>

@@ -1,6 +1,5 @@
 import { Hidden, makeStyles, Typography } from "@material-ui/core"
-import EnvelopeEmpty from "./EnvelopeEmpty";
-
+import EnvelopeEmpty from "./EnvelopeEmpty"
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -17,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "22px",
       width: "80%",
       paddingBottom: "20px"
-    },
+    }
   },
   longTitle: {
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
@@ -38,24 +37,26 @@ const useStyles = makeStyles((theme) => ({
     top: "0%",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "42px"
-    },
+    }
   },
   hrDivider: {
     width: "25%",
     border: 0,
     height: "1px",
-    borderTop: `1px solid ${theme.palette.gradient.start}`,
-  },
+    borderTop: `1px solid ${theme.palette.gradient.start}`
+  }
 }))
 
-
 const ContentHeader = (props: any) => {
-  const classes = useStyles();
+  const classes = useStyles()
   return (
     <>
       <div className={classes.headerDiv}>
-        <Typography variant="h4" className={`${classes.header} 
-          ${props.longTitle == "true" ? classes.longTitle : ''}`}>
+        <Typography
+          variant="h4"
+          className={`${classes.header} 
+          ${props.longTitle == "true" ? classes.longTitle : ""}`}
+        >
           {props.title}
         </Typography>
         <EnvelopeEmpty className={classes.envelope} />

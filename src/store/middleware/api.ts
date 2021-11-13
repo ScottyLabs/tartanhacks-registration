@@ -33,7 +33,7 @@ const apiMiddleware: Middleware<any, any> =
 
         const options = {
           url,
-          method: method === "FILE" ? "POST": method,
+          method: method === "FILE" ? "POST" : method,
           headers: {
             "x-access-token": accessToken
           },
