@@ -197,15 +197,15 @@ const TeamDescription = () => {
   const [changedDescription, setChangedDescription] = useState("")
 
   const handleClose = () => {
+    setOpen(dialogOpen.No);
     setChangedName(teamInfo.name);
     setChangedDescription(teamInfo.description);
-    setOpen(dialogOpen.No);
   }
 
   const handleCloseName = async () => {
+    setOpen(dialogOpen.No);
     try {
-      console.log(user._id, teamId as string);
-      await dispatch(actions.teams.editTeamInfo(changedName, teamInfo.description));
+      await dispatch(actions.teams.editTeamInfo(changedName, undefined, undefined));
       setTeamInfo({
         ...teamInfo,
         name: changedName
@@ -213,12 +213,12 @@ const TeamDescription = () => {
     } catch (err) {
       setNotify('error')
     }
-    handleClose();
   }
 
   const handleCloseDescription = async () => {
+    setOpen(dialogOpen.No);
     try {
-      await dispatch(actions.teams.editTeamInfo(changedName, teamInfo.description));
+      await dispatch(actions.teams.editTeamInfo(undefined, changedDescription, undefined));
       setTeamInfo({
         ...teamInfo,
         description: changedDescription
@@ -226,7 +226,6 @@ const TeamDescription = () => {
     } catch (err) {
       setNotify('error')
     }
-    handleClose();
   }
 
   useEffect(() => {
@@ -312,18 +311,37 @@ const TeamDescription = () => {
                 null
               }
             </div>
-            <Typography variant="h4" className={classes.title}>
-              TEAM MEMBERS
-            </Typography>
-          </div>
-          <ul className={classes.memberList}>
-            {teamInfo.members.map((member: any, idx: number) =>
-              <li key={idx}>
-                <Typography variant="subtitle1" className={classes.shortenedSubtitle}>
-                  {`${member.firstName} ${member.lastName} (${member.email})`}
+            <div className={classes.editableText}>
+              <div className={classes.shortenedText}>
+                <Typography variant="h4" className={classes.title}>
+                  TEAM MEMBERS
                 </Typography>
-              </li>)}
-          </ul>
+                <ul className={classes.memberList}>
+                  {teamInfo.members.map((member: any, idx: number) =>
+                    <li key={idx}>
+                      <Typography variant="subtitle1" className={classes.shortenedSubtitle}>
+                        {`${member.firstName} ${member.lastName} (${member.email})`}
+                      </Typography>
+                    </li>)}
+                </ul>
+              </div>
+              {isCaptain ?
+                <form className={classes.editButtonForm} onSubmit={async (e) => {
+                  e.preventDefault();
+                  try {
+                    setOpen(dialogOpen.Invite)
+                  } catch (err) {
+                    setNotify('error')
+                  }
+                }}>
+                  <RoundedButton type="submit" className={classes.editButton}>
+                    INVITE NEW MEMBERS
+                  </RoundedButton>
+                </form> :
+                null
+              }
+            </div>
+          </div>
           {isOwnTeam ?
             <form className={classes.buttonForm} onSubmit={async (e) => {
               e.preventDefault();
@@ -372,6 +390,25 @@ const TeamDescription = () => {
         </Dialog>
         <Dialog open={open === dialogOpen.Description} onClose={handleClose}>
           <DialogTitle className={classes.dialogHeader}>Edit Team Description</DialogTitle>
+          <DialogContent>
+            <TextField variant="outlined" fullWidth={true}
+              value={changedDescription} className={classes.textField}
+              InputProps={{
+                className: classes.textFieldInput,
+                classes: { notchedOutline: classes.textFieldInput }
+              }}
+              onChange={(e) => {
+                setChangedDescription(e.target.value)
+              }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleCloseDescription}>OK</Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={open === dialogOpen.Invite} onClose={handleClose}>
+          <DialogTitle className={classes.dialogHeader}>Invite New Members</DialogTitle>
           <DialogContent>
             <TextField variant="outlined" fullWidth={true}
               value={changedDescription} className={classes.textField}
