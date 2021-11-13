@@ -195,11 +195,13 @@ const TeamDescription = () => {
   const [open, setOpen] = useState(dialogOpen.No)
   const [changedName, setChangedName] = useState("")
   const [changedDescription, setChangedDescription] = useState("")
+  const [invitations, setInvitations] = useState<any>([])
 
   const handleClose = () => {
     setOpen(dialogOpen.No);
     setChangedName(teamInfo.name);
     setChangedDescription(teamInfo.description);
+    setInvitations([]);
   }
 
   const handleCloseName = async () => {
@@ -225,6 +227,20 @@ const TeamDescription = () => {
       });
     } catch (err) {
       setNotify('error')
+    }
+  }
+
+  const handleCloseInvite = async () => {
+    setOpen(dialogOpen.No);
+    console.log(invitations)
+    if (invitations) {
+      invitations.forEach(async (elem: string) => {
+        try {
+          await dispatch(actions.teams.inviteByEmail(elem))
+        } catch (err) {
+          setNotify('error')
+        }
+      });
     }
   }
 
@@ -369,6 +385,8 @@ const TeamDescription = () => {
             {notify == 'error' ? errorMessage : successMessage}
           </Alert>
         </Snackbar>
+
+
         <Dialog open={open === dialogOpen.Name} onClose={handleClose}>
           <DialogTitle className={classes.dialogHeader}>Edit Team Name</DialogTitle>
           <DialogContent>
@@ -388,6 +406,8 @@ const TeamDescription = () => {
             <Button onClick={handleCloseName}>OK</Button>
           </DialogActions>
         </Dialog>
+
+
         <Dialog open={open === dialogOpen.Description} onClose={handleClose}>
           <DialogTitle className={classes.dialogHeader}>Edit Team Description</DialogTitle>
           <DialogContent>
@@ -407,23 +427,25 @@ const TeamDescription = () => {
             <Button onClick={handleCloseDescription}>OK</Button>
           </DialogActions>
         </Dialog>
+
+
         <Dialog open={open === dialogOpen.Invite} onClose={handleClose}>
           <DialogTitle className={classes.dialogHeader}>Invite New Members</DialogTitle>
           <DialogContent>
             <TextField variant="outlined" fullWidth={true}
-              value={changedDescription} className={classes.textField}
+              className={classes.textField}
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
               }}
               onChange={(e) => {
-                setChangedDescription(e.target.value)
+                setInvitations(e.target.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
               }}
             />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handleCloseDescription}>OK</Button>
+            <Button onClick={handleCloseInvite}>OK</Button>
           </DialogActions>
         </Dialog>
       </div>

@@ -83,7 +83,7 @@ const TeamCreate = () => {
   const classes = useStyles();
   const [teamName, setTeamName] = useState("");
   const [teamDescription, setTeamDescription] = useState("");
-  const [addMembers, setAddMembers] = useState("");
+  const [addMembers, setAddMembers] = useState<any>([]);
   const [error, setError] = useState(false)
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
 
@@ -100,9 +100,17 @@ const TeamCreate = () => {
             </Typography>
             <form onSubmit={async (e) => {
               e.preventDefault();
-              console.log(addMembers.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
               try {
                 await dispatch(actions.teams.createTeam(teamName, teamDescription));
+                if(addMembers) {
+                  addMembers.forEach(async (elem: string) => {
+                    try {
+                      await dispatch(actions.teams.inviteByEmail(elem))
+                    } catch (err) {
+                      setError(true);
+                    }
+                  });
+                }
                 router.push("/teams");
               } catch (err) {
                 setError(true)
@@ -140,13 +148,13 @@ const TeamCreate = () => {
                 Invite New Member
               </Typography>
               <TextField variant="outlined" fullWidth={true}
-                value={addMembers} className={classes.textField}
+                className={classes.textField}
                 InputProps={{
                   className: classes.textFieldInput,
                   classes: { notchedOutline: classes.textFieldInput }
                 }}
                 onChange={(e) => {
-                  setAddMembers(e.target.value)
+                  setAddMembers(e.target.value.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi))
                 }}
               />
               <RoundedButton type="submit" className={classes.createButton}>
