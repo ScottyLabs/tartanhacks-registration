@@ -47,7 +47,6 @@ const Verification = () => {
         setVerificationStatus(status)
       } catch (err) {
         setVerificationStatus("ERROR")
-        console.log(err)
       } finally {
         setLoading(false)
       }

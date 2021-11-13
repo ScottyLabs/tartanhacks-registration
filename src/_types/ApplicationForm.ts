@@ -1,4 +1,13 @@
-import { CMUCollege, CollegeLevel, Ethnicity, Gender, HackathonExperience, Region, ShirtSize, WorkPermission } from "enums/Profile"
+import {
+  CMUCollege,
+  CollegeLevel,
+  Ethnicity,
+  Gender,
+  HackathonExperience,
+  Region,
+  ShirtSize,
+  WorkPermission
+} from "enums/Profile"
 
 export interface BasicFields {
   displayName: string
@@ -51,4 +60,10 @@ export interface LogisticsFields {
   phoneNumber: string
 }
 
-export type ApplicationForm = BasicFields & SchoolFields & ExperienceFields & WorkAuthorizationFields & PortfolioFields &EssayFields & LogisticsFields
+export type ApplicationForm = BasicFields &
+  SchoolFields &
+  ExperienceFields &
+  WorkAuthorizationFields &
+  PortfolioFields &
+  EssayFields &
+  LogisticsFields

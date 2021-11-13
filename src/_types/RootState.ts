@@ -15,20 +15,18 @@ export interface RootState {
     status: RequestStatus
     error: string
   }
-  sponsors: {
+  teams: {
     data: any
     status: RequestStatus
     error: string
   }
   user: {
-    data: {
-      status: {
-        verified?: boolean
-        completedProfile?: boolean
-        admitted?: boolean
-        confirmed?: boolean
-      }
-    }
+    data: any
+    status: RequestStatus
+    error: string
+  }
+  sponsors: {
+    data: any
     status: RequestStatus
     error: string
   }

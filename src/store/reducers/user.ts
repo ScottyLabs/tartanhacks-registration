@@ -6,6 +6,7 @@ import { DispatchAction } from "types/DispatchAction"
 const data = (state: any = {}, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.USER_STATUS:
+    case DispatchActionType.USER_GET_TEAM:
       if (action.status == RequestStatus.SUCCESS) {
         state.status = action.data
       }
@@ -16,6 +17,7 @@ const data = (state: any = {}, action: DispatchAction) => {
 const error = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.USER_STATUS:
+    case DispatchActionType.USER_GET_TEAM:
       if (action.status == RequestStatus.ERROR) {
         return action.data
       }
@@ -25,6 +27,7 @@ const error = (state = null, action: DispatchAction) => {
 
 const status = (state = null, action: DispatchAction) => {
   switch (action.type) {
+    case DispatchActionType.USER_GET_TEAM:
     case DispatchActionType.USER_STATUS:
       return action.status
   }

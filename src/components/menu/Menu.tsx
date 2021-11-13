@@ -69,7 +69,8 @@ const Menu = (): ReactElement => {
   const handleSwitch = () => setOpen(!open)
   const handleClose = () => setOpen(false)
 
-  const status = useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+  const status =
+    useSelector((state: RootState) => state?.user?.data?.status) ?? {}
   const applicationStatus = getApplicationStatus(status)
 
   return (
