@@ -42,4 +42,9 @@ export interface RootState {
     school: SchoolFields
     workAuth: WorkAuthorizationFields
   }
+  requests: {
+    data: any
+    status: RequestStatus
+    error: string
+  }
 }
