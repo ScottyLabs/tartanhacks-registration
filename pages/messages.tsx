@@ -10,6 +10,8 @@ import actions from "src/actions"
 import { AuthenticatedLayout } from "src/layouts"
 import { makeStyles } from "@material-ui/styles"
 import Message from "src/components/design/messages/Message"
+import { Snackbar } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   tableData: {
@@ -26,6 +28,8 @@ const Messages = () => {
   const errorMessage = useSelector((state: RootState) => state?.requests?.error)
   const user = useSelector((state: RootState) => state?.accounts?.data)
   const [requests, setRequests] = useState<any>([])
+  const [notify, setNotify] = useState("")
+  const [successMessage, setSuccessMessage] = useState("")
   const classes = useStyles();
 
   useEffect(() => {
@@ -48,7 +52,6 @@ const Messages = () => {
 
     fetchRequests()
   }, [user])
-  console.log(requests)
 
   return (
     <>
@@ -64,11 +67,23 @@ const Messages = () => {
                   key={idx}
                   isNew={true}
                   content={request}
+                  setSuccessMessage={setSuccessMessage}
+                  setNotify={setNotify}
                 />
               ))}
             </tbody>
           </table>
         </FloatingDiv>
+        <Snackbar
+          open={notify != ""}
+          autoHideDuration={5000}
+          onClose={(e) => setNotify("")}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <Alert severity={notify === "error" ? "error" : "success"}>
+            {notify === "error" ? errorMessage : successMessage}
+          </Alert>
+        </Snackbar>
       </div>
     </>
   )

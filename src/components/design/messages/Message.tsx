@@ -8,7 +8,12 @@ import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   newCell: {
+    paddingTop: "5px",
     width: "60px",
+    verticalAlign: "top",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "40px"
+    },
   },
   new: {
     color: theme.palette.primary.main,
@@ -17,20 +22,25 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: "nowrap",
     overflow: "hidden",
     display: "block",
+    top: "0px",
     width: "100%",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px"
+      fontSize: "13px"
     }
   },
   message: {
     paddingRight: "15px",
     paddingLeft: "30px",
+    paddingBottom: "30px",
+    paddingTop: "10px",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px"
+      paddingLeft: "0px",
+      paddingRight: "0px"
     }
   },
   tableEntryButton: {
-    width: "100%",
+    paddingLeft: "15px",
+    paddingRight: "15px",
     fontSize: "30px",
     fontWeight: 600,
     textAlign: "center",
@@ -42,15 +52,21 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "20px"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px",
-      height: "56px"
+      fontSize: "13px",
+      height: "56px",
+      paddingLeft: "0px",
+      paddingRight: "0px",
     }
   },
   buttonCell: {
-    width: "15%",
+    width: "20%",
     paddingLeft: "20px",
     paddingBottom: "30px",
     paddingTop: "10px",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "25%",
+      paddingLeft: "5px"
+    },
   },
   row: {
     borderBottom: "7px solid #F7C06260",
@@ -62,8 +78,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     marginLeft: "0",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "22px",
-      paddingBottom: "20px"
+      fontSize: "16px",
     }
   },
   messageText: {
@@ -73,6 +88,10 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     display: "block",
     wordWrap: "break-word",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "12px",
+      paddingTop: "10px"
+    }
   },
 }))
 
@@ -83,9 +102,13 @@ const Message = (props: any) => {
 
   const getMessage = (request: any) => {
     const header = request.type === "JOIN" ? "JOIN REQUEST" :
-                   request.type === "INVITE" ? "INVITATION" :
-                   request.type
-    const body = ""
+      request.type === "INVITE" ? "INVITATION" :
+        request.type
+    const body = (
+      request.type === "JOIN" ? "Sent by team" :
+        request.type === "INVITE" ? "To team" :
+          request.type
+    ) + " " + (request.team ? request.team.name : "null")
     return {
       header: header,
       body: body
@@ -111,28 +134,47 @@ const Message = (props: any) => {
           <Typography variant="h4" className={classes.messageHeader}>
             {message.header}
           </Typography>
+          <Typography variant="subtitle1" className={classes.messageText}>
+            {message.body}
+          </Typography>
         </td>
         <td className={classes.buttonCell}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-            }}
-          >
-            <RoundedButton type="submit" className={classes.tableEntryButton}>
-              Accept
-            </RoundedButton>
-          </form>
+          {
+            props.content.type == "INVITE" ?
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                }}
+              >
+                <RoundedButton type="submit" className={classes.tableEntryButton}>
+                  Accept
+                </RoundedButton>
+              </form> :
+              null
+          }
         </td>
         <td className={classes.buttonCell}>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault()
-            }}
-          >
-            <RoundedButton type="submit" className={classes.tableEntryButton}>
-              Reject
-            </RoundedButton>
-          </form>
+          {
+            props.content.type == "INVITE" ?
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                }}
+              >
+                <RoundedButton type="submit" className={classes.tableEntryButton}>
+                  Reject
+                </RoundedButton>
+              </form> :
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault()
+                }}
+              >
+                <RoundedButton type="submit" className={classes.tableEntryButton}>
+                  Cancel
+                </RoundedButton>
+              </form>
+          }
         </td>
       </tr>
     </>
