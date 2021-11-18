@@ -14,10 +14,11 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { getSchools } from "src/util/getSchools"
 import { SchoolFields } from "types/ApplicationForm"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -45,6 +46,12 @@ const SchoolSection = ({
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
+
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const schoolFields =
+    useSelector((state: RootState) => state?.application?.school) ?? {}
 
   // School information
   const [schools, setSchools] = useState<string[]>([])
@@ -75,7 +82,19 @@ const SchoolSection = ({
     if (validate) {
       validateForm()
     }
+    // eslint-disable-next-line
   }, [validate])
+
+  useEffect(() => {
+    if (fetchedProfile) {
+      setSchool(schoolFields.school)
+      setCollege(schoolFields.college ?? null)
+      setLevel(schoolFields.level ?? null)
+      setGraduationYear(schoolFields.graduationYear?.toString() ?? null)
+      setMajor(schoolFields.major)
+    }
+    // eslint-disable-next-line
+  }, [fetchedProfile])
 
   useEffect(() => {
     const querySchools = async () => {

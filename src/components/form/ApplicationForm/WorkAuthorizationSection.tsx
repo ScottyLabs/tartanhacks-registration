@@ -45,6 +45,12 @@ const WorkAuthorizationSection = ({
   const theme = useTheme()
   const classes = useStyles(theme)
 
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const workAuthFields =
+    useSelector((state: RootState) => state?.application?.workAuth) ?? {}
+
   // Work Authorization
   const sponsors: Sponsor[] =
     useSelector((state: RootState) => state.sponsors.data) || []
@@ -71,10 +77,22 @@ const WorkAuthorizationSection = ({
     if (validate) {
       validateForm()
     }
+    // eslint-disable-next-line
   }, [validate])
 
   useEffect(() => {
+    if (fetchedProfile) {
+      setWorkPermission(workAuthFields?.workPermission ?? null)
+      setWorkLocation(workAuthFields?.workLocation ?? "")
+      setWorkStrengths(workAuthFields?.workStrengths ?? "")
+      setSponsorRanking(workAuthFields?.sponsorRanking ?? [])
+    }
+    // eslint-disable-next-line
+  }, [fetchedProfile])
+
+  useEffect(() => {
     dispatch(actions.sponsors.list())
+    // eslint-disable-next-line
   }, [])
 
   return (

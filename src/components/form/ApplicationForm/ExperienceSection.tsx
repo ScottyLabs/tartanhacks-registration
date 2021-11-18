@@ -9,9 +9,10 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { ExperienceFields } from "types/ApplicationForm"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -38,16 +39,22 @@ const ExperienceSection = ({
   const theme = useTheme()
   const classes = useStyles(theme)
 
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const experienceFields =
+    useSelector((state: RootState) => state?.application?.experience) ?? {}
+
   // Experience
   const [coursework, setCoursework] = useState<string>("")
-  const [language, setLanguage] = useState<string>("")
+  const [languages, setLanguages] = useState<string>("")
   const [hackathonExperience, setHackathonExperience] =
     useState<HackathonExperience | null>(null)
 
   const validateForm = async () => {
     const data: ExperienceFields = {
       coursework,
-      language,
+      languages,
       hackathonExperience: hackathonExperience as HackathonExperience
     }
     await dispatch(actions.application.saveExperience(data))
@@ -59,7 +66,17 @@ const ExperienceSection = ({
     if (validate) {
       validateForm()
     }
+    // eslint-disable-next-line
   }, [validate])
+
+  useEffect(() => {
+    if (fetchedProfile) {
+      setCoursework(experienceFields.coursework ?? "")
+      setLanguages(experienceFields.languages ?? "")
+      setHackathonExperience(experienceFields.hackathonExperience)
+    }
+    // eslint-disable-next-line
+  }, [fetchedProfile])
 
   return (
     <div className={classes.section}>
@@ -79,9 +96,9 @@ const ExperienceSection = ({
         label="Programming Languages"
         variant="outlined"
         fullWidth
-        value={language}
+        value={languages}
         onChange={(e) => {
-          setLanguage(e.target.value)
+          setLanguages(e.target.value)
         }}
       />
       <Autocomplete

@@ -149,6 +149,10 @@ const ApplicationForm = (): ReactElement => {
     }
   }, [valid, calledValidate, validated])
 
+  useEffect(() => {
+    dispatch(actions.application.getProfile())
+  }, [])
+
   return (
     <Paper className={classes.formDialog}>
       <Snackbar

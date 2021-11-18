@@ -12,6 +12,16 @@ import {
 } from "types/ApplicationForm"
 import { DispatchAction } from "types/DispatchAction"
 
+export const getProfile = (): DispatchAction => ({
+  type: DispatchActionType.APPLICATION_GET_PROFILE,
+  useAPI: true,
+  request: {
+    path: "/user/profile",
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
+
 export const uploadResume = (file: File): DispatchAction => ({
   type: DispatchActionType.APPLICATION_UPLOAD_RESUME,
   useAPI: true,

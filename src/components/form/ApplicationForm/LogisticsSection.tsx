@@ -16,10 +16,11 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import isValidPhoneNumber from "src/util/isValidPhoneNumber"
 import { LogisticsFields } from "types/ApplicationForm"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -45,6 +46,12 @@ const LogisticsSection = ({
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
+
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const logisticsFields =
+    useSelector((state: RootState) => state?.application?.logistics) ?? {}
 
   // Logistics information
   const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
@@ -88,7 +95,20 @@ const LogisticsSection = ({
     if (validate) {
       validateForm()
     }
+    // eslint-disable-next-line
   }, [validate])
+
+  useEffect(() => {
+    if (fetchedProfile) {
+      setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? "")
+      setShirtSize(logisticsFields.shirtSize ?? null)
+      setWantsHardware(logisticsFields.wantsHardware ?? false)
+      setAddress(logisticsFields.address ?? "")
+      setRegion(logisticsFields.region ?? null)
+      setPhoneNumber(logisticsFields.phoneNumber ?? "")
+    }
+    // eslint-disable-next-line
+  }, [fetchedProfile])
 
   return (
     <div className={classes.section}>

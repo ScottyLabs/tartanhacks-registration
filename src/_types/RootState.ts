@@ -41,5 +41,6 @@ export interface RootState {
     portfolio: PortfolioFields
     school: SchoolFields
     workAuth: WorkAuthorizationFields
+    fetchedProfile: boolean
   }
 }
