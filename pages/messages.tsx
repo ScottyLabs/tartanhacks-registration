@@ -23,36 +23,42 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
+interface RequestData {
+  seen: Boolean,
+  _id: string
+}
+
 const Messages = () => {
   const dispatch = useDispatch()
   const errorMessage = useSelector((state: RootState) => state?.requests?.error)
-  const user = useSelector((state: RootState) => state?.accounts?.data)
   const [requests, setRequests] = useState<any>([])
+  const [seen, setSeen] = useState<Array<Boolean>>([])
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
   const classes = useStyles();
 
   useEffect(() => {
-    if(user == undefined) {
-      return;
-    }
     const fetchRequests = async () => {
-      if(user._id === undefined) {
-        return;
-      }
-      
       try {
-        console.log(user._id)
-        const req = await dispatch(actions.requests.userRequests(user._id));
+        const req = await dispatch(actions.requests.curUserRequests());
         setRequests(req.data);
+        console.log(requests)
+        setSeen(req.data.map((r: RequestData) => {
+          return r.seen
+        }))
+        req.data.forEach(async (value : any) => {
+          console.log(value)
+          await dispatch(actions.requests.openRequest(value._id))
+        })
       } catch (err) {
         console.error(err)
       }
     }
 
     fetchRequests()
-  }, [user])
+  }, [])
 
+  console.log(seen)
   return (
     <>
       <div>
@@ -62,13 +68,13 @@ const Messages = () => {
           <ContentHeader title="Messages" />
           <table className={classes.tableData}>
             <tbody>
-              {requests.map((request : any, idx : any) => (
+              {requests.map((request : any, idx: number) => (
                 <Message
                   key={idx}
-                  isNew={true}
                   content={request}
                   setSuccessMessage={setSuccessMessage}
                   setNotify={setNotify}
+                  isNew={!seen[idx]}
                 />
               ))}
             </tbody>

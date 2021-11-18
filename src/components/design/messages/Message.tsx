@@ -142,8 +142,15 @@ const Message = (props: any) => {
           {
             props.content.type == "INVITE" ?
               <form
-                onSubmit={(e) => {
+                onSubmit={ async (e) => {
                   e.preventDefault()
+                  try {
+                    await dispatch(actions.requests.acceptRequest(props.content._id))
+                    props.setNotify("success")
+                    props.setSuccessMessage("Successfully joined the team!")
+                  } catch (err) {
+                    props.setNotify("error")
+                  }
                 }}
               >
                 <RoundedButton type="submit" className={classes.tableEntryButton}>
@@ -162,7 +169,7 @@ const Message = (props: any) => {
                 }}
               >
                 <RoundedButton type="submit" className={classes.tableEntryButton}>
-                  Reject
+                  Decline
                 </RoundedButton>
               </form> :
               <form
