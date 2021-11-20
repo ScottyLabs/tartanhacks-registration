@@ -48,7 +48,13 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "10px",
     position: "absolute",
     top: "8em",
-    right: "5em"
+    right: "5em",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "50%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "60%"
+    }
   },
   menuLine: {
     position: "relative",
@@ -101,9 +107,9 @@ const Menu = (): ReactElement => {
                 <MenuLine />
               </>
             ) : null}
-            <MenuItem text="TEAM" url="" />
+            <MenuItem text="TEAM" url="/teams" />
             <MenuLine />
-            <MenuItem text="MESSAGES" url="" />
+            <MenuItem text="MESSAGES" url="/messages" />
             <MenuLine />
             <MenuItem text="LOGOUT" url="/logout" />
           </div>

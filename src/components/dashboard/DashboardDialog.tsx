@@ -27,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)"
+    backdropFilter: "blur(4px)",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "80%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "70%"
+    }
   },
   dialogContent: {
     display: "flex",
@@ -59,7 +65,12 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBox: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      flexDirection: "column",
+      gap: "0.5em",
+      alignItems: "center"
+    }
   },
   buttonSpacer: {
     width: "10px"
