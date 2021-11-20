@@ -43,4 +43,9 @@ export interface RootState {
     workAuth: WorkAuthorizationFields
     fetchedProfile: boolean
   }
+  requests: {
+    data: any
+    status: RequestStatus
+    error: string
+  }
 }
