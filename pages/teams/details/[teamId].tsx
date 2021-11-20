@@ -61,10 +61,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     display: "block",
     wordWrap: "break-word",
-    width: "100%",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "100%"
-    }
+    width: "100%"
   },
   memberList: {
     listStyleType: "none",
@@ -245,7 +242,7 @@ const TeamDescription = () => {
   }
 
   useEffect(() => {
-    if (teamId == undefined) {
+    if (teamId == undefined || user._id === undefined) {
       return
     }
 
@@ -269,7 +266,7 @@ const TeamDescription = () => {
     }
 
     fetchTeamInfo()
-  }, [teamId])
+  }, [teamId, user])
   return (
     <>
       <div>

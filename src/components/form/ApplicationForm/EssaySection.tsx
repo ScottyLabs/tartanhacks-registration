@@ -40,8 +40,8 @@ const EssaySection = ({
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
   )
-  const essayFields =
-    useSelector((state: RootState) => state?.application?.essay) ?? {}
+  const essayStore =
+    useSelector((state: RootState) => state?.application?.essay) ?? ""
 
   // Essays
   const [essay, setEssay] = useState<string>("")
@@ -57,14 +57,14 @@ const EssaySection = ({
     if (validate) {
       validateForm()
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [validate])
 
   useEffect(() => {
     if (fetchedProfile) {
-      setEssay(essayFields.essay)
+      setEssay(essayStore)
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [fetchedProfile])
 
   return (

@@ -63,7 +63,7 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
   return state
 }
 
-const essay = (state: EssayFields | null = null, action: DispatchAction) => {
+const essay = (state: string | null = null, action: DispatchAction) => {
   if (action.type === DispatchActionType.APPLICATION_SAVE_ESSAY) {
     state = action.data
   } else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
@@ -75,7 +75,7 @@ const essay = (state: EssayFields | null = null, action: DispatchAction) => {
         if (essays && essays.length > 0) {
           essay = essays[0]
         }
-        state = { essay }
+        state = essay
       }
     }
   }
