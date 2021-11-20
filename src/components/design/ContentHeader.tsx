@@ -59,7 +59,6 @@ const ContentHeader = (props: any) => {
         >
           {props.title}
         </Typography>
-        <EnvelopeEmpty className={classes.envelope} />
       </div>
       <Hidden xsDown>
         <hr className={classes.hrDivider} />

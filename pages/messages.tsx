@@ -9,6 +9,7 @@ import FloatingDiv from "src/components/design/FloatingDiv"
 import Message from "src/components/design/messages/Message"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
+import Menu from "src/components/menu/Menu"
 import { AuthenticatedLayout } from "src/layouts"
 import { RootState } from "types/RootState"
 
@@ -84,6 +85,7 @@ const Messages = () => {
 
   return (
     <>
+      <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />
