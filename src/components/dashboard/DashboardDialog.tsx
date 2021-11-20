@@ -13,6 +13,7 @@ import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
+import { DateTime } from "luxon"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -62,12 +63,18 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonSpacer: {
     width: "10px"
+  },
+  deadline: {
+    fontWeight: "bold",
+    fontSize: "1.3em"
   }
 }))
 
 const getDialogText = (
   classes: any,
-  applicationStatus: ApplicationStatus
+  applicationStatus: ApplicationStatus,
+  closeTime: string,
+  confirmTime: string
 ): ReactElement => {
   if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
@@ -79,8 +86,9 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            If you do not complete your application by _ _ _, you will not be
-            admitted!
+            If you do not complete your application by{" "}
+            <span className={classes.deadline}>{closeTime}</span>, you will not
+            be admitted!
           </Typography>
         </div>
       </>
@@ -93,7 +101,8 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            You can edit your confirmation information until _ _ _.
+            You can edit your submitted information until{" "}
+            <span className={classes.deadline}>{confirmTime}</span>
           </Typography>
         </div>
       </>
@@ -171,6 +180,17 @@ const DashboardDialog = (): ReactElement => {
   const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
+  const closeTime = useSelector(
+    (state: RootState) => state?.settings?.closeTime
+  )
+  const confirmTime = useSelector(
+    (state: RootState) => state?.settings?.confirmTime
+  )
+
+  const closeTimeStr = DateTime.fromJSDate(closeTime).toFormat("dd LLL yyyy")
+  const confirmTimeStr =
+    DateTime.fromJSDate(confirmTime).toFormat("dd LLL yyyy")
+
   const [applicationStatus, setApplicationStatus] = useState<ApplicationStatus>(
     ApplicationStatus.UNVERIFIED
   )
@@ -187,9 +207,16 @@ const DashboardDialog = (): ReactElement => {
 
   useEffect(() => {
     queryProfile()
+    dispatch(actions.settings.getCloseTime())
+    dispatch(actions.settings.getConfirmTime())
   }, [])
 
-  const dialogText = getDialogText(classes, applicationStatus)
+  const dialogText = getDialogText(
+    classes,
+    applicationStatus,
+    closeTimeStr,
+    confirmTimeStr
+  )
   const buttonBox = getButtonBox(classes, applicationStatus)
 
   return (
