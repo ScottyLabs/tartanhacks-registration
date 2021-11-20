@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     display: "block",
     wordWrap: "break-word",
-    width: "100%",
+    width: "100%"
   },
   memberList: {
     listStyleType: "none",

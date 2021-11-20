@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     verticalAlign: "top",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "40px"
-    },
+    }
   },
   new: {
     color: theme.palette.primary.main,
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "13px",
       height: "56px",
       paddingLeft: "0px",
-      paddingRight: "0px",
+      paddingRight: "0px"
     }
   },
   buttonCell: {
@@ -66,10 +66,10 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: "25%",
       paddingLeft: "5px"
-    },
+    }
   },
   row: {
-    borderBottom: "7px solid #F7C06260",
+    borderBottom: "7px solid #F7C06260"
   },
   messageHeader: {
     fontWeight: 600,
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     marginLeft: "0",
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px",
+      fontSize: "16px"
     }
   },
   messageText: {
@@ -92,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
       fontSize: "12px",
       paddingTop: "10px"
     }
-  },
+  }
 }))
 
 const Message = (props: any) => {
@@ -101,16 +101,24 @@ const Message = (props: any) => {
   const dispatch = useDispatch()
 
   const getMessage = (request: any) => {
-    const header = request.type === "JOIN" ? "JOIN REQUEST" :
-      request.type === "INVITE" ? "INVITATION" :
-        request.type
-    const body = (
-      request.type === "JOIN" ? (props.isCaptain ? "Sent from user" : 
-                                                   "Sent to team") :
-        request.type === "INVITE" ? (props.isCaptain ? "For User" :
-                                                       "From team") :
-          request.type
-    ) + " " + (props.isCaptain ? request.user : request.team.name)
+    const header =
+      request.type === "JOIN"
+        ? "JOIN REQUEST"
+        : request.type === "INVITE"
+          ? "INVITATION"
+          : request.type
+    const body =
+      (request.type === "JOIN"
+        ? props.isCaptain
+          ? "Sent from user"
+          : "Sent to team"
+        : request.type === "INVITE"
+          ? props.isCaptain
+            ? "For User"
+            : "From team"
+          : request.type) +
+      " " +
+      (props.isCaptain ? request.user : request.team.name)
     return {
       header: header,
       body: body
@@ -118,26 +126,25 @@ const Message = (props: any) => {
   }
 
   const message = getMessage(props.content)
-  const types = props.isCaptain ? {
-    cancel: "INVITE",
-    acceptDecline: "JOIN"
-  } : {
-    cancel: "JOIN",
-    acceptDecline: "INVITE"
-  }
-console.log(props.content)
+  const types = props.isCaptain
+    ? {
+      cancel: "INVITE",
+      acceptDecline: "JOIN"
+    }
+    : {
+      cancel: "JOIN",
+      acceptDecline: "INVITE"
+    }
+  console.log(props.content)
   return (
     <>
       <tr className={classes.row}>
         <td className={classes.newCell}>
-          {
-            props.isNew && props.content.type != types.cancel ? (
-              <Typography noWrap variant="subtitle1" className={classes.new}>
-                New
-              </Typography>
-            ) :
-              null
-          }
+          {props.isNew && props.content.type != types.cancel ? (
+            <Typography noWrap variant="subtitle1" className={classes.new}>
+              New
+            </Typography>
+          ) : null}
         </td>
         <td className={classes.message}>
           <Typography variant="h4" className={classes.messageHeader}>
@@ -148,66 +155,73 @@ console.log(props.content)
           </Typography>
         </td>
         <td className={classes.buttonCell}>
-          {
-            props.content.type == types.acceptDecline ?
-              <form
-                onSubmit={ async (e) => {
-                  e.preventDefault()
-                  try {
-                    await dispatch(actions.requests.acceptRequest(props.content._id))
-                    props.setNotify("success")
-                    props.setSuccessMessage(props.isCaptain ? "Successfully added the user" : 
-                                                              "Successfully joined the team!")
-                  } catch (err) {
-                    props.setNotify("error")
-                  } finally {
-                    props.handleRemove(props.key)
-                  }
-                }}
-              >
-                <RoundedButton type="submit" className={classes.tableEntryButton}>
-                  Accept
-                </RoundedButton>
-              </form> :
-              null
-          }
+          {props.content.type == types.acceptDecline ? (
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                  await dispatch(
+                    actions.requests.acceptRequest(props.content._id)
+                  )
+                  props.setNotify("success")
+                  props.setSuccessMessage(
+                    props.isCaptain
+                      ? "Successfully added the user"
+                      : "Successfully joined the team!"
+                  )
+                } catch (err) {
+                  props.setNotify("error")
+                } finally {
+                  props.handleRemove(props.key)
+                }
+              }}
+            >
+              <RoundedButton type="submit" className={classes.tableEntryButton}>
+                Accept
+              </RoundedButton>
+            </form>
+          ) : null}
         </td>
         <td className={classes.buttonCell}>
-          {
-            props.content.type == types.acceptDecline ?
-              <form
-                onSubmit={ async (e) => {
-                  e.preventDefault()
-                  try {
-                    await dispatch(actions.requests.declineRequest(props.content._id))
-                  } catch (err) {
-                    props.setNotify("error")
-                  } finally {
-                    props.handleRemove(props.key)
-                  }
-                }}
-              >
-                <RoundedButton type="submit" className={classes.tableEntryButton}>
-                  Decline
-                </RoundedButton>
-              </form> :
-              <form
-                onSubmit={ async (e) => {
-                  e.preventDefault()
-                  try {
-                    await dispatch(actions.requests.cancelRequest(props.content._id))
-                  } catch (err) {
-                    props.setNotify("error")
-                  } finally {
-                    props.handleRemove(props.key)
-                  }
-                }}
-              >
-                <RoundedButton type="submit" className={classes.tableEntryButton}>
-                  Cancel
-                </RoundedButton>
-              </form>
-          }
+          {props.content.type == types.acceptDecline ? (
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                  await dispatch(
+                    actions.requests.declineRequest(props.content._id)
+                  )
+                } catch (err) {
+                  props.setNotify("error")
+                } finally {
+                  props.handleRemove(props.key)
+                }
+              }}
+            >
+              <RoundedButton type="submit" className={classes.tableEntryButton}>
+                Decline
+              </RoundedButton>
+            </form>
+          ) : (
+            <form
+              onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                  await dispatch(
+                    actions.requests.cancelRequest(props.content._id)
+                  )
+                } catch (err) {
+                  props.setNotify("error")
+                } finally {
+                  props.handleRemove(props.key)
+                }
+              }}
+            >
+              <RoundedButton type="submit" className={classes.tableEntryButton}>
+                Cancel
+              </RoundedButton>
+            </form>
+          )}
         </td>
       </tr>
     </>

@@ -21,12 +21,12 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "left",
     borderCollapse: "collapse",
     borderSpacing: "0 33px"
-  },
+  }
 }))
 
 interface RequestData {
-  seen: Boolean,
-  _id: string,
+  seen: boolean
+  _id: string
   type: string
 }
 
@@ -34,11 +34,11 @@ const Messages = () => {
   const dispatch = useDispatch()
   const errorMessage = useSelector((state: RootState) => state?.requests?.error)
   const [requests, setRequests] = useState<any>([])
-  const [seen, setSeen] = useState<Array<Boolean>>([])
+  const [seen, setSeen] = useState<Array<boolean>>([])
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
   const [isCaptain, setIsCaptain] = useState(false)
-  const classes = useStyles();
+  const classes = useStyles()
   const user = useSelector((state: RootState) => state?.accounts?.data)
 
   useEffect(() => {
@@ -47,21 +47,25 @@ const Messages = () => {
     }
 
     const fetchRequests = async () => {
-      let captain = false;
+      let captain = false
       try {
         const teamInfo = await dispatch(actions.user.getOwnTeam())
         captain = user._id === teamInfo.data.admin
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+      }
       try {
         console.log(captain)
         setIsCaptain(captain)
-        const req = captain ?
-          await dispatch(actions.requests.curTeamRequests()) :
-          await dispatch(actions.requests.curUserRequests());
-        setRequests(req.data);
-        setSeen(req.data.map((r: RequestData) => {
-          return r.seen
-        }))
+        const req = captain
+          ? await dispatch(actions.requests.curTeamRequests())
+          : await dispatch(actions.requests.curUserRequests())
+        setRequests(req.data)
+        setSeen(
+          req.data.map((r: RequestData) => {
+            return r.seen
+          })
+        )
         req.data.forEach(async (value: any) => {
           if (value.type != "JOIN") {
             await dispatch(actions.requests.openRequest(value._id))
@@ -76,8 +80,8 @@ const Messages = () => {
   }, [user])
 
   function handleRemove(id: number) {
-    const newRequests = requests.filter((item: any) => item.id !== id);
-    setRequests(newRequests);
+    const newRequests = requests.filter((item: any) => item.id !== id)
+    setRequests(newRequests)
   }
 
   return (
@@ -89,18 +93,17 @@ const Messages = () => {
           <ContentHeader title="Messages" />
           <table className={classes.tableData}>
             <tbody>
-              {
-                requests.map((request: any, idx: number) => (
-                  <Message
-                    key={idx}
-                    content={request}
-                    setSuccessMessage={setSuccessMessage}
-                    setNotify={setNotify}
-                    isNew={!seen[idx]}
-                    isCaptain={isCaptain}
-                    handleRemove={handleRemove}
-                  />
-                ))}
+              {requests.map((request: any, idx: number) => (
+                <Message
+                  key={idx}
+                  content={request}
+                  setSuccessMessage={setSuccessMessage}
+                  setNotify={setNotify}
+                  isNew={!seen[idx]}
+                  isCaptain={isCaptain}
+                  handleRemove={handleRemove}
+                />
+              ))}
             </tbody>
           </table>
         </FloatingDiv>
@@ -119,4 +122,4 @@ const Messages = () => {
   )
 }
 
-export default AuthenticatedLayout(Messages);
+export default AuthenticatedLayout(Messages)
