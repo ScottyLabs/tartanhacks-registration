@@ -12,6 +12,16 @@ export const curUserRequests = (): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
+export const curTeamRequests = (): DispatchAction => ({
+  type: DispatchActionType.CURRENT_TEAM_REQUESTS,
+  useAPI: true,
+  request: {
+    path: "/requests/team/",
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
+
 export const acceptRequest = (requestId: string): DispatchAction => ({
   type: DispatchActionType.REQUEST_ACCEPT,
   useAPI: true,

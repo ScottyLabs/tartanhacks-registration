@@ -105,10 +105,12 @@ const Message = (props: any) => {
       request.type === "INVITE" ? "INVITATION" :
         request.type
     const body = (
-      request.type === "JOIN" ? "Sent by team" :
-        request.type === "INVITE" ? "To team" :
+      request.type === "JOIN" ? (props.isCaptain ? "Sent from user" : 
+                                                   "Sent to team") :
+        request.type === "INVITE" ? (props.isCaptain ? "For User" :
+                                                       "From team") :
           request.type
-    ) + " " + (request.team ? request.team.name : "null")
+    ) + " " + (props.isCaptain ? request.user : request.team.name)
     return {
       header: header,
       body: body
@@ -116,13 +118,20 @@ const Message = (props: any) => {
   }
 
   const message = getMessage(props.content)
-
+  const types = props.isCaptain ? {
+    cancel: "INVITE",
+    acceptDecline: "JOIN"
+  } : {
+    cancel: "JOIN",
+    acceptDecline: "INVITE"
+  }
+console.log(props.content)
   return (
     <>
       <tr className={classes.row}>
         <td className={classes.newCell}>
           {
-            props.isNew ? (
+            props.isNew && props.content.type != types.cancel ? (
               <Typography noWrap variant="subtitle1" className={classes.new}>
                 New
               </Typography>
@@ -140,16 +149,19 @@ const Message = (props: any) => {
         </td>
         <td className={classes.buttonCell}>
           {
-            props.content.type == "INVITE" ?
+            props.content.type == types.acceptDecline ?
               <form
                 onSubmit={ async (e) => {
                   e.preventDefault()
                   try {
                     await dispatch(actions.requests.acceptRequest(props.content._id))
                     props.setNotify("success")
-                    props.setSuccessMessage("Successfully joined the team!")
+                    props.setSuccessMessage(props.isCaptain ? "Successfully added the user" : 
+                                                              "Successfully joined the team!")
                   } catch (err) {
                     props.setNotify("error")
+                  } finally {
+                    props.handleRemove(props.key)
                   }
                 }}
               >
@@ -162,10 +174,17 @@ const Message = (props: any) => {
         </td>
         <td className={classes.buttonCell}>
           {
-            props.content.type == "INVITE" ?
+            props.content.type == types.acceptDecline ?
               <form
-                onSubmit={(e) => {
+                onSubmit={ async (e) => {
                   e.preventDefault()
+                  try {
+                    await dispatch(actions.requests.declineRequest(props.content._id))
+                  } catch (err) {
+                    props.setNotify("error")
+                  } finally {
+                    props.handleRemove(props.key)
+                  }
                 }}
               >
                 <RoundedButton type="submit" className={classes.tableEntryButton}>
@@ -173,8 +192,15 @@ const Message = (props: any) => {
                 </RoundedButton>
               </form> :
               <form
-                onSubmit={(e) => {
+                onSubmit={ async (e) => {
                   e.preventDefault()
+                  try {
+                    await dispatch(actions.requests.cancelRequest(props.content._id))
+                  } catch (err) {
+                    props.setNotify("error")
+                  } finally {
+                    props.handleRemove(props.key)
+                  }
                 }}
               >
                 <RoundedButton type="submit" className={classes.tableEntryButton}>

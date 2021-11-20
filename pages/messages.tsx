@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/styles"
 import Message from "src/components/design/messages/Message"
 import { Snackbar } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
+import createPalette from "@material-ui/core/styles/createPalette"
 
 const useStyles = makeStyles((theme) => ({
   tableData: {
@@ -25,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
 
 interface RequestData {
   seen: Boolean,
-  _id: string
+  _id: string,
+  type: string
 }
 
 const Messages = () => {
@@ -35,30 +37,49 @@ const Messages = () => {
   const [seen, setSeen] = useState<Array<Boolean>>([])
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
+  const [isCaptain, setIsCaptain] = useState(false)
   const classes = useStyles();
+  const user = useSelector((state: RootState) => state?.accounts?.data)
 
   useEffect(() => {
+    if (user === undefined) {
+      return
+    }
+
     const fetchRequests = async () => {
+      let captain = false;
       try {
-        const req = await dispatch(actions.requests.curUserRequests());
+        const teamInfo = await dispatch(actions.user.getOwnTeam())
+        captain = user._id === teamInfo.data.admin
+      } catch (err) {}
+      try {
+        console.log(captain)
+        setIsCaptain(captain)
+        const req = captain ?
+          await dispatch(actions.requests.curTeamRequests()) :
+          await dispatch(actions.requests.curUserRequests());
         setRequests(req.data);
-        console.log(requests)
         setSeen(req.data.map((r: RequestData) => {
           return r.seen
         }))
-        req.data.forEach(async (value : any) => {
-          console.log(value)
-          await dispatch(actions.requests.openRequest(value._id))
+        req.data.forEach(async (value: any) => {
+          if (value.type != "JOIN") {
+            await dispatch(actions.requests.openRequest(value._id))
+          }
         })
       } catch (err) {
-        console.error(err)
+        console.log(err)
       }
     }
 
     fetchRequests()
-  }, [])
+  }, [user])
 
-  console.log(seen)
+  function handleRemove(id: number) {
+    const newRequests = requests.filter((item: any) => item.id !== id);
+    setRequests(newRequests);
+  }
+
   return (
     <>
       <div>
@@ -68,15 +89,18 @@ const Messages = () => {
           <ContentHeader title="Messages" />
           <table className={classes.tableData}>
             <tbody>
-              {requests.map((request : any, idx: number) => (
-                <Message
-                  key={idx}
-                  content={request}
-                  setSuccessMessage={setSuccessMessage}
-                  setNotify={setNotify}
-                  isNew={!seen[idx]}
-                />
-              ))}
+              {
+                requests.map((request: any, idx: number) => (
+                  <Message
+                    key={idx}
+                    content={request}
+                    setSuccessMessage={setSuccessMessage}
+                    setNotify={setNotify}
+                    isNew={!seen[idx]}
+                    isCaptain={isCaptain}
+                    handleRemove={handleRemove}
+                  />
+                ))}
             </tbody>
           </table>
         </FloatingDiv>

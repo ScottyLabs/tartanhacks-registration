@@ -6,6 +6,7 @@ import { DispatchAction } from "types/DispatchAction"
 const data = (state = {}, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.CURRENT_USER_REQUESTS:
+    case DispatchActionType.CURRENT_TEAM_REQUESTS:
     case DispatchActionType.REQUEST_ACCEPT:
     case DispatchActionType.REQUEST_DECLINE:
     case DispatchActionType.REQUEST_CANCEL:
@@ -20,6 +21,7 @@ const data = (state = {}, action: DispatchAction) => {
 const error = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.CURRENT_USER_REQUESTS:
+    case DispatchActionType.CURRENT_TEAM_REQUESTS:
     case DispatchActionType.REQUEST_ACCEPT:
     case DispatchActionType.REQUEST_DECLINE:
     case DispatchActionType.REQUEST_CANCEL:
@@ -34,6 +36,7 @@ const error = (state = null, action: DispatchAction) => {
 const status = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.CURRENT_USER_REQUESTS:
+    case DispatchActionType.CURRENT_TEAM_REQUESTS:
     case DispatchActionType.REQUEST_ACCEPT:
     case DispatchActionType.REQUEST_DECLINE:
     case DispatchActionType.REQUEST_CANCEL:
