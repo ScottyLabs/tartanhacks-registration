@@ -101,11 +101,11 @@ const Menu = (): ReactElement => {
                 <MenuLine />
               </>
             ) : null}
-            <MenuItem text="TEAM" url="" />
+            <MenuItem text="TEAM" url="teams" />
             <MenuLine />
             <MenuItem text="BACK" url="" />
             <MenuLine />
-            <MenuItem text="MESSAGES" url="" />
+            <MenuItem text="MESSAGES" url="messages" />
             <MenuLine />
             <MenuItem text="LOGOUT" url="" />
           </div>

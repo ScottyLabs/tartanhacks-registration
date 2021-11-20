@@ -103,7 +103,7 @@ const BasicSection = ({
     if (validate) {
       validateForm()
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [validate])
 
   useEffect(() => {
@@ -116,7 +116,7 @@ const BasicSection = ({
       setEthnicity(basicFields?.ethnicity)
       setEthnicityOther(basicFields?.ethnicityOther ?? "")
     }
-  // eslint-disable-next-line
+    // eslint-disable-next-line
   }, [fetchedProfile])
 
   return (

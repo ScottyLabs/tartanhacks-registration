@@ -1,7 +1,5 @@
-import { Hidden, makeStyles, Typography, Snackbar } from "@material-ui/core"
+import { makeStyles, Typography, Snackbar } from "@material-ui/core"
 import React, {
-  ReactElement,
-  FunctionComponent,
   useEffect,
   useState
 } from "react"
@@ -9,16 +7,14 @@ import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { useRouter } from "next/dist/client/router"
 import { AuthenticatedLayout } from "src/layouts"
-import { viewTeams } from "src/actions/teams"
 import WaveFooter from "src/components/design/WaveFooter"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
-import EnvelopeEmpty from "src/components/design/EnvelopeEmpty"
 import RoundedButton from "src/components/design/RoundedButton"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
 import ContentHeader from "src/components/design/ContentHeader"
 import { Alert } from "@material-ui/lab"
-import { isAssetError } from "next/dist/client/route-loader"
+import Menu from "src/components/menu/Menu"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -108,10 +104,15 @@ const ViewTeams = () => {
   useEffect(() => {
     const getTeams = async () => {
       try {
-        const viewTeams = await dispatch(actions.teams.viewTeams())
-        setTeams(viewTeams.data)
+        const ownTeam = await dispatch(actions.user.getOwnTeam())
+        router.push('/teams/details/' + ownTeam.data._id)
       } catch (err) {
-        console.error(err)
+        try {
+          const viewTeams = await dispatch(actions.teams.viewTeams())
+          setTeams(viewTeams.data)
+        } catch (err) {
+          console.error(err)
+        }
       }
     }
     getTeams()
@@ -119,6 +120,7 @@ const ViewTeams = () => {
 
   return (
     <>
+    <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />
@@ -139,16 +141,6 @@ const ViewTeams = () => {
             <Typography variant="h4" className={classes.tableHeaderText}>
               VIEW OPEN TEAMS
             </Typography>
-            <button
-              className={classes.link}
-              onClick={(e) => {
-                console.log("filtered")
-              }}
-            >
-              <Typography variant="h4" className={classes.tableHeaderText}>
-                Filter
-              </Typography>
-            </button>
           </div>
           <table className={classes.tableData}>
             <tbody>

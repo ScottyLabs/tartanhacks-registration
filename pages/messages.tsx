@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/styles"
 import Message from "src/components/design/messages/Message"
 import { Snackbar } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
-import createPalette from "@material-ui/core/styles/createPalette"
+import Menu from "src/components/menu/Menu"
 
 const useStyles = makeStyles((theme) => ({
   tableData: {
@@ -55,7 +55,6 @@ const Messages = () => {
         console.log(err)
       }
       try {
-        console.log(captain)
         setIsCaptain(captain)
         const req = captain
           ? await dispatch(actions.requests.curTeamRequests())
@@ -67,7 +66,8 @@ const Messages = () => {
           })
         )
         req.data.forEach(async (value: any) => {
-          if (value.type != "JOIN") {
+          if ((isCaptain && value.type == "JOIN") || 
+              (!isCaptain && value.type == "INVITE")) {
             await dispatch(actions.requests.openRequest(value._id))
           }
         })
@@ -86,6 +86,7 @@ const Messages = () => {
 
   return (
     <>
+      <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />

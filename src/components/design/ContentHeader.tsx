@@ -1,5 +1,4 @@
 import { Hidden, makeStyles, Typography } from "@material-ui/core"
-import EnvelopeEmpty from "./EnvelopeEmpty"
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -29,16 +28,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     paddingTop: "42px"
   },
-  envelope: {
-    paddingTop: "42px",
-    width: "64px",
-    position: "absolute",
-    right: "0",
-    top: "0%",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "42px"
-    }
-  },
   hrDivider: {
     width: "25%",
     border: 0,
@@ -59,7 +48,6 @@ const ContentHeader = (props: any) => {
         >
           {props.title}
         </Typography>
-        <EnvelopeEmpty className={classes.envelope} />
       </div>
       <Hidden xsDown>
         <hr className={classes.hrDivider} />
