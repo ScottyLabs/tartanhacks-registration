@@ -29,7 +29,7 @@ export interface SchoolFields {
 
 export interface ExperienceFields {
   coursework?: string
-  language?: string
+  languages?: string
   hackathonExperience: HackathonExperience
 }
 
@@ -48,7 +48,7 @@ export interface PortfolioFields {
 }
 
 export interface EssayFields {
-  essay: string
+  essays: string[]
 }
 
 export interface LogisticsFields {

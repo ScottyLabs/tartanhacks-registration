@@ -7,9 +7,10 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { EssayFields } from "types/ApplicationForm"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -36,11 +37,17 @@ const EssaySection = ({
   const theme = useTheme()
   const classes = useStyles(theme)
 
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const essayStore =
+    useSelector((state: RootState) => state?.application?.essay) ?? ""
+
   // Essays
   const [essay, setEssay] = useState<string>("")
 
   const validateForm = async () => {
-    const data: EssayFields = { essay }
+    const data: EssayFields = { essays: [essay] }
     await dispatch(actions.application.saveEssay(data))
     setValid(true)
     setValidate(false)
@@ -50,7 +57,15 @@ const EssaySection = ({
     if (validate) {
       validateForm()
     }
+    // eslint-disable-next-line
   }, [validate])
+
+  useEffect(() => {
+    if (fetchedProfile) {
+      setEssay(essayStore)
+    }
+    // eslint-disable-next-line
+  }, [fetchedProfile])
 
   return (
     <div className={classes.section}>

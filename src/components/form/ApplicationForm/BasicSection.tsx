@@ -9,9 +9,10 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { BasicFields } from "types/ApplicationForm"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -37,6 +38,12 @@ const BasicSection = ({
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
+
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const basicFields =
+    useSelector((state: RootState) => state?.application?.basic) ?? {}
 
   // Basic information
   const [displayName, setDisplayName] = useState<string>("")
@@ -96,7 +103,21 @@ const BasicSection = ({
     if (validate) {
       validateForm()
     }
+  // eslint-disable-next-line
   }, [validate])
+
+  useEffect(() => {
+    if (fetchedProfile) {
+      setDisplayName(basicFields?.displayName)
+      setFirstName(basicFields?.firstName)
+      setLastName(basicFields?.lastName)
+      setGender(basicFields?.gender)
+      setGenderOther(basicFields?.genderOther ?? "")
+      setEthnicity(basicFields?.ethnicity)
+      setEthnicityOther(basicFields?.ethnicityOther ?? "")
+    }
+  // eslint-disable-next-line
+  }, [fetchedProfile])
 
   return (
     <div className={classes.section}>

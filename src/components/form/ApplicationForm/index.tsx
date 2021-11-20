@@ -125,7 +125,7 @@ const ApplicationForm = (): ReactElement => {
       application
     const data = {
       ...basic,
-      ...essay,
+      essays: [essay],
       ...experience,
       ...logistics,
       ...portfolio,
@@ -148,6 +148,10 @@ const ApplicationForm = (): ReactElement => {
       }
     }
   }, [valid, calledValidate, validated])
+
+  useEffect(() => {
+    dispatch(actions.application.getProfile())
+  }, [])
 
   return (
     <Paper className={classes.formDialog}>

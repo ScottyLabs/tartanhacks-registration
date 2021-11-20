@@ -5,7 +5,7 @@ module.exports = {
   reactStrictMode: false,
   env: {
     BACKEND_URL: isProduction
-      ? "http://tartanhacks-backend.herokuapp.com"
+      ? "https://backend.tartanhacks.com"
       : "http://localhost:4000"
   }
 }

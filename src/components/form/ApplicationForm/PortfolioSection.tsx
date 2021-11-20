@@ -7,10 +7,11 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { PortfolioFields } from "types/ApplicationForm"
 import { DispatchAction } from "types/DispatchAction"
+import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -46,6 +47,12 @@ const PortfolioSection = ({
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
+
+  const fetchedProfile = useSelector(
+    (state: RootState) => state?.application?.fetchedProfile
+  )
+  const portfolioFields =
+    useSelector((state: RootState) => state?.application?.portfolio) ?? {}
 
   // Portfolio
   const [github, setGithub] = useState<string>("")
@@ -96,7 +103,21 @@ const PortfolioSection = ({
     if (validate) {
       validateForm()
     }
+    // eslint-disable-next-line
   }, [validate])
+
+  useEffect(() => {
+    if (fetchedProfile) {
+      setGithub(portfolioFields.github ?? "")
+      setDesign(portfolioFields.design ?? "")
+      setWebsite(portfolioFields.website ?? "")
+      if (portfolioFields.resume) {
+        setResume(portfolioFields.resume ?? "")
+        setResumeFileName("Uploaded")
+      }
+    }
+    // eslint-disable-next-line
+  }, [fetchedProfile])
 
   return (
     <div className={classes.section}>
