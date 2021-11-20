@@ -22,6 +22,7 @@ import RoundedButton from "src/components/design/RoundedButton"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
 import { Alert } from "@material-ui/lab"
+import Menu from "src/components/menu/Menu"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -269,6 +270,7 @@ const TeamDescription = () => {
   }, [teamId, user])
   return (
     <>
+    <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />

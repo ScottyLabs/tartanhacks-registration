@@ -114,10 +114,11 @@ const Message = (props: any) => {
           : "Sent to team"
         : request.type === "INVITE"
           ? props.isCaptain
-            ? "For User"
+            ? "For user"
             : "From team"
           : request.type) +
       " " +
+      //TODO: get user name
       (props.isCaptain ? request.user : request.team.name)
     return {
       header: header,
