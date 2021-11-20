@@ -125,7 +125,7 @@ const ApplicationForm = (): ReactElement => {
       application
     const data = {
       ...basic,
-      ...essay,
+      essays: [essay],
       ...experience,
       ...logistics,
       ...portfolio,
