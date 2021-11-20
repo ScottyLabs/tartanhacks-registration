@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "467px",
+    width: "20%",
     padding: "1em",
     background: `${theme.palette.primary.main}`,
     boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuLine: {
     position: "relative",
-    width: "422px",
+    width: "100%",
     height: "7px"
   },
   menuBurgerContainer: {
@@ -103,11 +103,9 @@ const Menu = (): ReactElement => {
             ) : null}
             <MenuItem text="TEAM" url="" />
             <MenuLine />
-            <MenuItem text="BACK" url="" />
-            <MenuLine />
             <MenuItem text="MESSAGES" url="" />
             <MenuLine />
-            <MenuItem text="LOGOUT" url="" />
+            <MenuItem text="LOGOUT" url="/logout" />
           </div>
         </div>
       </Modal>

@@ -7,13 +7,13 @@ import {
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
+import { DateTime } from "luxon"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
-import { DateTime } from "luxon"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   statusText: {
-    marginBottom: "1em",
+    marginBottom: "0.5em",
     color: `${theme.palette.gradient.start}`
   },
   dialogText: {
@@ -86,7 +86,8 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            If you do not complete your application by{" "}
+            If you do not complete your application by
+            <br />
             <span className={classes.deadline}>{closeTime}</span>, you will not
             be admitted!
           </Typography>
@@ -101,7 +102,8 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            You can edit your submitted information until{" "}
+            You can edit your information until
+            <br />
             <span className={classes.deadline}>{confirmTime}</span>
           </Typography>
         </div>
@@ -147,9 +149,7 @@ const getButtonBox = (
     return (
       <div className={classes.buttonBox}>
         <Link href="/apply" className={classes.link}>
-          <RectangleButton type="submit">
-            EDIT CONFIRMATION INFO
-          </RectangleButton>
+          <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
         <RectangleButton type="submit">
