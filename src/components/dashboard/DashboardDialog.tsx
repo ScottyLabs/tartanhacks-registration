@@ -7,6 +7,7 @@ import {
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
+import { DateTime } from "luxon"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
@@ -26,7 +27,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)"
+    backdropFilter: "blur(4px)",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "80%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "70%"
+    }
   },
   dialogContent: {
     display: "flex",
@@ -40,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   statusText: {
-    marginBottom: "1em",
+    marginBottom: "0.5em",
     color: `${theme.palette.gradient.start}`
   },
   dialogText: {
@@ -58,16 +65,27 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBox: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      flexDirection: "column",
+      gap: "0.5em",
+      alignItems: "center"
+    }
   },
   buttonSpacer: {
     width: "10px"
+  },
+  deadline: {
+    fontWeight: "bold",
+    fontSize: "1.3em"
   }
 }))
 
 const getDialogText = (
   classes: any,
-  applicationStatus: ApplicationStatus
+  applicationStatus: ApplicationStatus,
+  closeTime: string,
+  confirmTime: string
 ): ReactElement => {
   if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
@@ -79,8 +97,10 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            If you do not complete your application by _ _ _, you will not be
-            admitted!
+            If you do not complete your application by
+            <br />
+            <span className={classes.deadline}>{closeTime}</span>, you will not
+            be admitted!
           </Typography>
         </div>
       </>
@@ -93,7 +113,9 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            You can edit your confirmation information until _ _ _.
+            You can edit your information until
+            <br />
+            <span className={classes.deadline}>{confirmTime}</span>
           </Typography>
         </div>
       </>
@@ -138,9 +160,7 @@ const getButtonBox = (
     return (
       <div className={classes.buttonBox}>
         <Link href="/apply" className={classes.link}>
-          <RectangleButton type="submit">
-            EDIT CONFIRMATION INFO
-          </RectangleButton>
+          <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
         <RectangleButton type="submit">
@@ -171,6 +191,17 @@ const DashboardDialog = (): ReactElement => {
   const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
+  const closeTime = useSelector(
+    (state: RootState) => state?.settings?.closeTime
+  )
+  const confirmTime = useSelector(
+    (state: RootState) => state?.settings?.confirmTime
+  )
+
+  const closeTimeStr = DateTime.fromJSDate(closeTime).toFormat("dd LLL yyyy")
+  const confirmTimeStr =
+    DateTime.fromJSDate(confirmTime).toFormat("dd LLL yyyy")
+
   const [applicationStatus, setApplicationStatus] = useState<ApplicationStatus>(
     ApplicationStatus.UNVERIFIED
   )
@@ -187,9 +218,16 @@ const DashboardDialog = (): ReactElement => {
 
   useEffect(() => {
     queryProfile()
+    dispatch(actions.settings.getCloseTime())
+    dispatch(actions.settings.getConfirmTime())
   }, [])
 
-  const dialogText = getDialogText(classes, applicationStatus)
+  const dialogText = getDialogText(
+    classes,
+    applicationStatus,
+    closeTimeStr,
+    confirmTimeStr
+  )
   const buttonBox = getButtonBox(classes, applicationStatus)
 
   return (

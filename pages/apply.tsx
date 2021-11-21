@@ -1,8 +1,10 @@
 import { makeStyles } from "@material-ui/core"
 import { NextPage } from "next"
 import React, { ReactElement } from "react"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
 import ApplicationForm from "src/components/form/ApplicationForm"
+import Menu from "src/components/menu/Menu"
 import { AuthenticatedLayout } from "src/layouts"
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +25,9 @@ const ApplicationPage: NextPage = (): ReactElement => {
   return (
     <>
       <WaveBackground />
+      <Menu />
       <div>
+        <ScottyLabsHeader />
         <div className={classes.background}>
           <ApplicationForm />
         </div>

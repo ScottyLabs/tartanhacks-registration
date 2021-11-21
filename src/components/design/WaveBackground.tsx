@@ -61,12 +61,6 @@ const WaveBackground = (): ReactElement => {
   return (
     <>
       <div className={classes.waveContainer}>
-        <div className={classes.titleBox}>
-          <ScottyLabsSmallLogo className={classes.scottyIcon} />
-          <Typography variant="h2" className={classes.title}>
-            Tartanhacks Scottylabs
-          </Typography>
-        </div>
         <svg
           className={classes.waveSvg}
           viewBox="0 0 1440 465"

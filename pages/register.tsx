@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core"
 import { NextPage } from "next"
-import React, { ReactElement } from "react"
+import React, { ReactElement, useEffect } from "react"
 import AuthenticationDialog from "src/components/auth/AuthenticationDialog"
 import WaveHeader from "src/components/design/WaveHeader"
 import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
@@ -41,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
 
 const RegisterPage: NextPage = (): ReactElement => {
   const classes = useStyles()
+
+  useEffect(() => {
+    window.localStorage.removeItem("accessToken")
+  }, [])
   return (
     <div>
       <WaveHeader />

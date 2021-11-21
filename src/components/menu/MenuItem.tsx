@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuItem: {
     textAlign: "center",
-    padding: "3em"
+    padding: "2em"
   }
 }))
 

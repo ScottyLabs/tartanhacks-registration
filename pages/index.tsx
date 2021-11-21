@@ -5,6 +5,7 @@ import { AuthenticatedLayout, DialogLayout } from "src/layouts"
 import DashboardDialog from "src/components/dashboard/DashboardDialog"
 import Menu from "src/components/menu/Menu"
 import WaveBackground from "src/components/design/WaveBackground"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -22,8 +23,11 @@ const Home: NextPage = (): ReactElement => {
     <>
       <WaveBackground />
       <Menu />
-      <div className={classes.dialog}>
-        <DashboardDialog />
+      <div>
+        <ScottyLabsHeader />
+        <div className={classes.dialog}>
+          <DashboardDialog />
+        </div>
       </div>
     </>
   )

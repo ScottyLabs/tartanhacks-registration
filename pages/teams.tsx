@@ -20,6 +20,7 @@ import ContentHeader from "src/components/design/ContentHeader"
 import { Alert } from "@material-ui/lab"
 import { isAssetError } from "next/dist/client/route-loader"
 import { RootState } from "types/RootState"
+import Menu from "src/components/menu/Menu"
 
 const useStyles = makeStyles((theme) => ({
   newTeamButton: {
@@ -119,6 +120,7 @@ const ViewTeams = () => {
 
   return (
     <>
+      <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />
