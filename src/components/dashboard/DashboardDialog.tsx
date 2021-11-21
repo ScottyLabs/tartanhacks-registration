@@ -8,7 +8,13 @@ import {
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
-import { ReactElement, SetStateAction, useEffect, useState } from "react"
+import {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
@@ -191,8 +197,7 @@ const getDialogText = (
 
 const getButtonBox = (
   classes: any,
-  applicationStatus: ApplicationStatus,
-  setShowModal: Dispatch<SetStateAction<boolean>>
+  applicationStatus: ApplicationStatus
 ): ReactElement => {
   if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
@@ -217,7 +222,7 @@ const getButtonBox = (
           <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
-        <RectangleButton type="submit" onClick={() => {}}>
+        <RectangleButton type="submit">
           SORRY, I CAN&apos;T MAKE IT
         </RectangleButton>
       </div>
