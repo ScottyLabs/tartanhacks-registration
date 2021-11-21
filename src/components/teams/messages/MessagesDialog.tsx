@@ -1,5 +1,4 @@
 import { CircularProgress, Collapse, makeStyles } from "@material-ui/core"
-import { RequestData } from "next/dist/server/web/types"
 import React, {
   ReactElement,
   useState,
