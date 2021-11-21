@@ -107,10 +107,14 @@ const Menu = (): ReactElement => {
                 <MenuLine />
               </>
             ) : null}
-            <MenuItem text="TEAM" url="/teams" />
-            <MenuLine />
-            <MenuItem text="MESSAGES" url="/messages" />
-            <MenuLine />
+            {applicationStatus === ApplicationStatus.CONFIRMED ? (
+              <>
+                <MenuItem text="TEAM" url="/teams" />
+                <MenuLine />
+                <MenuItem text="MESSAGES" url="/messages" />
+                <MenuLine />
+              </>
+            ) : null}
             <MenuItem text="LOGOUT" url="/logout" />
           </div>
         </div>

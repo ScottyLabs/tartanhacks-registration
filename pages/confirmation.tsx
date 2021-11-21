@@ -5,6 +5,7 @@ import { AuthenticatedLayout, DialogLayout } from "src/layouts"
 import ConfirmationDialog from "src/components/confirmation/ConfirmationDialog"
 import Menu from "src/components/menu/Menu"
 import WaveBackground from "src/components/design/WaveBackground"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -23,6 +24,7 @@ const ConfirmationPage: NextPage = (): ReactElement => {
       <WaveBackground />
       <Menu />
       <div className={classes.dialog}>
+        <ScottyLabsHeader />
         <ConfirmationDialog />
       </div>
     </>

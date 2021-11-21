@@ -8,12 +8,19 @@ import {
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
-import { ReactElement, useEffect, useState } from "react"
+import {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
+import Image from "next/image"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -53,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   dialogText: {
     marginBottom: "1em",
     color: `${theme.palette.gradient.start}`,
-    width: "80%",
+    width: "100%",
     textAlign: "center"
   },
   bodyText: {
@@ -78,6 +85,12 @@ const useStyles = makeStyles((theme) => ({
   deadline: {
     fontWeight: "bold",
     fontSize: "1.3em"
+  },
+  appStoreLinks: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }))
 
@@ -125,6 +138,10 @@ const getDialogText = (
       <>
         <div className={classes.dialogText}>
           <Typography variant="body1">Welcome to Tartanhacks!</Typography>
+          <Typography variant="body1">
+            Please confirm your attendance by
+          </Typography>
+          <span className={classes.deadline}>{confirmTime}</span>
         </div>
       </>
     )
@@ -136,6 +153,40 @@ const getDialogText = (
             Thanks for applying! We were unable to accommodate you this year.
             Please apply again next year!
           </Typography>
+        </div>
+      </>
+    )
+  } else if (applicationStatus === ApplicationStatus.CONFIRMED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            Thanks for confirming your attendance!
+          </Typography>
+          <Typography variant="body1">We hope to see you soon!</Typography>
+          <Typography variant="body1">
+            In the meantime, download our Dashboard App!
+          </Typography>
+          <div className={classes.appStoreLinks}>
+            <Link href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1">
+              <Image
+                alt="Get it on Google Play"
+                src="/google-play-badge.png"
+                // width={646}
+                // height={250}
+                width={155}
+                height={60}
+              />
+            </Link>
+            <Link href="https://apps.apple.com/us/app/scottylabs-dashboard/id1556362423">
+              <Image
+                alt="Download on the App Store"
+                src="/ios-app-store-badge.svg"
+                width={120}
+                height={40}
+              />
+            </Link>
+          </div>
         </div>
       </>
     )
@@ -162,22 +213,18 @@ const getButtonBox = (
         <Link href="/apply" className={classes.link}>
           <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
-        <div className={classes.buttonSpacer}></div>
-        <RectangleButton type="submit">
-          SORRY, I CAN&apos;T MAKE IT
-        </RectangleButton>
       </div>
     )
   } else if (applicationStatus === ApplicationStatus.ADMITTED) {
     return (
       <div className={classes.buttonBox}>
-        <Link href="/accept" className={classes.link}>
-          <RectangleButton type="submit">ACCEPT</RectangleButton>
+        <Link href="/confirmation" className={classes.link}>
+          <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
-        <Link href="/reject" className={classes.link}>
-          <RectangleButton type="submit">DENY</RectangleButton>
-        </Link>
+        <RectangleButton type="submit">
+          SORRY, I CAN&apos;T MAKE IT
+        </RectangleButton>
       </div>
     )
   } else {

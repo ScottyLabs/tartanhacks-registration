@@ -13,11 +13,13 @@ const useStyles = makeStyles((theme) => ({
 const RectangleButton = ({
   className,
   children,
-  type
+  type,
+  onClick
 }: {
   className?: string
   children?: ReactElement | string
   type: "button" | "reset" | "submit" | undefined
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
 }): ReactElement => {
   const classes = useStyles()
   return (
@@ -26,6 +28,7 @@ const RectangleButton = ({
         variant="contained"
         type={type}
         className={`${className} ${classes.button}`}
+        onClick={onClick}
       >
         {children}
       </Button>
