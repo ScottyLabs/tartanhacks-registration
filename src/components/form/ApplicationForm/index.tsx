@@ -25,10 +25,20 @@ const useStyles = makeStyles((theme) => ({
     width: "60%",
     padding: "2em",
     display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     flexDirection: "column",
     marginBottom: "3em",
     zIndex: 5,
-    backgroundImage: `linear-gradient(135deg, ${theme.palette.lightGradient.start} 0%, ${theme.palette.lightGradient.end} 189%)`
+    backgroundImage: `linear-gradient(135deg, ${theme.palette.lightGradient.start} 0%, ${theme.palette.lightGradient.end} 189%)`,
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "80%",
+      marginTop: "10%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "80%",
+      marginTop: "20%"
+    }
   },
   applicationForm: {
     width: "80%",
@@ -39,11 +49,23 @@ const useStyles = makeStyles((theme) => ({
   headerContainer: {
     width: "40%",
     textAlign: "center",
-    alignSelf: "center"
+    alignSelf: "center",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "60%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "80%"
+    }
   },
   header: {
     borderBottom: `solid ${theme.palette.text.primary} 2px`,
-    paddingBottom: "1rem"
+    paddingBottom: "1rem",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      fontSize: "2.5em"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "1.8em"
+    }
   },
   formContents: {
     marginTop: "2em",

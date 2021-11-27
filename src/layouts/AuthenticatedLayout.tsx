@@ -25,6 +25,9 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
       setLoading(true)
       try {
         await dispatch(actions.auth.loginWithToken())
+        dispatch(actions.user.getStatus(currentUser._id))
+        dispatch(actions.settings.getCloseTime())
+        dispatch(actions.settings.getConfirmTime())
       } catch (err) {
         // Login token expired or invalid
         router.push("/login")

@@ -168,17 +168,21 @@ const getDialogText = (
             In the meantime, download our Dashboard App!
           </Typography>
           <div className={classes.appStoreLinks}>
-            <Link href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1">
+            <Link
+              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+              target="_blank"
+            >
               <Image
                 alt="Get it on Google Play"
                 src="/google-play-badge.png"
-                // width={646}
-                // height={250}
                 width={155}
                 height={60}
               />
             </Link>
-            <Link href="https://apps.apple.com/us/app/scottylabs-dashboard/id1556362423">
+            <Link
+              href="https://apps.apple.com/us/app/scottylabs-dashboard/id1556362423"
+              target="_blank"
+            >
               <Image
                 alt="Download on the App Store"
                 src="/ios-app-store-badge.svg"
@@ -237,7 +241,6 @@ const DashboardDialog = (): ReactElement => {
   const theme = useTheme()
   const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
-  const currentUser = useSelector((state: RootState) => state?.accounts?.data)
   const closeTime = useSelector(
     (state: RootState) => state?.settings?.closeTime
   )
@@ -249,25 +252,9 @@ const DashboardDialog = (): ReactElement => {
   const confirmTimeStr =
     DateTime.fromJSDate(confirmTime).toFormat("dd LLL yyyy")
 
-  const [applicationStatus, setApplicationStatus] = useState<ApplicationStatus>(
-    ApplicationStatus.UNVERIFIED
-  )
-
-  const queryProfile = async () => {
-    setLoading(true)
-    await dispatch(actions.auth.login())
-    const { data: status } = await dispatch(
-      actions.user.getStatus(currentUser._id)
-    )
-    setApplicationStatus(getApplicationStatus(status ?? {}))
-    setLoading(false)
-  }
-
-  useEffect(() => {
-    queryProfile()
-    dispatch(actions.settings.getCloseTime())
-    dispatch(actions.settings.getConfirmTime())
-  }, [])
+  const status =
+    useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+  const applicationStatus = getApplicationStatus(status)
 
   const dialogText = getDialogText(
     classes,
