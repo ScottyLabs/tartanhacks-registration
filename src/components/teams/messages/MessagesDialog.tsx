@@ -1,4 +1,9 @@
-import { CircularProgress, Collapse, makeStyles } from "@material-ui/core"
+import {
+  CircularProgress,
+  Collapse,
+  makeStyles,
+  Typography
+} from "@material-ui/core"
 import React, {
   ReactElement,
   useState,
@@ -22,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
     borderSpacing: "0 33px"
   },
   spinnerContainer: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  statusMessageContainer: {
     display: "flex",
     justifyContent: "center"
   }
@@ -92,6 +101,17 @@ const MessagesDialog = ({
     setRequests(newRequests)
   }
 
+  let emptyMessage = null
+  if (!loading && requests.length === 0) {
+    emptyMessage = (
+      <div className={classes.statusMessageContainer}>
+        <Typography variant="body1">
+          You don&apos;t have any messages
+        </Typography>
+      </div>
+    )
+  }
+
   return (
     <FloatingDiv>
       <ContentHeader title="Messages" />
@@ -113,6 +133,7 @@ const MessagesDialog = ({
               handleRemove={handleRemove}
             />
           ))}
+          {emptyMessage}
         </tbody>
       </table>
     </FloatingDiv>

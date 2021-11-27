@@ -210,7 +210,7 @@ const getButtonBox = (
   } else if (applicationStatus === ApplicationStatus.APPLIED) {
     return (
       <div className={classes.buttonBox}>
-        <Link href="/apply" className={classes.link}>
+        <Link href="/apply" className={classes.link} target="_blank">
           <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
       </div>
@@ -218,7 +218,7 @@ const getButtonBox = (
   } else if (applicationStatus === ApplicationStatus.ADMITTED) {
     return (
       <div className={classes.buttonBox}>
-        <Link href="/confirmation" className={classes.link}>
+        <Link href="/confirmation" className={classes.link} target="_blank">
           <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
