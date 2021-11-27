@@ -6,9 +6,14 @@ import { DispatchAction } from "types/DispatchAction"
 const data = (state: any = {}, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.USER_STATUS:
-    case DispatchActionType.USER_GET_TEAM:
-      if (action.status == RequestStatus.SUCCESS) {
+      if (action.status === RequestStatus.SUCCESS) {
         state.status = action.data
+      }
+      break
+
+    case DispatchActionType.USER_GET_TEAM:
+      if (action.status === RequestStatus.SUCCESS) {
+        state.team = action.data
       }
   }
   return state
