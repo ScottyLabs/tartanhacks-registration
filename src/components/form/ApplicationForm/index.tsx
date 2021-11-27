@@ -65,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "1.8em"
-    },
+    }
   },
   formContents: {
     marginTop: "2em",
