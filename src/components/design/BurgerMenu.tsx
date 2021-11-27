@@ -5,7 +5,7 @@ const BurgerMenu = ({
   onClick
 }: {
   className?: string
-  onClick?: MouseEventHandler<HTMLDivElement> | undefined
+  onClick?: MouseEventHandler<SVGSVGElement> | undefined
 }): ReactElement => {
   return (
     <svg
