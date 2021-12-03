@@ -90,7 +90,7 @@ const TeamCreate = () => {
 
   return (
     <>
-    <Menu />
+      <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />

@@ -5,10 +5,7 @@ import {
   CircularProgress,
   Collapse
 } from "@material-ui/core"
-import React, {
-  useEffect,
-  useState
-} from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { useRouter } from "next/dist/client/router"
@@ -127,7 +124,7 @@ const ViewTeams = () => {
       setLoading(true)
       try {
         const ownTeam = await dispatch(actions.user.getOwnTeam())
-        router.push('/teams/details/' + ownTeam.data._id)
+        router.push("/teams/details/" + ownTeam.data._id)
       } catch (err) {
         try {
           const viewTeams = await dispatch(actions.teams.viewTeams())

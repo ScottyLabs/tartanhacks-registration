@@ -270,7 +270,7 @@ const TeamDescription = () => {
   }, [teamId, user])
   return (
     <>
-    <Menu />
+      <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />
