@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import RectangleButton from "../design/RectangleButton"
 import HeaderUnderline from "../design/HeaderUnderline"
+import { useRouter } from "next/router"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -40,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const ConfirmationDialog = (): ReactElement => {
+  const router = useRouter()
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -80,6 +82,7 @@ const ConfirmationDialog = (): ReactElement => {
       console.error(err)
     }
     setLoading(false)
+    router.push("/")
   }
 
   return (

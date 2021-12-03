@@ -30,6 +30,13 @@ export interface RootState {
     status: RequestStatus
     error: string
   }
+  settings: {
+    openTime: Date
+    closeTime: Date
+    confirmTime: Date
+    status: RequestStatus
+    error: string
+  }
   application: {
     status: RequestStatus
     error: string

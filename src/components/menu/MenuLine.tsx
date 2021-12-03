@@ -5,7 +5,7 @@ import { ReactElement } from "react"
 const useStyles = makeStyles((theme) => ({
   menuLine: {
     position: "relative",
-    width: "422px",
+    width: "100%",
     height: "7px"
   }
 }))

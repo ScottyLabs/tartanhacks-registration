@@ -120,7 +120,7 @@ const ViewTeams = () => {
 
   return (
     <>
-    <Menu />
+      <Menu />
       <div>
         <ScottyLabsHeader />
         <WaveFooter />

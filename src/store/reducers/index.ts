@@ -4,6 +4,7 @@ import teams from "./teams"
 import sponsors from "./sponsors"
 import application from "./application"
 import user from "./user"
+import settings from "./settings"
 import requests from "./requests"
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
   sponsors,
   application,
   user,
+  settings,
   requests
 })

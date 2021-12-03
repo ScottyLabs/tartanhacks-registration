@@ -7,12 +7,20 @@ import {
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
-import { ReactElement, useEffect, useState } from "react"
+import { DateTime } from "luxon"
+import {
+  Dispatch,
+  ReactElement,
+  SetStateAction,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
+import Image from "next/image"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -26,7 +34,13 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)"
+    backdropFilter: "blur(4px)",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "80%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "70%"
+    }
   },
   dialogContent: {
     display: "flex",
@@ -40,13 +54,13 @@ const useStyles = makeStyles((theme) => ({
     }
   },
   statusText: {
-    marginBottom: "1em",
+    marginBottom: "0.5em",
     color: `${theme.palette.gradient.start}`
   },
   dialogText: {
     marginBottom: "1em",
     color: `${theme.palette.gradient.start}`,
-    width: "80%",
+    width: "100%",
     textAlign: "center"
   },
   bodyText: {
@@ -58,16 +72,33 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonBox: {
     display: "flex",
-    flexDirection: "row"
+    flexDirection: "row",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      flexDirection: "column",
+      gap: "0.5em",
+      alignItems: "center"
+    }
   },
   buttonSpacer: {
     width: "10px"
+  },
+  deadline: {
+    fontWeight: "bold",
+    fontSize: "1.3em"
+  },
+  appStoreLinks: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }))
 
 const getDialogText = (
   classes: any,
-  applicationStatus: ApplicationStatus
+  applicationStatus: ApplicationStatus,
+  closeTime: string,
+  confirmTime: string
 ): ReactElement => {
   if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
@@ -79,8 +110,10 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            If you do not complete your application by _ _ _, you will not be
-            admitted!
+            If you do not complete your application by
+            <br />
+            <span className={classes.deadline}>{closeTime}</span>, you will not
+            be admitted!
           </Typography>
         </div>
       </>
@@ -93,7 +126,9 @@ const getDialogText = (
         </div>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            You can edit your confirmation information until _ _ _.
+            You can edit your information until
+            <br />
+            <span className={classes.deadline}>{confirmTime}</span>
           </Typography>
         </div>
       </>
@@ -103,6 +138,10 @@ const getDialogText = (
       <>
         <div className={classes.dialogText}>
           <Typography variant="body1">Welcome to Tartanhacks!</Typography>
+          <Typography variant="body1">
+            Please confirm your attendance by
+          </Typography>
+          <span className={classes.deadline}>{confirmTime}</span>
         </div>
       </>
     )
@@ -114,6 +153,44 @@ const getDialogText = (
             Thanks for applying! We were unable to accommodate you this year.
             Please apply again next year!
           </Typography>
+        </div>
+      </>
+    )
+  } else if (applicationStatus === ApplicationStatus.CONFIRMED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            Thanks for confirming your attendance!
+          </Typography>
+          <Typography variant="body1">We hope to see you soon!</Typography>
+          <Typography variant="body1">
+            In the meantime, download our Dashboard App!
+          </Typography>
+          <div className={classes.appStoreLinks}>
+            <Link
+              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+              target="_blank"
+            >
+              <Image
+                alt="Get it on Google Play"
+                src="/google-play-badge.png"
+                width={155}
+                height={60}
+              />
+            </Link>
+            <Link
+              href="https://apps.apple.com/us/app/scottylabs-dashboard/id1556362423"
+              target="_blank"
+            >
+              <Image
+                alt="Download on the App Store"
+                src="/ios-app-store-badge.svg"
+                width={120}
+                height={40}
+              />
+            </Link>
+          </div>
         </div>
       </>
     )
@@ -138,26 +215,20 @@ const getButtonBox = (
     return (
       <div className={classes.buttonBox}>
         <Link href="/apply" className={classes.link}>
-          <RectangleButton type="submit">
-            EDIT CONFIRMATION INFO
-          </RectangleButton>
+          <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
-        <div className={classes.buttonSpacer}></div>
-        <RectangleButton type="submit">
-          SORRY, I CAN&apos;T MAKE IT
-        </RectangleButton>
       </div>
     )
   } else if (applicationStatus === ApplicationStatus.ADMITTED) {
     return (
       <div className={classes.buttonBox}>
-        <Link href="/accept" className={classes.link}>
-          <RectangleButton type="submit">ACCEPT</RectangleButton>
+        <Link href="/confirmation" className={classes.link}>
+          <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
-        <Link href="/reject" className={classes.link}>
-          <RectangleButton type="submit">DENY</RectangleButton>
-        </Link>
+        <RectangleButton type="submit">
+          SORRY, I CAN&apos;T MAKE IT
+        </RectangleButton>
       </div>
     )
   } else {
@@ -170,26 +241,27 @@ const DashboardDialog = (): ReactElement => {
   const theme = useTheme()
   const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
-  const currentUser = useSelector((state: RootState) => state?.accounts?.data)
-  const [applicationStatus, setApplicationStatus] = useState<ApplicationStatus>(
-    ApplicationStatus.UNVERIFIED
+  const closeTime = useSelector(
+    (state: RootState) => state?.settings?.closeTime
+  )
+  const confirmTime = useSelector(
+    (state: RootState) => state?.settings?.confirmTime
   )
 
-  const queryProfile = async () => {
-    setLoading(true)
-    await dispatch(actions.auth.login())
-    const { data: status } = await dispatch(
-      actions.user.getStatus(currentUser._id)
-    )
-    setApplicationStatus(getApplicationStatus(status ?? {}))
-    setLoading(false)
-  }
+  const closeTimeStr = DateTime.fromJSDate(closeTime).toFormat("dd LLL yyyy")
+  const confirmTimeStr =
+    DateTime.fromJSDate(confirmTime).toFormat("dd LLL yyyy")
 
-  useEffect(() => {
-    queryProfile()
-  }, [])
+  const status =
+    useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+  const applicationStatus = getApplicationStatus(status)
 
-  const dialogText = getDialogText(classes, applicationStatus)
+  const dialogText = getDialogText(
+    classes,
+    applicationStatus,
+    closeTimeStr,
+    confirmTimeStr
+  )
   const buttonBox = getButtonBox(classes, applicationStatus)
 
   return (

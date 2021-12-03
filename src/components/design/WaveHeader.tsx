@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   waveSvg: {
     position: "relative",
     width: "100%",
-    height: "300px",
+    height: "250px",
     filter: "drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2))",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       height: "15em"

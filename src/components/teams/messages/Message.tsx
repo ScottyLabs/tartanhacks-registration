@@ -1,10 +1,8 @@
-import { Hidden, makeStyles, Typography, Snackbar } from "@material-ui/core"
-import actions from "src/actions"
-import RoundedButton from "src/components/design/RoundedButton"
+import { makeStyles, Typography } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
 import { useDispatch } from "react-redux"
-import { useState } from "react"
-import { Alert } from "@material-ui/lab"
+import actions from "src/actions"
+import RoundedButton from "src/components/design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
   newCell: {
@@ -136,7 +134,6 @@ const Message = (props: any) => {
       cancel: "JOIN",
       acceptDecline: "INVITE"
     }
-  console.log(props.content)
   return (
     <>
       <tr className={classes.row}>
