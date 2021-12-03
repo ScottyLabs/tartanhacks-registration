@@ -1,4 +1,10 @@
-import { makeStyles, Typography, Snackbar } from "@material-ui/core"
+import {
+  makeStyles,
+  Typography,
+  Snackbar,
+  CircularProgress,
+  Collapse
+} from "@material-ui/core"
 import React, {
   useEffect,
   useState
@@ -76,23 +82,38 @@ const useStyles = makeStyles((theme) => ({
   buttonForm: {
     display: "inline-flex",
     justifyContent: "center"
+  },
+  statusMessageContainer: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  spinnerContainer: {
+    display: "flex",
+    justifyContent: "center"
+  },
+  noTeamsText: {
+    fontWeight: 600,
+    color: theme.palette.primary.main,
+    fontSize: "25px",
+    textAlign: "center",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "20px",
+      width: "80%",
+      paddingBottom: "20px"
+    }
   }
 }))
 
 const ViewTeams = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [teams, setTeams] = useState([
-    {
-      name: "",
-      description: ""
-    }
-  ])
+  const [teams, setTeams] = useState<Array<any>>([])
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
   const classes = useStyles()
 
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
+  const [loading, setLoading] = useState(false)
 
   const checkJoinErrorCallback = (isError: boolean) => {
     setNotify(isError ? "error" : "success")
@@ -103,6 +124,7 @@ const ViewTeams = () => {
 
   useEffect(() => {
     const getTeams = async () => {
+      setLoading(true)
       try {
         const ownTeam = await dispatch(actions.user.getOwnTeam())
         router.push('/teams/details/' + ownTeam.data._id)
@@ -114,9 +136,21 @@ const ViewTeams = () => {
           console.error(err)
         }
       }
+      setLoading(false)
     }
     getTeams()
   }, [])
+
+  let emptyMessage = null
+  if (!loading && teams.length === 0) {
+    emptyMessage = (
+      <div className={classes.statusMessageContainer}>
+        <Typography variant="body1" className={classes.noTeamsText}>
+          There are no open teams
+        </Typography>
+      </div>
+    )
+  }
 
   return (
     <>
@@ -137,11 +171,17 @@ const ViewTeams = () => {
               Create new team
             </RoundedButton>
           </form>
+          <Collapse in={loading}>
+            <div className={classes.spinnerContainer}>
+              <CircularProgress />
+            </div>
+          </Collapse>
           <div className={classes.tableHeader}>
             <Typography variant="h4" className={classes.tableHeaderText}>
               VIEW OPEN TEAMS
             </Typography>
           </div>
+          {emptyMessage}
           <table className={classes.tableData}>
             <tbody>
               {teams.map((team, idx) => (

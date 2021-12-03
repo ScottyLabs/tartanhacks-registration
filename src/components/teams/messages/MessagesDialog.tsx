@@ -33,6 +33,17 @@ const useStyles = makeStyles((theme) => ({
   statusMessageContainer: {
     display: "flex",
     justifyContent: "center"
+  },
+  noTeamsText: {
+    fontWeight: 600,
+    color: theme.palette.primary.main,
+    fontSize: "25px",
+    textAlign: "center",
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "20px",
+      width: "80%",
+      paddingBottom: "20px"
+    }
   }
 }))
 
@@ -105,7 +116,7 @@ const MessagesDialog = ({
   if (!loading && requests.length === 0) {
     emptyMessage = (
       <div className={classes.statusMessageContainer}>
-        <Typography variant="body1">
+        <Typography variant="body1" className={classes.noTeamsText}>
           You don&apos;t have any messages
         </Typography>
       </div>
