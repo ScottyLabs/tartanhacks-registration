@@ -158,10 +158,11 @@ const RecruiterApplicationForm = (): ReactElement => {
       await dispatch(
         actions.recruiters.create(sponsorSelection, email, firstName, lastName)
       )
-    } catch {}
-    setEmail("")
-    setFirstName("")
-    setLastName("")
+    } finally {
+      setEmail("")
+      setFirstName("")
+      setLastName("")
+    }
   }
 
   useEffect(() => {
