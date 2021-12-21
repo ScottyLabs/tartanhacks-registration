@@ -70,10 +70,6 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
     )
   }
 
-  if (currentUser == null) {
-    return <></>
-  }
-
   return <Page />
 }
 
