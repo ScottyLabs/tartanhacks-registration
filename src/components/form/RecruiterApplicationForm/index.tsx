@@ -100,8 +100,7 @@ const RecruiterApplicationForm = (): ReactElement => {
         setErrorMessage("")
       }
       return true
-    }
-    else {
+    } else {
       setError(true)
       setErrorMessage("Sponsor not selected")
       return false
@@ -115,8 +114,7 @@ const RecruiterApplicationForm = (): ReactElement => {
         setErrorMessage("")
       }
       return true
-    }
-    else {
+    } else {
       setError(true)
       setErrorMessage("Invalid email")
       return false
@@ -130,8 +128,7 @@ const RecruiterApplicationForm = (): ReactElement => {
         setErrorMessage("")
       }
       return true
-    }
-    else {
+    } else {
       setError(true)
       setErrorMessage("Empty first name")
       return false
@@ -145,8 +142,7 @@ const RecruiterApplicationForm = (): ReactElement => {
         setErrorMessage("")
       }
       return true
-    }
-    else {
+    } else {
       setError(true)
       setErrorMessage("Empty last name")
       return false
@@ -154,20 +150,14 @@ const RecruiterApplicationForm = (): ReactElement => {
   }
 
   const checkFields = () => {
-    return checkSponsor() &&
-    checkEmail() &&
-    checkFirstName() &&
-    checkLastName()
+    return checkSponsor() && checkEmail() && checkFirstName() && checkLastName()
   }
 
   const submitForm = async () => {
     try {
-      await dispatch(actions.recruiters.create(
-        sponsorSelection,
-        email,
-        firstName,
-        lastName
-      ))
+      await dispatch(
+        actions.recruiters.create(sponsorSelection, email, firstName, lastName)
+      )
     } catch {}
     setEmail("")
     setFirstName("")
@@ -191,9 +181,11 @@ const RecruiterApplicationForm = (): ReactElement => {
       </Snackbar>
       <form
         className={classes.applicationForm}
-        onSubmit={ async (e) => {
+        onSubmit={async (e) => {
           e.preventDefault()
-          console.log(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi.test(email))
+          console.log(
+            /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi.test(email)
+          )
           if (checkFields()) {
             console.log("submitting")
             submitForm()

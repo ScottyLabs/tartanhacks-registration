@@ -7,13 +7,13 @@ import * as settings from "./settings"
 import * as requests from "./requests"
 import * as recruiters from "./recruiters"
 
-export default { 
-    auth, 
-    user, 
-    sponsors, 
-    application, 
-    teams, 
-    settings, 
-    requests, 
-    recruiters 
+export default {
+  auth,
+  user,
+  sponsors,
+  application,
+  teams,
+  settings,
+  requests,
+  recruiters
 }
