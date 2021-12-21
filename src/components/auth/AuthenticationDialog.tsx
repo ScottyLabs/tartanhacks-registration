@@ -168,7 +168,7 @@ const AuthenticationDialog = ({
             {registration ? "Log In" : "Sign Up"}
           </Link>
           {registration ? null : (
-            <Link href="/password-reset">Forgot password</Link>
+            <Link href="/forgot-password">Forgot password</Link>
           )}
         </div>
       </form>
