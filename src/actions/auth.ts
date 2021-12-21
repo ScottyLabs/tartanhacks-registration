@@ -43,3 +43,28 @@ export const loginWithToken = (): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const requestReset = (email: string): DispatchAction => ({
+  type: DispatchActionType.AUTH_REQUEST_RESET,
+  useAPI: true,
+  request: {
+    path: "/auth/request-reset",
+    method: "POST",
+    body: { email }
+  },
+  status: RequestStatus.PENDING
+})
+
+export const resetPassword = (
+  token: string,
+  password: string
+): DispatchAction => ({
+  type: DispatchActionType.AUTH_RESET_PASSWORD,
+  useAPI: true,
+  request: {
+    path: "/auth/reset/password",
+    method: "POST",
+    body: { token, password }
+  },
+  status: RequestStatus.PENDING
+})

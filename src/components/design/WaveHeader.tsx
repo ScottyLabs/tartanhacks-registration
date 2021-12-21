@@ -1,4 +1,4 @@
-import { makeStyles, Typography, useTheme } from "@material-ui/core"
+import { Link, makeStyles, Typography, useTheme } from "@material-ui/core"
 import React, { ReactElement } from "react"
 
 const useStyles = makeStyles((theme) => ({
@@ -46,9 +46,11 @@ const WaveHeader = (): ReactElement => {
   return (
     <>
       <div className={classes.waveContainer}>
-        <Typography variant="h1" className={classes.title}>
-          TartanHacks
-        </Typography>
+        <Link href="/">
+          <Typography variant="h1" className={classes.title}>
+            TartanHacks
+          </Typography>
+        </Link>
         <svg
           className={classes.waveSvg}
           viewBox="0 0 1440 420"

@@ -25,6 +25,7 @@ const error = (state = null, action: DispatchAction) => {
     case DispatchActionType.AUTH_REGISTER:
     case DispatchActionType.AUTH_LOGIN_TOKEN:
     case DispatchActionType.AUTH_VERIFY:
+    case DispatchActionType.AUTH_RESET_PASSWORD:
       if (action.status == RequestStatus.ERROR) {
         return action.data
       }
@@ -37,6 +38,7 @@ const status = (state = null, action: DispatchAction) => {
     case DispatchActionType.AUTH_LOGIN:
     case DispatchActionType.AUTH_REGISTER:
     case DispatchActionType.AUTH_LOGIN_TOKEN:
+    case DispatchActionType.AUTH_RESET_PASSWORD:
     case DispatchActionType.AUTH_VERIFY:
       return action.status
   }
