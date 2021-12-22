@@ -9,7 +9,7 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { useRouter } from "next/dist/client/router"
-import { AuthenticatedLayout } from "src/layouts"
+import { AuthenticatedLayout, TeamlessLayout } from "src/layouts"
 import WaveFooter from "src/components/design/WaveFooter"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import RoundedButton from "src/components/design/RoundedButton"
@@ -123,15 +123,10 @@ const ViewTeams = () => {
     const getTeams = async () => {
       setLoading(true)
       try {
-        const ownTeam = await dispatch(actions.user.getOwnTeam())
-        router.push("/teams/details/" + ownTeam.data._id)
+        const viewTeams = await dispatch(actions.teams.viewTeams())
+        setTeams(viewTeams.data)
       } catch (err) {
-        try {
-          const viewTeams = await dispatch(actions.teams.viewTeams())
-          setTeams(viewTeams.data)
-        } catch (err) {
-          console.error(err)
-        }
+        console.error(err)
       }
       setLoading(false)
     }
@@ -206,4 +201,4 @@ const ViewTeams = () => {
   )
 }
 
-export default AuthenticatedLayout(ViewTeams)
+export default TeamlessLayout(AuthenticatedLayout(ViewTeams))
