@@ -5,61 +5,88 @@ import {
     makeStyles,
     Typography,
     Button,
-    Modal
-  } from "@material-ui/core"
-  import { useTheme } from "@material-ui/styles"
-  import {
+    Modal,
+    Paper,
+    Chip,
+    Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination
+} from "@material-ui/core"
+import { useTheme } from "@material-ui/styles"
+import {
     ReactElement,
     useState,
     useEffect,
     useMemo
-  } from "react"
-  import { useDispatch, useSelector } from "react-redux"
-  import actions from "src/actions"
-  import { useTable, Column, Cell } from "react-table"
-  import ProfileBox from "./ProfileBox"
-  
-  const useStyles = makeStyles((theme) => ({
+} from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
+import { useTable, Column, Cell } from "react-table"
+import ProfileBox from "./ProfileBox"
+import RectangleButton from "../design/RectangleButton"
+
+const useStyles = makeStyles((theme) => ({
     dialog: {
-      display: "flex",
-      alignItems: "center",
-      width: "75%",
-      borderRadius: "25px",
-      padding: "2em",
-      margin: "0 auto",
-      flexDirection: "column",
-      background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
-      boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-      backdropFilter: "blur(4px)",
-      [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-        width: "80%"
-      },
-      [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-        width: "70%"
-      },
-      maxHeight: "70%",
-      overflow: "scroll"
+        display: "flex",
+        alignItems: "center",
+        width: "75%",
+        borderRadius: "25px",
+        padding: "2em",
+        margin: "0 auto",
+        flexDirection: "column",
+        backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
+                        35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
+        boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
+        backdropFilter: "blur(4px)",
+        [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+            width: "80%"
+        },
+        [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+            width: "70%"
+        },
+        maxHeight: "70%",
+        overflow: "scroll"
     },
     dialogContent: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center"
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        width: "100%"
     },
     spinnerContainer: {
-      display: "flex",
-      justifyContent: "center"
+        display: "flex",
+        justifyContent: "center"
+    },
+    buttonMargin: {
+        marginRight: "1em"
     },
     table: {
-        border: "1px solid black",
-        borderCollapse: "collapse"
+        width: "100%"
+    },
+    chipMargin: {
+        marginRight: "0.5em"
     }
-  }))
-  
-  const AdminDialog = (): ReactElement => {
+}))
+
+interface DataInit {
+    admin: boolean;
+    company: string;
+    _id: string;
+    email: string;
+}
+interface Data {
+    id: string;
+    email: string;
+    status: string;
+    admitted: boolean;
+    confirmed: boolean;
+    completedProfile: boolean;
+    profile: string;
+}
+
+const AdminDialog = (): ReactElement => {
     const dispatch = useDispatch()
     const theme = useTheme()
     const classes = useStyles(theme)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [users, setUsers] = useState<Data[]>([])
 
     const [open, setOpen] = useState(false);
@@ -67,6 +94,18 @@ import {
     const handleClose = () => setOpen(false);
 
     const [profile, setProfile] = useState({});
+
+    const [page, setPage] = useState(0);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const handleChangePage = (event: unknown, newPage: number) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
 
     const getUserInfo = async (user: DataInit) => {
         const id = user._id
@@ -86,22 +125,53 @@ import {
         }
     }
 
+    const getStatusChips = (cell: Cell<Data, string>) => {
+        const admitted = cell.row.allCells[1].value
+        const confirmed = cell.row.allCells[2].value
+        const completedProfile = cell.row.allCells[3].value
+
+        return (
+            <div>
+                <Chip label="A" className={classes.chipMargin} color={admitted ? "primary" : "default"} />
+                <Chip label="C" className={classes.chipMargin} color={confirmed ? "primary" : "default"} />
+                <Chip label="CP" color={completedProfile ? "primary" : "default"} />
+            </div>
+        )
+    }
+
     const getUserIdFromCell = (cell: Cell<Data, string>) => {
         return cell.row.allCells[0].value
     }
 
     const handleProfileClick = async (cell: Cell<Data, string>) => {
+        console.log(cell)
         const userId = getUserIdFromCell(cell)
-        console.log(userId)
         try {
             const res = await dispatch(actions.user.getProfile(userId))
-            // console.log(res)
             setProfile(res.data)
             handleOpen()
-        } catch(err) {
+        } catch (err) {
             console.log("User has no profile.");
             setProfile({})
             handleOpen()
+        }
+    }
+
+    const handleAdmitClick = async (cell: Cell<Data, string>) => {
+        const userId = getUserIdFromCell(cell)
+        try {
+            await dispatch(actions.user.admitUser(userId))
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    const handleRejectClick = async (cell: Cell<Data, string>) => {
+        const userId = getUserIdFromCell(cell)
+        try {
+            await dispatch(actions.user.rejectUser(userId))
+        } catch (err) {
+            console.log(err)
         }
     }
 
@@ -109,141 +179,164 @@ import {
         const getUsers = async () => {
             setLoading(true)
             try {
-              const res = await dispatch(actions.user.getUsers())
-              const dataTransformed: Data[] = await Promise.all(res.data.map(async (user: DataInit) => {
-                try {
-                const transformed = await getUserInfo(user);
-                return transformed; 
-                } catch(err) {
-                   console.log(err);
-                }
+                const res = await dispatch(actions.user.getUsers())
+                const dataTransformed: Data[] = await Promise.all(res.data.map(async (user: DataInit) => {
+                    try {
+                        const transformed = await getUserInfo(user);
+                        return transformed;
+                    } catch (err) {
+                        console.log(err);
+                    }
                 }));
-              console.log(dataTransformed);
-              setUsers(dataTransformed);
+                console.log(dataTransformed);
+                setUsers([...dataTransformed]);
+                console.log(users)
             } catch (err) {
-              console.log(err)
+                console.log(err)
             }
             setLoading(false)
-          }
-        getUsers()
+        }
+        if (loading) getUsers()
     }, [])
 
-    interface DataInit {
-        admin: boolean;
-        company: string;
-        _id: string;
-        email: string;
-      }
-    interface Data {
-        id: string;
-        email: string;
-        status: string;
-        admitted: boolean;
-        confirmed: boolean;
-        completedProfile: boolean;
-        profile: string;
-    }
+    useEffect(() => {
+        console.log(users)
+    }, [users])
+
     const columns: Column<Data>[] = useMemo(
         () => [
-          {
-            Header: 'ID',
-            accessor: 'id',
-          },
-          {
-            Header: 'Email',
-            accessor: 'email',
-          },
-          {
-            Header: 'Status',
-            accessor: 'status',
-          },
-          {
-            Header: "Profile",
-            accessor: "profile",
-            Cell: ({ cell }) => (
-              <Button value={cell.row.values.name} onClick={() => handleProfileClick(cell)}>
-                Profile
-              </Button>
-            )
-          }
+            {
+                Header: 'ID',
+                accessor: 'id',
+            },
+            {
+                Header: 'Admitted',
+                accessor: 'admitted',
+            },
+            {
+                Header: 'Confirmed',
+                accessor: 'confirmed',
+            },
+            {
+                Header: 'Completed Profile',
+                accessor: 'completedProfile',
+            },
+            {
+                Header: 'Email',
+                accessor: 'email',
+            },
+            {
+                Header: 'Status',
+                accessor: 'status',
+                Cell: ({ cell }) => (getStatusChips(cell))
+            },
+            {
+                Header: "Actions",
+                accessor: "profile",
+                Cell: ({ cell }) => (
+                    <div>
+                        <RectangleButton className={classes.buttonMargin} type="button" onClick={() => handleProfileClick(cell)}>
+                            Profile
+                        </RectangleButton>
+                        <RectangleButton className={classes.buttonMargin} type="button" onClick={() => handleAdmitClick(cell)}>
+                            Admit
+                        </RectangleButton>
+                        <RectangleButton type="button" onClick={() => handleRejectClick(cell)}>
+                            Reject
+                        </RectangleButton>
+                    </div>
+                )
+            },
         ],
         []
-      )
+    )
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
         rows,
         prepareRow
-      } = useTable<Data>({
-          columns,
-          data: users,
-          initialState: {
-              hiddenColumns: ['id']
-          }
-        });
+    } = useTable<Data>({
+        columns,
+        data: users,
+        initialState: {
+            hiddenColumns: ['id', 'admitted', 'confirmed', 'completedProfile']
+        }
+    });
 
     return (
-      <div className={classes.dialog}>
-        <Collapse in={loading}>
-            <div className={classes.spinnerContainer}>
-            <CircularProgress />
+        <div className={classes.dialog}>
+            <Collapse in={loading}>
+                <div className={classes.spinnerContainer}>
+                    <CircularProgress />
+                </div>
+            </Collapse>
+            <Modal
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <ProfileBox profile={profile}></ProfileBox>
+            </Modal>
+            <div className={classes.dialogContent}>
+                <Paper className={classes.table}>
+                    <TableContainer >
+                        <Table {...getTableProps()} >
+                            <TableHead>
+                                {// Loop over the header rows
+                                    headerGroups.map(headerGroup => (
+                                        // Apply the header row props
+                                        <TableRow {...headerGroup.getHeaderGroupProps()}>
+                                            {// Loop over the headers in each row
+                                                headerGroup.headers.map(column => (
+                                                    // Apply the header cell props
+                                                    <TableCell {...column.getHeaderProps()}>
+                                                        {// Render the header
+                                                            column.render('Header')}
+                                                    </TableCell>
+                                                ))}
+                                        </TableRow>
+                                    ))}
+                            </TableHead>
+                            {/* Apply the table body props */}
+                            <TableBody {...getTableBodyProps()}>
+                                {// Loop over the table rows
+                                    rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => {
+                                        // Prepare the row for display
+                                        prepareRow(row)
+                                        return (
+                                            // Apply the row props
+                                            <TableRow {...row.getRowProps()}>
+                                                {// Loop over the rows cells
+                                                    row.cells.map(cell => {
+                                                        // Apply the cell props
+                                                        return (
+                                                            <TableCell {...cell.getCellProps()}>
+                                                                {// Render the cell contents
+                                                                    cell.render('Cell')}
+                                                            </TableCell>
+                                                        )
+                                                    })}
+                                            </TableRow>
+                                        )
+                                    })}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                    <TablePagination
+                        rowsPerPageOptions={[5, 10, 25]}
+                        component="div"
+                        count={rows.length}
+                        rowsPerPage={rowsPerPage}
+                        page={page}
+                        onPageChange={handleChangePage}
+                        onRowsPerPageChange={handleChangeRowsPerPage}
+                    />
+                </Paper>
             </div>
-        </Collapse>
-        <Modal
-            open={open}
-            onClose={handleClose}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-        >
-            <ProfileBox profile={profile}></ProfileBox>
-        </Modal>
-        <div className={classes.dialogContent}>
-            <table {...getTableProps()}>
-                <thead>
-                {// Loop over the header rows
-                headerGroups.map(headerGroup => (
-                    // Apply the header row props
-                    <tr {...headerGroup.getHeaderGroupProps()}>
-                    {// Loop over the headers in each row
-                    headerGroup.headers.map(column => (
-                        // Apply the header cell props
-                        <th {...column.getHeaderProps()}>
-                        {// Render the header
-                        column.render('Header')}
-                        </th>
-                    ))}
-                    </tr>
-                ))}
-                </thead>
-                {/* Apply the table body props */}
-                <tbody {...getTableBodyProps()}>
-                {// Loop over the table rows
-                rows.map(row => {
-                    // Prepare the row for display
-                    prepareRow(row)
-                    return (
-                    // Apply the row props
-                    <tr {...row.getRowProps()}>
-                        {// Loop over the rows cells
-                        row.cells.map(cell => {
-                        // Apply the cell props
-                        return (
-                            <td {...cell.getCellProps()}>
-                            {// Render the cell contents
-                            cell.render('Cell')}
-                            </td>
-                        )
-                        })}
-                    </tr>
-                    )
-                })}
-                </tbody>
-            </table>
         </div>
-      </div>
     )
-  }
-  
-  export default AdminDialog
-  
+}
+
+export default AdminDialog
