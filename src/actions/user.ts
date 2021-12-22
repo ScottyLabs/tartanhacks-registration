@@ -21,6 +21,24 @@ export const getStatus = (id: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+export const getProfile = (id: string): DispatchAction => ({
+  type: DispatchActionType.USER_PROFILE,
+  useAPI: true,
+  request: {
+    path: `/users/${id}/profile/`,
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
+export const getUsers = (): DispatchAction => ({
+  type: DispatchActionType.GET_USERS,
+  useAPI: true,
+  request: {
+    path: `/users`,
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
 
 export const confirm = (
   signatureLiability: boolean,
