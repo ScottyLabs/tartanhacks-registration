@@ -187,7 +187,7 @@ const getDialogText = (
             >
               <Image
                 alt="Download on the App Store"
-                src="/ios-app-store.svg"
+                src="/ios-app-store-badge.svg"
                 width={120}
                 height={40}
               />
