@@ -90,7 +90,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    marginTop: "1em",
+    gap: "0.5em"
   }
 }))
 
@@ -174,9 +176,9 @@ const getDialogText = (
             >
               <Image
                 alt="Get it on Google Play"
-                src="/google-play-badge.png"
-                width={155}
-                height={60}
+                src="/google-play-badge.svg"
+                width={563 * (40 / 168)}
+                height={40}
               />
             </Link>
             <Link
