@@ -8,6 +8,8 @@ import {
     Modal,
     Paper,
     Chip,
+    Snackbar,
+    IconButton,
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, TablePagination
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
@@ -22,6 +24,7 @@ import actions from "src/actions"
 import { useTable, Column, Cell } from "react-table"
 import ProfileBox from "./ProfileBox"
 import RectangleButton from "../design/RectangleButton"
+import CloseIcon from '@material-ui/icons/Close';
 
 const useStyles = makeStyles((theme) => ({
     dialog: {
@@ -89,14 +92,45 @@ const AdminDialog = (): ReactElement => {
     const [loading, setLoading] = useState(true)
     const [users, setUsers] = useState<Data[]>([])
 
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const [profileOpen, setProfileOpen] = useState(false);
+    const handleProfileOpen = () => setProfileOpen(true);
+    const handleProfileClose = () => setProfileOpen(false);
+
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
 
     const [profile, setProfile] = useState({});
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(5);
+
+    const [snackbarMsg, setSnackbarMsg] = useState("");
+    const snackbarDuration = 3000;
+
+    const openSnackbar = (msg: string) => {
+        setSnackbarMsg(msg)
+        setSnackbarOpen(true);
+    }
+
+    const handleSnackbarClose = (event: React.SyntheticEvent | Event, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setSnackbarOpen(false);
+    };
+
+    const snackbarAction = (
+        <div>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleSnackbarClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </div>
+    );
 
     const handleChangePage = (event: unknown, newPage: number) => {
         setPage(newPage);
@@ -144,16 +178,14 @@ const AdminDialog = (): ReactElement => {
     }
 
     const handleProfileClick = async (cell: Cell<Data, string>) => {
-        console.log(cell)
         const userId = getUserIdFromCell(cell)
         try {
             const res = await dispatch(actions.user.getProfile(userId))
             setProfile(res.data)
-            handleOpen()
+            handleProfileOpen()
         } catch (err) {
-            console.log("User has no profile.");
-            setProfile({})
-            handleOpen()
+            console.log(err)
+            openSnackbar("User has no profile")
         }
     }
 
@@ -161,7 +193,9 @@ const AdminDialog = (): ReactElement => {
         const userId = getUserIdFromCell(cell)
         try {
             await dispatch(actions.user.admitUser(userId))
+            openSnackbar("Admitted user")
         } catch (err) {
+            openSnackbar("Error admitting user")
             console.log(err)
         }
     }
@@ -170,7 +204,9 @@ const AdminDialog = (): ReactElement => {
         const userId = getUserIdFromCell(cell)
         try {
             await dispatch(actions.user.rejectUser(userId))
+            openSnackbar("Rejected user")
         } catch (err) {
+            openSnackbar("Error rejecting user")
             console.log(err)
         }
     }
@@ -188,9 +224,7 @@ const AdminDialog = (): ReactElement => {
                         console.log(err);
                     }
                 }));
-                console.log(dataTransformed);
                 setUsers([...dataTransformed]);
-                console.log(users)
             } catch (err) {
                 console.log(err)
             }
@@ -198,10 +232,6 @@ const AdminDialog = (): ReactElement => {
         }
         if (loading) getUsers()
     }, [])
-
-    useEffect(() => {
-        console.log(users)
-    }, [users])
 
     const columns: Column<Data>[] = useMemo(
         () => [
@@ -272,13 +302,20 @@ const AdminDialog = (): ReactElement => {
                 </div>
             </Collapse>
             <Modal
-                open={open}
-                onClose={handleClose}
+                open={profileOpen}
+                onClose={handleProfileClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
             >
                 <ProfileBox profile={profile}></ProfileBox>
             </Modal>
+            <Snackbar
+                open={snackbarOpen}
+                autoHideDuration={snackbarDuration}
+                onClose={handleSnackbarClose}
+                message={snackbarMsg}
+                action={snackbarAction}
+            />
             <div className={classes.dialogContent}>
                 <Paper className={classes.table}>
                     <TableContainer >
