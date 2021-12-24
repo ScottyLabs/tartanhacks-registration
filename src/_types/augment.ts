@@ -16,6 +16,13 @@ declare module "@material-ui/core/styles/createPalette" {
       start: string
       end: string
     }
+    unverified?: string
+    verified?: string
+    applied?: string
+    admitted?: string
+    rejected?: string
+    declined?: string
+    confirmed?: string
   }
 
   interface Palette {
@@ -31,6 +38,13 @@ declare module "@material-ui/core/styles/createPalette" {
       start: string
       end: string
     }
+    unverified: string
+    verified: string
+    applied: string
+    admitted: string
+    rejected: string
+    declined: string
+    confirmed: string
   }
 }
 

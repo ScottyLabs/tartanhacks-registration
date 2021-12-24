@@ -1,5 +1,6 @@
 import {
-  Box, CircularProgress,
+  Box,
+  CircularProgress,
   Collapse,
   Link,
   makeStyles,
@@ -16,6 +17,7 @@ import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
+import { Participant } from "types/Participant"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -228,19 +230,29 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
   )
 }
 
-const ProfileBox = ({ participant }: { participant?: any }): ReactElement => {
+interface Status {
+  verified?: boolean
+  completedProfile?: boolean
+  admitted?: boolean
+  declined?: boolean
+  confirmed?: boolean
+}
+
+const ProfileBox = ({
+  participant
+}: {
+  participant: Participant
+}): ReactElement => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const [profile, setProfile] = useState<any>(null)
   const [loading, setLoading] = useState(true)
 
-  const participantId = participant?._id
-  const status = getApplicationStatus(participant?.status)
+  const applicationStatus = getApplicationStatus(participant?.status)
 
   const incomplete = [ApplicationStatus.UNVERIFIED, ApplicationStatus.VERIFIED]
-
   let profileContent = null
-  if (profile != null && !incomplete.includes(status)) {
+  if (profile != null && !incomplete.includes(applicationStatus)) {
     profileContent = <ProfileContent profile={profile} />
   }
 
@@ -248,7 +260,9 @@ const ProfileBox = ({ participant }: { participant?: any }): ReactElement => {
     const queryProfile = async () => {
       try {
         setLoading(true)
-        const { data } = await dispatch(actions.user.getProfile(participantId))
+        const { data } = await dispatch(
+          actions.user.getProfile(participant._id)
+        )
         setProfile(data)
         setLoading(false)
       } catch (err) {
@@ -257,7 +271,7 @@ const ProfileBox = ({ participant }: { participant?: any }): ReactElement => {
       }
     }
     queryProfile()
-  }, [participantId])
+  }, [participant])
 
   return (
     <Box className={classes.modal}>
@@ -268,7 +282,8 @@ const ProfileBox = ({ participant }: { participant?: any }): ReactElement => {
         <>
           <Typography variant="h5">{participant?.email}</Typography>
           <Typography variant="h6">
-            Status: <span className={classes.statusLabel}>{status}</span>
+            Status:{" "}
+            <span className={classes.statusLabel}>{applicationStatus}</span>
           </Typography>
           {profileContent}
         </>

@@ -50,6 +50,7 @@ export const getParticipants = (): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
 export const admitUser = (id: string): DispatchAction => ({
   type: DispatchActionType.ADMIT_USER,
   useAPI: true,
@@ -59,6 +60,7 @@ export const admitUser = (id: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
 export const rejectUser = (id: string): DispatchAction => ({
   type: DispatchActionType.REJECT_USER,
   useAPI: true,
@@ -68,6 +70,7 @@ export const rejectUser = (id: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
 export const confirm = (
   signatureLiability: boolean,
   signaturePhotoRelease: boolean,
