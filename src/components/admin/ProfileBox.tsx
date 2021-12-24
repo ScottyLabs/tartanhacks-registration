@@ -139,7 +139,7 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           <TableCell>{profile.languages}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Hackathon Experience</TableCell>
+          <TableCell>Number of hackathons attended</TableCell>
           <TableCell>{profile.hackathonExperience}</TableCell>
         </TableRow>
         <TableRow>

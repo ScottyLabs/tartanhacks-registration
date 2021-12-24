@@ -11,3 +11,16 @@ export const list = (): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const create = (sponsorName: string): DispatchAction => ({
+  type: DispatchActionType.SPONSORS_CREATE,
+  useAPI: true,
+  request: {
+    path: "/sponsor",
+    method: "POST",
+    body: {
+      name: sponsorName
+    }
+  },
+  status: RequestStatus.PENDING
+})

@@ -10,7 +10,10 @@ import { TabContext, TabList, TabPanel } from "@material-ui/lab"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
+import RecruiterApplicationForm from "../form/RecruiterApplicationForm"
 import ParticipantTable from "./ParticipantTable"
+import RecruiterCreationForm from "./RecruiterCreationForm"
+import SponsorCreationForm from "./SponsorCreationForm"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -64,14 +67,20 @@ const AdminDialog = (): ReactElement => {
           >
             <Tab label="Participants" value="0" />
             <Tab label="Recruiters" value="1" />
-            <Tab label="Analytics" value="2" />
+            <Tab label="Sponsors" value="2" />
+            <Tab label="Analytics" value="3" />
           </TabList>
         </Box>
         <TabPanel value="0" className={classes.tabPanel}>
           <ParticipantTable />
         </TabPanel>
-        <TabPanel value="1" className={classes.tabPanel}></TabPanel>
-        <TabPanel value="2" className={classes.tabPanel}></TabPanel>
+        <TabPanel value="1" className={classes.tabPanel}>
+          <RecruiterCreationForm />
+        </TabPanel>
+        <TabPanel value="2" className={classes.tabPanel}>
+          <SponsorCreationForm />
+        </TabPanel>
+        <TabPanel value="3" className={classes.tabPanel}></TabPanel>
       </TabContext>
     </div>
   )

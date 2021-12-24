@@ -6,6 +6,7 @@ import AdminDialog from "src/components/admin/AdminDialog"
 import Menu from "src/components/menu/Menu"
 import WaveBackground from "src/components/design/WaveBackground"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import AdminLayout from "src/layouts/AdminLayout"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -33,4 +34,4 @@ const AdminPage: NextPage = (): ReactElement => {
   )
 }
 
-export default AuthenticatedLayout(AdminPage)
+export default AdminLayout(AdminPage)

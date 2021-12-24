@@ -7,9 +7,12 @@ import React, {
 import { useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
 import { RootState } from "types/RootState"
+import { Collapse, CircularProgress } from "@material-ui/core"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import WaveBackground from "src/components/design/WaveBackground"
 
 /**
- * Layout to hide content that requires authentication.
+ * Layout to hide content that requires authentication at an admin level.
  * This automatically redirects to the login page if it cannot successfully
  * login the user using the stored login token in the browser
  */
@@ -30,7 +33,19 @@ const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
   }, [currentUser])
 
   if (loading || currentUser == null) {
-    return <></>
+    return (
+      <>
+        <WaveBackground />
+        <div>
+          <ScottyLabsHeader />
+          <div className={classes.dialog}>
+            <Collapse in={loading}>
+              <CircularProgress className={classes.spinner} />
+            </Collapse>
+          </div>
+        </div>
+      </>
+    )
   }
 
   return <Page />

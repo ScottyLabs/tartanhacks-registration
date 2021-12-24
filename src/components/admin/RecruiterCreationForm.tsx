@@ -15,24 +15,11 @@ import { RootState } from "types/RootState"
 import { ObjectId } from "mongodb"
 
 const useStyles = makeStyles((theme) => ({
-  formDialog: {
-    width: "60%",
-    padding: "2em",
+  container: {
+    width: "100%",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
     flexDirection: "column",
-    marginBottom: "3em",
-    zIndex: 5,
-    backgroundImage: `linear-gradient(135deg, ${theme.palette.lightGradient.start} 0%, ${theme.palette.lightGradient.end} 189%)`,
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "80%",
-      marginTop: "10%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%",
-      marginTop: "20%"
-    }
+    alignSelf: "center"
   },
   applicationForm: {
     width: "80%",
@@ -41,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: "center"
   },
   headerContainer: {
-    width: "40%",
     textAlign: "center",
     alignSelf: "center",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
@@ -78,7 +64,7 @@ interface Sponsor {
   _id: ObjectId
 }
 
-const RecruiterApplicationForm = (): ReactElement => {
+const RecruiterCreationForm = (): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
@@ -171,7 +157,7 @@ const RecruiterApplicationForm = (): ReactElement => {
   }, [])
 
   return (
-    <Paper className={classes.formDialog}>
+    <div className={classes.container}>
       <Snackbar
         open={error}
         autoHideDuration={5000}
@@ -194,8 +180,8 @@ const RecruiterApplicationForm = (): ReactElement => {
         }}
       >
         <div className={classes.headerContainer}>
-          <Typography variant="h3" className={classes.header}>
-            Recruiter Application
+          <Typography variant="h4" className={classes.header}>
+            Create Recruiter
           </Typography>
         </div>
         <div className={classes.formContents}>
@@ -252,8 +238,8 @@ const RecruiterApplicationForm = (): ReactElement => {
           </div>
         </div>
       </form>
-    </Paper>
+    </div>
   )
 }
 
-export default RecruiterApplicationForm
+export default RecruiterCreationForm
