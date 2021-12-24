@@ -1,16 +1,8 @@
-import {
-  Box,
-  Collapse,
-  LinearProgress,
-  makeStyles,
-  Tab,
-  Tabs
-} from "@material-ui/core"
+import { Box, makeStyles, Tab } from "@material-ui/core"
 import { TabContext, TabList, TabPanel } from "@material-ui/lab"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import RecruiterApplicationForm from "../form/RecruiterApplicationForm"
 import ParticipantTable from "./ParticipantTable"
 import RecruiterCreationForm from "./RecruiterCreationForm"
 import SponsorCreationForm from "./SponsorCreationForm"

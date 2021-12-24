@@ -70,8 +70,12 @@ const SponsorCreationForm = (): ReactElement => {
   const [sponsors, setSponsors] = useState("")
 
   const [loading, setLoading] = useState(false)
+
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
+
+  const [success, setSuccess] = useState(true)
+  const [successMessage, setSuccessMessage] = useState("")
 
   const createSponsors = async () => {
     setLoading(true)
@@ -82,7 +86,10 @@ const SponsorCreationForm = (): ReactElement => {
         setErrorMessage("Please enter at least one sponsor!")
       } else {
         for (const sponsorName of lines) {
+          setSuccess(false)
           await dispatch(actions.sponsors.create(sponsorName))
+          setSuccessMessage("Created sponsor: " + sponsorName)
+          setSuccess(true)
         }
       }
     } catch (err: any) {
@@ -101,6 +108,14 @@ const SponsorCreationForm = (): ReactElement => {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert severity="error">{errorMessage}</Alert>
+      </Snackbar>
+      <Snackbar
+        open={success}
+        autoHideDuration={5000}
+        onClose={(e) => setSuccess(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity="success">{successMessage}</Alert>
       </Snackbar>
       <form
         className={classes.applicationForm}

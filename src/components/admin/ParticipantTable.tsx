@@ -114,7 +114,7 @@ const ParticipantTable = (): ReactElement => {
   const [profileOpen, setProfileOpen] = useState(false)
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [dialogOpen, setDialogOpen] = useState(false)
-  const [bulkAction, setBulkAction] = useState<BulkAction>(null)
+  const [bulkAction, setBulkAction] = useState<BulkAction | null>(null)
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)

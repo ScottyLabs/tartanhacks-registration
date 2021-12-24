@@ -5,7 +5,12 @@ import {
   Typography
 } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
-import React, { FunctionComponent, ReactElement, useEffect, useState } from "react"
+import React, {
+  FunctionComponent,
+  ReactElement,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"

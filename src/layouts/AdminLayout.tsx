@@ -7,9 +7,22 @@ import React, {
 import { useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
 import { RootState } from "types/RootState"
-import { Collapse, CircularProgress } from "@material-ui/core"
+import { Collapse, CircularProgress, makeStyles } from "@material-ui/core"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
+
+const useStyles = makeStyles((theme) => ({
+  dialog: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  spinner: {
+    marginBottom: "5em"
+  }
+}))
 
 /**
  * Layout to hide content that requires authentication at an admin level.
@@ -17,6 +30,7 @@ import WaveBackground from "src/components/design/WaveBackground"
  * login the user using the stored login token in the browser
  */
 const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
+  const classes = useStyles()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
@@ -25,7 +39,7 @@ const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
     const loginWithToken = async () => {
       setLoading(true)
       if (currentUser.admin === false) {
-        router.push("/login")
+        router.push("/")
       }
       setLoading(false)
     }
