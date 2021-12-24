@@ -42,7 +42,7 @@ export interface RootState {
     error: string
     resume: string
     basic: BasicFields
-    essay: string
+    essays: EssayFields
     experience: ExperienceFields
     logistics: LogisticsFields
     portfolio: PortfolioFields

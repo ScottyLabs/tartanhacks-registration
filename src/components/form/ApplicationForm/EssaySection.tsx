@@ -41,7 +41,7 @@ const EssaySection = ({
     (state: RootState) => state?.application?.fetchedProfile
   )
   const essayStore =
-    useSelector((state: RootState) => state?.application?.essay) ?? ""
+    useSelector((state: RootState) => state?.application?.essays?.essays) ?? []
 
   // Essays
   const [essay, setEssay] = useState<string>("")
@@ -61,8 +61,8 @@ const EssaySection = ({
   }, [validate])
 
   useEffect(() => {
-    if (fetchedProfile) {
-      setEssay(essayStore)
+    if (fetchedProfile && essayStore && essayStore.length > 0) {
+      setEssay(essayStore[0])
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
