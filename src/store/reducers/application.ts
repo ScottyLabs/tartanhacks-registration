@@ -63,19 +63,14 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
   return state
 }
 
-const essay = (state: string | null = null, action: DispatchAction) => {
+const essays = (state: EssayFields | null = null, action: DispatchAction) => {
   if (action.type === DispatchActionType.APPLICATION_SAVE_ESSAY) {
     state = action.data
   } else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
     if (action?.data) {
       const { data } = action
-      if (data) {
-        const { essays } = data
-        let essay = null
-        if (essays && essays.length > 0) {
-          essay = essays[0]
-        }
-        state = essay
+      if (data.essays) {
+        state = { essays: data.essays }
       }
     }
   }
@@ -226,7 +221,7 @@ export default combineReducers({
   error,
   status,
   basic,
-  essay,
+  essays,
   experience,
   logistics,
   portfolio,

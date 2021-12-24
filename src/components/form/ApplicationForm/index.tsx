@@ -148,11 +148,18 @@ const ApplicationForm = (): ReactElement => {
   }
 
   const submitForm = async () => {
-    const { basic, essay, experience, logistics, portfolio, school, workAuth } =
-      application
+    const {
+      basic,
+      essays,
+      experience,
+      logistics,
+      portfolio,
+      school,
+      workAuth
+    } = application
     const data = {
       ...basic,
-      essays: [essay],
+      ...essays,
       ...experience,
       ...logistics,
       ...portfolio,
