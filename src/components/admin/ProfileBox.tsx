@@ -1,7 +1,5 @@
 import {
-  Box,
-  Checkbox,
-  CircularProgress,
+  Box, CircularProgress,
   Collapse,
   Link,
   makeStyles,
@@ -14,7 +12,6 @@ import {
 import { Cancel, Check, OpenInNew } from "@material-ui/icons"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { Ethnicity, Gender } from "enums/Profile"
-import { ObjectId } from "mongoose"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
