@@ -123,7 +123,7 @@ const Menu = (): ReactElement => {
             ) : null}
             {applicationStatus === ApplicationStatus.ADMITTED ? (
               <>
-                <MenuItem text="CONFIRM" url="/confirm" />
+                <MenuItem text="CONFIRM" url="/confirmation" />
                 <MenuLine />
               </>
             ) : null}
