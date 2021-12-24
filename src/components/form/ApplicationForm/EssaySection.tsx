@@ -47,8 +47,7 @@ const EssaySection = ({
   const [essay, setEssay] = useState<string>("")
 
   const validateForm = async () => {
-    const data: EssayFields = { essays: [essay] }
-    await dispatch(actions.application.saveEssay(data))
+    await dispatch(actions.application.saveEssay(essay))
     setValid(true)
     setValidate(false)
   }

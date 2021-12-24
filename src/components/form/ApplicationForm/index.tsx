@@ -1,5 +1,7 @@
 import {
   Button,
+  CircularProgress,
+  Collapse,
   makeStyles,
   Paper,
   Snackbar,
@@ -75,7 +77,9 @@ const useStyles = makeStyles((theme) => ({
   },
   buttonContainer: {
     display: "flex",
-    justifyContent: "center"
+    alignItems: "center",
+    flexDirection: "column",
+    gap: "1em"
   }
 }))
 
@@ -85,6 +89,7 @@ const ApplicationForm = (): ReactElement => {
   const theme = useTheme()
   const classes = useStyles(theme)
   const application = useSelector((state: RootState) => state?.application)
+  const [loading, setLoading] = useState(false)
 
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState(application?.error)
@@ -154,7 +159,14 @@ const ApplicationForm = (): ReactElement => {
       ...school,
       ...workAuth
     }
-    await dispatch(actions.application.submitForm(data))
+    setLoading(true)
+    try {
+      await dispatch(actions.application.submitForm(data))
+    } catch (err: any) {
+      setError(true)
+      setErrorMessage(err.data)
+    }
+    setLoading(false)
     router.push("/")
   }
 
@@ -239,6 +251,9 @@ const ApplicationForm = (): ReactElement => {
             <Button type="submit" variant="outlined">
               Submit
             </Button>
+            <Collapse in={loading}>
+              <CircularProgress />
+            </Collapse>
           </div>
         </div>
       </form>
