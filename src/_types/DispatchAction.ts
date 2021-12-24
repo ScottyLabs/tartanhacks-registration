@@ -1,6 +1,7 @@
 import { DispatchActionType } from "enums/DispatchActionType"
 import { RequestStatus } from "src/_enums/RequestStatus"
 import { APIRequest } from "./APIRequest"
+
 export type LocalDispatchAction = {
   type: DispatchActionType
   useAPI: false

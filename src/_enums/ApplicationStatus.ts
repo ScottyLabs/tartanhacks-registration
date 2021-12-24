@@ -4,5 +4,6 @@ export enum ApplicationStatus {
   APPLIED = "APPLIED",
   ADMITTED = "ADMITTED",
   REJECTED = "REJECTED",
+  DECLINED = "DECLINED",
   CONFIRMED = "CONFIRMED"
 }

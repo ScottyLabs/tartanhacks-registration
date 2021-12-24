@@ -24,7 +24,14 @@ export const theme = createTheme({
     text: {
       primary: "#AA5418",
       secondary: "#F3964A"
-    }
+    },
+    unverified: "#F3964A",
+    verified: "#2979ff",
+    applied: "#ffc107",
+    admitted: "#8bc34a",
+    rejected: "#f44336",
+    declined: "#f44336",
+    confirmed: "#4caf50"
   },
   typography: {
     fontFamily: "Poppins, Roboto, sans-serif"

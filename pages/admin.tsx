@@ -1,40 +1,36 @@
 import { makeStyles } from "@material-ui/core"
 import { NextPage } from "next"
 import React, { ReactElement } from "react"
+import AdminDialog from "src/components/admin/AdminDialog"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
-import RecruiterApplicationForm from "src/components/form/RecruiterApplicationForm"
 import Menu from "src/components/menu/Menu"
-import { AuthenticatedLayout, AdminLayout } from "src/layouts"
+import AdminLayout from "src/layouts/AdminLayout"
 
 const useStyles = makeStyles((theme) => ({
-  background: {
+  dialog: {
     width: "100%",
+    height: "100%",
     display: "flex",
-    justifyContent: "center",
-    paddingTop: "10em",
-    boxSizing: "border-box",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingTop: "3em"
-    }
+    alignItems: "center",
+    justifyContent: "center"
   }
 }))
 
-const RecruiterApplicationPage: NextPage = (): ReactElement => {
+const AdminPage: NextPage = (): ReactElement => {
   const classes = useStyles()
-
   return (
     <>
       <WaveBackground />
       <Menu />
       <div>
         <ScottyLabsHeader />
-        <div className={classes.background}>
-          <RecruiterApplicationForm />
+        <div className={classes.dialog}>
+          <AdminDialog />
         </div>
       </div>
     </>
   )
 }
 
-export default AdminLayout(AuthenticatedLayout(RecruiterApplicationPage))
+export default AdminLayout(AdminPage)
