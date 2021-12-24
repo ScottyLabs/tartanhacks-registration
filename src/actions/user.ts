@@ -71,6 +71,26 @@ export const rejectUser = (id: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
+export const admitAll = (): DispatchAction => ({
+  type: DispatchActionType.ADMIT_ALL,
+  useAPI: true,
+  request: {
+    path: "/users/admit/all",
+    method: "POST"
+  },
+  status: RequestStatus.PENDING
+})
+
+export const rejectAll = (): DispatchAction => ({
+  type: DispatchActionType.REJECT_ALL,
+  useAPI: true,
+  request: {
+    path: "/users/reject/all",
+    method: "POST"
+  },
+  status: RequestStatus.PENDING
+})
+
 export const confirm = (
   signatureLiability: boolean,
   signaturePhotoRelease: boolean,

@@ -29,8 +29,8 @@ export const theme = createTheme({
     verified: "#2979ff",
     applied: "#ffc107",
     admitted: "#8bc34a",
-    rejected: "#ff1744",
-    declined: "#ff1744",
+    rejected: "#f44336",
+    declined: "#f44336",
     confirmed: "#4caf50"
   },
   typography: {

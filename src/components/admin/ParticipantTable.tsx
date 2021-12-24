@@ -1,7 +1,13 @@
 import {
+  Button,
   Chip,
   CircularProgress,
   Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   IconButton,
   makeStyles,
   Modal,
@@ -13,7 +19,9 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Toolbar,
   Tooltip,
+  Typography,
   useTheme
 } from "@material-ui/core"
 import { Person } from "@material-ui/icons"
@@ -63,6 +71,16 @@ const useStyles = makeStyles((theme) => ({
   buttonMargin: {
     marginRight: "1em"
   },
+  toolbar: {
+    width: "100%",
+    justifyContent: "end"
+  },
+  toolbarContent: {
+    paddingRight: "1em",
+    display: "flex",
+    flexDirection: "row",
+    gap: "1em"
+  },
   table: {
     width: "100%"
   },
@@ -78,6 +96,11 @@ const useStyles = makeStyles((theme) => ({
   chipConfirmed: { backgroundColor: theme.palette.confirmed }
 }))
 
+enum BulkAction {
+  ADMIT_ALL = "Admit all",
+  REJECT_ALL = "Reject all"
+}
+
 const ParticipantTable = (): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
@@ -90,6 +113,8 @@ const ParticipantTable = (): ReactElement => {
 
   const [profileOpen, setProfileOpen] = useState(false)
   const [snackbarOpen, setSnackbarOpen] = useState(false)
+  const [dialogOpen, setDialogOpen] = useState(false)
+  const [bulkAction, setBulkAction] = useState<BulkAction>(null)
 
   const [page, setPage] = useState(0)
   const [rowsPerPage, setRowsPerPage] = useState(5)
@@ -199,6 +224,26 @@ const ParticipantTable = (): ReactElement => {
     }
   }
 
+  const admitAll = async () => {
+    try {
+      await dispatch(actions.user.admitAll())
+      openSnackbar("Admitted all remaining users!")
+      setInvalidated(true)
+    } catch (err) {
+      openSnackbar("Error admitting all users")
+    }
+  }
+
+  const rejectAll = async () => {
+    try {
+      await dispatch(actions.user.rejectAll())
+      openSnackbar("Rejected all remaining users!")
+      setInvalidated(true)
+    } catch (err) {
+      openSnackbar("Error rejecting all users")
+    }
+  }
+
   useEffect(() => {
     const getParticipants = async () => {
       setLoading(true)
@@ -303,6 +348,30 @@ const ParticipantTable = (): ReactElement => {
       >
         <ProfileBox participant={selected as Participant}></ProfileBox>
       </Modal>
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+        <DialogTitle>{bulkAction}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Are you sure you want to {bulkAction?.toLowerCase()} remaining
+            applicants?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDialogOpen(false)}>Cancel</Button>
+          <Button
+            onClick={() => {
+              if (bulkAction === BulkAction.ADMIT_ALL) {
+                admitAll()
+              } else if (bulkAction == BulkAction.REJECT_ALL) {
+                rejectAll()
+              }
+              setDialogOpen(false)
+            }}
+          >
+            {bulkAction}
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={snackbarDuration}
@@ -316,6 +385,28 @@ const ParticipantTable = (): ReactElement => {
             <CircularProgress />
           </div>
         </Collapse>
+        <Toolbar className={classes.toolbar}>
+          <div className={classes.toolbarContent}>
+            <RectangleButton
+              type="button"
+              onClick={() => {
+                setBulkAction(BulkAction.ADMIT_ALL)
+                setDialogOpen(true)
+              }}
+            >
+              Admit All
+            </RectangleButton>
+            <RectangleButton
+              type="button"
+              onClick={() => {
+                setBulkAction(BulkAction.REJECT_ALL)
+                setDialogOpen(true)
+              }}
+            >
+              Reject All
+            </RectangleButton>
+          </div>
+        </Toolbar>
         <TableContainer>
           <Table {...getTableProps()}>
             <TableHead>
