@@ -191,7 +191,14 @@ const ApplicationForm = (): ReactElement => {
   }, [valid, calledValidate, validated])
 
   useEffect(() => {
-    dispatch(actions.application.getProfile())
+    const loadProfile = async () => {
+      try {
+        await dispatch(actions.application.getProfile())
+      } catch (err) {
+        // No submitted profile yet
+      }
+    }
+    loadProfile()
   }, [])
 
   return (
