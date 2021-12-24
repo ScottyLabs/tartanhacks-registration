@@ -1,4 +1,11 @@
-import { Button, makeStyles, TextField, Typography } from "@material-ui/core"
+import {
+  Button,
+  CircularProgress,
+  Collapse,
+  makeStyles,
+  TextField,
+  Typography
+} from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import React, {
   Dispatch,
@@ -69,6 +76,7 @@ const PortfolioSection = ({
         actions.application.uploadResume(file)
       )
       setResume(fileId)
+      setResumeFileName(file.name)
       setUploading(false)
     } catch (err) {
       console.error(err)
@@ -133,11 +141,13 @@ const PortfolioSection = ({
             onChange={(e) => {
               if (e.target.files && e.target.files.length > 0) {
                 uploadResume(e.target.files[0])
-                setResumeFileName(e.target.files[0].name)
               }
             }}
           />
         </Button>
+        <Collapse in={uploading}>
+          <CircularProgress />
+        </Collapse>
         <Typography variant="body2">{resumeFileName}</Typography>
       </div>
       <TextField

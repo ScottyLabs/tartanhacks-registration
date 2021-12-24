@@ -1,8 +1,7 @@
 import {
   CircularProgress,
   Collapse,
-  makeStyles,
-  Typography
+  makeStyles
 } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
 import React, {
@@ -47,9 +46,6 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
       setLoading(true)
       try {
         await dispatch(actions.auth.loginWithToken())
-        dispatch(actions.user.getStatus(currentUser._id))
-        dispatch(actions.settings.getCloseTime())
-        dispatch(actions.settings.getConfirmTime())
       } catch (err) {
         // Login token expired or invalid
         router.push("/login")
@@ -58,6 +54,23 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
     }
     loginWithToken()
   }, [])
+
+  useEffect(() => {
+    const getData = async () => {
+      setLoading(true)
+      try {
+        dispatch(actions.user.getStatus(currentUser._id))
+        dispatch(actions.settings.getCloseTime())
+        dispatch(actions.settings.getConfirmTime())
+      } catch (err) {
+        console.error(err)
+      }
+      setLoading(false)
+    }
+    if (currentUser?._id != null) {
+      getData()
+    }
+  }, [currentUser])
 
   if (loading || currentUser == null) {
     return (
