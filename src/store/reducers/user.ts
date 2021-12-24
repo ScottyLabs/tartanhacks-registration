@@ -7,14 +7,27 @@ const data = (state: any = {}, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.USER_STATUS:
       if (action.status === RequestStatus.SUCCESS) {
-        state.status = action.data
+        state = {
+          status: action.data
+        }
       }
       break
 
     case DispatchActionType.USER_GET_TEAM:
       if (action.status === RequestStatus.SUCCESS) {
-        state.team = action.data
+        state = {
+          team: action.data
+        }
       }
+      break
+
+    case DispatchActionType.USER_PROFILE:
+    case DispatchActionType.GET_USERS:
+    case DispatchActionType.GET_PARTICIPANTS:
+      if (action.status === RequestStatus.SUCCESS) {
+        state = action.data
+      }
+      break
   }
   return state
 }

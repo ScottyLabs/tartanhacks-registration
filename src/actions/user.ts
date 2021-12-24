@@ -30,11 +30,22 @@ export const getProfile = (id: string): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
 export const getUsers = (): DispatchAction => ({
   type: DispatchActionType.GET_USERS,
   useAPI: true,
   request: {
-    path: `/users`,
+    path: "/users",
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
+
+export const getParticipants = (): DispatchAction => ({
+  type: DispatchActionType.GET_PARTICIPANTS,
+  useAPI: true,
+  request: {
+    path: "/participants",
     method: "GET"
   },
   status: RequestStatus.PENDING

@@ -94,6 +94,9 @@ const Menu = (): ReactElement => {
 
   const status =
     useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+  const isAdmin = useSelector(
+    (state: RootState) => state?.accounts?.data?.admin
+  )
   const applicationStatus = getApplicationStatus(status)
 
   return (
@@ -129,6 +132,12 @@ const Menu = (): ReactElement => {
                 <MenuItem text="TEAM" url="/teams" />
                 <MenuLine />
                 <MenuItem text="MESSAGES" url="/messages" />
+                <MenuLine />
+              </>
+            ) : null}
+            {isAdmin ? (
+              <>
+                <MenuItem text="ADMIN" url="/admin" />
                 <MenuLine />
               </>
             ) : null}

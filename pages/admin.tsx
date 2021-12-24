@@ -33,4 +33,4 @@ const AdminPage: NextPage = (): ReactElement => {
   )
 }
 
-export default AdminPage
+export default AuthenticatedLayout(AdminPage)
