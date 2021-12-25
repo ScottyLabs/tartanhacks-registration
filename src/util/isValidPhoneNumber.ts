@@ -21,7 +21,8 @@
  */
 export default (phoneNumber: string): boolean => {
   return (
-    phoneNumber.match(/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/) !=
-    null
+    phoneNumber.match(
+      /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
+    ) != null
   )
 }

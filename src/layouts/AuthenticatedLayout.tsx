@@ -1,8 +1,4 @@
-import {
-  CircularProgress,
-  Collapse,
-  makeStyles
-} from "@material-ui/core"
+import { CircularProgress, Collapse, makeStyles } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
 import React, {
   FunctionComponent,

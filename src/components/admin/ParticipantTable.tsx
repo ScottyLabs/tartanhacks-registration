@@ -21,13 +21,12 @@ import {
   TableRow,
   Toolbar,
   Tooltip,
-  Typography,
   useTheme
 } from "@material-ui/core"
 import { Person } from "@material-ui/icons"
 import CloseIcon from "@material-ui/icons/Close"
 import { ApplicationStatus } from "enums/ApplicationStatus"
-import { ReactElement, useEffect, useMemo, useState } from "react"
+import React, { ReactElement, useEffect, useMemo, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Column, useTable } from "react-table"
 import actions from "src/actions"
@@ -339,14 +338,14 @@ const ParticipantTable = (): ReactElement => {
     })
 
   return (
-    <div>
+    <>
       <Modal
         open={profileOpen}
         onClose={() => setProfileOpen(false)}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <ProfileBox participant={selected as Participant}></ProfileBox>
+        <ProfileBox participant={selected as Participant} />
       </Modal>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogTitle>{bulkAction}</DialogTitle>
@@ -480,7 +479,7 @@ const ParticipantTable = (): ReactElement => {
           }}
         />
       </div>
-    </div>
+    </>
   )
 }
 

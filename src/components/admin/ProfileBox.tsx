@@ -231,7 +231,14 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
 }
 
 const ProfileBox = React.forwardRef(
-  ({ participant }: { participant: Participant }, ref): ReactElement => {
+  (
+    {
+      participant
+    }: {
+      participant: Participant
+    },
+    ref
+  ): ReactElement => {
     const dispatch = useDispatch()
     const classes = useStyles()
     const [profile, setProfile] = useState<any>(null)
@@ -266,7 +273,7 @@ const ProfileBox = React.forwardRef(
     }, [participant])
 
     return (
-      <Box className={classes.modal} ref={ref}>
+      <Box className={classes.modal}>
         <Collapse in={loading}>
           <CircularProgress />
         </Collapse>
