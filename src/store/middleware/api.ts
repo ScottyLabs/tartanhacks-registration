@@ -67,7 +67,6 @@ const apiMiddleware: Middleware<any, any> =
               status: RequestStatus.ERROR,
               data: message
             }
-            console.log({ ...err, message: err.message })
             dispatch(action)
             return Promise.reject(action)
           } else {
