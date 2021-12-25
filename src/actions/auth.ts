@@ -23,6 +23,19 @@ export const verify = (token: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
+export const resendVerification = (email: string): DispatchAction => ({
+  type: DispatchActionType.AUTH_VERIFY,
+  useAPI: true,
+  request: {
+    path: "/auth/verify/resend",
+    method: "POST",
+    body: {
+      email
+    }
+  },
+  status: RequestStatus.PENDING
+})
+
 export const login = (email?: string, password?: string): DispatchAction => ({
   type: DispatchActionType.AUTH_LOGIN,
   useAPI: true,

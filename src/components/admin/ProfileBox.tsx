@@ -13,7 +13,7 @@ import {
 import { Cancel, Check, OpenInNew } from "@material-ui/icons"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { Ethnicity, Gender } from "enums/Profile"
-import { ReactElement, useEffect, useState } from "react"
+import React, { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
@@ -230,66 +230,59 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
   )
 }
 
-interface Status {
-  verified?: boolean
-  completedProfile?: boolean
-  admitted?: boolean
-  declined?: boolean
-  confirmed?: boolean
-}
+const ProfileBox = React.forwardRef(
+  ({ participant }: { participant: Participant }, ref): ReactElement => {
+    const dispatch = useDispatch()
+    const classes = useStyles()
+    const [profile, setProfile] = useState<any>(null)
+    const [loading, setLoading] = useState(true)
 
-const ProfileBox = ({
-  participant
-}: {
-  participant: Participant
-}): ReactElement => {
-  const dispatch = useDispatch()
-  const classes = useStyles()
-  const [profile, setProfile] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+    const applicationStatus = getApplicationStatus(participant?.status)
 
-  const applicationStatus = getApplicationStatus(participant?.status)
-
-  const incomplete = [ApplicationStatus.UNVERIFIED, ApplicationStatus.VERIFIED]
-  let profileContent = null
-  if (profile != null && !incomplete.includes(applicationStatus)) {
-    profileContent = <ProfileContent profile={profile} />
-  }
-
-  useEffect(() => {
-    const queryProfile = async () => {
-      try {
-        setLoading(true)
-        const { data } = await dispatch(
-          actions.user.getProfile(participant._id)
-        )
-        setProfile(data)
-        setLoading(false)
-      } catch (err) {
-        console.error(err)
-        setLoading(false)
-      }
+    const incomplete = [
+      ApplicationStatus.UNVERIFIED,
+      ApplicationStatus.VERIFIED
+    ]
+    let profileContent = null
+    if (profile != null && !incomplete.includes(applicationStatus)) {
+      profileContent = <ProfileContent profile={profile} />
     }
-    queryProfile()
-  }, [participant])
 
-  return (
-    <Box className={classes.modal}>
-      <Collapse in={loading}>
-        <CircularProgress />
-      </Collapse>
-      {loading ? null : (
-        <>
-          <Typography variant="h5">{participant?.email}</Typography>
-          <Typography variant="h6">
-            Status:{" "}
-            <span className={classes.statusLabel}>{applicationStatus}</span>
-          </Typography>
-          {profileContent}
-        </>
-      )}
-    </Box>
-  )
-}
+    useEffect(() => {
+      const queryProfile = async () => {
+        try {
+          setLoading(true)
+          const { data } = await dispatch(
+            actions.user.getProfile(participant._id)
+          )
+          setProfile(data)
+          setLoading(false)
+        } catch (err) {
+          console.error(err)
+          setLoading(false)
+        }
+      }
+      queryProfile()
+    }, [participant])
+
+    return (
+      <Box className={classes.modal} ref={ref}>
+        <Collapse in={loading}>
+          <CircularProgress />
+        </Collapse>
+        {loading ? null : (
+          <>
+            <Typography variant="h5">{participant?.email}</Typography>
+            <Typography variant="h6">
+              Status:{" "}
+              <span className={classes.statusLabel}>{applicationStatus}</span>
+            </Typography>
+            {profileContent}
+          </>
+        )}
+      </Box>
+    )
+  }
+)
 
 export default ProfileBox

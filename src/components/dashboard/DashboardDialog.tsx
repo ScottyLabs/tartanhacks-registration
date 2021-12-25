@@ -1,8 +1,10 @@
 import {
+  CircularProgress,
   Collapse,
   LinearProgress,
   Link,
   makeStyles,
+  Snackbar,
   Typography
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
@@ -21,6 +23,7 @@ import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import Image from "next/image"
+import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -203,9 +206,16 @@ const getDialogText = (
 
 const getButtonBox = (
   classes: any,
-  applicationStatus: ApplicationStatus
+  applicationStatus: ApplicationStatus,
+  resendVerification: () => Promise<void>
 ): ReactElement => {
-  if (applicationStatus === ApplicationStatus.VERIFIED) {
+  if (applicationStatus === ApplicationStatus.UNVERIFIED) {
+    return (
+      <RectangleButton type="button" onClick={() => resendVerification()}>
+        RESEND VERIFICATION EMAIL
+      </RectangleButton>
+    )
+  } else if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
       <Link href="/apply" className={classes.link}>
         <RectangleButton type="submit">
@@ -243,6 +253,12 @@ const DashboardDialog = (): ReactElement => {
   const theme = useTheme()
   const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
+  const [snackbarOpen, setSnackbarOpen] = useState(false)
+  const [snackbarState, setSnackbarState] = useState<"success" | "error">(
+    "success"
+  )
+  const [snackbarMessage, setSnackbarMessage] = useState("")
+
   const closeTime = useSelector(
     (state: RootState) => state?.settings?.closeTime
   )
@@ -256,7 +272,22 @@ const DashboardDialog = (): ReactElement => {
 
   const status =
     useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+  const email =
+    useSelector((state: RootState) => state?.accounts?.data?.email) || ""
   const applicationStatus = getApplicationStatus(status)
+
+  const resendVerification = async () => {
+    setLoading(true)
+    try {
+      await dispatch(actions.auth.resendVerification(email))
+      setSnackbarMessage("Sent verification email to: " + email)
+      setSnackbarState("success")
+      setSnackbarOpen(true)
+    } catch (err) {
+      console.error(err)
+    }
+    setLoading(false)
+  }
 
   const dialogText = getDialogText(
     classes,
@@ -264,24 +295,35 @@ const DashboardDialog = (): ReactElement => {
     closeTimeStr,
     confirmTimeStr
   )
-  const buttonBox = getButtonBox(classes, applicationStatus)
+  const buttonBox = getButtonBox(classes, applicationStatus, resendVerification)
 
   return (
-    <div className={classes.dialog}>
-      <Collapse in={loading}>
-        <LinearProgress />
-      </Collapse>
-      <div className={classes.dialogContent}>
-        <div className={classes.statusText}>
-          <Typography variant="h4">Your Status:</Typography>
+    <>
+      <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={3000}
+        onClose={(e) => setSnackbarOpen(false)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      >
+        <Alert severity={snackbarState}>{snackbarMessage}</Alert>
+      </Snackbar>
+      <div className={classes.dialog}>
+        <div className={classes.dialogContent}>
+          <div className={classes.statusText}>
+            <Typography variant="h4">Your Status:</Typography>
+          </div>
+          <div className={classes.emphasisText}>
+            <Typography variant="h4">{applicationStatus}</Typography>
+          </div>
+          {dialogText}
+          {buttonBox}
         </div>
-        <div className={classes.emphasisText}>
-          <Typography variant="h4">{applicationStatus}</Typography>
-        </div>
-        {dialogText}
-        {buttonBox}
+        <Collapse in={loading}>
+          <br />
+          <CircularProgress />
+        </Collapse>
       </div>
-    </div>
+    </>
   )
 }
 
