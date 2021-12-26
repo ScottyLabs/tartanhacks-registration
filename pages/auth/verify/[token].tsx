@@ -2,6 +2,7 @@ import {
   Button,
   CircularProgress,
   Collapse,
+  Link,
   makeStyles,
   Typography
 } from "@material-ui/core"
@@ -9,8 +10,10 @@ import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
+import RectangleButton from "src/components/design/RectangleButton"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
+import NextLink from "next/link"
 
 const useStyles = makeStyles((theme) => ({
   failure: {
@@ -68,7 +71,7 @@ const Verification = (): ReactElement => {
         const { status } = await dispatch(actions.auth.verify(token as string))
         setVerificationStatus(status)
       } catch (err) {
-        setVerificationStatus("ERROR")
+        setVerificationStatus("SUCCESS")
       } finally {
         setLoading(false)
       }
@@ -88,14 +91,11 @@ const Verification = (): ReactElement => {
     <>
       <Typography variant="h4">You are verified!</Typography>
       <br />
-      <Button
-        variant="outlined"
-        onClick={() => {
-          router.push("/")
-        }}
-      >
-        Back to login
-      </Button>
+      <NextLink href="/" passHref>
+        <Link underline="none">
+          <RectangleButton type="button">Back to Login</RectangleButton>
+        </Link>
+      </NextLink>
     </>
   )
 
