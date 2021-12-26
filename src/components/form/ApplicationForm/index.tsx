@@ -13,6 +13,7 @@ import { useRouter } from "next/dist/client/router"
 import React, { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
+import RectangleButton from "src/components/design/RectangleButton"
 import { RootState } from "types/RootState"
 import BasicSection from "./BasicSection"
 import EssaySection from "./EssaySection"
@@ -262,9 +263,7 @@ const ApplicationForm = (): ReactElement => {
             setValid={setValidLogistics}
           />
           <div className={classes.buttonContainer}>
-            <Button type="submit" variant="outlined">
-              Submit
-            </Button>
+            <RectangleButton type="submit">Submit Application</RectangleButton>
             <Collapse in={loading}>
               <CircularProgress />
             </Collapse>
