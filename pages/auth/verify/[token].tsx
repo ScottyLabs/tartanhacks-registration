@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center"
+  },
+  spinner: {
+    marginBottom: "5em"
   }
 }))
 
