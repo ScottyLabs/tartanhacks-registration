@@ -4,12 +4,13 @@ import React, {
   useEffect,
   useState
 } from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/dist/client/router"
 import { RootState } from "types/RootState"
 import { Collapse, CircularProgress, makeStyles } from "@material-ui/core"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
+import actions from "src/actions"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
  * login the user using the stored login token in the browser
  */
 const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
+  const dispatch = useDispatch()
   const classes = useStyles()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
@@ -38,12 +40,21 @@ const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
   useEffect(() => {
     const loginWithToken = async () => {
       setLoading(true)
-      if (currentUser.admin === false) {
-        router.push("/")
+      try {
+        await dispatch(actions.auth.loginWithToken())
+      } catch (err) {
+        // Login token expired or invalid
+        router.push("/login")
       }
       setLoading(false)
     }
     loginWithToken()
+  }, [])
+
+  useEffect(() => {
+    if (currentUser?._id && !currentUser.admin) {
+      router.push("/")
+    }
   }, [currentUser])
 
   if (loading || currentUser == null) {
