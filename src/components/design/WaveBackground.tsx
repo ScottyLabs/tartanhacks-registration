@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     width: "100%",
     overflow: "hidden",
-    lineHeight: 0
+    lineHeight: 0,
+    zIndex: -1
   },
   titleBox: {
     position: "absolute",

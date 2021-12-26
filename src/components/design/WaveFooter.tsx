@@ -7,7 +7,8 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     overflow: "hidden",
     lineHeight: 0,
-    bottom: "0px"
+    bottom: "0px",
+    zIndex: -1
   },
   waveSvg: {
     width: "100%",
