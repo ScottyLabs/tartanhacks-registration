@@ -35,9 +35,6 @@ const useStyles = makeStyles((theme) => ({
     background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
     backdropFilter: "blur(4px)",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      paddingTop: "3em"
-    },
     borderRadius: "10px",
     marginTop: "-5em",
     flexDirection: "column"
@@ -122,7 +119,7 @@ const Verification = (): ReactElement => {
             <Collapse in={loading}>
               <CircularProgress className={classes.spinner} />
             </Collapse>
-            {dialogContent}
+            <Collapse in={!loading}>{dialogContent}</Collapse>
           </div>
         </div>
       </div>
