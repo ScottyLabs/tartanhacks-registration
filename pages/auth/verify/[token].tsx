@@ -19,6 +19,9 @@ const useStyles = makeStyles((theme) => ({
   success: {
     border: `solid 3px ${theme.palette.success.main}`
   },
+  loading: {
+    border: `solid 3px ${theme.palette.primary.main}`
+  },
   dialog: {
     width: "100%",
     height: "100%",
@@ -39,8 +42,11 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "-5em",
     flexDirection: "column"
   },
-  spinner: {
-    marginBottom: "5em"
+  dialogText: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   }
 }))
 
@@ -108,6 +114,9 @@ const Verification = (): ReactElement => {
   } else if (verificationStatus === "EXPIRED") {
     dialogContent = expired
   }
+  if (loading) {
+    dialogClass = classes.loading
+  }
 
   return (
     <>
@@ -119,7 +128,9 @@ const Verification = (): ReactElement => {
             <Collapse in={loading}>
               <CircularProgress className={classes.spinner} />
             </Collapse>
-            <Collapse in={!loading}>{dialogContent}</Collapse>
+            <Collapse in={!loading}>
+              <div className={classes.dialogText}>{dialogContent}</div>
+            </Collapse>
           </div>
         </div>
       </div>
