@@ -1,34 +1,53 @@
-import { Button, makeStyles, Typography } from "@material-ui/core"
+import {
+  Button,
+  CircularProgress,
+  Collapse,
+  makeStyles,
+  Typography
+} from "@material-ui/core"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import { DialogLayout } from "src/layouts"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import WaveBackground from "src/components/design/WaveBackground"
 
 const useStyles = makeStyles((theme) => ({
   failure: {
-    border: "solid #D8000C 1px",
-    background: "#FFBABA"
+    border: `solid 3px ${theme.palette.error.main}`
   },
-
   success: {
-    border: "solid #04AA6D 1px",
-    background: "#DFF2BF"
+    border: `solid 3px ${theme.palette.success.main}`
   },
-
   dialog: {
+    width: "100%",
+    height: "100%",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    width: "25%",
-    borderRadius: "1em",
-    padding: "1em",
-    margin: "0 auto",
+    zIndex: 5
+  },
+  dialogContent: {
+    display: "flex",
+    alignItems: "center",
+    padding: "2em",
+    boxSizing: "border-box",
+    background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
+    boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
+    backdropFilter: "blur(4px)",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      paddingTop: "3em"
+    },
+    borderRadius: "10px",
+    marginTop: "-5em",
     flexDirection: "column"
+  },
+  spinner: {
+    marginBottom: "5em"
   }
 }))
 
-const Verification = () => {
+const Verification = (): ReactElement => {
   const dispatch = useDispatch()
   const classes = useStyles()
   const router = useRouter()
@@ -55,53 +74,60 @@ const Verification = () => {
     verify()
   }, [token])
 
-  const failure = () => {
-    return (
-      <div className={`${classes.dialog} ${classes.failure}`}>
-        <Typography variant="h4">This is an invalid token</Typography>
-        <Typography variant="body1">Please request a new one</Typography>
-      </div>
-    )
-  }
+  const failure = (
+    <>
+      <Typography variant="h4">This is an invalid token</Typography>
+      <Typography variant="body1">Please request a new one</Typography>
+    </>
+  )
 
-  const success = () => {
-    return (
-      <div className={`${classes.dialog} ${classes.success}`}>
-        <Typography variant="h4">You are verified!</Typography>
-        <Button
-          variant="outlined"
-          onClick={() => {
-            router.push("/")
-          }}
-        >
-          Back to login
-        </Button>
-      </div>
-    )
-  }
+  const success = (
+    <>
+      <Typography variant="h4">You are verified!</Typography>
+      <br />
+      <Button
+        variant="outlined"
+        onClick={() => {
+          router.push("/")
+        }}
+      >
+        Back to login
+      </Button>
+    </>
+  )
 
-  const expired = () => {
-    return (
-      <div className={`${classes.dialog}, ${classes.failure}`}>
-        <Typography variant="h4">This token has expired</Typography>
-        <Typography variant="body1">Please request a new one</Typography>
-      </div>
-    )
-  }
+  const expired = (
+    <>
+      <Typography variant="h4">This token has expired</Typography>
+      <Typography variant="body1">Please request a new one</Typography>
+    </>
+  )
 
-  if (loading) {
-    return <></>
-  }
-
+  let dialogContent = failure
+  let dialogClass = classes.failure
   if (verificationStatus === "SUCCESS") {
-    return success()
+    dialogContent = success
+    dialogClass = classes.success
+  } else if (verificationStatus === "EXPIRED") {
+    dialogContent = expired
   }
 
-  if (verificationStatus === "EXPIRED") {
-    return expired()
-  }
-
-  return failure()
+  return (
+    <>
+      <WaveBackground />
+      <div>
+        <ScottyLabsHeader />
+        <div className={classes.dialog}>
+          <div className={`${classes.dialogContent} ${dialogClass}`}>
+            <Collapse in={loading}>
+              <CircularProgress className={classes.spinner} />
+            </Collapse>
+            {dialogContent}
+          </div>
+        </div>
+      </div>
+    </>
+  )
 }
 
-export default DialogLayout(Verification)
+export default Verification
