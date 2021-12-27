@@ -25,6 +25,10 @@ export const theme = createTheme({
       primary: "#AA5418",
       secondary: "#F3964A"
     },
+    button: {
+      primary: "#F7C062",
+      secondary: "#e0ac52"
+    },
     unverified: "#F3964A",
     verified: "#2979ff",
     applied: "#ffc107",

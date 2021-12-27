@@ -3,10 +3,13 @@ import React, { ReactElement } from "react"
 
 const useStyles = makeStyles((theme) => ({
   button: {
-    background: "#F7C062",
+    backgroundColor: theme.palette.button.primary,
     borderRadius: "10px",
     boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
-    color: "white"
+    color: "white",
+    "&:hover": {
+      backgroundColor: theme.palette.button.secondary
+    }
   }
 }))
 

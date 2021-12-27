@@ -4,25 +4,29 @@
  */
 declare module "@material-ui/core/styles/createPalette" {
   interface PaletteOptions {
-    gradient?: {
+    gradient: {
       start: string
       end: string
     }
-    waveGradient?: {
+    waveGradient: {
       start: string
       end: string
     }
-    lightGradient?: {
+    lightGradient: {
       start: string
       end: string
-    }
-    unverified?: string
-    verified?: string
-    applied?: string
-    admitted?: string
-    rejected?: string
-    declined?: string
-    confirmed?: string
+    },
+    button: {
+      primary: string,
+      secondary: string
+    },
+    unverified: string
+    verified: string
+    applied: string
+    admitted: string
+    rejected: string
+    declined: string
+    confirmed: string
   }
 
   interface Palette {
@@ -37,7 +41,11 @@ declare module "@material-ui/core/styles/createPalette" {
     lightGradient: {
       start: string
       end: string
-    }
+    },
+    button: {
+      primary: string,
+      secondary: string
+    },
     unverified: string
     verified: string
     applied: string
