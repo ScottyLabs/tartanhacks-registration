@@ -7,7 +7,7 @@ export const theme = createTheme({
       main: "#F3964A"
     },
     secondary: {
-      main: green[100]
+      main: "#AA5418"
     },
     gradient: {
       start: "#AA5418",
