@@ -26,8 +26,8 @@ export const theme = createTheme({
       secondary: "#F3964A"
     },
     button: {
-      primary: "#F7C062",
-      secondary: "#e0ac52"
+      main: "#F7C062",
+      focused: "#e0ac52"
     },
     unverified: "#F3964A",
     verified: "#2979ff",

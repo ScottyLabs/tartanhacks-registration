@@ -17,8 +17,8 @@ declare module "@material-ui/core/styles/createPalette" {
       end: string
     },
     button: {
-      primary: string,
-      secondary: string
+      main: string,
+      focused: string
     },
     unverified: string
     verified: string
@@ -43,8 +43,8 @@ declare module "@material-ui/core/styles/createPalette" {
       end: string
     },
     button: {
-      primary: string,
-      secondary: string
+      main: string,
+      focused: string
     },
     unverified: string
     verified: string
