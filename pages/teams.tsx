@@ -12,7 +12,7 @@ import { useRouter } from "next/dist/client/router"
 import { AuthenticatedLayout, TeamlessLayout } from "src/layouts"
 import WaveFooter from "src/components/design/WaveFooter"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
-import RoundedButton from "src/components/design/RoundedButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
 import ContentHeader from "src/components/design/ContentHeader"
@@ -159,9 +159,9 @@ const ViewTeams = () => {
               router.push("/teams/create")
             }}
           >
-            <RoundedButton type="submit" className={classes.newTeamButton}>
+            <RectangleButton type="submit" className={classes.newTeamButton}>
               Create new team
-            </RoundedButton>
+            </RectangleButton>
           </form>
           <Collapse in={loading}>
             <div className={classes.spinnerContainer}>

@@ -2,7 +2,7 @@ import { makeStyles, Typography } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import RoundedButton from "src/components/design/RoundedButton"
+import RectangleButton from "src/components/design/RectangleButton"
 
 const useStyles = makeStyles((theme) => ({
   newCell: {
@@ -174,9 +174,12 @@ const Message = (props: any) => {
                 }
               }}
             >
-              <RoundedButton type="submit" className={classes.tableEntryButton}>
+              <RectangleButton
+                type="submit"
+                className={classes.tableEntryButton}
+              >
                 Accept
-              </RoundedButton>
+              </RectangleButton>
             </form>
           ) : null}
         </td>
@@ -196,9 +199,12 @@ const Message = (props: any) => {
                 }
               }}
             >
-              <RoundedButton type="submit" className={classes.tableEntryButton}>
+              <RectangleButton
+                type="submit"
+                className={classes.tableEntryButton}
+              >
                 Decline
-              </RoundedButton>
+              </RectangleButton>
             </form>
           ) : (
             <form
@@ -215,9 +221,12 @@ const Message = (props: any) => {
                 }
               }}
             >
-              <RoundedButton type="submit" className={classes.tableEntryButton}>
+              <RectangleButton
+                type="submit"
+                className={classes.tableEntryButton}
+              >
                 Cancel
-              </RoundedButton>
+              </RectangleButton>
             </form>
           )}
         </td>

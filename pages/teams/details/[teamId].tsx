@@ -18,7 +18,7 @@ import WaveFooter from "src/components/design/WaveFooter"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import ContentHeader from "src/components/design/ContentHeader"
-import RoundedButton from "src/components/design/RoundedButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
 import { Alert } from "@material-ui/lab"
@@ -317,9 +317,9 @@ const TeamDescription = () => {
                     }
                   }}
                 >
-                  <RoundedButton type="submit" className={classes.editButton}>
+                  <RectangleButton type="submit" className={classes.editButton}>
                     EDIT TEAM NAME
-                  </RoundedButton>
+                  </RectangleButton>
                 </form>
               ) : null}
             </div>
@@ -344,9 +344,9 @@ const TeamDescription = () => {
                     }
                   }}
                 >
-                  <RoundedButton type="submit" className={classes.editButton}>
+                  <RectangleButton type="submit" className={classes.editButton}>
                     EDIT DESCRIPTION
-                  </RoundedButton>
+                  </RectangleButton>
                 </form>
               ) : null}
             </div>
@@ -380,9 +380,9 @@ const TeamDescription = () => {
                     }
                   }}
                 >
-                  <RoundedButton type="submit" className={classes.editButton}>
+                  <RectangleButton type="submit" className={classes.editButton}>
                     INVITE NEW MEMBERS
-                  </RoundedButton>
+                  </RectangleButton>
                 </form>
               ) : null}
             </div>
@@ -400,9 +400,9 @@ const TeamDescription = () => {
                 }
               }}
             >
-              <RoundedButton type="submit" className={classes.leaveButton}>
+              <RectangleButton type="submit" className={classes.leaveButton}>
                 LEAVE TEAM
-              </RoundedButton>
+              </RectangleButton>
             </form>
           ) : null}
         </FloatingDiv>

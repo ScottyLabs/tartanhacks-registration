@@ -1,6 +1,6 @@
 import { Hidden, makeStyles, Typography, Snackbar } from "@material-ui/core"
 import actions from "src/actions"
-import RoundedButton from "src/components/design/RoundedButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import { useRouter } from "next/dist/client/router"
 import { useDispatch } from "react-redux"
 import { useState } from "react"
@@ -106,9 +106,9 @@ const TeamTableEntry = (props: any) => {
               }
             }}
           >
-            <RoundedButton type="submit" className={classes.tableEntryButton}>
+            <RectangleButton type="submit" className={classes.tableEntryButton}>
               Join
-            </RoundedButton>
+            </RectangleButton>
           </form>
         </td>
         <td className={classes.viewDetailCell}>
@@ -118,9 +118,9 @@ const TeamTableEntry = (props: any) => {
               router.push("/teams/details/" + props.team._id)
             }}
           >
-            <RoundedButton type="submit" className={classes.tableEntryButton}>
+            <RectangleButton type="submit" className={classes.tableEntryButton}>
               View Detail
-            </RoundedButton>
+            </RectangleButton>
           </form>
         </td>
       </tr>

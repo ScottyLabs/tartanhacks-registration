@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "50%",
     margin: "0 auto",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      fontSize: "28px",
+      width: "70%"
+    },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "22px",
       width: "80%",
@@ -44,7 +48,7 @@ const ContentHeader = (props: any) => {
         <Typography
           variant="h4"
           className={`${classes.header} 
-          ${props.longTitle == "true" ? classes.longTitle : ""}`}
+          ${props.longTitle ? classes.longTitle : ""}`}
         >
           {props.title}
         </Typography>

@@ -7,7 +7,7 @@ import FloatingDiv from "src/components/design/FloatingDiv"
 import ContentHeader from "src/components/design/ContentHeader"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/router"
-import RoundedButton from "src/components/design/RoundedButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import actions from "src/actions"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
@@ -108,7 +108,7 @@ const TeamCreate = () => {
         <WaveFooter />
         <FloatingDiv>
           <BackButton link="/teams" className={classes.backButton} />
-          <ContentHeader title="Create New Team" longTitle="true" />
+          <ContentHeader title="Create New Team" longTitle={true} />
           <div className={classes.content}>
             <Typography variant="h4" className={classes.title}>
               BASIC INFO
@@ -190,9 +190,9 @@ const TeamCreate = () => {
                   )
                 }}
               />
-              <RoundedButton type="submit" className={classes.createButton}>
+              <RectangleButton type="submit" className={classes.createButton}>
                 CREATE NEW TEAM
-              </RoundedButton>
+              </RectangleButton>
             </form>
           </div>
         </FloatingDiv>
