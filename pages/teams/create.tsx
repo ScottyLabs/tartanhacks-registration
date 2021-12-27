@@ -141,6 +141,7 @@ const TeamCreate = () => {
               <TextField
                 required
                 variant="outlined"
+                placeholder="Your team's name"
                 fullWidth={true}
                 value={teamName}
                 className={classes.textField}
@@ -159,6 +160,7 @@ const TeamCreate = () => {
               <TextField
                 required
                 variant="outlined"
+                placeholder="Your team's description"
                 fullWidth={true}
                 value={teamDescription}
                 className={classes.textField}
@@ -176,8 +178,10 @@ const TeamCreate = () => {
               </Typography>
               <TextField
                 variant="outlined"
+                placeholder={"e.g. user@example.com\n        teammate@tartanhacks.cmu.edu"}
                 fullWidth={true}
                 className={classes.textField}
+                multiline
                 InputProps={{
                   className: classes.textFieldInput,
                   classes: { notchedOutline: classes.textFieldInput }
@@ -185,7 +189,7 @@ const TeamCreate = () => {
                 onChange={(e) => {
                   setAddMembers(
                     e.target.value.match(
-                      /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi
+                      /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi
                     )
                   )
                 }}

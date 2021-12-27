@@ -1,6 +1,7 @@
 import {
   CircularProgress,
-  Collapse, Link,
+  Collapse,
+  Link,
   makeStyles,
   Snackbar,
   Typography
@@ -9,9 +10,7 @@ import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
-import {
-  ReactElement, useState
-} from "react"
+import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
