@@ -284,11 +284,9 @@ const TeamDescription = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
-          {
-            ownTeamFetched && !isOwnTeam ?
-            <BackButton link='/teams' className={classes.backButton}/>
-            : null
-          }
+          {ownTeamFetched && !isOwnTeam ? (
+            <BackButton link="/teams" className={classes.backButton} />
+          ) : null}
           <ContentHeader title="Team" />
           <div className={classes.content}>
             <div className={classes.editableText}>

@@ -100,7 +100,7 @@ const TeamCreate = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
-          <BackButton link="/teams" className={classes.backButton}/>
+          <BackButton link="/teams" className={classes.backButton} />
           <ContentHeader title="Create New Team" longTitle="true" />
           <div className={classes.content}>
             <Typography variant="h4" className={classes.title}>
