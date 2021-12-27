@@ -7,7 +7,7 @@ export const theme = createTheme({
       main: "#F3964A"
     },
     secondary: {
-      main: green[100]
+      main: "#AA5418"
     },
     gradient: {
       start: "#AA5418",
@@ -24,6 +24,10 @@ export const theme = createTheme({
     text: {
       primary: "#AA5418",
       secondary: "#F3964A"
+    },
+    button: {
+      main: "#F7C062",
+      focused: "#e0ac52"
     },
     unverified: "#F3964A",
     verified: "#2979ff",

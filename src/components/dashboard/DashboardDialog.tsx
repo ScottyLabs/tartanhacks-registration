@@ -1,29 +1,22 @@
 import {
   CircularProgress,
-  Collapse,
-  LinearProgress,
-  Link,
+  Collapse, Link,
   makeStyles,
   Snackbar,
   Typography
 } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
 import {
-  Dispatch,
-  ReactElement,
-  SetStateAction,
-  useEffect,
-  useState
+  ReactElement, useState
 } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
-import Image from "next/image"
-import { Alert } from "@material-ui/lab"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -170,12 +163,14 @@ const getDialogText = (
             Thanks for confirming your attendance!
           </Typography>
           <Typography variant="body1">We hope to see you soon!</Typography>
-          <Typography variant="body1">
+          <Typography variant="body1"></Typography>
+          {/* Remove for now until Dashboard app is finalized */}
+          {/* <Typography variant="body1">
             In the meantime, download our Dashboard App!
           </Typography>
           <div className={classes.appStoreLinks}>
             <Link
-              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal"
               target="_blank"
             >
               <Image
@@ -196,7 +191,7 @@ const getDialogText = (
                 height={40}
               />
             </Link>
-          </div>
+          </div> */}
         </div>
       </>
     )
