@@ -13,6 +13,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
 import { Alert } from "@material-ui/lab"
 import Menu from "src/components/menu/Menu"
+import BackButton from "src/components/design/BackButton"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -75,6 +76,10 @@ const useStyles = makeStyles((theme) => ({
   textFieldInput: {
     border: "none",
     color: theme.palette.gradient.start
+  },
+  backButton: {
+    marginTop: "20px",
+    alignSelf: "flex-start"
   }
 }))
 
@@ -95,6 +100,7 @@ const TeamCreate = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
+          <BackButton link="/teams" className={classes.backButton}/>
           <ContentHeader title="Create New Team" longTitle="true" />
           <div className={classes.content}>
             <Typography variant="h4" className={classes.title}>
