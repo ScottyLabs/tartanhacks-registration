@@ -108,7 +108,7 @@ const Message = (props: any) => {
     const body =
       (request.type === "JOIN"
         ? props.isCaptain
-          ? "Sent from user"
+          ? "Sent by user"
           : "Sent to team"
         : request.type === "INVITE"
           ? props.isCaptain
@@ -116,8 +116,7 @@ const Message = (props: any) => {
             : "From team"
           : request.type) +
       " " +
-      //TODO: get user name
-      (props.isCaptain ? request.user : request.team.name)
+      (props.isCaptain ? request.user.email : request.team.name)
     return {
       header: header,
       body: body
@@ -135,7 +134,6 @@ const Message = (props: any) => {
       acceptDecline: "INVITE"
     }
   return (
-    <>
       <tr className={classes.row}>
         <td className={classes.newCell}>
           {props.isNew && props.content.type != types.cancel ? (
@@ -170,7 +168,7 @@ const Message = (props: any) => {
                 } catch (err) {
                   props.setNotify("error")
                 } finally {
-                  props.handleRemove(props.key)
+                  props.handleRemove(props.content._id)
                 }
               }}
             >
@@ -195,7 +193,7 @@ const Message = (props: any) => {
                 } catch (err) {
                   props.setNotify("error")
                 } finally {
-                  props.handleRemove(props.key)
+                  props.handleRemove(props.content._id)
                 }
               }}
             >
@@ -217,7 +215,7 @@ const Message = (props: any) => {
                 } catch (err) {
                   props.setNotify("error")
                 } finally {
-                  props.handleRemove(props.key)
+                  props.handleRemove(props.content._id)
                 }
               }}
             >
@@ -231,7 +229,6 @@ const Message = (props: any) => {
           )}
         </td>
       </tr>
-    </>
   )
 }
 

@@ -187,13 +187,13 @@ const ViewTeams = () => {
           </table>
         </FloatingDiv>
         <Snackbar
-          open={notify != ""}
+          open={notify === "error" || notify === "success"}
           autoHideDuration={5000}
-          onClose={(e) => setNotify("")}
+          onClose={(e) => setNotify(notify === "error" ? "error_close" : "success_close")}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          <Alert severity={notify === "error" ? "error" : "success"}>
-            {notify == "error" ? errorMessage : successMessage}
+          <Alert severity={notify === "error" || notify === "error_close" ? "error" : "success"}>
+            {notify == "error" || notify === "error_close" ? errorMessage : successMessage}
           </Alert>
         </Snackbar>
       </div>
