@@ -15,11 +15,11 @@ declare module "@material-ui/core/styles/createPalette" {
     lightGradient: {
       start: string
       end: string
-    },
+    }
     button: {
-      main: string,
+      main: string
       focused: string
-    },
+    }
     unverified: string
     verified: string
     applied: string
@@ -41,11 +41,11 @@ declare module "@material-ui/core/styles/createPalette" {
     lightGradient: {
       start: string
       end: string
-    },
+    }
     button: {
-      main: string,
+      main: string
       focused: string
-    },
+    }
     unverified: string
     verified: string
     applied: string
