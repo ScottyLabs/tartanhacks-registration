@@ -174,7 +174,7 @@ const getDialogText = (
           </Typography>
           <div className={classes.appStoreLinks}>
             <Link
-              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal&hl=en_US&gl=US&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1"
+              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal"
               target="_blank"
             >
               <Image
