@@ -94,8 +94,10 @@ const MessagesDialog = ({
           })
         )
         req.data.forEach(async (value: any) => {
-          if ((captain && value.type === "JOIN") ||
-          (!captain && value.type === "INVITE")) {
+          if (
+            (captain && value.type === "JOIN") ||
+            (!captain && value.type === "INVITE")
+          ) {
             await dispatch(actions.requests.openRequest(value._id))
           }
         })

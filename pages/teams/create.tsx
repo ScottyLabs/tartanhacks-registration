@@ -178,7 +178,9 @@ const TeamCreate = () => {
               </Typography>
               <TextField
                 variant="outlined"
-                placeholder={"e.g. user@example.com\n        teammate@tartanhacks.cmu.edu"}
+                placeholder={
+                  "e.g. user@example.com\n        teammate@tartanhacks.cmu.edu"
+                }
                 fullWidth={true}
                 className={classes.textField}
                 multiline

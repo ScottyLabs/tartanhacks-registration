@@ -427,6 +427,7 @@ const TeamDescription = () => {
               fullWidth={true}
               value={changedName}
               className={classes.textField}
+              placeholder="Your team's name"
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
@@ -452,6 +453,7 @@ const TeamDescription = () => {
               fullWidth={true}
               value={changedDescription}
               className={classes.textField}
+              placeholder="Your team's description"
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
@@ -476,6 +478,10 @@ const TeamDescription = () => {
               variant="outlined"
               fullWidth={true}
               className={classes.textField}
+              multiline
+              placeholder={
+                "e.g. user@example.com\n        teammate@tartanhacks.cmu.edu"
+              }
               InputProps={{
                 className: classes.textFieldInput,
                 classes: { notchedOutline: classes.textFieldInput }
