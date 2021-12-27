@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 
 interface Sponsor {
   name: string
-  _id: ObjectId
+  _id: string
 }
 
 const WorkAuthorizationSection = ({
@@ -54,19 +54,25 @@ const WorkAuthorizationSection = ({
   // Work Authorization
   const sponsors: Sponsor[] =
     useSelector((state: RootState) => state.sponsors.data) || []
+  const sponsorMap: { [key: string]: Sponsor } = {}
+  for (const sponsor of sponsors) {
+    sponsorMap[sponsor._id] = sponsor
+  }
+
   const [workPermission, setWorkPermission] = useState<WorkPermission | null>(
     null
   )
   const [workLocation, setWorkLocation] = useState<string>("")
   const [workStrengths, setWorkStrengths] = useState<string>("")
-  const [sponsorRanking, setSponsorRanking] = useState<string[]>([])
+  const [sponsorRanking, setSponsorRanking] = useState<Sponsor[]>([])
 
   const validateForm = async () => {
+    const sponsorRankingIds = sponsorRanking.map((sponsor) => sponsor._id)
     const data: WorkAuthorizationFields = {
       workPermission: workPermission as WorkPermission,
       workLocation,
       workStrengths,
-      sponsorRanking
+      sponsorRanking: sponsorRankingIds
     }
     await dispatch(actions.application.saveWorkAuth(data))
     setValid(true)
@@ -85,7 +91,11 @@ const WorkAuthorizationSection = ({
       setWorkPermission(workAuthFields?.workPermission ?? null)
       setWorkLocation(workAuthFields?.workLocation ?? "")
       setWorkStrengths(workAuthFields?.workStrengths ?? "")
-      setSponsorRanking(workAuthFields?.sponsorRanking ?? [])
+
+      const sponsorRankingPopulated = workAuthFields?.sponsorRanking?.map(
+        (sponsorId) => sponsorMap[sponsorId]
+      )
+      setSponsorRanking(sponsorRankingPopulated)
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
@@ -132,11 +142,10 @@ const WorkAuthorizationSection = ({
       />
       <Autocomplete
         multiple
+        value={sponsorRanking}
         options={sponsors}
         getOptionLabel={(option: any) => option.name}
-        onChange={(e, ranking) =>
-          setSponsorRanking(ranking.map((sponsor) => sponsor._id.toString()))
-        }
+        onChange={(e, ranking: Sponsor[]) => setSponsorRanking(ranking)}
         getOptionDisabled={(options) => sponsorRanking.length >= 5}
         renderInput={(params) => (
           <TextField
