@@ -14,6 +14,7 @@ import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
+import RectangleButton from "../design/RectangleButton"
 import RoundedButton from "../design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
@@ -152,9 +153,9 @@ const AuthenticationDialog = ({
             setPassword(e.target.value)
           }}
         />
-        <RoundedButton type="submit">
+        <RectangleButton type="submit">
           {registration ? "Register" : "Login"}
-        </RoundedButton>
+        </RectangleButton>
         <div className={classes.switchAuth}>
           <Typography variant="body1">
             {registration

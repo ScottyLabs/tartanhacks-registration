@@ -74,7 +74,7 @@ const SponsorCreationForm = (): ReactElement => {
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState("")
 
-  const [success, setSuccess] = useState(true)
+  const [success, setSuccess] = useState(false)
   const [successMessage, setSuccessMessage] = useState("")
 
   const createSponsors = async () => {
