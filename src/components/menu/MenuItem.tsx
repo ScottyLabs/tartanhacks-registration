@@ -1,6 +1,7 @@
 import { Link, makeStyles, Typography } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
 import { ReactElement } from "react"
+import NextLink from "next/link"
 
 const useStyles = makeStyles((theme) => ({
   link: {
@@ -29,11 +30,13 @@ const MenuItem = ({
   const classes = useStyles(theme)
 
   return (
-    <Link className={classes.link} href={url}>
-      <div className={classes.menuItem}>
-        <Typography variant="h5">{text}</Typography>
-      </div>
-    </Link>
+    <NextLink href={url} passHref>
+      <Link className={classes.link}>
+        <div className={classes.menuItem}>
+          <Typography variant="h5">{text}</Typography>
+        </div>
+      </Link>
+    </NextLink>
   )
 }
 

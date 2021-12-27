@@ -1,5 +1,6 @@
 import { Link, makeStyles, Typography, useTheme } from "@material-ui/core"
 import React, { ReactElement } from "react"
+import NextLink from "next/link"
 
 const useStyles = makeStyles((theme) => ({
   waveContainer: {
@@ -46,11 +47,13 @@ const WaveHeader = (): ReactElement => {
   return (
     <>
       <div className={classes.waveContainer}>
-        <Link href="/">
-          <Typography variant="h1" className={classes.title}>
-            TartanHacks
-          </Typography>
-        </Link>
+        <NextLink href="/" passHref>
+          <Link>
+            <Typography variant="h1" className={classes.title}>
+              TartanHacks
+            </Typography>
+          </Link>
+        </NextLink>
         <svg
           className={classes.waveSvg}
           viewBox="0 0 1440 420"

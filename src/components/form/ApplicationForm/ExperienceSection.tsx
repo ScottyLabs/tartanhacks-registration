@@ -46,15 +46,13 @@ const ExperienceSection = ({
     useSelector((state: RootState) => state?.application?.experience) ?? {}
 
   // Experience
-  const [coursework, setCoursework] = useState<string>("")
-  const [languages, setLanguages] = useState<string>("")
   const [hackathonExperience, setHackathonExperience] =
     useState<HackathonExperience | null>(null)
 
   const validateForm = async () => {
     const data: ExperienceFields = {
-      coursework,
-      languages,
+      coursework: "",
+      languages: "",
       hackathonExperience: hackathonExperience as HackathonExperience
     }
     await dispatch(actions.application.saveExperience(data))
@@ -71,8 +69,6 @@ const ExperienceSection = ({
 
   useEffect(() => {
     if (fetchedProfile) {
-      setCoursework(experienceFields.coursework ?? "")
-      setLanguages(experienceFields.languages ?? "")
       setHackathonExperience(experienceFields.hackathonExperience)
     }
     // eslint-disable-next-line
@@ -83,24 +79,6 @@ const ExperienceSection = ({
       <Typography variant="h5" className={classes.sectionHeader}>
         EXPERIENCE
       </Typography>
-      <TextField
-        label="Relevant Coursework"
-        variant="outlined"
-        fullWidth
-        value={coursework}
-        onChange={(e) => {
-          setCoursework(e.target.value)
-        }}
-      />
-      <TextField
-        label="Programming Languages"
-        variant="outlined"
-        fullWidth
-        value={languages}
-        onChange={(e) => {
-          setLanguages(e.target.value)
-        }}
-      />
       <Autocomplete
         options={Object.values(HackathonExperience)}
         value={hackathonExperience}
