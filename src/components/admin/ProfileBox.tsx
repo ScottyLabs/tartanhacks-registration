@@ -27,7 +27,8 @@ const useStyles = makeStyles((theme) => ({
     left: "50%",
     transform: "translate(-50%, -50%)",
     width: "60%",
-    background: `linear-gradient(316.54deg, ${theme.palette.lightGradient.start} 35.13%, ${theme.palette.lightGradient.end} 126.39%)`,
+    backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
+    35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
     boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
     backdropFilter: "blur(4px)",
     padding: "2em",

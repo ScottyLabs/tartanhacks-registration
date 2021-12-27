@@ -23,6 +23,7 @@ import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
 import { Alert } from "@material-ui/lab"
 import Menu from "src/components/menu/Menu"
+import BackButton from "src/components/design/BackButton"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -153,6 +154,17 @@ const useStyles = makeStyles((theme) => ({
   },
   dialogHeader: {
     color: theme.palette.gradient.start
+  },
+  backButton: {
+    marginTop: "20px",
+    alignSelf: "flex-start",
+    fontSize: "24px",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      fontSize: "20px"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "16px"
+    }
   }
 }))
 
@@ -179,6 +191,7 @@ const TeamDescription = () => {
     updatedAt: "",
     __v: 0
   })
+  const [ownTeamFetched, setOwnTeamFetched] = useState(false)
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
   const [isOwnTeam, setIsOwnTeam] = useState(false)
@@ -243,7 +256,7 @@ const TeamDescription = () => {
   }
 
   useEffect(() => {
-    if (teamId == undefined || user._id === undefined) {
+    if (teamId === undefined || user._id === undefined) {
       return
     }
 
@@ -258,10 +271,13 @@ const TeamDescription = () => {
         console.error(err)
       } finally {
         try {
+          setOwnTeamFetched(false)
           const ownTeam = await dispatch(actions.user.getOwnTeam())
           setIsOwnTeam(ownTeam.data._id === (teamId as string))
         } catch (err) {
           setIsOwnTeam(false)
+        } finally {
+          setOwnTeamFetched(true)
         }
       }
     }
@@ -275,6 +291,9 @@ const TeamDescription = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
+          {ownTeamFetched && !isOwnTeam ? (
+            <BackButton link="/teams" className={classes.backButton} />
+          ) : null}
           <ContentHeader title="Team" />
           <div className={classes.content}>
             <div className={classes.editableText}>
