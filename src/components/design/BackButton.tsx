@@ -14,7 +14,7 @@ const BackButton = (props: any) => {
           router.push(link)
         }}
       >
-        <ArrowBack fontSize="large" />
+        <ArrowBack />
         &nbsp;BACK
       </IconButton>
     </Tooltip>

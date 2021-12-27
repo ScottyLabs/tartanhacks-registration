@@ -157,7 +157,14 @@ const useStyles = makeStyles((theme) => ({
   },
   backButton: {
     marginTop: "20px",
-    alignSelf: "flex-start"
+    alignSelf: "flex-start",
+    fontSize: "24px",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      fontSize: "20px"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "16px"
+    }
   }
 }))
 
