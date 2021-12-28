@@ -11,7 +11,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
     <>
       <Head>
-        <title>TartanHacks Registration</title>
+        <title>TartanHacks</title>
         <meta name="description" content="TartanHacks Registration System" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
