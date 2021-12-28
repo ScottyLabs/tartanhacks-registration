@@ -10,12 +10,12 @@ import {
 import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
+import NextLink from "next/link"
 import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
-import RoundedButton from "../design/RoundedButton"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -162,14 +162,15 @@ const AuthenticationDialog = ({
               ? "Already have an account?"
               : "Don't have an account?"}
           </Typography>
-          <Link
-            className={classes.link}
-            href={registration ? "/login" : "/register"}
-          >
-            {registration ? "Log In" : "Sign Up"}
-          </Link>
+          <NextLink href={registration ? "/login" : "/register"} passHref>
+            <Link className={classes.link}>
+              {registration ? "Log In" : "Sign Up"}
+            </Link>
+          </NextLink>
           {registration ? null : (
-            <Link href="/forgot-password">Forgot password</Link>
+            <NextLink href="/forgot-password" passHref>
+              <Link>Forgot password</Link>
+            </NextLink>
           )}
         </div>
       </form>

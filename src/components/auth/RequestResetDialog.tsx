@@ -1,8 +1,6 @@
 import {
   Collapse,
-  LinearProgress,
-  Link,
-  makeStyles,
+  LinearProgress, makeStyles,
   Snackbar,
   TextField,
   Typography
@@ -14,7 +12,7 @@ import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
-import RoundedButton from "../design/RoundedButton"
+import RectangleButton from "../design/RectangleButton"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -101,7 +99,7 @@ const RequestResetDialog = (): ReactElement => {
           setEmail(e.target.value)
         }}
       />
-      <RoundedButton type="submit">Reset</RoundedButton>
+      <RectangleButton type="submit">Reset</RectangleButton>
     </form>
   )
 
