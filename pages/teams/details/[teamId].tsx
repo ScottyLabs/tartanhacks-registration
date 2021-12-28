@@ -7,7 +7,9 @@ import {
   DialogActions,
   DialogContent,
   Button,
-  TextField
+  TextField,
+  Collapse,
+  CircularProgress
 } from "@material-ui/core"
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
@@ -165,6 +167,13 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "16px"
     }
+  },
+  spinnerContainer: {
+    marginTop: "1em",
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
   }
 }))
 
@@ -203,6 +212,8 @@ const TeamDescription = () => {
   const [changedName, setChangedName] = useState("")
   const [changedDescription, setChangedDescription] = useState("")
   const [invitations, setInvitations] = useState<any>([])
+
+  const [loading, setLoading] = useState(true)
 
   const handleClose = () => {
     setOpen(dialogOpen.No)
@@ -257,29 +268,40 @@ const TeamDescription = () => {
 
   useEffect(() => {
     if (teamId === undefined || user._id === undefined) {
+      setLoading(false)
       return
     }
 
     const fetchTeamInfo = async () => {
+      setLoading(true)
+      const promises = [
+        dispatch(actions.teams.getTeamInfo(teamId as string)),
+        dispatch(actions.user.getOwnTeam())
+      ]
       try {
-        const info = await dispatch(actions.teams.getTeamInfo(teamId as string))
-        setTeamInfo(info.data)
-        setChangedName(info.data.name)
-        setChangedDescription(info.data.description)
-        setIsCaptain(info.data.admin._id === user._id)
+        setOwnTeamFetched(false)
+        const [teamInfoData, ownTeamData] = await Promise.allSettled(promises)
+        if (teamInfoData.status === "rejected") {
+          console.error(teamInfoData.reason)
+        } else {
+          const info = teamInfoData.value
+          setTeamInfo(info.data)
+          setChangedName(info.data.name)
+          setChangedDescription(info.data.description)
+          setIsCaptain(info.data.admin._id === user._id)
+        }
+
+        if (ownTeamData.status === "rejected") {
+          setIsOwnTeam(false)
+        } else {
+          const ownTeam = ownTeamData.value
+          setIsOwnTeam(ownTeam.data._id === (teamId as string))
+        }
+        setOwnTeamFetched(true)
       } catch (err) {
         console.error(err)
-      } finally {
-        try {
-          setOwnTeamFetched(false)
-          const ownTeam = await dispatch(actions.user.getOwnTeam())
-          setIsOwnTeam(ownTeam.data._id === (teamId as string))
-        } catch (err) {
-          setIsOwnTeam(false)
-        } finally {
-          setOwnTeamFetched(true)
-        }
       }
+      setLoading(false)
     }
 
     fetchTeamInfo()
@@ -294,6 +316,11 @@ const TeamDescription = () => {
           {ownTeamFetched && !isOwnTeam ? (
             <BackButton link="/teams" className={classes.backButton} />
           ) : null}
+          <div className={classes.spinnerContainer}>
+            <Collapse in={loading}>
+              <CircularProgress />
+            </Collapse>
+          </div>
           <ContentHeader title="Team" />
           <div className={classes.content}>
             <div className={classes.editableText}>
