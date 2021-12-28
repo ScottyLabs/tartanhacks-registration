@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     <>
       <Head>
         <title>TartanHacks Registration</title>
-        <meta name="description" content="TartanHacks Registration System" />
+        <meta name="description" content="Register for TartanHacks 2022!" />
         <link rel="icon" href="/favicon.ico" />
         <script
           async
