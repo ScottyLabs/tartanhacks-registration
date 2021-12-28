@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   },
   scottyIcon: {
     position: "relative",
-    width: "50%",
+    width: "40%",
     bottom: 0,
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       width: "100%"
