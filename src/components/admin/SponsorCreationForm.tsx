@@ -33,17 +33,20 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "80%"
-    }
+    },
+    paddingBottom: "0.5rem"
   },
   header: {
     borderBottom: `solid ${theme.palette.text.primary} 2px`,
-    paddingBottom: "1rem",
+    paddingBottom: "0.5rem",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "2.5em"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       fontSize: "1.8em"
-    }
+    },
+    color: theme.palette.text.primary,
+    fontWeight: 600
   },
   formContents: {
     marginTop: "2em",

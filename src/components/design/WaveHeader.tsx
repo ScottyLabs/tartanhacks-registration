@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#fff",
     opacity: 0.6,
     marginLeft: "0.5em",
-    marginTop: "0.5em",
+    marginTop: "0.3em",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       marginLeft: "0.5em",
       marginTop: "0.5em",
@@ -25,6 +25,24 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "0.7em",
       marginTop: "0.7em",
       fontSize: "3em"
+    }
+  },
+  subtitle: {
+    position: "absolute",
+    zIndex: 1,
+    color: "#fff",
+    opacity: 0.6,
+    marginLeft: "1.7em",
+    marginTop: "4em",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      marginLeft: "1.7em",
+      marginTop: "4em",
+      fontSize: "2em"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      marginLeft: "2.5em",
+      marginTop: "5.5em",
+      fontSize: "1em"
     }
   },
   waveSvg: {
@@ -51,6 +69,9 @@ const WaveHeader = (): ReactElement => {
           <Link>
             <Typography variant="h1" className={classes.title}>
               TartanHacks
+            </Typography>
+            <Typography variant="h4" className={classes.subtitle}>
+              Feb 5-6, 2022
             </Typography>
           </Link>
         </NextLink>

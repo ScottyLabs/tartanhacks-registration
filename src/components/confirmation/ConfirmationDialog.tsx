@@ -38,6 +38,29 @@ const useStyles = makeStyles((theme) => ({
   dialogText: {
     marginBottom: "1em",
     color: `${theme.palette.gradient.start}`
+  },
+  headerContainer: {
+    textAlign: "center",
+    alignSelf: "center",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "60%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "80%"
+    },
+    paddingBottom: "0.5rem"
+  },
+  header: {
+    borderBottom: `solid ${theme.palette.text.primary} 2px`,
+    paddingBottom: "0.5rem",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      fontSize: "2.5em"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      fontSize: "1.8em"
+    },
+    color: theme.palette.text.primary,
+    fontWeight: 600
   }
 }))
 
@@ -99,10 +122,11 @@ const ConfirmationDialog = (): ReactElement => {
         }}
       >
         <div className={classes.dialogContent}>
-          <div className={classes.dialogText}>
-            <Typography variant="h4">Confirmation</Typography>
+          <div className={classes.headerContainer}>
+            <Typography variant="h4" className={classes.header}>
+              Confirmation
+            </Typography>
           </div>
-          <HeaderUnderline />
           <div className={classes.dialogText}>
             <FormGroup>
               <FormControlLabel
