@@ -12,8 +12,24 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
     <>
       <Head>
         <title>TartanHacks</title>
-        <meta name="description" content="TartanHacks Registration System" />
+        <meta name="description" content="Register for TartanHacks" />
         <link rel="icon" href="/favicon.ico" />
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-GDT87TLX5E"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GDT87TLX5E', {
+              page_path: window.location.pathname,
+            });
+          `
+          }}
+        />
       </Head>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
