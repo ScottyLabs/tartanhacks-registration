@@ -16,6 +16,7 @@ import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
+import NextLink from "next/link"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -159,10 +160,17 @@ const getDialogText = (
       <>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            Thanks for confirming your attendance!
+            Thanks for confirming your attendance! We hope to see you soon!
           </Typography>
-          <Typography variant="body1">We hope to see you soon!</Typography>
-          <Typography variant="body1"></Typography>
+          <Typography variant="body1">
+            In the meantime, join a team or create one with your friends!
+          </Typography>
+          <br />
+          <NextLink href="/teams" passHref>
+            <Link underline="none">
+              <RectangleButton type="button">Browse Teams</RectangleButton>
+            </Link>
+          </NextLink>
           {/* Remove for now until Dashboard app is finalized */}
           {/* <Typography variant="body1">
             In the meantime, download our Dashboard App!
