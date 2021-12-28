@@ -58,7 +58,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    width: "20%",
+    width: "15%",
     padding: "1em",
     background: `${theme.palette.primary.main}`,
     boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
@@ -67,10 +67,10 @@ const useStyles = makeStyles((theme) => ({
     top: "8em",
     right: "5em",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "50%"
+      width: "25%"
     },
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "60%"
+      width: "50%"
     }
   },
   menuLine: {
