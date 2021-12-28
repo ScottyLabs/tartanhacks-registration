@@ -11,8 +11,8 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
     <>
       <Head>
-        <title>TartanHacks Registration</title>
-        <meta name="description" content="Register for TartanHacks 2022!" />
+        <title>TartanHacks</title>
+        <meta name="description" content="Register for TartanHacks" />
         <link rel="icon" href="/favicon.ico" />
         <script
           async

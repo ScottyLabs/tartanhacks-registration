@@ -9,17 +9,17 @@ class MyDocument extends Document {
       <Html>
         <Head>
           <meta charSet={"utf-8"} />
-          <meta name="description" content="TartanHacks Registration System" />
+          <meta name="description" content="Register for TartanHacks" />
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <meta property="og:title" content="TartanHacks Registration" />
+          <meta property="og:title" content="TartanHacks" />
           <meta property="og:type" content="website" />
           <meta
             property={"og:url"}
-            content={"https://registration.tartanhacks.com"}
+            content={"https://register.tartanhacks.com"}
           />
           <meta
             property="og:description"
-            content="TartanHacks Registration System"
+            content="Register for TartanHacks"
           />
           {/* <meta
             property={'og:image'} content={''}

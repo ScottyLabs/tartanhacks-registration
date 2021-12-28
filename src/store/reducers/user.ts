@@ -13,14 +13,6 @@ const data = (state: any = {}, action: DispatchAction) => {
       }
       break
 
-    case DispatchActionType.USER_GET_TEAM:
-      if (action.status === RequestStatus.SUCCESS) {
-        state = {
-          team: action.data
-        }
-      }
-      break
-
     case DispatchActionType.USER_PROFILE:
     case DispatchActionType.GET_USERS:
     case DispatchActionType.GET_PARTICIPANTS:

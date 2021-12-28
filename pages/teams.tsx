@@ -1,23 +1,20 @@
 import {
-  makeStyles,
-  Typography,
-  Snackbar,
   CircularProgress,
-  Collapse
+  Collapse, makeStyles, Snackbar, Typography
 } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
+import { useRouter } from "next/dist/client/router"
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
-import { useRouter } from "next/dist/client/router"
-import { AuthenticatedLayout, TeamlessLayout } from "src/layouts"
-import WaveFooter from "src/components/design/WaveFooter"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
-import RectangleButton from "src/components/design/RectangleButton"
-import FloatingDiv from "src/components/design/FloatingDiv"
-import TeamTableEntry from "src/components/teams/TeamTableEntry"
 import ContentHeader from "src/components/design/ContentHeader"
-import { Alert } from "@material-ui/lab"
+import FloatingDiv from "src/components/design/FloatingDiv"
+import RectangleButton from "src/components/design/RectangleButton"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import WaveFooter from "src/components/design/WaveFooter"
 import Menu from "src/components/menu/Menu"
+import TeamTableEntry from "src/components/teams/TeamTableEntry"
+import { AuthenticatedLayout } from "src/layouts"
 import { RootState } from "types/RootState"
 
 const useStyles = makeStyles((theme) => ({
@@ -109,6 +106,7 @@ const ViewTeams = () => {
   const [successMessage, setSuccessMessage] = useState("")
   const classes = useStyles()
 
+  const currentUser = useSelector((state: RootState) => state?.accounts?.data)
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
   const [loading, setLoading] = useState(false)
 
@@ -118,6 +116,19 @@ const ViewTeams = () => {
       setSuccessMessage("Join request sent successfully")
     }
   }
+
+  useEffect(() => {
+    const checkForTeam = async () => {
+      setLoading(true)
+      try {
+        const ownTeam = await dispatch(actions.user.getOwnTeam())
+        router.push("/teams/details/" + ownTeam.data._id)
+      } finally {
+        setLoading(false)
+      }
+    }
+    checkForTeam()
+  }, [currentUser._id])
 
   useEffect(() => {
     const getTeams = async () => {
@@ -187,13 +198,23 @@ const ViewTeams = () => {
           </table>
         </FloatingDiv>
         <Snackbar
-          open={notify != ""}
+          open={notify === "error" || notify === "success"}
           autoHideDuration={5000}
-          onClose={(e) => setNotify("")}
+          onClose={(e) =>
+            setNotify(notify === "error" ? "error_close" : "success_close")
+          }
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          <Alert severity={notify === "error" ? "error" : "success"}>
-            {notify == "error" ? errorMessage : successMessage}
+          <Alert
+            severity={
+              notify === "error" || notify === "error_close"
+                ? "error"
+                : "success"
+            }
+          >
+            {notify == "error" || notify === "error_close"
+              ? errorMessage
+              : successMessage}
           </Alert>
         </Snackbar>
       </div>
@@ -201,4 +222,4 @@ const ViewTeams = () => {
   )
 }
 
-export default TeamlessLayout(AuthenticatedLayout(ViewTeams))
+export default AuthenticatedLayout(ViewTeams)

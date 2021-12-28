@@ -78,7 +78,7 @@ const MessagesDialog = ({
       let captain = false
       try {
         const teamInfo = await dispatch(actions.user.getOwnTeam())
-        captain = user._id === teamInfo.data.admin
+        captain = user._id === teamInfo.data.admin._id
       } catch (err) {
         console.log(err)
       }
@@ -94,7 +94,10 @@ const MessagesDialog = ({
           })
         )
         req.data.forEach(async (value: any) => {
-          if (value.type != "JOIN") {
+          if (
+            (captain && value.type === "JOIN") ||
+            (!captain && value.type === "INVITE")
+          ) {
             await dispatch(actions.requests.openRequest(value._id))
           }
         })
@@ -108,7 +111,7 @@ const MessagesDialog = ({
   }, [user])
 
   function handleRemove(id: number) {
-    const newRequests = requests.filter((item: any) => item.id !== id)
+    const newRequests = requests.filter((item: any) => item._id !== id)
     setRequests(newRequests)
   }
 

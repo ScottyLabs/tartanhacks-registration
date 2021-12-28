@@ -108,7 +108,7 @@ const Message = (props: any) => {
     const body =
       (request.type === "JOIN"
         ? props.isCaptain
-          ? "Sent from user"
+          ? "Sent by user"
           : "Sent to team"
         : request.type === "INVITE"
           ? props.isCaptain
@@ -116,8 +116,7 @@ const Message = (props: any) => {
             : "From team"
           : request.type) +
       " " +
-      //TODO: get user name
-      (props.isCaptain ? request.user : request.team.name)
+      (props.isCaptain ? request.user.email : request.team.name)
     return {
       header: header,
       body: body
@@ -135,103 +134,92 @@ const Message = (props: any) => {
       acceptDecline: "INVITE"
     }
   return (
-    <>
-      <tr className={classes.row}>
-        <td className={classes.newCell}>
-          {props.isNew && props.content.type != types.cancel ? (
-            <Typography noWrap variant="subtitle1" className={classes.new}>
-              New
-            </Typography>
-          ) : null}
-        </td>
-        <td className={classes.message}>
-          <Typography variant="h4" className={classes.messageHeader}>
-            {message.header}
+    <tr className={classes.row}>
+      <td className={classes.newCell}>
+        {props.isNew && props.content.type != types.cancel ? (
+          <Typography noWrap variant="subtitle1" className={classes.new}>
+            New
           </Typography>
-          <Typography variant="subtitle1" className={classes.messageText}>
-            {message.body}
-          </Typography>
-        </td>
-        <td className={classes.buttonCell}>
-          {props.content.type == types.acceptDecline ? (
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault()
-                try {
-                  await dispatch(
-                    actions.requests.acceptRequest(props.content._id)
-                  )
-                  props.setNotify("success")
-                  props.setSuccessMessage(
-                    props.isCaptain
-                      ? "Successfully added the user"
-                      : "Successfully joined the team!"
-                  )
-                } catch (err) {
-                  props.setNotify("error")
-                } finally {
-                  props.handleRemove(props.key)
-                }
-              }}
-            >
-              <RectangleButton
-                type="submit"
-                className={classes.tableEntryButton}
-              >
-                Accept
-              </RectangleButton>
-            </form>
-          ) : null}
-        </td>
-        <td className={classes.buttonCell}>
-          {props.content.type == types.acceptDecline ? (
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault()
-                try {
-                  await dispatch(
-                    actions.requests.declineRequest(props.content._id)
-                  )
-                } catch (err) {
-                  props.setNotify("error")
-                } finally {
-                  props.handleRemove(props.key)
-                }
-              }}
-            >
-              <RectangleButton
-                type="submit"
-                className={classes.tableEntryButton}
-              >
-                Decline
-              </RectangleButton>
-            </form>
-          ) : (
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault()
-                try {
-                  await dispatch(
-                    actions.requests.cancelRequest(props.content._id)
-                  )
-                } catch (err) {
-                  props.setNotify("error")
-                } finally {
-                  props.handleRemove(props.key)
-                }
-              }}
-            >
-              <RectangleButton
-                type="submit"
-                className={classes.tableEntryButton}
-              >
-                Cancel
-              </RectangleButton>
-            </form>
-          )}
-        </td>
-      </tr>
-    </>
+        ) : null}
+      </td>
+      <td className={classes.message}>
+        <Typography variant="h4" className={classes.messageHeader}>
+          {message.header}
+        </Typography>
+        <Typography variant="subtitle1" className={classes.messageText}>
+          {message.body}
+        </Typography>
+      </td>
+      <td className={classes.buttonCell}>
+        {props.content.type == types.acceptDecline ? (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault()
+              try {
+                await dispatch(
+                  actions.requests.acceptRequest(props.content._id)
+                )
+                props.setNotify("success")
+                props.setSuccessMessage(
+                  props.isCaptain
+                    ? "Successfully added the user"
+                    : "Successfully joined the team!"
+                )
+              } catch (err) {
+                props.setNotify("error")
+              } finally {
+                props.handleRemove(props.content._id)
+              }
+            }}
+          >
+            <RectangleButton type="submit" className={classes.tableEntryButton}>
+              Accept
+            </RectangleButton>
+          </form>
+        ) : null}
+      </td>
+      <td className={classes.buttonCell}>
+        {props.content.type == types.acceptDecline ? (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault()
+              try {
+                await dispatch(
+                  actions.requests.declineRequest(props.content._id)
+                )
+              } catch (err) {
+                props.setNotify("error")
+              } finally {
+                props.handleRemove(props.content._id)
+              }
+            }}
+          >
+            <RectangleButton type="submit" className={classes.tableEntryButton}>
+              Decline
+            </RectangleButton>
+          </form>
+        ) : (
+          <form
+            onSubmit={async (e) => {
+              e.preventDefault()
+              try {
+                await dispatch(
+                  actions.requests.cancelRequest(props.content._id)
+                )
+              } catch (err) {
+                props.setNotify("error")
+              } finally {
+                props.handleRemove(props.content._id)
+              }
+            }}
+          >
+            <RectangleButton type="submit" className={classes.tableEntryButton}>
+              Cancel
+            </RectangleButton>
+          </form>
+        )}
+      </td>
+    </tr>
   )
 }
 
