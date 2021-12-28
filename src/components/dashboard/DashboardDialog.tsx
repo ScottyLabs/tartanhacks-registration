@@ -10,7 +10,7 @@ import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
-import { ReactElement, useState } from "react"
+import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
@@ -255,7 +255,7 @@ const DashboardDialog = (): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
-  const [loading, setLoading] = useState(false)
+  const [sendingVerification, setSendingVerification] = useState(false)
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarState, setSnackbarState] = useState<"success" | "error">(
     "success"
@@ -278,9 +278,10 @@ const DashboardDialog = (): ReactElement => {
   const email =
     useSelector((state: RootState) => state?.accounts?.data?.email) || ""
   const applicationStatus = getApplicationStatus(status)
+  const loading = status._id == null
 
   const resendVerification = async () => {
-    setLoading(true)
+    setSendingVerification(true)
     try {
       await dispatch(actions.auth.resendVerification(email))
       setSnackbarMessage("Sent verification email to: " + email)
@@ -289,7 +290,7 @@ const DashboardDialog = (): ReactElement => {
     } catch (err) {
       console.error(err)
     }
-    setLoading(false)
+    setSendingVerification(false)
   }
 
   const dialogText = getDialogText(
@@ -312,16 +313,23 @@ const DashboardDialog = (): ReactElement => {
       </Snackbar>
       <div className={classes.dialog}>
         <div className={classes.dialogContent}>
-          <div className={classes.statusText}>
-            <Typography variant="h4">Your Status:</Typography>
-          </div>
-          <div className={classes.emphasisText}>
-            <Typography variant="h4">{applicationStatus}</Typography>
-          </div>
-          {dialogText}
-          {buttonBox}
+          <Collapse in={loading}>
+            <CircularProgress />
+          </Collapse>
+          {!loading && (
+            <>
+              <div className={classes.statusText}>
+                <Typography variant="h4">Your Status:</Typography>
+              </div>
+              <div className={classes.emphasisText}>
+                <Typography variant="h4">{applicationStatus}</Typography>
+              </div>
+              {dialogText}
+              {buttonBox}
+            </>
+          )}
         </div>
-        <Collapse in={loading}>
+        <Collapse in={sendingVerification}>
           <br />
           <CircularProgress />
         </Collapse>
