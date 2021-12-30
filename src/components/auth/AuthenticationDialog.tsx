@@ -1,6 +1,6 @@
 import {
   Collapse,
-  LinearProgress,
+  CircularProgress,
   Link,
   makeStyles,
   Snackbar,
@@ -102,9 +102,6 @@ const AuthenticationDialog = ({
 
   return (
     <div className={classes.dialog}>
-      <Collapse in={loading}>
-        <LinearProgress />
-      </Collapse>
       <Snackbar
         open={error}
         autoHideDuration={5000}
@@ -128,6 +125,9 @@ const AuthenticationDialog = ({
         <Typography variant="h4" className={classes.header}>
           Welcome
         </Typography>
+      <Collapse in={loading}>
+        <CircularProgress />
+      </Collapse>
         <TextField
           required
           name="email"
