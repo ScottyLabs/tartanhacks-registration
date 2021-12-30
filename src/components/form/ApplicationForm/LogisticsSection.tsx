@@ -111,6 +111,7 @@ const LogisticsSection = ({
       setAddress(logisticsFields.address ?? "")
       setRegion(logisticsFields.region ?? null)
       setPhoneNumber(logisticsFields.phoneNumber ?? "")
+      setAttendingPhysically(logisticsFields.attendingPhysically ?? false)
     }
     // eslint-disable-next-line
   }, [fetchedProfile])

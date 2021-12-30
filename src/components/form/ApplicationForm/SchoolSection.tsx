@@ -94,6 +94,7 @@ const SchoolSection = ({
       setLevel(schoolFields.level ?? null)
       setGraduationYear(schoolFields.graduationYear?.toString() ?? null)
       setMajor(schoolFields.major)
+      setIsCMUStudent(schoolFields.school == CMU)
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
