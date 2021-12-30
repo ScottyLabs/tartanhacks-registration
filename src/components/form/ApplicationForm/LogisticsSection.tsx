@@ -107,7 +107,6 @@ const LogisticsSection = ({
     if (fetchedProfile) {
       setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? "")
       setShirtSize(logisticsFields.shirtSize ?? null)
-      console.log(logisticsFields.wantsHardware)
       setWantsHardware(logisticsFields.wantsHardware ?? false)
       setAddress(logisticsFields.address ?? "")
       setRegion(logisticsFields.region ?? null)

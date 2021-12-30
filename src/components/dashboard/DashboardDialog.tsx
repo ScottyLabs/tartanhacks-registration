@@ -308,7 +308,6 @@ const DashboardDialog = (): ReactElement => {
   const email =
     useSelector((state: RootState) => state?.accounts?.data?.email) || ""
   const applicationStatus = getApplicationStatus(status)
-  console.log(useSelector((state: RootState) => state?.user?.data))
   const loading = status._id == null
 
   const resendVerification = async () => {
