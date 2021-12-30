@@ -135,7 +135,7 @@ const LogisticsSection = ({
       <TextField
         label="Mailing Address"
         variant="outlined"
-        helperText="We use this to send swag if you aren't joining us in-person"
+        helperText="We use this to send prizes. Swag will not be shipped to remote participants"
         fullWidth
         multiline
         value={address}
