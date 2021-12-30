@@ -215,6 +215,12 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           </TableCell>
         </TableRow>
         <TableRow>
+          <TableCell>Attending Physically</TableCell>
+          <TableCell>
+            {profile.attendingPhysically ? <Check /> : <Cancel />}
+          </TableCell>
+        </TableRow>
+        <TableRow>
           <TableCell>Address</TableCell>
           <TableCell>{profile.address}</TableCell>
         </TableRow>
