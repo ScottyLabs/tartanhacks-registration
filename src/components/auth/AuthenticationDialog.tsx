@@ -125,9 +125,9 @@ const AuthenticationDialog = ({
         <Typography variant="h4" className={classes.header}>
           Welcome
         </Typography>
-      <Collapse in={loading}>
-        <CircularProgress />
-      </Collapse>
+        <Collapse in={loading}>
+          <CircularProgress />
+        </Collapse>
         <TextField
           required
           name="email"
