@@ -113,6 +113,8 @@ const ApplicationForm = (): ReactElement => {
 
   const [calledValidate, setCalledValidate] = useState(false)
 
+  const [isCMUStudent, setIsCMUStudent] = useState(false)
+
   // Check that all validate requests are false (i.e. completed)
   const validated = ![
     validateBasic,
@@ -234,6 +236,7 @@ const ApplicationForm = (): ReactElement => {
             validate={validateSchool}
             setValidate={setValidateSchool}
             setValid={setValidSchool}
+            setIsCMUStudent={setIsCMUStudent}
           />
           <ExperienceSection
             validate={validateExperience}
@@ -261,6 +264,7 @@ const ApplicationForm = (): ReactElement => {
             validate={validateLogistics}
             setValidate={setValidateLogistics}
             setValid={setValidLogistics}
+            isCMUStudent={isCMUStudent}
           />
           <div className={classes.buttonContainer}>
             <RectangleButton type="submit">Submit Application</RectangleButton>

@@ -111,7 +111,8 @@ const logistics = (
           wantsHardware,
           address,
           region,
-          phoneNumber
+          phoneNumber,
+          attendingPhysically
         } = data
         state = {
           dietaryRestrictions,
@@ -119,7 +120,8 @@ const logistics = (
           wantsHardware,
           address,
           region,
-          phoneNumber
+          phoneNumber,
+          attendingPhysically
         }
       }
     }

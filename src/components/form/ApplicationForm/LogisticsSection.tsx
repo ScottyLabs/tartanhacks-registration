@@ -37,11 +37,13 @@ const useStyles = makeStyles((theme) => ({
 const LogisticsSection = ({
   validate,
   setValidate,
-  setValid
+  setValid,
+  isCMUStudent
 }: {
   validate: boolean
   setValidate: Dispatch<SetStateAction<boolean>>
   setValid: Dispatch<SetStateAction<boolean>>
+  isCMUStudent: boolean
 }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
@@ -50,6 +52,7 @@ const LogisticsSection = ({
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
   )
+
   const logisticsFields =
     useSelector((state: RootState) => state?.application?.logistics) ?? {}
 
@@ -83,7 +86,8 @@ const LogisticsSection = ({
         wantsHardware,
         address,
         region: region as Region,
-        phoneNumber
+        phoneNumber,
+        attendingPhysically
       }
       await dispatch(actions.application.saveLogistics(data))
     }
@@ -186,17 +190,20 @@ const LogisticsSection = ({
           label="Will you use hardware?"
         />
       </FormGroup>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              value={attendingPhysically}
-              onChange={(e, checked) => setAttendingPhysically(checked)}
-            />
-          }
-          label="Will you be attending in-person?"
-        />
-      </FormGroup>
+      {/* In person attendance question only visible to CMU students */}
+      {isCMUStudent && (
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={attendingPhysically}
+                onChange={(e, checked) => setAttendingPhysically(checked)}
+              />
+            }
+            label="Will you be attending in-person?"
+          />
+        </FormGroup>
+      )}
     </div>
   )
 }

@@ -58,6 +58,7 @@ export interface LogisticsFields {
   address: string
   region: Region
   phoneNumber: string
+  attendingPhysically: boolean
 }
 
 export type ApplicationForm = BasicFields &
