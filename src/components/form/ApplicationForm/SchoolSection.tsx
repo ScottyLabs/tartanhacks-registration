@@ -37,11 +37,13 @@ const CMU = "Carnegie Mellon University"
 const SchoolSection = ({
   validate,
   setValidate,
-  setValid
+  setValid,
+  setIsCMUStudent
 }: {
   validate: boolean
   setValidate: Dispatch<SetStateAction<boolean>>
   setValid: Dispatch<SetStateAction<boolean>>
+  setIsCMUStudent: (val: boolean) => void
 }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
@@ -92,6 +94,7 @@ const SchoolSection = ({
       setLevel(schoolFields.level ?? null)
       setGraduationYear(schoolFields.graduationYear?.toString() ?? null)
       setMajor(schoolFields.major)
+      setIsCMUStudent(schoolFields.school == CMU)
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
@@ -112,7 +115,10 @@ const SchoolSection = ({
       <Autocomplete
         options={schools as string[]}
         value={school}
-        onChange={(e, value) => setSchool(value)}
+        onChange={(e, value) => {
+          setSchool(value)
+          setIsCMUStudent(value == CMU)
+        }}
         renderInput={(params) => (
           <TextField variant="outlined" {...params} label="School" required />
         )}

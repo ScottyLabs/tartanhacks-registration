@@ -140,7 +140,7 @@ const WorkAuthorizationSection = ({
           setWorkStrengths(e.target.value)
         }}
       />
-      <Autocomplete
+      {/* <Autocomplete
         multiple
         value={sponsorRanking}
         options={sponsors}
@@ -154,7 +154,7 @@ const WorkAuthorizationSection = ({
             label="Rank Sponsors (Top 5)"
           />
         )}
-      />
+      /> */}
     </div>
   )
 }

@@ -37,11 +37,13 @@ const useStyles = makeStyles((theme) => ({
 const LogisticsSection = ({
   validate,
   setValidate,
-  setValid
+  setValid,
+  isCMUStudent
 }: {
   validate: boolean
   setValidate: Dispatch<SetStateAction<boolean>>
   setValid: Dispatch<SetStateAction<boolean>>
+  isCMUStudent: boolean
 }): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
@@ -50,6 +52,7 @@ const LogisticsSection = ({
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
   )
+
   const logisticsFields =
     useSelector((state: RootState) => state?.application?.logistics) ?? {}
 
@@ -57,6 +60,7 @@ const LogisticsSection = ({
   const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
   const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null)
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
+  const [attendingPhysically, setAttendingPhysically] = useState<boolean>(false)
   const [address, setAddress] = useState<string>("")
   const [region, setRegion] = useState<Region | null>(null)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
@@ -82,7 +86,8 @@ const LogisticsSection = ({
         wantsHardware,
         address,
         region: region as Region,
-        phoneNumber
+        phoneNumber,
+        attendingPhysically
       }
       await dispatch(actions.application.saveLogistics(data))
     }
@@ -102,10 +107,12 @@ const LogisticsSection = ({
     if (fetchedProfile) {
       setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? "")
       setShirtSize(logisticsFields.shirtSize ?? null)
+      console.log(logisticsFields.wantsHardware)
       setWantsHardware(logisticsFields.wantsHardware ?? false)
       setAddress(logisticsFields.address ?? "")
       setRegion(logisticsFields.region ?? null)
       setPhoneNumber(logisticsFields.phoneNumber ?? "")
+      setAttendingPhysically(logisticsFields.attendingPhysically ?? false)
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
@@ -130,7 +137,7 @@ const LogisticsSection = ({
       <TextField
         label="Mailing Address"
         variant="outlined"
-        helperText="We use this to send swag if you aren't joining us in-person"
+        helperText="We use this to send prizes. Swag will not be shipped to remote participants."
         fullWidth
         multiline
         value={address}
@@ -179,12 +186,29 @@ const LogisticsSection = ({
           control={
             <Checkbox
               value={wantsHardware}
+              checked={wantsHardware}
               onChange={(e, checked) => setWantsHardware(checked)}
             />
           }
           label="Will you use hardware?"
         />
       </FormGroup>
+      {/* In person attendance question only visible to CMU students */}
+      {
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={attendingPhysically}
+                checked={attendingPhysically}
+                onChange={(e, checked) => setAttendingPhysically(checked)}
+                disabled={!isCMUStudent}
+              />
+            }
+            label="Will you be attending in-person? (CMU students only)"
+          />
+        </FormGroup>
+      }
     </div>
   )
 }
