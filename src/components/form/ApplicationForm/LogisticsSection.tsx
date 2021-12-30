@@ -57,6 +57,7 @@ const LogisticsSection = ({
   const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
   const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null)
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
+  const [attendingPhysically, setAttendingPhysically] = useState<boolean>(false)
   const [address, setAddress] = useState<string>("")
   const [region, setRegion] = useState<Region | null>(null)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
@@ -183,6 +184,17 @@ const LogisticsSection = ({
             />
           }
           label="Will you use hardware?"
+        />
+      </FormGroup>
+      <FormGroup>
+        <FormControlLabel
+          control={
+            <Checkbox
+              value={attendingPhysically}
+              onChange={(e, checked) => setAttendingPhysically(checked)}
+            />
+          }
+          label="Will you be attending in-person?"
         />
       </FormGroup>
     </div>
