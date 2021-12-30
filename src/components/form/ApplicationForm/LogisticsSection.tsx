@@ -107,6 +107,7 @@ const LogisticsSection = ({
     if (fetchedProfile) {
       setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? "")
       setShirtSize(logisticsFields.shirtSize ?? null)
+      console.log(logisticsFields.wantsHardware)
       setWantsHardware(logisticsFields.wantsHardware ?? false)
       setAddress(logisticsFields.address ?? "")
       setRegion(logisticsFields.region ?? null)
@@ -185,6 +186,7 @@ const LogisticsSection = ({
           control={
             <Checkbox
               value={wantsHardware}
+              checked={wantsHardware}
               onChange={(e, checked) => setWantsHardware(checked)}
             />
           }
@@ -198,6 +200,7 @@ const LogisticsSection = ({
             control={
               <Checkbox
                 value={attendingPhysically}
+                checked={attendingPhysically}
                 onChange={(e, checked) => setAttendingPhysically(checked)}
                 disabled={!isCMUStudent}
               />
