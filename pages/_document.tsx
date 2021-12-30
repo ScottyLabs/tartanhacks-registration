@@ -17,10 +17,7 @@ class MyDocument extends Document {
             property={"og:url"}
             content={"https://register.tartanhacks.com"}
           />
-          <meta
-            property="og:description"
-            content="Register for TartanHacks"
-          />
+          <meta property="og:description" content="Register for TartanHacks" />
           {/* <meta
             property={'og:image'} content={''}
           /> */}

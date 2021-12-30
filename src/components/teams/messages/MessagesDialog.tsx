@@ -80,7 +80,7 @@ const MessagesDialog = ({
         const teamInfo = await dispatch(actions.user.getOwnTeam())
         captain = user._id === teamInfo.data.admin._id
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
       try {
         setIsCaptain(captain)
@@ -102,7 +102,7 @@ const MessagesDialog = ({
           }
         })
       } catch (err) {
-        console.log(err)
+        console.error(err)
       }
       setLoading(false)
     }

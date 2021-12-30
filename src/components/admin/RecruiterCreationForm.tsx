@@ -173,11 +173,7 @@ const RecruiterCreationForm = (): ReactElement => {
         className={classes.applicationForm}
         onSubmit={async (e) => {
           e.preventDefault()
-          console.log(
-            /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi.test(email)
-          )
           if (checkFields()) {
-            console.log("submitting")
             submitForm()
           }
         }}

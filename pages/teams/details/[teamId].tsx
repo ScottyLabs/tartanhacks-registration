@@ -254,7 +254,6 @@ const TeamDescription = () => {
 
   const handleCloseInvite = async () => {
     setOpen(dialogOpen.No)
-    console.log(invitations)
     if (invitations) {
       invitations.forEach(async (elem: string) => {
         try {

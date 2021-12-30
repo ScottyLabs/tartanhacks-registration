@@ -1,6 +1,7 @@
 import {
   Collapse,
-  LinearProgress, makeStyles,
+  LinearProgress,
+  makeStyles,
   Snackbar,
   TextField,
   Typography

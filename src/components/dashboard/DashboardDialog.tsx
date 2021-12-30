@@ -24,7 +24,7 @@ import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import NextLink from "next/link"
-import Router from 'next/router'
+import Router from "next/router"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -218,7 +218,8 @@ const getDialogText = (
       <>
         <div className={classes.dialogText}>
           <Typography variant="body1">
-            We're sorry you couldn't join us this year. We hope to see you next year!
+            We&apos;re sorry you couldn&apos;t join us this year. We hope to see
+            you next year!
           </Typography>
         </div>
       </>
@@ -263,7 +264,12 @@ const getButtonBox = (
           <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
-        <RectangleButton type="button" onClick={() => { setShowDeclineDialog(true) }}>
+        <RectangleButton
+          type="button"
+          onClick={() => {
+            setShowDeclineDialog(true)
+          }}
+        >
           SORRY, I CAN&apos;T MAKE IT
         </RectangleButton>
       </div>
@@ -377,9 +383,12 @@ const DashboardDialog = (): ReactElement => {
           <CircularProgress />
         </Collapse>
       </div>
-      <Dialog open={showDeclineDialog} onClose={() => {
-        setShowDeclineDialog(false)
-      }}>
+      <Dialog
+        open={showDeclineDialog}
+        onClose={() => {
+          setShowDeclineDialog(false)
+        }}
+      >
         <DialogTitle className={classes.dialogHeader}>
           Cancel registration?
         </DialogTitle>
@@ -388,18 +397,27 @@ const DashboardDialog = (): ReactElement => {
             <CircularProgress />
           </Collapse>
           <DialogContentText>
-            Are you sure you want to cancel your registration for TartanHacks 2022?
+            Are you sure you want to cancel your registration for TartanHacks
+            2022?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => {
-            setShowDeclineDialog(false)
-          }}>Cancel</Button>
-          <Button onClick={async () => {
-            await declineAcceptance()
-            setShowDeclineDialog(false)
-            Router.reload()
-          }}>OK</Button>
+          <Button
+            onClick={() => {
+              setShowDeclineDialog(false)
+            }}
+          >
+            Cancel
+          </Button>
+          <Button
+            onClick={async () => {
+              await declineAcceptance()
+              setShowDeclineDialog(false)
+              Router.reload()
+            }}
+          >
+            OK
+          </Button>
         </DialogActions>
       </Dialog>
     </>
