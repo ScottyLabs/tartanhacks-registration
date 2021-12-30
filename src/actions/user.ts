@@ -115,3 +115,13 @@ export const confirm = (
   },
   status: RequestStatus.PENDING
 })
+
+export const declineAcceptance = (): DispatchAction => ({
+  type: DispatchActionType.USER_DECLINE_ACCEPTANCE,
+  useAPI: true,
+  request: {
+    path: "/user/decline",
+    method: "PUT"
+  },
+  status: RequestStatus.PENDING
+})

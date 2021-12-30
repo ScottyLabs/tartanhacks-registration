@@ -15,12 +15,12 @@ export default ({
 }): ApplicationStatus => {
   if (confirmed) {
     return ApplicationStatus.CONFIRMED
+  } else if (declined) {
+    return ApplicationStatus.DECLINED
   } else if (admitted) {
     return ApplicationStatus.ADMITTED
   } else if (admitted === false) {
     return ApplicationStatus.REJECTED
-  } else if (declined) {
-    return ApplicationStatus.DECLINED
   } else if (completedProfile) {
     return ApplicationStatus.APPLIED
   } else if (verified) {

@@ -1,9 +1,16 @@
 import {
+  Button,
   CircularProgress,
   Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Link,
   makeStyles,
   Snackbar,
+  TextField,
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
@@ -17,6 +24,7 @@ import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import NextLink from "next/link"
+import Router from 'next/router'
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -90,6 +98,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
     marginTop: "1em",
     gap: "0.5em"
+  },
+  dialogHeader: {
+    color: theme.palette.gradient.start
   }
 }))
 
@@ -202,6 +213,16 @@ const getDialogText = (
         </div>
       </>
     )
+  } else if (applicationStatus === ApplicationStatus.DECLINED) {
+    return (
+      <>
+        <div className={classes.dialogText}>
+          <Typography variant="body1">
+            We're sorry you couldn't join us this year. We hope to see you next year!
+          </Typography>
+        </div>
+      </>
+    )
   } else {
     return <></>
   }
@@ -210,7 +231,8 @@ const getDialogText = (
 const getButtonBox = (
   classes: any,
   applicationStatus: ApplicationStatus,
-  resendVerification: () => Promise<void>
+  resendVerification: () => Promise<void>,
+  setShowDeclineDialog: (b: boolean) => void
 ): ReactElement => {
   if (applicationStatus === ApplicationStatus.UNVERIFIED) {
     return (
@@ -241,7 +263,7 @@ const getButtonBox = (
           <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
         <div className={classes.buttonSpacer}></div>
-        <RectangleButton type="submit">
+        <RectangleButton type="button" onClick={() => { setShowDeclineDialog(true) }}>
           SORRY, I CAN&apos;T MAKE IT
         </RectangleButton>
       </div>
@@ -255,7 +277,9 @@ const DashboardDialog = (): ReactElement => {
   const dispatch = useDispatch()
   const theme = useTheme()
   const classes = useStyles(theme)
+  const [decliningAcceptance, setDecliningAcceptance] = useState(false)
   const [sendingVerification, setSendingVerification] = useState(false)
+  const [showDeclineDialog, setShowDeclineDialog] = useState(false)
   const [snackbarOpen, setSnackbarOpen] = useState(false)
   const [snackbarState, setSnackbarState] = useState<"success" | "error">(
     "success"
@@ -278,6 +302,7 @@ const DashboardDialog = (): ReactElement => {
   const email =
     useSelector((state: RootState) => state?.accounts?.data?.email) || ""
   const applicationStatus = getApplicationStatus(status)
+  console.log(useSelector((state: RootState) => state?.user?.data))
   const loading = status._id == null
 
   const resendVerification = async () => {
@@ -293,13 +318,31 @@ const DashboardDialog = (): ReactElement => {
     setSendingVerification(false)
   }
 
+  const declineAcceptance = async () => {
+    setDecliningAcceptance(true)
+    try {
+      await dispatch(actions.user.declineAcceptance())
+      setSnackbarMessage("Cancelled registration")
+      setSnackbarState("success")
+      setSnackbarOpen(true)
+    } catch (err) {
+      console.error(err)
+    }
+    setDecliningAcceptance(false)
+  }
+
   const dialogText = getDialogText(
     classes,
     applicationStatus,
     closeTimeStr,
     confirmTimeStr
   )
-  const buttonBox = getButtonBox(classes, applicationStatus, resendVerification)
+  const buttonBox = getButtonBox(
+    classes,
+    applicationStatus,
+    resendVerification,
+    setShowDeclineDialog
+  )
 
   return (
     <>
@@ -334,6 +377,31 @@ const DashboardDialog = (): ReactElement => {
           <CircularProgress />
         </Collapse>
       </div>
+      <Dialog open={showDeclineDialog} onClose={() => {
+        setShowDeclineDialog(false)
+      }}>
+        <DialogTitle className={classes.dialogHeader}>
+          Cancel registration?
+        </DialogTitle>
+        <DialogContent className={classes.dialogContent}>
+          <Collapse in={decliningAcceptance}>
+            <CircularProgress />
+          </Collapse>
+          <DialogContentText>
+            Are you sure you want to cancel your registration for TartanHacks 2022?
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => {
+            setShowDeclineDialog(false)
+          }}>Cancel</Button>
+          <Button onClick={async () => {
+            await declineAcceptance()
+            setShowDeclineDialog(false)
+            Router.reload()
+          }}>OK</Button>
+        </DialogActions>
+      </Dialog>
     </>
   )
 }
