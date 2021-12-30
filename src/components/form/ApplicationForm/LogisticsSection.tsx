@@ -191,19 +191,20 @@ const LogisticsSection = ({
         />
       </FormGroup>
       {/* In person attendance question only visible to CMU students */}
-      {isCMUStudent && (
+      {
         <FormGroup>
           <FormControlLabel
             control={
               <Checkbox
                 value={attendingPhysically}
                 onChange={(e, checked) => setAttendingPhysically(checked)}
+                disabled={!isCMUStudent}
               />
             }
-            label="Will you be attending in-person?"
+            label="Will you be attending in-person? (CMU students only)"
           />
         </FormGroup>
-      )}
+      }
     </div>
   )
 }
