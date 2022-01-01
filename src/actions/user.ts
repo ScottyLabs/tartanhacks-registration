@@ -97,7 +97,8 @@ export const confirm = (
   signatureCodeOfConduct: boolean,
   mlhCodeOfConduct: boolean,
   mlhEventLogistics: boolean,
-  mlhPromotional: boolean
+  mlhPromotional: boolean,
+  willMentor: boolean
 ): DispatchAction => ({
   type: DispatchActionType.USER_CONFIRM,
   useAPI: true,
@@ -110,7 +111,8 @@ export const confirm = (
       signatureCodeOfConduct,
       mlhCodeOfConduct,
       mlhEventLogistics,
-      mlhPromotional
+      mlhPromotional,
+      willMentor
     }
   },
   status: RequestStatus.PENDING

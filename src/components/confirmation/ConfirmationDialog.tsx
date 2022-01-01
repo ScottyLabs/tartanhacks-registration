@@ -1,19 +1,18 @@
 import {
+  Checkbox,
   Collapse,
+  FormControlLabel,
+  FormGroup,
   LinearProgress,
   makeStyles,
-  Typography,
-  FormGroup,
-  FormControlLabel,
-  Checkbox
+  Typography
 } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
+import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import RectangleButton from "../design/RectangleButton"
-import HeaderUnderline from "../design/HeaderUnderline"
-import { useRouter } from "next/router"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -77,6 +76,7 @@ const ConfirmationDialog = (): ReactElement => {
   const [mlhCodeOfConduct, setMlhCodeOfConduct] = useState(false)
   const [mlhEventLogistics, setMlhEventLogistics] = useState(false)
   const [mlhPromotional, setMlhPromotional] = useState(false)
+  const [willMentor, setWillMentor] = useState(false)
 
   const signatureLiabilityText = "Signature liability place holder.*"
   const signaturePhotoReleaseText = "Signature photo release place holder.*"
@@ -84,10 +84,8 @@ const ConfirmationDialog = (): ReactElement => {
   const mlhCodeOfConductText = "MLH Code of Conduct place holder.*"
   const mlhEventLogisticsText = "MLH Event Logistics place holder."
   const mlhPromotionalText = "MLH promotional place holder."
-
-  useEffect(() => {
-    dispatch(actions.auth.login())
-  }, [])
+  const willingToMentorText =
+    "Are you willing to help other hackers as a mentor?"
 
   const confirm = async () => {
     setLoading(true)
@@ -99,7 +97,8 @@ const ConfirmationDialog = (): ReactElement => {
           signatureCodeOfConduct,
           mlhCodeOfConduct,
           mlhEventLogistics,
-          mlhPromotional
+          mlhPromotional,
+          willMentor
         )
       )
     } catch (err) {
@@ -188,6 +187,15 @@ const ConfirmationDialog = (): ReactElement => {
                   />
                 }
                 label={mlhPromotionalText}
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={willMentor}
+                    onChange={(e) => setWillMentor(e.target.checked)}
+                  />
+                }
+                label={willingToMentorText}
               />
             </FormGroup>
           </div>
