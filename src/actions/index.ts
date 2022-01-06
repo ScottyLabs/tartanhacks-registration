@@ -6,6 +6,7 @@ import * as user from "./user"
 import * as settings from "./settings"
 import * as requests from "./requests"
 import * as recruiters from "./recruiters"
+import * as analytics from "./analytics"
 
 export default {
   auth,
@@ -15,5 +16,6 @@ export default {
   teams,
   settings,
   requests,
-  recruiters
+  recruiters,
+  analytics
 }
