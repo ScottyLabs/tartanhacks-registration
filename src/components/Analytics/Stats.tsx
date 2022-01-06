@@ -1,18 +1,16 @@
-import { makeStyles, TextField, Typography } from "@material-ui/core"
-import { Autocomplete } from "@material-ui/lab"
+import { makeStyles, Typography } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
-import { Ethnicity, Gender } from "enums/Profile"
-import React, {
-  ReactElement,
-  useEffect,
-  useState
-} from "react"
-import { useDispatch, useSelector } from "react-redux"
-import actions from "src/actions"
-import { BasicFields } from "types/ApplicationForm"
-import { RootState } from "types/RootState"
+import React, { ReactElement } from "react"
+import { useDispatch } from "react-redux"
 import { AnalyticsData } from "src/_types/AnalyticsData"
-import { CheckCircle, Cancel, AccessibilityNew, Restaurant, Person, Computer } from "@material-ui/icons"
+import {
+  CheckCircle,
+  Cancel,
+  AccessibilityNew,
+  Restaurant,
+  Person,
+  Computer
+} from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
   section: {
@@ -31,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1rem"
   },
   icon: {
-    marginRight: "0.5em",
+    marginRight: "0.5em"
   }
 }))
 
@@ -54,7 +52,7 @@ const Stats = ({
       return ""
     }
     return Array.from(Object.keys(data.shirtSizes))
-      .map(size => size + " (" + data.shirtSizes[size] + ")")
+      .map((size) => size + " (" + data.shirtSizes[size] + ")")
       .join(", ")
   }
 
@@ -63,59 +61,73 @@ const Stats = ({
       return ""
     }
     return Array.from(Object.keys(data.dietaryRestrictions))
-      .map(r => r + " (" + data.dietaryRestrictions[r] + ")")
+      .map((r) => r + " (" + data.dietaryRestrictions[r] + ")")
       .join(", ")
   }
 
   return (
     <div className={classes.section}>
-      <Typography variant="h5">
-        STATS
-      </Typography>
+      <Typography variant="h5">STATS</Typography>
       <div className={classes.subsection}>
         <Typography variant="h6" className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green"  />Total  Users: {data.total}
+          <CheckCircle className={classes.icon} htmlColor="green" />
+          Total Users: {data.total}
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green"  />Verified  Users: {data.verified}  ({Math.round(data.verified / data.total * 100)}%)
+          <CheckCircle className={classes.icon} htmlColor="green" />
+          Verified Users: {data.verified} (
+          {Math.round((data.verified / data.total) * 100)}%)
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green"  />Submitted  Users: {data.submitted}  ({Math.round(data.submitted / data.total * 100)}%)
+          <CheckCircle className={classes.icon} htmlColor="green" />
+          Submitted Users: {data.submitted} (
+          {Math.round((data.submitted / data.total) * 100)}%)
         </Typography>
       </div>
       <div className={classes.subsection}>
         <Typography variant="h6" className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green"  />Admitted: {data.admitted}
+          <CheckCircle className={classes.icon} htmlColor="green" />
+          Admitted: {data.admitted}
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green"  />Confirmed (Total): {data.confirmed}
+          <CheckCircle className={classes.icon} htmlColor="green" />
+          Confirmed (Total): {data.confirmed}
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green"  />Confirmed (CMU) {data.confirmedCmu}
+          <CheckCircle className={classes.icon} htmlColor="green" />
+          Confirmed (CMU) {data.confirmedCmu}
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <Cancel className={classes.icon} htmlColor="red"  />Declined {data.declined}
+          <Cancel className={classes.icon} htmlColor="red" />
+          Declined {data.declined}
         </Typography>
       </div>
       <div className={classes.subsection}>
         <Typography variant="h6" className={classes.entry}>
-          <AccessibilityNew className={classes.icon} />Shirt sizes: {parseShirtSizes(data)}
+          <AccessibilityNew className={classes.icon} />
+          Shirt sizes: {parseShirtSizes(data)}
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <Computer className={classes.icon} />Need Hardware: {data.wantsHardware}
+          <Computer className={classes.icon} />
+          Need Hardware: {data.wantsHardware}
         </Typography>
       </div>
       <div className={classes.subsection}>
         <Typography variant="h6" className={classes.entry}>
-          <Restaurant className={classes.icon} />Dietary Restrictions: {parseDietRestrictions(data)}
+          <Restaurant className={classes.icon} />
+          Dietary Restrictions: {parseDietRestrictions(data)}
         </Typography>
       </div>
       <div className={classes.subsection}>
-      <Typography variant="h6" className={classes.entry}>
-          <Person className={classes.icon} />Attending Physically: {data.attendance.physical} ({Math.round(data.attendance.physical / data.submitted * 100)}%)
+        <Typography variant="h6" className={classes.entry}>
+          <Person className={classes.icon} />
+          Attending Physically: {data.attendance.physical} (
+          {Math.round((data.attendance.physical / data.submitted) * 100)}%)
         </Typography>
         <Typography variant="h6" className={classes.entry}>
-          <Computer className={classes.icon} />Attending Virtually: {data.attendance.virtual} ({Math.round(data.attendance.virtual / data.submitted * 100)}%)
+          <Computer className={classes.icon} />
+          Attending Virtually: {data.attendance.virtual} (
+          {Math.round((data.attendance.virtual / data.submitted) * 100)}%)
         </Typography>
       </div>
     </div>
