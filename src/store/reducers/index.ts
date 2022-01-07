@@ -6,6 +6,7 @@ import application from "./application"
 import user from "./user"
 import settings from "./settings"
 import requests from "./requests"
+import analytics from "./analytics"
 
 export default combineReducers({
   accounts,
@@ -14,5 +15,6 @@ export default combineReducers({
   application,
   user,
   settings,
-  requests
+  requests,
+  analytics
 })
