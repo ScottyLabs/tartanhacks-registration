@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
   },
   contents: {
     marginTop: "2em",
-    marginLeft: "10em",
     display: "flex",
     flexDirection: "column",
     gap: "2em",

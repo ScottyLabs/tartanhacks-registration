@@ -42,6 +42,7 @@ const AdminDialog = (): ReactElement => {
             value={tabIndex}
             onChange={(e, newIndex: string) => setTabIndex(newIndex)}
             className={classes.tabs}
+            variant="scrollable"
           >
             <Tab label="Participants" value="0" />
             <Tab label="Recruiters" value="1" />
