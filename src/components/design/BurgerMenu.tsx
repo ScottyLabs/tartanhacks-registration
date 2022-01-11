@@ -1,3 +1,4 @@
+import { useTheme } from "@material-ui/core"
 import React, { MouseEventHandler, ReactElement } from "react"
 
 const BurgerMenu = ({
@@ -7,6 +8,7 @@ const BurgerMenu = ({
   className?: string
   onClick?: MouseEventHandler<SVGSVGElement> | undefined
 }): ReactElement => {
+  const theme = useTheme()
   return (
     <svg
       width="70"
@@ -22,7 +24,7 @@ const BurgerMenu = ({
         y1="2.5"
         x2="67.5"
         y2="2.5"
-        stroke="#F3964A"
+        stroke={theme.palette.text.primary}
         strokeWidth="5"
         strokeLinecap="round"
       />
@@ -31,7 +33,7 @@ const BurgerMenu = ({
         y1="22.5"
         x2="67.5"
         y2="22.5"
-        stroke="#F3964A"
+        stroke={theme.palette.text.primary}
         strokeWidth="5"
         strokeLinecap="round"
       />
@@ -40,7 +42,7 @@ const BurgerMenu = ({
         y1="42.5"
         x2="67.5"
         y2="42.5"
-        stroke="#F3964A"
+        stroke={theme.palette.text.primary}
         strokeWidth="5"
         strokeLinecap="round"
       />

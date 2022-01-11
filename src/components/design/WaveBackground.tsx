@@ -1,6 +1,5 @@
-import { makeStyles, Typography, useTheme } from "@material-ui/core"
+import { makeStyles, useTheme } from "@material-ui/core"
 import React, { ReactElement } from "react"
-import ScottyLabsSmallLogo from "./ScottyLabsSmallIcon"
 
 const useStyles = makeStyles((theme) => ({
   waveContainer: {
@@ -9,28 +8,6 @@ const useStyles = makeStyles((theme) => ({
     overflow: "hidden",
     lineHeight: 0,
     zIndex: -1
-  },
-  titleBox: {
-    position: "absolute",
-    marginLeft: "2em",
-    marginTop: "2em",
-    display: "flex",
-    flexDirection: "row"
-  },
-  title: {
-    bottom: "0",
-    zIndex: 1,
-    color: `${theme.palette.primary.main}`,
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      marginLeft: "0.5em",
-      marginTop: "0.5em",
-      fontSize: "5em"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      marginLeft: "0.7em",
-      marginTop: "0.7em",
-      fontSize: "3em"
-    }
   },
   waveSvg: {
     position: "absolute",

@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     width: "15%",
     padding: "1em",
-    background: `${theme.palette.primary.main}`,
+    background: `${theme.palette.text.primary}`,
     boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
     borderRadius: "10px",
     position: "absolute",

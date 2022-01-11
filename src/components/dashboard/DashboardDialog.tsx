@@ -10,21 +10,20 @@ import {
   Link,
   makeStyles,
   Snackbar,
-  TextField,
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
 import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
-import { ReactElement, useEffect, useState } from "react"
+import NextLink from "next/link"
+import Router from "next/router"
+import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
-import NextLink from "next/link"
-import Router from "next/router"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -54,26 +53,26 @@ const useStyles = makeStyles((theme) => ({
   },
   link: {
     "&:hover": {
-      textDecoration: "none",
-      filter: "brightness(85%)"
+      textDecoration: "none"
     }
   },
-  statusText: {
+  statusHeaderText: {
     marginBottom: "0.5em",
-    color: `${theme.palette.gradient.start}`
+    color: `${theme.palette.text.primary}`
   },
   dialogText: {
     marginBottom: "1em",
-    color: `${theme.palette.gradient.start}`,
+    color: `${theme.palette.text.primary}`,
     width: "100%",
     textAlign: "center"
   },
   bodyText: {
-    color: `${theme.palette.gradient.start}`
+    color: `${theme.palette.text.primary}`
   },
-  emphasisText: {
+  statusText: {
     marginBottom: "1em",
-    color: `${theme.palette.primary.main}`
+    color: `${theme.palette.text.secondary}`,
+    fontWeight: 600
   },
   buttonBox: {
     display: "flex",
@@ -366,11 +365,15 @@ const DashboardDialog = (): ReactElement => {
           </Collapse>
           {!loading && (
             <>
-              <div className={classes.statusText}>
-                <Typography variant="h4">Your Status:</Typography>
+              <div>
+                <Typography variant="h4" className={classes.statusHeaderText}>
+                  Your Status:
+                </Typography>
               </div>
-              <div className={classes.emphasisText}>
-                <Typography variant="h4">{applicationStatus}</Typography>
+              <div>
+                <Typography variant="h4" className={classes.statusText}>
+                  {applicationStatus}
+                </Typography>
               </div>
               {dialogText}
               {buttonBox}
