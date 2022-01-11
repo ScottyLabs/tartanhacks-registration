@@ -5,10 +5,11 @@ const useStyles = makeStyles((theme) => ({
   button: {
     backgroundColor: theme.palette.button.main,
     borderRadius: "10px",
-    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)",
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.15)",
     color: "white",
     "&:hover": {
-      backgroundColor: theme.palette.button.focused
+      backgroundColor: theme.palette.button.main,
+      filter: "brightness(95%)"
     }
   }
 }))
