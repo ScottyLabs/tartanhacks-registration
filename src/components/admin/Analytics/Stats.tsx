@@ -42,7 +42,6 @@ const Stats = ({
   const theme = useTheme()
   const classes = useStyles(theme)
 
-  console.log(data)
   if (data === undefined) {
     return <></>
   }
@@ -67,64 +66,64 @@ const Stats = ({
 
   return (
     <div className={classes.section}>
-      <Typography variant="h5">STATS</Typography>
+      <Typography variant="h4">STATS</Typography>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CheckCircle className={classes.icon} htmlColor="green" />
           Total Users: {data.total}
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CheckCircle className={classes.icon} htmlColor="green" />
           Verified Users: {data.verified} (
           {Math.round((data.verified / data.total) * 100)}%)
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CheckCircle className={classes.icon} htmlColor="green" />
           Submitted Users: {data.submitted} (
           {Math.round((data.submitted / data.total) * 100)}%)
         </Typography>
       </div>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CheckCircle className={classes.icon} htmlColor="green" />
           Admitted: {data.admitted}
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CheckCircle className={classes.icon} htmlColor="green" />
           Confirmed (Total): {data.confirmed}
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CheckCircle className={classes.icon} htmlColor="green" />
           Confirmed (CMU) {data.confirmedCmu}
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Cancel className={classes.icon} htmlColor="red" />
           Declined {data.declined}
         </Typography>
       </div>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <AccessibilityNew className={classes.icon} />
           Shirt sizes: {parseShirtSizes(data)}
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Computer className={classes.icon} />
           Need Hardware: {data.wantsHardware}
         </Typography>
       </div>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Restaurant className={classes.icon} />
           Dietary Restrictions: {parseDietRestrictions(data)}
         </Typography>
       </div>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Person className={classes.icon} />
           Attending Physically: {data.attendance.physical} (
           {Math.round((data.attendance.physical / data.submitted) * 100)}%)
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Computer className={classes.icon} />
           Attending Virtually: {data.attendance.virtual} (
           {Math.round((data.attendance.virtual / data.submitted) * 100)}%)

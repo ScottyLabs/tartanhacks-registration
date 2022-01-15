@@ -11,7 +11,8 @@ import FloatingDiv from "src/components/design/FloatingDiv"
 
 const useStyles = makeStyles((theme) => ({
   tabs: {
-    width: "100%"
+    width: "100%",
+    justifyContent: "space-between"
   },
   tabPanel: {
     width: "100%"
@@ -43,6 +44,7 @@ const AdminDialog = (): ReactElement => {
             onChange={(e, newIndex: string) => setTabIndex(newIndex)}
             className={classes.tabs}
             variant="scrollable"
+            centered
           >
             <Tab label="Participants" value="0" />
             <Tab label="Recruiters" value="1" />

@@ -49,7 +49,6 @@ const Demographics = ({
   const theme = useTheme()
   const classes = useStyles(theme)
 
-  console.log(data)
   if (data === undefined) {
     return <></>
   }
@@ -130,25 +129,25 @@ const Demographics = ({
           "%)"}
         <ul className={classes.statusList}>
           <li>
-            <Typography variant="h6" className={classes.entry}>
+            <Typography className={classes.entry}>
               <CheckCircle className={classes.icon} htmlColor="green" />{" "}
               submitted: {data.demographic.schools[school].submitted}
             </Typography>
           </li>
           <li>
-            <Typography variant="h6" className={classes.entry}>
+            <Typography className={classes.entry}>
               <CheckCircle className={classes.icon} htmlColor="green" />{" "}
               admitted: {data.demographic.schools[school].admitted}
             </Typography>
           </li>
           <li>
-            <Typography variant="h6" className={classes.entry}>
+            <Typography className={classes.entry}>
               <CheckCircle className={classes.icon} htmlColor="green" />{" "}
               confirmed: {data.demographic.schools[school].confirmed}
             </Typography>
           </li>
           <li>
-            <Typography variant="h6" className={classes.entry}>
+            <Typography className={classes.entry}>
               <Cancel className={classes.icon} htmlColor="red" /> declined:{" "}
               {data.demographic.schools[school].declined}
             </Typography>
@@ -160,9 +159,9 @@ const Demographics = ({
 
   return (
     <div className={classes.section}>
-      <Typography variant="h5">DEMOGRAPHICS</Typography>
+      <Typography variant="h4">DEMOGRAPHICS</Typography>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Person className={classes.icon} />
           Female: {data.demographic.gender["Female"] || 0} (
           {Math.round(
@@ -170,7 +169,7 @@ const Demographics = ({
           )}
           %)
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Person className={classes.icon} />
           Male: {data.demographic.gender["Male"] || 0} (
           {Math.round(
@@ -178,7 +177,7 @@ const Demographics = ({
           )}
           %)
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Person className={classes.icon} />
           Other: {data.demographic.gender["Other"] || 0} (
           {Math.round(
@@ -186,7 +185,7 @@ const Demographics = ({
           )}
           %)
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Person className={classes.icon} />
           Did not respond: {data.demographic.gender["Prefer not to say"] || 0} (
           {Math.round(
@@ -198,34 +197,34 @@ const Demographics = ({
         </Typography>
       </div>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <CalendarToday className={classes.icon} />
           Graduation year
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <ul>{parseGraduationYear(data)}</ul>
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <Code className={classes.icon} />
           Years of Hackathon Experience
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <ul>{parseExperience(data)}</ul>
         </Typography>
       </div>
       <div className={classes.subsection}>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <School className={classes.icon} />
           CMU Colleges
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <ul>{parseCollege(data)}</ul>
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <AlternateEmail className={classes.icon} />
           Domains
         </Typography>
-        <Typography variant="h6" className={classes.entry}>
+        <Typography className={classes.entry}>
           <ul>{parseDomains(data)}</ul>
         </Typography>
       </div>
