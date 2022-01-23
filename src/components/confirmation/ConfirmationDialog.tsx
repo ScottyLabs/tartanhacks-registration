@@ -3,10 +3,13 @@ import {
   Collapse,
   FormControlLabel,
   FormGroup,
+  IconButton,
   LinearProgress,
+  Link,
   makeStyles,
   Typography
 } from "@material-ui/core"
+import { Launch } from "@material-ui/icons"
 import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
@@ -60,6 +63,9 @@ const useStyles = makeStyles((theme) => ({
     },
     color: theme.palette.text.primary,
     fontWeight: 600
+  },
+  link: {
+    color: theme.palette.text.primary
   }
 }))
 
@@ -71,21 +77,8 @@ const ConfirmationDialog = (): ReactElement => {
   const [loading, setLoading] = useState(false)
 
   const [signatureLiability, setSignatureLiability] = useState(false)
-  const [signaturePhotoRelease, setSignaturePhotoRelease] = useState(false)
   const [signatureCodeOfConduct, setSignatureCodeOfConduct] = useState(false)
-  const [mlhCodeOfConduct, setMlhCodeOfConduct] = useState(false)
-  const [mlhEventLogistics, setMlhEventLogistics] = useState(false)
-  const [mlhPromotional, setMlhPromotional] = useState(false)
   const [willMentor, setWillMentor] = useState(false)
-
-  const signatureLiabilityText = "Signature liability place holder.*"
-  const signaturePhotoReleaseText = "Signature photo release place holder.*"
-  const signatureCodeOfConductText = "Signature code of conduct place holder.*"
-  const mlhCodeOfConductText = "MLH Code of Conduct place holder.*"
-  const mlhEventLogisticsText = "MLH Event Logistics place holder."
-  const mlhPromotionalText = "MLH promotional place holder."
-  const willingToMentorText =
-    "Are you willing to help other hackers as a mentor?"
 
   const confirm = async () => {
     setLoading(true)
@@ -93,11 +86,7 @@ const ConfirmationDialog = (): ReactElement => {
       await dispatch(
         actions.user.confirm(
           signatureLiability,
-          signaturePhotoRelease,
           signatureCodeOfConduct,
-          mlhCodeOfConduct,
-          mlhEventLogistics,
-          mlhPromotional,
           willMentor
         )
       )
@@ -136,17 +125,19 @@ const ConfirmationDialog = (): ReactElement => {
                     onChange={(e) => setSignatureLiability(e.target.checked)}
                   />
                 }
-                label={signatureLiabilityText}
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    required
-                    checked={signaturePhotoRelease}
-                    onChange={(e) => setSignaturePhotoRelease(e.target.checked)}
-                  />
+                label={
+                  <Typography>
+                    I agree to the{" "}
+                    <Link
+                      target="_blank"
+                      href="/THLiabilityWaiver.pdf"
+                      className={classes.link}
+                    >
+                      TartanHacks Liability Waiver
+                    </Link>
+                    .*
+                  </Typography>
                 }
-                label={signaturePhotoReleaseText}
               />
               <FormControlLabel
                 control={
@@ -158,35 +149,19 @@ const ConfirmationDialog = (): ReactElement => {
                     }
                   />
                 }
-                label={signatureCodeOfConductText}
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    required
-                    checked={mlhCodeOfConduct}
-                    onChange={(e) => setMlhCodeOfConduct(e.target.checked)}
-                  />
+                label={
+                  <Typography>
+                    I agree to the{" "}
+                    <Link
+                      target="_blank"
+                      href="/THCodeOfConduct.pdf"
+                      className={classes.link}
+                    >
+                      TartanHacks Code of Conduct
+                    </Link>
+                    .*
+                  </Typography>
                 }
-                label={mlhCodeOfConductText}
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={mlhEventLogistics}
-                    onChange={(e) => setMlhEventLogistics(e.target.checked)}
-                  />
-                }
-                label={mlhEventLogisticsText}
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={mlhPromotional}
-                    onChange={(e) => setMlhPromotional(e.target.checked)}
-                  />
-                }
-                label={mlhPromotionalText}
               />
               <FormControlLabel
                 control={
@@ -195,7 +170,7 @@ const ConfirmationDialog = (): ReactElement => {
                     onChange={(e) => setWillMentor(e.target.checked)}
                   />
                 }
-                label={willingToMentorText}
+                label="Are you willing to help other hackers as a mentor?"
               />
             </FormGroup>
           </div>

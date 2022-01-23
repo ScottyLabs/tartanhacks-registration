@@ -93,11 +93,7 @@ export const rejectAll = (): DispatchAction => ({
 
 export const confirm = (
   signatureLiability: boolean,
-  signaturePhotoRelease: boolean,
   signatureCodeOfConduct: boolean,
-  mlhCodeOfConduct: boolean,
-  mlhEventLogistics: boolean,
-  mlhPromotional: boolean,
   willMentor: boolean
 ): DispatchAction => ({
   type: DispatchActionType.USER_CONFIRM,
@@ -107,11 +103,7 @@ export const confirm = (
     method: "PUT",
     body: {
       signatureLiability,
-      signaturePhotoRelease,
       signatureCodeOfConduct,
-      mlhCodeOfConduct,
-      mlhEventLogistics,
-      mlhPromotional,
       willMentor
     }
   },
