@@ -127,7 +127,7 @@ const ConfirmationDialog = (): ReactElement => {
                 }
                 label={
                   <Typography>
-                    I agree to the{" "}
+                    I agree with the{" "}
                     <Link
                       target="_blank"
                       href="/THLiabilityWaiver.pdf"
@@ -151,7 +151,7 @@ const ConfirmationDialog = (): ReactElement => {
                 }
                 label={
                   <Typography>
-                    I agree to the{" "}
+                    I agree with the{" "}
                     <Link
                       target="_blank"
                       href="/THCodeOfConduct.pdf"
