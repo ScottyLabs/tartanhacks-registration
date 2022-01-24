@@ -8,6 +8,6 @@ module.exports = {
   poweredByHeader: false,
   reactStrictMode: false,
   env: {
-    BACKEND_URL: backends[process.env.NODE_ENV ?? "production"]
+    BACKEND_URL: backends[process.env.NODE_ENV || "production"]
   }
 }
