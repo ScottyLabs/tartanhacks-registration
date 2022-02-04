@@ -18,12 +18,16 @@ const RectangleButton = ({
   className,
   children,
   type,
-  onClick
+  onClick,
+  startIcon,
+  backgroundColor
 }: {
   className?: string
   children?: ReactElement | string
   type: "button" | "reset" | "submit" | undefined
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
+  startIcon?: ReactElement
+  backgroundColor?: string
 }): ReactElement => {
   const classes = useStyles()
   return (
@@ -33,6 +37,8 @@ const RectangleButton = ({
         type={type}
         className={`${className} ${classes.button}`}
         onClick={onClick}
+        startIcon={startIcon}
+        style={{ backgroundColor }}
       >
         {children}
       </Button>

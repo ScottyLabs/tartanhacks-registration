@@ -24,6 +24,8 @@ import actions from "src/actions"
 import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
+import Image from "next/image"
+import { Computer } from "@material-ui/icons"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -181,13 +183,14 @@ const getDialogText = (
               <RectangleButton type="button">Browse Teams</RectangleButton>
             </Link>
           </NextLink>
-          {/* Remove for now until Dashboard app is finalized */}
-          {/* <Typography variant="body1">
-            In the meantime, download our Dashboard App!
+          <br />
+          <br />
+          <Typography variant="body1">
+            Once you're all set, download our Dashboard App!
           </Typography>
           <div className={classes.appStoreLinks}>
             <Link
-              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdappfinal"
+              href="https://play.google.com/store/apps/details?id=org.scottylabs.thdapp"
               target="_blank"
             >
               <Image
@@ -208,7 +211,20 @@ const getDialogText = (
                 height={40}
               />
             </Link>
-          </div> */}
+            <Link
+              href="https://dashboard.tartanhacks.com/"
+              target="_blank"
+              underline="none"
+            >
+              <RectangleButton
+                type="button"
+                startIcon={<Computer />}
+                backgroundColor="#000"
+              >
+                Web
+              </RectangleButton>
+            </Link>
+          </div>
         </div>
       </>
     )
