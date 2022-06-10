@@ -20,6 +20,7 @@ import RectangleButton from "../design/RectangleButton"
 const useStyles = makeStyles((theme) => ({
   dialog: {
     display: "flex",
+    flexDirection: "column",
     alignItems: "center",
     justifyContent: "center",
     width: "20%",
@@ -37,7 +38,13 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     gap: "1em",
-    width: "100%"
+    width: "100%",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      gap: "0.8em"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      gap: "0.4em"
+    }
   },
   header: {
     fontWeight: 600,
@@ -58,6 +65,33 @@ const useStyles = makeStyles((theme) => ({
       textDecoration: "none",
       filter: "brightness(85%)"
     }
+  },
+  warningDiv: {
+    background: theme.palette.primary.main,
+    marginTop: "2em",
+    padding: "10px",
+    layout: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "50%",
+    margin: "0 auto",
+    borderRadius: "10px",
+    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
+      width: "60%"
+    },
+    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
+      width: "80%",
+      marginTop: "0em"
+    },
+  },
+  warning: {
+    textAlign: "center",
+    color: theme.palette.declined
+  },  
+  wrapper: {
+    layout: "flex",
+    flexDirection: "column",
+    width: "100%",
   }
 }))
 
@@ -101,80 +135,87 @@ const AuthenticationDialog = ({
   }
 
   return (
-    <div className={classes.dialog}>
-      <Snackbar
-        open={error}
-        autoHideDuration={5000}
-        onClose={(e) => setError(false)}
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-      >
-        <Alert severity="error">{errorMessage}</Alert>
-      </Snackbar>
-      <form
-        className={classes.registrationForm}
-        onSubmit={(e) => {
-          e.preventDefault()
+    <div className={classes.wrapper}>
+      <div className={classes.dialog}>
+        <Snackbar
+          open={error}
+          autoHideDuration={5000}
+          onClose={(e) => setError(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <Alert severity="error">{errorMessage}</Alert>
+        </Snackbar>
+        <form
+          className={classes.registrationForm}
+          onSubmit={(e) => {
+            e.preventDefault()
 
-          if (registration) {
-            register()
-          } else {
-            login()
-          }
-        }}
-      >
-        <Typography variant="h4" className={classes.header}>
-          Welcome
-        </Typography>
-        <Collapse in={loading}>
-          <CircularProgress />
-        </Collapse>
-        <TextField
-          required
-          name="email"
-          size="medium"
-          label="Email"
-          variant="outlined"
-          fullWidth={true}
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value)
+            if (registration) {
+              register()
+            } else {
+              login()
+            }
           }}
-        />
-        <TextField
-          required
-          type="password"
-          name="password"
-          size="medium"
-          label="Password"
-          variant="outlined"
-          fullWidth={true}
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value)
-          }}
-        />
-        <RectangleButton type="submit">
-          {registration ? "Register" : "Login"}
-        </RectangleButton>
-        <div className={classes.switchAuth}>
-          <Typography variant="body1">
-            {registration
-              ? "Already have an account?"
-              : "Don't have an account?"}
+        >
+          <Typography variant="h4" className={classes.header}>
+            Welcome
           </Typography>
-          <NextLink href={registration ? "/login" : "/register"} passHref>
-            <Link className={classes.link}>
-              {registration ? "Log In" : "Sign Up"}
-            </Link>
-          </NextLink>
-          {registration ? null : (
-            <NextLink href="/forgot-password" passHref>
-              <Link>Forgot password</Link>
+          <Collapse in={loading}>
+            <CircularProgress />
+          </Collapse>
+          <TextField
+            required
+            name="email"
+            size="medium"
+            label="Email"
+            variant="outlined"
+            fullWidth={true}
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value)
+            }}
+          />
+          <TextField
+            required
+            type="password"
+            name="password"
+            size="medium"
+            label="Password"
+            variant="outlined"
+            fullWidth={true}
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value)
+            }}
+          />
+          <RectangleButton type="submit">
+            {registration ? "Register" : "Login"}
+          </RectangleButton>
+          <div className={classes.switchAuth}>
+            <Typography variant="body1">
+              {registration
+                ? "Already have an account?"
+                : "Don't have an account?"}
+            </Typography>
+            <NextLink href={registration ? "/login" : "/register"} passHref>
+              <Link className={classes.link}>
+                {registration ? "Log In" : "Sign Up"}
+              </Link>
             </NextLink>
-          )}
+            {registration ? null : (
+              <NextLink href="/forgot-password" passHref>
+                <Link>Forgot password</Link>
+              </NextLink>
+            )}
+          </div>
+        </form>
+      </div>
+        <div className={classes.warningDiv}>
+          <Typography className={classes.warning}>
+            Attention! Only undergraduate participants who are at least 18 years old are eligible for a prize
+          </Typography>
         </div>
-      </form>
-    </div>
+      </div>
   )
 }
 
