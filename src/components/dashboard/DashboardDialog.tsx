@@ -186,7 +186,7 @@ const getDialogText = (
           <br />
           <br />
           <Typography variant="body1">
-            Once you're all set, download our Dashboard App!
+            Once you&apos;re all set, download our Dashboard App!
           </Typography>
           <div className={classes.appStoreLinks}>
             <Link

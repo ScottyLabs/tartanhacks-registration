@@ -82,16 +82,16 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
       width: "80%",
       marginTop: "0em"
-    },
+    }
   },
   warning: {
     textAlign: "center",
     color: theme.palette.declined
-  },  
+  },
   wrapper: {
     layout: "flex",
     flexDirection: "column",
-    width: "100%",
+    width: "100%"
   }
 }))
 
@@ -210,12 +210,13 @@ const AuthenticationDialog = ({
           </div>
         </form>
       </div>
-        <div className={classes.warningDiv}>
-          <Typography className={classes.warning}>
-            Attention! Only undergraduate participants who are at least 18 years old are eligible for a prize
-          </Typography>
-        </div>
+      <div className={classes.warningDiv}>
+        <Typography className={classes.warning}>
+          Attention! Only undergraduate participants who are at least 18 years
+          old are eligible for a prize
+        </Typography>
       </div>
+    </div>
   )
 }
 
