@@ -1,6 +1,5 @@
 import {
   CMUCollege,
-  CollegeLevel,
   Ethnicity,
   Gender,
   HackathonExperience,
@@ -22,7 +21,6 @@ export interface BasicFields {
 export interface SchoolFields {
   school: string
   college?: CMUCollege
-  level: CollegeLevel
   graduationYear: string
   major: string
 }

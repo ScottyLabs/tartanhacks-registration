@@ -59,7 +59,6 @@ const SchoolSection = ({
   const [schools, setSchools] = useState<string[]>([])
   const [school, setSchool] = useState<string | null>(null)
   const [college, setCollege] = useState<CMUCollege | null>(null)
-  const [level, setLevel] = useState<CollegeLevel | null>(null)
   const [graduationYear, setGraduationYear] = useState<GraduationYear | null>(
     null
   )
@@ -68,7 +67,6 @@ const SchoolSection = ({
   const validateForm = async () => {
     const data: SchoolFields = {
       school: school as string,
-      level: level as CollegeLevel,
       graduationYear: graduationYear as string,
       major
     }
@@ -91,7 +89,6 @@ const SchoolSection = ({
     if (fetchedProfile) {
       setSchool(schoolFields.school)
       setCollege(schoolFields.college ?? null)
-      setLevel(schoolFields.level ?? null)
       setGraduationYear(schoolFields.graduationYear?.toString() ?? null)
       setMajor(schoolFields.major)
       setIsCMUStudent(schoolFields.school == CMU)
@@ -138,19 +135,6 @@ const SchoolSection = ({
           )}
         />
       ) : null}
-      <Autocomplete
-        options={Object.values(CollegeLevel)}
-        value={level}
-        onChange={(e, value) => setLevel(value)}
-        renderInput={(params) => (
-          <TextField
-            variant="outlined"
-            {...params}
-            label="Year Level"
-            required
-          />
-        )}
-      />
       <Autocomplete
         options={GraduationYears}
         value={graduationYear}

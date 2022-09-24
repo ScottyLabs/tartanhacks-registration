@@ -115,10 +115,6 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           </TableRow>
         )}
         <TableRow>
-          <TableCell>Level</TableCell>
-          <TableCell>{profile.level}</TableCell>
-        </TableRow>
-        <TableRow>
           <TableCell>Graduation Year</TableCell>
           <TableCell>{profile.graduationYear}</TableCell>
         </TableRow>

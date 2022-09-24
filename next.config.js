@@ -1,6 +1,6 @@
 const backends = {
   local: "http://localhost:4000",
-  development: "https://dev.backend.tartanhacks.com",
+  development: "https://backend.tartanhacks.com",
   staging: "https://stg.backend.tartanhacks.com",
   production: "https://backend.tartanhacks.com"
 }
