@@ -101,7 +101,6 @@ const Menu = (): ReactElement => {
 
   return (
     <div className={classes.menuBurgerContainer}>
-      {console.log(status)}
       <div className={classes.burgerWrapper}>
         <BurgerMenu className={classes.burger} onClick={handleSwitch} />
       </div>
