@@ -101,6 +101,7 @@ const Menu = (): ReactElement => {
 
   return (
     <div className={classes.menuBurgerContainer}>
+      {console.log(status)}
       <div className={classes.burgerWrapper}>
         <BurgerMenu className={classes.burger} onClick={handleSwitch} />
       </div>
@@ -137,6 +138,10 @@ const Menu = (): ReactElement => {
             ) : null}
             {isAdmin ? (
               <>
+                <MenuItem text="TEAM" url="/teams" />
+                <MenuLine />
+                <MenuItem text="MESSAGES" url="/messages" />
+                <MenuLine />
                 <MenuItem text="ADMIN" url="/admin" />
                 <MenuLine />
               </>
