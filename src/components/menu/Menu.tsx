@@ -127,7 +127,7 @@ const Menu = (): ReactElement => {
                 <MenuLine />
               </>
             ) : null}
-            {(applicationStatus === ApplicationStatus.CONFIRMED || isAdmin) ? (
+            {applicationStatus === ApplicationStatus.CONFIRMED ? (
               <>
                 <MenuItem text="TEAM" url="/teams" />
                 <MenuLine />
