@@ -14,3 +14,14 @@ div#__next > div {
   height: 100%;
   width: 100%;
 }
+
+.MuiInputLabel-root{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+  height: 100%;
+}
+.MuiInputLabel-shrink{
+  max-width: 109%;
+}
