@@ -1,14 +1,13 @@
 import { DispatchActionType } from "enums/DispatchActionType"
 import { RequestStatus } from "enums/RequestStatus"
-import { DispatchAction } from "types/DispatchAction"
+import { DispatchAction, RemoteDispatchAction } from "types/DispatchAction"
 
-export const getOwnTeam = (): DispatchAction => ({
+export const getOwnTeam = (): RemoteDispatchAction => ({
   type: DispatchActionType.USER_GET_TEAM,
   useAPI: true,
   request: {
     path: "/user/team",
-    method: "GET",
-    body: {}
+    method: "GET"
   },
   status: RequestStatus.PENDING
 })
