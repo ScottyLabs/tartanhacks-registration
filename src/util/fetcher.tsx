@@ -2,7 +2,7 @@ import axios, { Method } from "axios"
 import { RemoteDispatchAction } from "types/DispatchAction"
 
 /**
- * Create a data fetcher for use with SWR
+ * Create a data fetcher
  * @param method the HTTP method to use
  */
 export default function createFetcher<T>(
@@ -19,5 +19,15 @@ export default function createFetcher<T>(
     }).then((res) => res.data)
 }
 
+/**
+ * fetcher for get requests
+ * @param action details of the request
+ * @param accessToken the user's accessToken cookie
+ */
 export const getFetcher = createFetcher("get")
+/**
+ * fetcher for post requests
+ * @param action details of the request
+ * @param accessToken the user's accessToken cookie
+ */
 export const postFetcher = createFetcher("post")

@@ -178,7 +178,7 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
   useEffect(() => {
     setLoading(true)
     if (!props.isAuth) {
-      // if user is not authorized, redirect to login
+      // if user is not authenticated, redirect to login
       router.push("/login")
     } else if (props.data?.isInTeam) {
       // open team page if user is in a team
@@ -189,7 +189,7 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
   }, [])
 
   if (!props.isAuth) {
-    // don't show UI if the user is unauthenticated
+    // don't show UI if the user is unauthenticated (before the redirect)
     return <></>
   }
   let emptyMessage = null
