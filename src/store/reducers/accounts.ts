@@ -2,6 +2,7 @@ import { combineReducers } from "redux"
 import { RequestStatus } from "enums/RequestStatus"
 import { DispatchActionType } from "enums/DispatchActionType"
 import { DispatchAction } from "types/DispatchAction"
+import { setCookie } from "cookies-next"
 
 const data = (state = {}, action: DispatchAction) => {
   switch (action.type) {
@@ -12,6 +13,7 @@ const data = (state = {}, action: DispatchAction) => {
       if (action.status == RequestStatus.SUCCESS) {
         if (action.data.token) {
           window.localStorage.setItem("accessToken", action.data.token)
+          setCookie("accessToken", action.data.token)
         }
         return action.data
       }
