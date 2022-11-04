@@ -6,6 +6,7 @@ import {
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
+import { AxiosError } from "axios"
 import { useRouter } from "next/dist/client/router"
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
@@ -116,35 +117,44 @@ export async function getServerSideProps(
   context: any
 ): Promise<SSRDataAuth<TeamData>> {
   const accessToken: string = context.req.cookies["accessToken"]
-  const isAuth = await isAuthenticated(accessToken)
-  if (!isAuth) {
+  if (accessToken === undefined) {
+    // not authenticated
     return {
       props: { isAuth: false }
     }
   }
+  // prevents exception from being thrown if the user is not in a team
+  const ownTeamOrNull = async () => {
+    try {
+      // get user's team
+      const ownTeam = (await getFetcher(
+        actions.user.getOwnTeam(),
+        accessToken
+      )) as Team
+      // if no exception thrown, then the user has a team
+      return ownTeam
+    } catch (error) {
+      return null
+    }
+  }
   try {
-    // get user's team
-    const ownTeam: Team = (await getFetcher(
-      actions.user.getOwnTeam(),
-      accessToken
-    )) as Team
-    // if no exception thrown, then the user has a team
-    return {
-      props: {
-        isAuth: true,
-        data: {
-          isInTeam: true,
-          ownTeam: ownTeam
+    const [ownTeam, teams] = await Promise.all([
+      ownTeamOrNull(),
+      getFetcher(actions.teams.viewTeams(), accessToken) as Promise<Array<Team>>
+    ])
+    if (ownTeam !== null) {
+      // has a team
+      return {
+        props: {
+          isAuth: true,
+          data: {
+            isInTeam: true,
+            ownTeam: ownTeam
+          }
         }
       }
     }
-  } catch (error) {
-    // if exception is thrown, then the user doesn't have a team
-    // get all teams
-    const teams: Array<Team> = (await getFetcher(
-      actions.teams.viewTeams(),
-      accessToken
-    )) as Array<Team>
+    // doesn't have a team - return list of teams
     return {
       props: {
         isAuth: true,
@@ -154,6 +164,16 @@ export async function getServerSideProps(
         }
       }
     }
+  } catch (error) {
+    // request to /teams failed
+    if((error as AxiosError).isAxiosError === true && (error as AxiosError).response?.status === 403) {
+      // not authenticated
+      return {
+        props: { isAuth: false }
+      }
+    }
+    // some unexpected error - redirect to 500 page
+    throw error
   }
 }
 
