@@ -166,7 +166,10 @@ export async function getServerSideProps(
     }
   } catch (error) {
     // request to /teams failed
-    if((error as AxiosError).isAxiosError === true && (error as AxiosError).response?.status === 403) {
+    if (
+      (error as AxiosError).isAxiosError === true &&
+      (error as AxiosError).response?.status === 403
+    ) {
       // not authenticated
       return {
         props: { isAuth: false }
