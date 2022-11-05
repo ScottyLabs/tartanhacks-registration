@@ -2,15 +2,17 @@ import axios, { Method } from "axios"
 import { RemoteDispatchAction } from "types/DispatchAction"
 
 /**
- * Create a data fetcher
- * @param method the HTTP method to use
+ * send an axios request
+ * doesn't support actions with method FILE
+ * @param action details of the request
+ * @param accessToken the user's accessToken cookie
  */
-export default function createFetcher<T>(
-  method: Method
-): (action: RemoteDispatchAction, accessToken: string) => Promise<T> {
-  return (action: RemoteDispatchAction, accessToken: string) =>
-    axios({
-      method,
+export default function fetchData (
+  action: RemoteDispatchAction,
+  accessToken: string
+  ): Promise<any> {
+  return axios({
+      method: action.request.method as Method, // method must not be FILE
       url: `${process.env.BACKEND_URL}${action.request.path}`,
       headers: {
         "x-access-token": accessToken
@@ -18,16 +20,3 @@ export default function createFetcher<T>(
       data: action.request.body ?? undefined
     }).then((res) => res.data)
 }
-
-/**
- * fetcher for get requests
- * @param action details of the request
- * @param accessToken the user's accessToken cookie
- */
-export const getFetcher = createFetcher("get")
-/**
- * fetcher for post requests
- * @param action details of the request
- * @param accessToken the user's accessToken cookie
- */
-export const postFetcher = createFetcher("post")

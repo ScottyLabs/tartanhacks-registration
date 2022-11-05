@@ -18,8 +18,7 @@ import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
 import Menu from "src/components/menu/Menu"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
-import { isAuthenticated } from "src/util/auth"
-import { getFetcher } from "src/util/fetcher"
+import fetchData from "src/util/fetcher"
 import { RootState } from "types/RootState"
 import { SSRDataAuth, TeamData } from "types/SSRData"
 import { Team } from "types/Team"
@@ -127,7 +126,7 @@ export async function getServerSideProps(
   const ownTeamOrNull = async () => {
     try {
       // get user's team
-      const ownTeam = (await getFetcher(
+      const ownTeam = (await fetchData(
         actions.user.getOwnTeam(),
         accessToken
       )) as Team
@@ -140,7 +139,7 @@ export async function getServerSideProps(
   try {
     const [ownTeam, teams] = await Promise.all([
       ownTeamOrNull(),
-      getFetcher(actions.teams.viewTeams(), accessToken) as Promise<Array<Team>>
+      fetchData(actions.teams.viewTeams(), accessToken) as Promise<Array<Team>>
     ])
     if (ownTeam !== null) {
       // has a team
