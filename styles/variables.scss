@@ -1,15 +1,40 @@
 // Colors
-$text-primary: #07054c;
-$text-alt: #fdcd60;
-$link-color: #07054c;
-$text-unfocused: #999999;
+$color-primary: #ffc738;
+$color-secondary: #07054c;
+$color-primary-darker: #db4d20;
 
-$background-color: #ffc738;
+// Text colors
+$text-color-primary: #db4d20;
+$text-color-secondary: #ffc738;
+$text-color-alt: #fdcd60;
+$text-color-unfocused: #999999;
+$link-color: $color-secondary;
 
-$circle-color-primary: #dd562b;
-$circle-color-secondary: #f3a241;
+// Status badge colors
+$status-color-unverified: #f3964a;
+$status-color-verified: #2979ff;
+$status-color-applied: #ffc107;
+$status-color-admitted: #8bc34a;
+$status-color-rejected: #f44336;
+$status-color-declined: #f44336;
+$status-color-confirmed: #4caf50;
 
-$footer-color: #dd562b;
+// Gradient colors
+$gradient-color-start: #aa5418;
+$gradient-color-end: #ffc738;
+
+$wave-gradient-color-start: #ffc738;
+$wave-gradient-color-end: #db4d20;
+
+$light-gradient-color-start: #ffffff;
+$light-gradient-color-end: #ffe3e3;
+
+// Additional component colors
+$background-color: $color-primary;
+$button-color: #ffc738;
+$button-color-focused: #ffc738;
+
+// Component properties
 
 // Font sizes
 $hero-font-sizes: (
