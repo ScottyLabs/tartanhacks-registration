@@ -1,11 +1,11 @@
-import { NextPage } from "next"
 import { makeStyles } from "@material-ui/core"
-import React, { ReactElement } from "react"
-import { AuthenticatedLayout, DialogLayout } from "src/layouts"
+import { NextPage } from "next"
+import { ReactElement } from "react"
 import DashboardDialog from "src/components/dashboard/DashboardDialog"
-import Menu from "src/components/menu/Menu"
-import WaveBackground from "src/components/design/WaveBackground"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import WaveBackground from "src/components/design/WaveBackground"
+import Menu from "src/components/menu/Menu"
+import { AuthenticatedLayout } from "src/layouts"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {

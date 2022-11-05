@@ -1,0 +1,84 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.burgerLine {
+  width: 3rem;
+  height: 0.25rem;
+  background-color: $color-primary;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 2px;
+}
+
+.burgerWrapper {
+  top: 0;
+  right: 0;
+
+  position: absolute;
+  margin: 3% 3% 0 0;
+  cursor: pointer;
+  padding: 0;
+  z-index: 100;
+
+  @include down($breakpoint-md) {
+    margin: 5% 5% 0 0;
+  }
+
+  @include down($breakpoint-sm) {
+    margin: 8% 5% 0 0;
+  }
+}
+
+.burger {
+  height: 3rem;
+  width: 3rem;
+
+  @include down($breakpoint-sm) {
+    height: 2rem;
+    width: 2rem;
+  }
+}
+
+.menuWrapper {
+  top: 0;
+  width: 100%;
+  position: absolute;
+}
+
+.menuBox {
+  top: 8rem;
+  right: 5rem;
+  position: absolute;
+
+  width: 15%;
+  padding: 1em;
+  background: $color-primary-darker;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  box-shadow: $box-shadow;
+  border-radius: 10px;
+
+  @include down($breakpoint-md) {
+    width: 25%;
+  }
+
+  @include down($breakpoint-sm) {
+    width: 50%;
+  }
+}
+
+.menuLine {
+  position: relative;
+  width: 100%;
+  height: 7px;
+}
+
+.menuBurgerContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}

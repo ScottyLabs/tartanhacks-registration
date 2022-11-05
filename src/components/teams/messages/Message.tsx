@@ -103,18 +103,18 @@ const Message = (props: any) => {
       request.type === "JOIN"
         ? "JOIN REQUEST"
         : request.type === "INVITE"
-          ? "INVITATION"
-          : request.type
+        ? "INVITATION"
+        : request.type
     const body =
       (request.type === "JOIN"
         ? props.isCaptain
           ? "Sent by user"
           : "Sent to team"
         : request.type === "INVITE"
-          ? props.isCaptain
-            ? "For user"
-            : "From team"
-          : request.type) +
+        ? props.isCaptain
+          ? "For user"
+          : "From team"
+        : request.type) +
       " " +
       (props.isCaptain ? request.user.email : request.team.name)
     return {
@@ -126,13 +126,13 @@ const Message = (props: any) => {
   const message = getMessage(props.content)
   const types = props.isCaptain
     ? {
-      cancel: "INVITE",
-      acceptDecline: "JOIN"
-    }
+        cancel: "INVITE",
+        acceptDecline: "JOIN"
+      }
     : {
-      cancel: "JOIN",
-      acceptDecline: "INVITE"
-    }
+        cancel: "JOIN",
+        acceptDecline: "INVITE"
+      }
   return (
     <tr className={classes.row}>
       <td className={classes.newCell}>

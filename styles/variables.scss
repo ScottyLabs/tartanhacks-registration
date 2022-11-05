@@ -1,0 +1,74 @@
+// Colors
+$color-primary: #ffc738;
+$color-secondary: #07054c;
+$color-primary-darker: #db4d20;
+
+// Text colors
+$text-color-primary: #db4d20;
+$text-color-secondary: #ffc738;
+$text-color-alt: #fdcd60;
+$text-color-unfocused: #999999;
+$link-color: $color-secondary;
+
+// Status badge colors
+$status-color-unverified: #f3964a;
+$status-color-verified: #2979ff;
+$status-color-applied: #ffc107;
+$status-color-admitted: #8bc34a;
+$status-color-rejected: #f44336;
+$status-color-declined: #f44336;
+$status-color-confirmed: #4caf50;
+
+// Gradient colors
+$gradient-color-start: #aa5418;
+$gradient-color-end: #ffc738;
+
+$wave-gradient-color-start: #ffc738;
+$wave-gradient-color-end: #db4d20;
+
+$light-gradient-color-start: #ffffff;
+$light-gradient-color-end: #ffe3e3;
+
+// Additional component colors
+$background-color: $color-primary;
+$button-color: #ffc738;
+$button-color-focused: #ffc738;
+
+// Component properties
+
+// Font sizes
+$hero-font-sizes: (
+  default: 5rem,
+  sm: 2.5rem,
+  xs: 2rem
+);
+$h1-font-sizes: (
+  default: 3rem
+);
+$h2-font-sizes: (
+  default: 2rem,
+  xs: 1.5rem
+);
+$body-font-sizes: (
+  default: 1rem
+);
+$subtitle-font-sizes: (
+  default: 0.8rem
+);
+$subtitle1-font-sizes: (
+  default: 0.6rem
+);
+$button-font-sizes: (
+  default: 1.3rem
+);
+
+// Container paddings
+$container-padding: 1em 1.5em 1em 1.5em;
+
+// Shadows
+$box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
+  0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+$text-shadow: 1px 1px 10px #0005;
+
+// Transitions
+$logo-hover-transition: 0.2s;

@@ -9,7 +9,8 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "next/core-web-vitals"
+    "next/core-web-vitals",
+    "prettier"
   ],
   parserOptions: {
     ecmaVersion: 2018,
@@ -23,7 +24,6 @@ module.exports = {
     "@typescript-eslint/quotes": ["error", "double"],
     camelcase: "off",
     "comma-dangle": ["error", "never"],
-    indent: ["error", 2, { SwitchCase: 1 }],
     "no-extra-semi": 2,
     "no-irregular-whitespace": 2,
     "no-lonely-if": 2,
