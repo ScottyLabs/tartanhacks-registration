@@ -1,5 +1,5 @@
-import { postFetcher } from "./fetcher"
 import actions from "src/actions"
+import fetchData from "./fetcher"
 
 /**
  * check if a user is authenticated
@@ -11,7 +11,7 @@ export async function isAuthenticated(accessToken: string): Promise<boolean> {
     return false
   }
   try {
-    await postFetcher(actions.auth.loginWithToken(), accessToken)
+    await fetchData(actions.auth.loginWithToken(), accessToken)
     return true
   } catch (error) {
     //token invalid or expired
