@@ -1,8 +1,8 @@
 import { DispatchActionType } from "enums/DispatchActionType"
 import { RequestStatus } from "enums/RequestStatus"
-import { DispatchAction } from "types/DispatchAction"
+import { DispatchAction, RemoteDispatchAction } from "types/DispatchAction"
 
-export const viewTeams = (): DispatchAction => ({
+export const viewTeams = (): RemoteDispatchAction => ({
   type: DispatchActionType.TEAMS_VIEW,
   useAPI: true,
   request: {

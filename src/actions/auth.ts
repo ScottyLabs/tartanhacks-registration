@@ -1,6 +1,6 @@
 import { DispatchActionType } from "enums/DispatchActionType"
 import { RequestStatus } from "enums/RequestStatus"
-import { DispatchAction } from "types/DispatchAction"
+import { DispatchAction, RemoteDispatchAction } from "types/DispatchAction"
 
 export const register = (email: string, password: string): DispatchAction => ({
   type: DispatchActionType.AUTH_REGISTER,
@@ -47,7 +47,7 @@ export const login = (email?: string, password?: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
-export const loginWithToken = (): DispatchAction => ({
+export const loginWithToken = (): RemoteDispatchAction => ({
   type: DispatchActionType.AUTH_LOGIN_TOKEN,
   useAPI: true,
   request: {

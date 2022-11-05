@@ -4,6 +4,7 @@ import React, { ReactElement, useEffect } from "react"
 import AuthenticationDialog from "src/components/auth/AuthenticationDialog"
 import WaveHeader from "src/components/design/WaveHeader"
 import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
+import { deleteCookie } from "cookies-next"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -44,6 +45,7 @@ const RegisterPage: NextPage = (): ReactElement => {
 
   useEffect(() => {
     window.localStorage.removeItem("accessToken")
+    deleteCookie("accessToken")
   }, [])
   return (
     <div>
