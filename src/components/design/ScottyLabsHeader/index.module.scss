@@ -1,0 +1,22 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.pageHeader {
+  position: absolute;
+  left: 3%;
+  top: 4%;
+  white-space: nowrap;
+  width: 45%;
+
+  @include down($breakpoint-sm){
+    width: 80%; 
+  }
+}
+
+.primaryTextColor{
+  fill: $text-color-primary; 
+}
+
+.secondaryTextColor{
+  fill: $text-color-secondary; 
+}

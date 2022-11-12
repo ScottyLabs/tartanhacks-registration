@@ -9,6 +9,7 @@ import MessagesDialog from "src/components/teams/messages/MessagesDialog"
 import { AuthenticatedLayout } from "src/layouts"
 import { RootState } from "types/RootState"
 
+
 const Messages = () => {
   const errorMessage = useSelector((state: RootState) => state?.requests?.error)
   const [notify, setNotify] = useState("")
