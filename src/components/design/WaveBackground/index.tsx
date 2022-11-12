@@ -23,10 +23,10 @@ const WaveBackground = (): ReactElement => {
               y2="465"
               gradientUnits="userSpaceOnUse"
             >
-              <stop className={styles.gradientStart} /> 
+              <stop className={styles.gradientStart} />
               <stop
                 offset="1"
-                className={styles.gradientStop}  
+                className={styles.gradientStop}
                 stopOpacity="0.53"
               />
             </linearGradient>

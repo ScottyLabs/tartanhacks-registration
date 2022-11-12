@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react"
-import {Link} from "@material-ui/core"
+import { Link } from "@material-ui/core"
 import NextLink from "next/link"
 import TartanHacksIcon from "../TartanHacksIcon"
 import styles from "./index.module.scss"

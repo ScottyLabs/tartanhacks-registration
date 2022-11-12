@@ -16,12 +16,12 @@
   bottom: 0;
   filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
 
-  @include down($breakpoint-md){
-    height: 15em; 
+  @include down($breakpoint-md) {
+    height: 15em;
   }
 
-  @include down($breakpoint-sm){
-    height: 10em; 
+  @include down($breakpoint-sm) {
+    height: 10em;
   }
 }
 
@@ -30,15 +30,15 @@
   width: 75px;
   height: 65px;
 
-  @include down($breakpoint-md){
-    width: 100%; 
+  @include down($breakpoint-md) {
+    width: 100%;
   }
 
-  margin-right: 1em; 
+  margin-right: 1em;
 }
 
 .gradientStart {
-  stop-color: $wave-gradient-color-start; 
+  stop-color: $wave-gradient-color-start;
 }
 .gradientStop {
   stop-color: $wave-gradient-color-end;

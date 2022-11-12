@@ -6,14 +6,17 @@
   align-items: center;
   justify-content: center;
   width: 50%;
-  border-radius: 25px; 
+  border-radius: 25px;
   padding: 2em;
   margin: 0 auto;
   flex-direction: column;
-  background-image: linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
-  35.13%, rgba(255, 255, 255, 0.85) 126.39%);
+  background-image: linear-gradient(
+    316.54deg,
+    rgba(255, 227, 227, 0.7565) 35.13%,
+    rgba(255, 255, 255, 0.85) 126.39%
+  );
   box-shadow: 0px 4px 4px rgba(200, 116, 56, 0.25);
-  backdrop-filter: blur(4px); 
+  backdrop-filter: blur(4px);
 }
 
 .dialogContent {
@@ -24,18 +27,18 @@
 
 .dialogText {
   margin-bottom: 1em;
-  color: $wave-gradient-color-start; 
+  color: $wave-gradient-color-start;
 }
 
 .headerContainer {
   text-align: "center";
   align-self: "center";
-  
-  @include down($breakpoint-md){
-    width: 60%; 
+
+  @include down($breakpoint-md) {
+    width: 60%;
   }
 
-  @include down($breakpoint-sm){
+  @include down($breakpoint-sm) {
     width: 80%;
   }
 
@@ -46,18 +49,18 @@
   border-bottom: solid $text-color-primary 2px;
   padding-bottom: 0.5rem;
 
-  @include down($breakpoint-md){
-    fontSize: 2.5em; 
+  @include down($breakpoint-md) {
+    fontsize: 2.5em;
   }
 
-  @include donw($breakpoint-sm){
-    fontSize: 1.8em; 
+  @include donw($breakpoint-sm) {
+    fontsize: 1.8em;
   }
 
-  color: $text-color-primary; 
-  font-weight: 600; 
+  color: $text-color-primary;
+  font-weight: 600;
 }
 
 .link {
-  color: $text-color-primary; 
+  color: $text-color-primary;
 }

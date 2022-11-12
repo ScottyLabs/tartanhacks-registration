@@ -8,15 +8,15 @@
   white-space: nowrap;
   width: 45%;
 
-  @include down($breakpoint-sm){
-    width: 80%; 
+  @include down($breakpoint-sm) {
+    width: 80%;
   }
 }
 
-.primaryTextColor{
-  fill: $text-color-primary; 
+.primaryTextColor {
+  fill: $text-color-primary;
 }
 
-.secondaryTextColor{
-  fill: $text-color-secondary; 
+.secondaryTextColor {
+  fill: $text-color-secondary;
 }
