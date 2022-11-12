@@ -53,7 +53,7 @@
     fontsize: 2.5em;
   }
 
-  @include donw($breakpoint-sm) {
+  @include down($breakpoint-sm) {
     fontsize: 1.8em;
   }
 
