@@ -56,7 +56,7 @@
 .statusText {
   margin-bottom: 1em;
   color: $text-color-secondary;
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 
 .buttonBox {
