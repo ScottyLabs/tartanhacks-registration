@@ -8,12 +8,10 @@ import {
   DialogContentText,
   DialogTitle,
   Link,
-  makeStyles,
   Snackbar,
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import { ApplicationStatus } from "enums/ApplicationStatus"
 import { DateTime } from "luxon"
 import NextLink from "next/link"
@@ -26,87 +24,9 @@ import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import Image from "next/image"
 import { Computer } from "@material-ui/icons"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "50%",
-    borderRadius: "25px",
-    padding: "2em",
-    margin: "0 auto",
-    flexDirection: "column",
-    backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
-    35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
-    boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "80%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "70%"
-    }
-  },
-  dialogContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  link: {
-    "&:hover": {
-      textDecoration: "none"
-    }
-  },
-  statusHeaderText: {
-    marginBottom: "0.5em",
-    color: `${theme.palette.text.primary}`
-  },
-  dialogText: {
-    marginBottom: "1em",
-    color: `${theme.palette.text.primary}`,
-    width: "100%",
-    textAlign: "center"
-  },
-  bodyText: {
-    color: `${theme.palette.text.primary}`
-  },
-  statusText: {
-    marginBottom: "1em",
-    color: `${theme.palette.text.secondary}`,
-    fontWeight: 600
-  },
-  buttonBox: {
-    display: "flex",
-    flexDirection: "row",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      flexDirection: "column",
-      gap: "0.5em",
-      alignItems: "center"
-    }
-  },
-  buttonSpacer: {
-    width: "10px"
-  },
-  deadline: {
-    fontWeight: "bold",
-    fontSize: "1.3em"
-  },
-  appStoreLinks: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: "1em",
-    gap: "0.5em"
-  },
-  dialogHeader: {
-    color: theme.palette.gradient.start
-  }
-}))
+import styles from "styles/DashboardDialog.module.scss"
 
 const getDialogText = (
-  classes: any,
   applicationStatus: ApplicationStatus,
   closeTime: string,
   confirmTime: string
@@ -114,16 +34,16 @@ const getDialogText = (
   if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
       <>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">
             You still need to complete your application!
           </Typography>
         </div>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">
             If you do not complete your application by
             <br />
-            <span className={classes.deadline}>{closeTime}</span>, you will not
+            <span className={styles.deadline}>{closeTime}</span>, you will not
             be admitted!
           </Typography>
         </div>
@@ -132,14 +52,14 @@ const getDialogText = (
   } else if (applicationStatus == ApplicationStatus.APPLIED) {
     return (
       <>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">Welcome back!</Typography>
         </div>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">
             You can edit your information until
             <br />
-            <span className={classes.deadline}>{confirmTime}</span>
+            <span className={styles.deadline}>{confirmTime}</span>
           </Typography>
         </div>
       </>
@@ -147,19 +67,19 @@ const getDialogText = (
   } else if (applicationStatus === ApplicationStatus.ADMITTED) {
     return (
       <>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">Welcome to Tartanhacks!</Typography>
           <Typography variant="body1">
             Please confirm your attendance by
           </Typography>
-          <span className={classes.deadline}>{confirmTime}</span>
+          <span className={styles.deadline}>{confirmTime}</span>
         </div>
       </>
     )
   } else if (applicationStatus === ApplicationStatus.REJECTED) {
     return (
       <>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">
             Thanks for applying! We were unable to accommodate you this year.
             Please apply again next year!
@@ -170,7 +90,7 @@ const getDialogText = (
   } else if (applicationStatus === ApplicationStatus.CONFIRMED) {
     return (
       <>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">
             Thanks for confirming your attendance! We hope to see you soon!
           </Typography>
@@ -188,7 +108,7 @@ const getDialogText = (
           <Typography variant="body1">
             Once you&apos;re all set, download our Dashboard App!
           </Typography>
-          <div className={classes.appStoreLinks}>
+          <div className={styles.appStoreLinks}>
             <Link
               href="https://play.google.com/store/apps/details?id=org.scottylabs.thdapp"
               target="_blank"
@@ -231,7 +151,7 @@ const getDialogText = (
   } else if (applicationStatus === ApplicationStatus.DECLINED) {
     return (
       <>
-        <div className={classes.dialogText}>
+        <div className={styles.dialogText}>
           <Typography variant="body1">
             We&apos;re sorry you couldn&apos;t join us this year. We hope to see
             you next year!
@@ -245,7 +165,6 @@ const getDialogText = (
 }
 
 const getButtonBox = (
-  classes: any,
   applicationStatus: ApplicationStatus,
   resendVerification: () => Promise<void>,
   setShowDeclineDialog: (b: boolean) => void
@@ -258,7 +177,7 @@ const getButtonBox = (
     )
   } else if (applicationStatus === ApplicationStatus.VERIFIED) {
     return (
-      <Link href="/apply" className={classes.link}>
+      <Link href="/apply" className={styles.link}>
         <RectangleButton type="submit">
           COMPLETE YOUR APPLICATION
         </RectangleButton>
@@ -266,19 +185,19 @@ const getButtonBox = (
     )
   } else if (applicationStatus === ApplicationStatus.APPLIED) {
     return (
-      <div className={classes.buttonBox}>
-        <Link href="/apply" className={classes.link}>
+      <div className={styles.buttonBox}>
+        <Link href="/apply" className={styles.link}>
           <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
       </div>
     )
   } else if (applicationStatus === ApplicationStatus.ADMITTED) {
     return (
-      <div className={classes.buttonBox}>
-        <Link href="/confirmation" className={classes.link}>
+      <div className={styles.buttonBox}>
+        <Link href="/confirmation" className={styles.link}>
           <RectangleButton type="submit">CONFIRM</RectangleButton>
         </Link>
-        <div className={classes.buttonSpacer}></div>
+        <div className={styles.buttonSpacer}></div>
         <RectangleButton
           type="button"
           onClick={() => {
@@ -296,8 +215,6 @@ const getButtonBox = (
 
 const DashboardDialog = (): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
   const [decliningAcceptance, setDecliningAcceptance] = useState(false)
   const [sendingVerification, setSendingVerification] = useState(false)
   const [showDeclineDialog, setShowDeclineDialog] = useState(false)
@@ -352,13 +269,11 @@ const DashboardDialog = (): ReactElement => {
   }
 
   const dialogText = getDialogText(
-    classes,
     applicationStatus,
     closeTimeStr,
     confirmTimeStr
   )
   const buttonBox = getButtonBox(
-    classes,
     applicationStatus,
     resendVerification,
     setShowDeclineDialog
@@ -369,25 +284,25 @@ const DashboardDialog = (): ReactElement => {
       <Snackbar
         open={snackbarOpen}
         autoHideDuration={3000}
-        onClose={(e) => setSnackbarOpen(false)}
+        onClose={() => setSnackbarOpen(false)}
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       >
         <Alert severity={snackbarState}>{snackbarMessage}</Alert>
       </Snackbar>
-      <div className={classes.dialog}>
-        <div className={classes.dialogContent}>
+      <div className={styles.dialog}>
+        <div className={styles.dialogContent}>
           <Collapse in={loading}>
             <CircularProgress />
           </Collapse>
           {!loading && (
             <>
               <div>
-                <Typography variant="h4" className={classes.statusHeaderText}>
+                <Typography variant="h4" className={styles.statusHeaderText}>
                   Your Status:
                 </Typography>
               </div>
               <div>
-                <Typography variant="h4" className={classes.statusText}>
+                <Typography variant="h4" className={styles.statusText}>
                   {applicationStatus}
                 </Typography>
               </div>
@@ -407,10 +322,10 @@ const DashboardDialog = (): ReactElement => {
           setShowDeclineDialog(false)
         }}
       >
-        <DialogTitle className={classes.dialogHeader}>
+        <DialogTitle className={styles.dialogHeader}>
           Cancel registration?
         </DialogTitle>
-        <DialogContent className={classes.dialogContent}>
+        <DialogContent className={styles.dialogContent}>
           <Collapse in={decliningAcceptance}>
             <CircularProgress />
           </Collapse>
