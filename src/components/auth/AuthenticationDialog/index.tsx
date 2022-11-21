@@ -1,5 +1,7 @@
 import {
-  CircularProgress, Collapse, makeStyles,
+  CircularProgress,
+  Collapse,
+  makeStyles,
   Snackbar,
   TextField,
   Typography
@@ -13,84 +15,6 @@ import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../../design/RectangleButton"
 import styles from "./index.module.scss"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "20%",
-    padding: "1em",
-    margin: "0 auto",
-    textAlign: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "50%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    }
-  },
-  registrationForm: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em",
-    width: "100%",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      gap: "0.8em"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      gap: "0.4em"
-    }
-  },
-  header: {
-    fontWeight: 600,
-    backgroundImage: `linear-gradient(180deg, ${theme.palette.gradient.start} 19.64%, ${theme.palette.gradient.end} 69.64%)`,
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    marginBottom: "1em"
-  },
-  switchAuth: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "1em"
-  },
-  link: {
-    "&:hover": {
-      textDecoration: "none",
-      filter: "brightness(85%)"
-    }
-  },
-  warningDiv: {
-    background: theme.palette.primary.main,
-    marginTop: "2em",
-    padding: "10px",
-    layout: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "50%",
-    margin: "0 auto",
-    borderRadius: "10px",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "60%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%",
-      marginTop: "0em"
-    }
-  },
-  warning: {
-    textAlign: "center",
-    color: theme.palette.declined
-  },
-  wrapper: {
-    layout: "flex",
-    flexDirection: "column",
-    width: "100%"
-  }
-}))
 
 const AuthenticationDialog = ({
   registration = false
