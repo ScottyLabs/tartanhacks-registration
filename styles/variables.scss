@@ -29,6 +29,12 @@ $wave-gradient-color-end: #db4d20;
 $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;
 
+$dialog-container-gradient: linear-gradient(
+  316.54deg,
+  rgba(255, 227, 227, 0.7565) 35.13%,
+  rgba(255, 255, 255, 0.85) 126.39%
+);
+
 // Additional component colors
 $background-color: $color-primary;
 $button-color: #ffc738;
@@ -69,6 +75,8 @@ $container-padding: 1em 1.5em 1em 1.5em;
 $box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
   0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
 $text-shadow: 1px 1px 10px #0005;
+
+$dialog-container-box-shadow: 0px 4px 4px rgba(200, 116, 56, 0.25);
 
 // Transitions
 $logo-hover-transition: 0.2s;
