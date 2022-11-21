@@ -11,27 +11,26 @@ import {
   Snackbar,
   Typography
 } from "@material-ui/core"
+import { Computer } from "@material-ui/icons"
 import { Alert } from "@material-ui/lab"
-import { ApplicationStatus } from "enums/ApplicationStatus"
+import { Status, statusToString } from "enums/Status"
 import { DateTime } from "luxon"
+import Image from "next/image"
 import NextLink from "next/link"
 import Router from "next/router"
 import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
-import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
-import Image from "next/image"
-import { Computer } from "@material-ui/icons"
 import styles from "styles/DashboardDialog.module.scss"
 
 const getDialogText = (
-  applicationStatus: ApplicationStatus,
+  status: Status,
   closeTime: string,
   confirmTime: string
 ): ReactElement => {
-  if (applicationStatus === ApplicationStatus.VERIFIED) {
+  if (status === Status.VERIFIED) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -49,7 +48,7 @@ const getDialogText = (
         </div>
       </>
     )
-  } else if (applicationStatus == ApplicationStatus.APPLIED) {
+  } else if (status == Status.COMPLETED_PROFILE) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -64,7 +63,7 @@ const getDialogText = (
         </div>
       </>
     )
-  } else if (applicationStatus === ApplicationStatus.ADMITTED) {
+  } else if (status === Status.ADMITTED) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -76,7 +75,7 @@ const getDialogText = (
         </div>
       </>
     )
-  } else if (applicationStatus === ApplicationStatus.REJECTED) {
+  } else if (status === Status.REJECTED) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -87,7 +86,7 @@ const getDialogText = (
         </div>
       </>
     )
-  } else if (applicationStatus === ApplicationStatus.CONFIRMED) {
+  } else if (status === Status.CONFIRMED) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -148,7 +147,7 @@ const getDialogText = (
         </div>
       </>
     )
-  } else if (applicationStatus === ApplicationStatus.DECLINED) {
+  } else if (status === Status.DECLINED) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -165,17 +164,17 @@ const getDialogText = (
 }
 
 const getButtonBox = (
-  applicationStatus: ApplicationStatus,
+  status: Status,
   resendVerification: () => Promise<void>,
   setShowDeclineDialog: (b: boolean) => void
 ): ReactElement => {
-  if (applicationStatus === ApplicationStatus.UNVERIFIED) {
+  if (status === Status.UNVERIFIED) {
     return (
       <RectangleButton type="button" onClick={() => resendVerification()}>
         RESEND VERIFICATION EMAIL
       </RectangleButton>
     )
-  } else if (applicationStatus === ApplicationStatus.VERIFIED) {
+  } else if (status === Status.VERIFIED) {
     return (
       <Link href="/apply" className={styles.link}>
         <RectangleButton type="submit">
@@ -183,7 +182,7 @@ const getButtonBox = (
         </RectangleButton>
       </Link>
     )
-  } else if (applicationStatus === ApplicationStatus.APPLIED) {
+  } else if (status === Status.COMPLETED_PROFILE) {
     return (
       <div className={styles.buttonBox}>
         <Link href="/apply" className={styles.link}>
@@ -191,7 +190,7 @@ const getButtonBox = (
         </Link>
       </div>
     )
-  } else if (applicationStatus === ApplicationStatus.ADMITTED) {
+  } else if (status === Status.ADMITTED) {
     return (
       <div className={styles.buttonBox}>
         <Link href="/confirmation" className={styles.link}>
@@ -236,11 +235,12 @@ const DashboardDialog = (): ReactElement => {
     DateTime.fromJSDate(confirmTime).toFormat("dd LLL yyyy")
 
   const status =
-    useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+    useSelector((state: RootState) => state?.accounts?.data?.status) ?? null
+  const statusStr = statusToString(status)
   const email =
     useSelector((state: RootState) => state?.accounts?.data?.email) || ""
-  const applicationStatus = getApplicationStatus(status)
-  const loading = status._id == null
+
+  const loading = status === null
 
   const resendVerification = async () => {
     setSendingVerification(true)
@@ -268,13 +268,9 @@ const DashboardDialog = (): ReactElement => {
     setDecliningAcceptance(false)
   }
 
-  const dialogText = getDialogText(
-    applicationStatus,
-    closeTimeStr,
-    confirmTimeStr
-  )
+  const dialogText = getDialogText(status, closeTimeStr, confirmTimeStr)
   const buttonBox = getButtonBox(
-    applicationStatus,
+    status,
     resendVerification,
     setShowDeclineDialog
   )
@@ -303,7 +299,7 @@ const DashboardDialog = (): ReactElement => {
               </div>
               <div>
                 <Typography variant="h4" className={styles.statusText}>
-                  {applicationStatus}
+                  {statusStr}
                 </Typography>
               </div>
               {dialogText}

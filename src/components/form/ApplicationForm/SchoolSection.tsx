@@ -1,6 +1,5 @@
-import { makeStyles, TextField, Typography } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import {
   CMUCollege,
   CollegeLevel,
@@ -19,18 +18,7 @@ import actions from "src/actions"
 import { getSchools } from "src/util/getSchools"
 import { SchoolFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    marginTop: "1em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em"
-  },
-  sectionHeader: {
-    marginBottom: "1rem"
-  }
-}))
+import styles from "./index.module.scss"
 
 const CMU = "Carnegie Mellon University"
 
@@ -46,8 +34,6 @@ const SchoolSection = ({
   setIsCMUStudent: (val: boolean) => void
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
@@ -108,8 +94,8 @@ const SchoolSection = ({
   }, [])
 
   return (
-    <div className={classes.section}>
-      <Typography variant="h5" className={classes.sectionHeader}>
+    <div className={styles.section}>
+      <Typography variant="h5" className={styles.sectionHeader}>
         School Information
       </Typography>
       <Autocomplete

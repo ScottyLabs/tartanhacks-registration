@@ -2,11 +2,9 @@ import {
   Button,
   CircularProgress,
   Collapse,
-  makeStyles,
   TextField,
   Typography
 } from "@material-ui/core"
-import { useTheme } from "@material-ui/styles"
 import React, {
   Dispatch,
   ReactElement,
@@ -19,24 +17,7 @@ import actions from "src/actions"
 import { PortfolioFields } from "types/ApplicationForm"
 import { DispatchAction } from "types/DispatchAction"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    marginTop: "1em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em"
-  },
-  sectionHeader: {
-    marginBottom: "1rem"
-  },
-  resumeUploadContainer: {
-    display: "flex",
-    alignItems: "center",
-    gap: "1em",
-    flexDirection: "row"
-  }
-}))
+import styles from "./index.module.scss"
 
 const PortfolioSection = ({
   setError,
@@ -52,8 +33,6 @@ const PortfolioSection = ({
   setValid: Dispatch<SetStateAction<boolean>>
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
@@ -128,11 +107,11 @@ const PortfolioSection = ({
   }, [fetchedProfile])
 
   return (
-    <div className={classes.section}>
-      <Typography variant="h5" className={classes.sectionHeader}>
+    <div className={styles.section}>
+      <Typography variant="h5" className={styles.sectionHeader}>
         PORTFOLIO
       </Typography>
-      <div className={classes.resumeUploadContainer}>
+      <div className={styles.resumeUploadContainer}>
         <Button variant="outlined" component="label">
           Upload Resume *
           <input

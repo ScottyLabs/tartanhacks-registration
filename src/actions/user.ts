@@ -11,15 +11,6 @@ export const getOwnTeam = (): RemoteDispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
-export const getStatus = (id: string): DispatchAction => ({
-  type: DispatchActionType.USER_STATUS,
-  useAPI: true,
-  request: {
-    path: `/users/${id}/status/`,
-    method: "GET"
-  },
-  status: RequestStatus.PENDING
-})
 export const getProfile = (id: string): DispatchAction => ({
   type: DispatchActionType.USER_PROFILE,
   useAPI: true,

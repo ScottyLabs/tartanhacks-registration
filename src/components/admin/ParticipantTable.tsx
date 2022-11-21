@@ -25,12 +25,11 @@ import {
 } from "@material-ui/core"
 import { Person } from "@material-ui/icons"
 import CloseIcon from "@material-ui/icons/Close"
-import { ApplicationStatus } from "enums/ApplicationStatus"
+import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useMemo, useState } from "react"
 import { useDispatch } from "react-redux"
 import { Column, useTable } from "react-table"
 import actions from "src/actions"
-import getApplicationStatus from "src/util/getApplicationStatus"
 import { Participant } from "types/Participant"
 import RectangleButton from "../design/RectangleButton"
 import ProfileBox from "./ProfileBox"
@@ -150,50 +149,50 @@ const ParticipantTable = (): ReactElement => {
     </div>
   )
 
-  const getStatusChips = (status: ApplicationStatus) => {
-    if (status == ApplicationStatus.UNVERIFIED) {
+  const getStatusChips = (status: Status) => {
+    if (status == Status.UNVERIFIED) {
       return (
         <Chip
           label="UNVERIFIED"
           className={`${classes.chipMargin} ${classes.chipUnverified}`}
         />
       )
-    } else if (status == ApplicationStatus.VERIFIED) {
+    } else if (status == Status.VERIFIED) {
       return (
         <Chip
           label="VERIFIED"
           className={`${classes.chipMargin} ${classes.chipVerified}`}
         />
       )
-    } else if (status == ApplicationStatus.APPLIED) {
+    } else if (status == Status.COMPLETED_PROFILE) {
       return (
         <Chip
           label="APPLIED"
           className={`${classes.chipMargin} ${classes.chipApplied}`}
         />
       )
-    } else if (status == ApplicationStatus.ADMITTED) {
+    } else if (status == Status.ADMITTED) {
       return (
         <Chip
           label="ADMITTED"
           className={`${classes.chipMargin} ${classes.chipAdmitted}`}
         />
       )
-    } else if (status == ApplicationStatus.REJECTED) {
+    } else if (status == Status.REJECTED) {
       return (
         <Chip
           label="REJECTED"
           className={`${classes.chipMargin} ${classes.chipRejected}`}
         />
       )
-    } else if (status == ApplicationStatus.DECLINED) {
+    } else if (status == Status.DECLINED) {
       return (
         <Chip
           label="DECLINED"
           className={`${classes.chipMargin} ${classes.chipDeclined}`}
         />
       )
-    } else if (status == ApplicationStatus.CONFIRMED) {
+    } else if (status == Status.CONFIRMED) {
       return (
         <Chip
           label="CONFIRMED"
@@ -273,10 +272,7 @@ const ParticipantTable = (): ReactElement => {
         accessor: "status",
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
-          const { status } = original
-
-          const applicationStatus = getApplicationStatus(status)
-          return getStatusChips(applicationStatus)
+          return getStatusChips(original.status)
         }
       },
       {
@@ -303,9 +299,7 @@ const ParticipantTable = (): ReactElement => {
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
           const { _id, status } = original
-
-          const applicationStatus = getApplicationStatus(status)
-          if (applicationStatus == ApplicationStatus.APPLIED) {
+          if (status == Status.COMPLETED_PROFILE) {
             return (
               <div>
                 <RectangleButton
