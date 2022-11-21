@@ -1,6 +1,5 @@
-import { makeStyles, TextField, Typography } from "@material-ui/core"
+import { TextField, Typography } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import { WorkPermission } from "enums/Profile"
 import { ObjectId } from "mongodb"
 import React, {
@@ -14,18 +13,7 @@ import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { WorkAuthorizationFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    marginTop: "1em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em"
-  },
-  sectionHeader: {
-    marginBottom: "1rem"
-  }
-}))
+import styles from "./index.module.scss"
 
 interface Sponsor {
   name: string
@@ -42,8 +30,6 @@ const WorkAuthorizationSection = ({
   setValid: Dispatch<SetStateAction<boolean>>
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
@@ -106,8 +92,8 @@ const WorkAuthorizationSection = ({
   }, [])
 
   return (
-    <div className={classes.section}>
-      <Typography variant="h5" className={classes.sectionHeader}>
+    <div className={styles.section}>
+      <Typography variant="h5" className={styles.sectionHeader}>
         Sponsor Information
       </Typography>
       <Autocomplete
