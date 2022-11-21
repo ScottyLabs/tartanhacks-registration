@@ -11,12 +11,11 @@ import {
   Typography
 } from "@material-ui/core"
 import { Cancel, Check, OpenInNew } from "@material-ui/icons"
-import { ApplicationStatus } from "enums/ApplicationStatus"
 import { Ethnicity, Gender } from "enums/Profile"
+import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
-import getApplicationStatus from "src/util/getApplicationStatus"
 import { Participant } from "types/Participant"
 import { RootState } from "types/RootState"
 
@@ -251,14 +250,11 @@ const ProfileBox = React.forwardRef(
     const [profile, setProfile] = useState<any>(null)
     const [loading, setLoading] = useState(true)
 
-    const applicationStatus = getApplicationStatus(participant?.status)
+    const status = participant?.status
 
-    const incomplete = [
-      ApplicationStatus.UNVERIFIED,
-      ApplicationStatus.VERIFIED
-    ]
+    const incomplete = [Status.UNVERIFIED, Status.VERIFIED]
     let profileContent = null
-    if (profile != null && !incomplete.includes(applicationStatus)) {
+    if (profile != null && !incomplete.includes(status)) {
       profileContent = <ProfileContent profile={profile} />
     }
 
@@ -288,8 +284,7 @@ const ProfileBox = React.forwardRef(
           <>
             <Typography variant="h5">{participant?.email}</Typography>
             <Typography variant="h6">
-              Status:{" "}
-              <span className={classes.statusLabel}>{applicationStatus}</span>
+              Status: <span className={classes.statusLabel}>{status}</span>
             </Typography>
             {profileContent}
           </>

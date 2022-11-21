@@ -55,7 +55,6 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
     const getData = async () => {
       setLoading(true)
       try {
-        dispatch(actions.user.getStatus(currentUser._id))
         dispatch(actions.settings.getCloseTime())
         dispatch(actions.settings.getConfirmTime())
       } catch (err) {
