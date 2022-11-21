@@ -1,21 +1,18 @@
 import {
-  Collapse,
-  CircularProgress,
-  Link,
-  makeStyles,
+  CircularProgress, Collapse, makeStyles,
   Snackbar,
   TextField,
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
 import NextLink from "next/link"
 import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
-import RectangleButton from "../design/RectangleButton"
+import RectangleButton from "../../design/RectangleButton"
+import styles from "./index.module.scss"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {
@@ -101,9 +98,7 @@ const AuthenticationDialog = ({
   registration: boolean
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
   const router = useRouter()
-  const classes = useStyles(theme)
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
@@ -135,8 +130,8 @@ const AuthenticationDialog = ({
   }
 
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.dialog}>
+    <div className={styles.wrapper}>
+      <div className={styles.dialog}>
         <Snackbar
           open={error}
           autoHideDuration={5000}
@@ -146,7 +141,7 @@ const AuthenticationDialog = ({
           <Alert severity="error">{errorMessage}</Alert>
         </Snackbar>
         <form
-          className={classes.registrationForm}
+          className={styles.registrationForm}
           onSubmit={(e) => {
             e.preventDefault()
 
@@ -157,7 +152,7 @@ const AuthenticationDialog = ({
             }
           }}
         >
-          <Typography variant="h4" className={classes.header}>
+          <Typography variant="h4" className={styles.header}>
             Welcome
           </Typography>
           <Collapse in={loading}>
@@ -191,29 +186,32 @@ const AuthenticationDialog = ({
           <RectangleButton type="submit">
             {registration ? "Register" : "Login"}
           </RectangleButton>
-          <div className={classes.switchAuth}>
+          <div className={styles.switchAuth}>
             <Typography variant="body1">
               {registration
                 ? "Already have an account?"
                 : "Don't have an account?"}
             </Typography>
             <NextLink href={registration ? "/login" : "/register"} passHref>
-              <Link className={classes.link}>
+              <a className={styles.link}>
                 {registration ? "Log In" : "Sign Up"}
-              </Link>
+              </a>
             </NextLink>
             {registration ? null : (
               <NextLink href="/forgot-password" passHref>
-                <Link>Forgot password</Link>
+                <a className={styles.link}>Forgot password</a>
               </NextLink>
             )}
           </div>
         </form>
       </div>
-      <div className={classes.warningDiv}>
-        <Typography className={classes.warning}>
-          Attention! Only undergraduate participants who are at least 18 years
-          old are eligible for a prize
+      <div className={styles.warningDiv}>
+        <Typography className={styles.warning}>
+          Attention! Only{" "}
+          <span className={styles.emphasize}>undergraduate</span> participants
+          who are at least{" "}
+          <span className={styles.emphasize}>18 years old</span> are eligible
+          for a prize
         </Typography>
       </div>
     </div>
