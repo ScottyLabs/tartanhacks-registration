@@ -1,9 +1,8 @@
 import { Modal } from "@material-ui/core"
 import { useTheme } from "@material-ui/styles"
-import { ApplicationStatus } from "enums/ApplicationStatus"
+import { Status } from "enums/Status"
 import { ReactElement, useState } from "react"
 import { useSelector } from "react-redux"
-import getApplicationStatus from "src/util/getApplicationStatus"
 import { RootState } from "types/RootState"
 import BurgerMenu from "../../design/BurgerMenu"
 import MenuItem from "../MenuItem"
@@ -11,17 +10,16 @@ import MenuLine from "../MenuLine"
 import styles from "./index.module.scss"
 
 const Menu = (): ReactElement => {
-  const theme = useTheme()
   const [open, setOpen] = useState(false)
   const handleSwitch = () => setOpen(!open)
   const handleClose = () => setOpen(false)
 
   const status =
-    useSelector((state: RootState) => state?.user?.data?.status) ?? {}
+    useSelector((state: RootState) => state?.accounts?.data?.status) ??
+    Status.UNVERIFIED
   const isAdmin = useSelector(
     (state: RootState) => state?.accounts?.data?.admin
   )
-  const applicationStatus = getApplicationStatus(status)
 
   return (
     <div className={styles.menuBurgerContainer}>
@@ -33,25 +31,25 @@ const Menu = (): ReactElement => {
           <div className={styles.menuBox}>
             <MenuItem text="HOME" url="/" />
             <MenuLine />
-            {applicationStatus === ApplicationStatus.VERIFIED ? (
+            {status === Status.VERIFIED ? (
               <>
                 <MenuItem text="APPLY" url="/apply" />
                 <MenuLine />
               </>
             ) : null}
-            {applicationStatus === ApplicationStatus.APPLIED ? (
+            {status === Status.COMPLETED_PROFILE ? (
               <>
                 <MenuItem text="APPLICATION" url="/apply" />
                 <MenuLine />
               </>
             ) : null}
-            {applicationStatus === ApplicationStatus.ADMITTED ? (
+            {status === Status.ADMITTED ? (
               <>
                 <MenuItem text="CONFIRM" url="/confirmation" />
                 <MenuLine />
               </>
             ) : null}
-            {applicationStatus === ApplicationStatus.CONFIRMED ? (
+            {status === Status.CONFIRMED ? (
               <>
                 <MenuItem text="TEAM" url="/teams" />
                 <MenuLine />

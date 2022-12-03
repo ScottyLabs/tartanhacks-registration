@@ -9,71 +9,16 @@ import {
   makeStyles,
   Typography
 } from "@material-ui/core"
-import { Launch } from "@material-ui/icons"
-import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import RectangleButton from "../design/RectangleButton"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "50%",
-    borderRadius: "25px",
-    padding: "2em",
-    margin: "0 auto",
-    flexDirection: "column",
-    backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
-    35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
-    boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)"
-  },
-  dialogContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  dialogText: {
-    marginBottom: "1em",
-    color: `${theme.palette.gradient.start}`
-  },
-  headerContainer: {
-    textAlign: "center",
-    alignSelf: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "60%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    },
-    paddingBottom: "0.5rem"
-  },
-  header: {
-    borderBottom: `solid ${theme.palette.text.primary} 2px`,
-    paddingBottom: "0.5rem",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "2.5em"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "1.8em"
-    },
-    color: theme.palette.text.primary,
-    fontWeight: 600
-  },
-  link: {
-    color: theme.palette.text.primary
-  }
-}))
+import RectangleButton from "src/components/design/RectangleButton"
+import styles from "./index.module.scss"
 
 const ConfirmationDialog = (): ReactElement => {
   const router = useRouter()
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
   const [loading, setLoading] = useState(false)
 
   const [signatureLiability, setSignatureLiability] = useState(false)
@@ -98,7 +43,7 @@ const ConfirmationDialog = (): ReactElement => {
   }
 
   return (
-    <div className={classes.dialog}>
+    <div className={styles.dialog}>
       <Collapse in={loading}>
         <LinearProgress />
       </Collapse>
@@ -109,13 +54,13 @@ const ConfirmationDialog = (): ReactElement => {
           confirm()
         }}
       >
-        <div className={classes.dialogContent}>
-          <div className={classes.headerContainer}>
-            <Typography variant="h4" className={classes.header}>
+        <div className={styles.dialogContent}>
+          <div className={styles.headerContainer}>
+            <Typography variant="h4" className={styles.header}>
               Confirmation
             </Typography>
           </div>
-          <div className={classes.dialogText}>
+          <div className={styles.dialogText}>
             <FormGroup>
               <FormControlLabel
                 control={
@@ -131,7 +76,7 @@ const ConfirmationDialog = (): ReactElement => {
                     <Link
                       target="_blank"
                       href="/THLiabilityWaiver.pdf"
-                      className={classes.link}
+                      className={styles.link}
                     >
                       TartanHacks Liability Waiver
                     </Link>
@@ -155,7 +100,7 @@ const ConfirmationDialog = (): ReactElement => {
                     <Link
                       target="_blank"
                       href="/THCodeOfConduct.pdf"
-                      className={classes.link}
+                      className={styles.link}
                     >
                       TartanHacks Code of Conduct
                     </Link>

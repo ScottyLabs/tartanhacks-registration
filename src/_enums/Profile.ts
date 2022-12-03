@@ -32,6 +32,7 @@ export enum Ethnicity {
   PACIFIC_ISLANDER = "Pacific Islander",
   WHITE = "White",
   HISPANIC = "Hispanic",
+  PREFER_NOT_TO_SAY = "Prefer not to say",
   OTHER = "Other"
 }
 

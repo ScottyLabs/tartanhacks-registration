@@ -2,12 +2,10 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  makeStyles,
   TextField,
   Typography
 } from "@material-ui/core"
 import { Autocomplete } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import { Region, ShirtSize } from "enums/Profile"
 import React, {
   Dispatch,
@@ -21,18 +19,7 @@ import actions from "src/actions"
 import isValidPhoneNumber from "src/util/isValidPhoneNumber"
 import { LogisticsFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    marginTop: "1em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em"
-  },
-  sectionHeader: {
-    marginBottom: "1rem"
-  }
-}))
+import styles from "./index.module.scss"
 
 const LogisticsSection = ({
   validate,
@@ -46,8 +33,6 @@ const LogisticsSection = ({
   isCMUStudent: boolean
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   const fetchedProfile = useSelector(
     (state: RootState) => state?.application?.fetchedProfile
@@ -117,8 +102,8 @@ const LogisticsSection = ({
   }, [fetchedProfile])
 
   return (
-    <div className={classes.section}>
-      <Typography variant="h5" className={classes.sectionHeader}>
+    <div className={styles.section}>
+      <Typography variant="h5" className={styles.sectionHeader}>
         LOGISTICS INFORMATION
       </Typography>
       <TextField
