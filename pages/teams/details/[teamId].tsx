@@ -1,31 +1,26 @@
 import {
-  makeStyles,
-  Typography,
-  Snackbar,
-  Dialog,
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-  Button,
-  TextField,
-  Collapse,
-  CircularProgress
+  Button, CircularProgress, Collapse, Dialog, DialogActions,
+  DialogContent, DialogTitle, makeStyles, Snackbar, TextField, Typography
 } from "@material-ui/core"
-import React, { useEffect, useState } from "react"
-import { useRouter } from "next/router"
-import { useDispatch } from "react-redux"
-import actions from "src/actions"
-import { AuthenticatedLayout } from "src/layouts"
-import WaveFooter from "src/components/design/WaveFooter"
-import FloatingDiv from "src/components/design/FloatingDiv"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
-import ContentHeader from "src/components/design/ContentHeader"
-import RectangleButton from "src/components/design/RectangleButton"
-import { useSelector } from "react-redux"
-import { RootState } from "types/RootState"
 import { Alert } from "@material-ui/lab"
-import Menu from "src/components/menu/Menu"
+import { useRouter } from "next/router"
+import { ReactElement, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
 import BackButton from "src/components/design/BackButton"
+import ContentHeader from "src/components/design/ContentHeader"
+import FloatingDiv from "src/components/design/FloatingDiv"
+import RectangleButton from "src/components/design/RectangleButton"
+import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
+import WaveFooter from "src/components/design/WaveFooter"
+import Menu from "src/components/menu/Menu"
+import { AuthenticatedLayout } from "src/layouts"
+import { RootState } from "types/RootState"
+
+//import new
+import fetchData from "src/util/fetcher"
+import { SSRDataAuth, TeamInfoData } from "types/SSRData"
+import { Team } from "types/Team"
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -184,11 +179,73 @@ enum dialogOpen {
   Invite
 }
 
-const TeamDescription = () => {
-  const dispatch = useDispatch()
+
+export async function getServerSideProps(
+  context: any
+): Promise<SSRDataAuth<TeamInfoData>> {
+  const accessToken: string = context.req.cookies["accessToken"]
+  if (accessToken === undefined) {
+    // not authenticated
+    return {
+      props: { isAuth: false }
+    }
+  }
+
   const router = useRouter()
   const { teamId } = router.query
-  const [teamInfo, setTeamInfo] = useState({
+  const promises = [
+    fetchData(actions.auth.loginWithToken(), accessToken),
+    fetchData(actions.teams.getTeamInfo(teamId as string), accessToken),
+    fetchData(actions.user.getOwnTeam(), accessToken)
+  ]
+
+  try {
+    const [userData, teamInfoData, ownTeamData] = await Promise.allSettled(promises)
+    if (teamInfoData.status === "rejected") {
+      console.error(teamInfoData.reason)
+    }
+    else if (userData.status === "rejected") {
+      console.error(userData.reason)
+    }
+    else if (ownTeamData.status === "rejected") {
+      console.error(ownTeamData.reason)
+    }
+    else {
+      const info = teamInfoData.value
+      const user = userData.value
+      const teamInfo = info.data
+      const isCaptain = info.data.admin._id === user.data._id
+      const ownTeam = ownTeamData.value
+      const isOwnTeam = ownTeam.data._id === (teamId as string)
+
+      return {
+        props: {
+          isAuth: true,
+          data: {
+            teamInfo: teamInfo,
+            isCaptain: isCaptain,
+            user: user,
+            isOwnTeam: isOwnTeam
+          }
+        }
+      }
+    }
+
+  } catch (err) {
+    console.error(err)
+  }
+  return {
+    props: {
+      isAuth: false
+    }
+  }
+}
+
+
+const TeamDescription = (props: SSRDataAuth<TeamInfoData>["props"]): ReactElement => {
+  const dispatch = useDispatch()
+  const router = useRouter()
+  const [teamInfo, setTeamInfo] = useState(props.data?.teamInfo ?? {
     _id: "",
     members: [],
     visible: true,
@@ -200,20 +257,22 @@ const TeamDescription = () => {
     updatedAt: "",
     __v: 0
   })
-  const [ownTeamFetched, setOwnTeamFetched] = useState(false)
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
-  const [isOwnTeam, setIsOwnTeam] = useState(false)
   const classes = useStyles()
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
   const user = useSelector((state: RootState) => state?.accounts?.data)
-  const [isCaptain, setIsCaptain] = useState(false)
   const [open, setOpen] = useState(dialogOpen.No)
-  const [changedName, setChangedName] = useState("")
-  const [changedDescription, setChangedDescription] = useState("")
   const [invitations, setInvitations] = useState<any>([])
-
+  const [changedName, setChangedName] = useState(props.data?.teamInfo?.name ?? "")
+  const [changedDescription, setChangedDescription] = useState(props.data?.teamInfo?.description ?? "")
   const [loading, setLoading] = useState(true)
+
+  //check if the user is authenticated or not
+  if (!props.isAuth){
+    router.push("/login")
+  }
+
 
   const handleClose = () => {
     setOpen(dialogOpen.No)
@@ -224,8 +283,9 @@ const TeamDescription = () => {
 
   const handleCloseName = async () => {
     setOpen(dialogOpen.No)
+    setLoading(true)
     try {
-      await dispatch(
+      dispatch(
         actions.teams.editTeamInfo(changedName, undefined, undefined)
       )
       setTeamInfo({
@@ -235,12 +295,14 @@ const TeamDescription = () => {
     } catch (err) {
       setNotify("error")
     }
+    setLoading(false)
   }
 
   const handleCloseDescription = async () => {
     setOpen(dialogOpen.No)
+    setLoading(true)
     try {
-      await dispatch(
+      dispatch(
         actions.teams.editTeamInfo(undefined, changedDescription, undefined)
       )
       setTeamInfo({
@@ -250,61 +312,24 @@ const TeamDescription = () => {
     } catch (err) {
       setNotify("error")
     }
+    setLoading(false)
   }
 
   const handleCloseInvite = async () => {
     setOpen(dialogOpen.No)
+    setLoading(true)
     if (invitations) {
       invitations.forEach(async (elem: string) => {
         try {
-          await dispatch(actions.teams.inviteByEmail(elem))
+          dispatch(actions.teams.inviteByEmail(elem))
         } catch (err) {
           setNotify("error")
         }
       })
     }
+    setLoading(false)
   }
 
-  useEffect(() => {
-    if (teamId === undefined || user._id === undefined) {
-      setLoading(false)
-      return
-    }
-
-    const fetchTeamInfo = async () => {
-      setLoading(true)
-      const promises = [
-        dispatch(actions.teams.getTeamInfo(teamId as string)),
-        dispatch(actions.user.getOwnTeam())
-      ]
-      try {
-        setOwnTeamFetched(false)
-        const [teamInfoData, ownTeamData] = await Promise.allSettled(promises)
-        if (teamInfoData.status === "rejected") {
-          console.error(teamInfoData.reason)
-        } else {
-          const info = teamInfoData.value
-          setTeamInfo(info.data)
-          setChangedName(info.data.name)
-          setChangedDescription(info.data.description)
-          setIsCaptain(info.data.admin._id === user._id)
-        }
-
-        if (ownTeamData.status === "rejected") {
-          setIsOwnTeam(false)
-        } else {
-          const ownTeam = ownTeamData.value
-          setIsOwnTeam(ownTeam.data._id === (teamId as string))
-        }
-        setOwnTeamFetched(true)
-      } catch (err) {
-        console.error(err)
-      }
-      setLoading(false)
-    }
-
-    fetchTeamInfo()
-  }, [teamId, user])
   return (
     <>
       <Menu />
@@ -312,7 +337,7 @@ const TeamDescription = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
-          {ownTeamFetched && !isOwnTeam ? (
+          {!props.data?.isOwnTeam ? (
             <BackButton link="/teams" className={classes.backButton} />
           ) : null}
           <div className={classes.spinnerContainer}>
@@ -331,7 +356,7 @@ const TeamDescription = () => {
                   {teamInfo.name}
                 </Typography>
               </div>
-              {isCaptain ? (
+              {props.data?.isCaptain ? (
                 <form
                   className={classes.editButtonForm}
                   onSubmit={async (e) => {
@@ -358,7 +383,7 @@ const TeamDescription = () => {
                   {teamInfo.description}
                 </Typography>
               </div>
-              {isCaptain ? (
+              {props.data?.isCaptain ? (
                 <form
                   className={classes.editButtonForm}
                   onSubmit={async (e) => {
@@ -394,7 +419,7 @@ const TeamDescription = () => {
                   ))}
                 </ul>
               </div>
-              {isCaptain ? (
+              {props.data?.isCaptain ? (
                 <form
                   className={classes.editButtonForm}
                   onSubmit={async (e) => {
@@ -413,7 +438,7 @@ const TeamDescription = () => {
               ) : null}
             </div>
           </div>
-          {isOwnTeam ? (
+          {props.data?.isOwnTeam ? (
             <form
               className={classes.buttonForm}
               onSubmit={async (e) => {
@@ -531,4 +556,4 @@ const TeamDescription = () => {
   )
 }
 
-export default AuthenticatedLayout(TeamDescription)
+export default TeamDescription

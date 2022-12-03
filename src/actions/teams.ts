@@ -23,7 +23,7 @@ export const joinTeamRequest = (id: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
-export const getTeamInfo = (teamId: string): DispatchAction => ({
+export const getTeamInfo = (teamId: string): RemoteDispatchAction => ({
   type: DispatchActionType.TEAM_INFO,
   useAPI: true,
   request: {
@@ -34,7 +34,7 @@ export const getTeamInfo = (teamId: string): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
-export const leaveTeam = (): DispatchAction => ({
+export const leaveTeam = (): RemoteDispatchAction => ({
   type: DispatchActionType.TEAM_LEAVE,
   useAPI: true,
   request: {
@@ -74,7 +74,7 @@ export const editTeamInfo = (
   name?: string,
   description?: string,
   visible?: boolean
-): DispatchAction => ({
+): RemoteDispatchAction => ({
   type: DispatchActionType.TEAM_EDIT,
   useAPI: true,
   request: {
