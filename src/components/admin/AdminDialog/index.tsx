@@ -1,0 +1,62 @@
+import { Box, Tab } from "@material-ui/core"
+import { TabContext, TabList, TabPanel } from "@material-ui/lab"
+import { ReactElement, useEffect, useState } from "react"
+import { useDispatch } from "react-redux"
+import actions from "src/actions"
+import ParticipantTable from "../ParticipantTable"
+import RecruiterCreationForm from "../RecruiterCreationForm"
+import SponsorCreationForm from "../SponsorCreationForm"
+import AnalyticsTab from "../Analytics"
+import FloatingDiv from "src/components/design/FloatingDiv"
+import styles from "./index.module.scss"
+
+const AdminDialog = (): ReactElement => {
+  const dispatch = useDispatch()
+  const [tabIndex, setTabIndex] = useState("0")
+
+  useEffect(() => {
+    const querySponsors = async () => {
+      try {
+        await dispatch(actions.sponsors.list())
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    querySponsors()
+  }, [])
+
+  return (
+    <FloatingDiv>
+      <TabContext value={tabIndex}>
+        <Box>
+          <TabList
+            value={tabIndex}
+            onChange={(e, newIndex: string) => setTabIndex(newIndex)}
+            className={styles.tabs}
+            variant="scrollable"
+            centered
+          >
+            <Tab label="Participants" value="0" />
+            <Tab label="Recruiters" value="1" />
+            <Tab label="Sponsors" value="2" />
+            <Tab label="Analytics" value="3" />
+          </TabList>
+        </Box>
+        <TabPanel value="0" className={styles.tabPanel}>
+          <ParticipantTable />
+        </TabPanel>
+        <TabPanel value="1" className={styles.tabPanel}>
+          <RecruiterCreationForm />
+        </TabPanel>
+        <TabPanel value="2" className={styles.tabPanel}>
+          <SponsorCreationForm />
+        </TabPanel>
+        <TabPanel value="3" className={styles.tabPanel}>
+          <AnalyticsTab />
+        </TabPanel>
+      </TabContext>
+    </FloatingDiv>
+  )
+}
+
+export default AdminDialog
