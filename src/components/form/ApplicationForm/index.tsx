@@ -2,13 +2,11 @@ import {
   Button,
   CircularProgress,
   Collapse,
-  makeStyles,
   Paper,
   Snackbar,
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import { useRouter } from "next/dist/client/router"
 import React, { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
@@ -22,73 +20,11 @@ import LogisticsSection from "./LogisticsSection"
 import PortfolioSection from "./PortfolioSection"
 import SchoolSection from "./SchoolSection"
 import WorkAuthorizationSection from "./WorkAuthorizationSection"
-
-const useStyles = makeStyles((theme) => ({
-  formDialog: {
-    width: "60%",
-    padding: "2em",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-    marginBottom: "3em",
-    zIndex: 5,
-    backgroundImage: `linear-gradient(135deg, ${theme.palette.lightGradient.start} 0%, ${theme.palette.lightGradient.end} 189%)`,
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "80%",
-      marginTop: "10%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%",
-      marginTop: "20%"
-    }
-  },
-  applicationForm: {
-    width: "80%",
-    display: "flex",
-    flexDirection: "column",
-    alignSelf: "center"
-  },
-  headerContainer: {
-    width: "40%",
-    textAlign: "center",
-    alignSelf: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "60%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    }
-  },
-  header: {
-    borderBottom: `solid ${theme.palette.text.primary} 2px`,
-    paddingBottom: "1rem",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "2.5em"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "1.8em"
-    }
-  },
-  formContents: {
-    marginTop: "2em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "2em"
-  },
-  buttonContainer: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    gap: "1em"
-  }
-}))
+import styles from "./index.module.scss"
 
 const ApplicationForm = (): ReactElement => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const theme = useTheme()
-  const classes = useStyles(theme)
   const application = useSelector((state: RootState) => state?.application)
   const [loading, setLoading] = useState(false)
 
@@ -205,7 +141,7 @@ const ApplicationForm = (): ReactElement => {
   }, [])
 
   return (
-    <Paper className={classes.formDialog}>
+    <Paper className={styles.formDialog}>
       <Snackbar
         open={error}
         autoHideDuration={5000}
@@ -215,18 +151,18 @@ const ApplicationForm = (): ReactElement => {
         <Alert severity="error">{errorMessage}</Alert>
       </Snackbar>
       <form
-        className={classes.applicationForm}
+        className={styles.applicationForm}
         onSubmit={(e) => {
           e.preventDefault()
           validateForm()
         }}
       >
-        <div className={classes.headerContainer}>
-          <Typography variant="h3" className={classes.header}>
+        <div className={styles.headerContainer}>
+          <Typography variant="h3" className={styles.header}>
             Application
           </Typography>
         </div>
-        <div className={classes.formContents}>
+        <div className={styles.formContents}>
           <BasicSection
             validate={validateBasic}
             setValidate={setValidateBasic}
@@ -266,7 +202,7 @@ const ApplicationForm = (): ReactElement => {
             setValid={setValidLogistics}
             isCMUStudent={isCMUStudent}
           />
-          <div className={classes.buttonContainer}>
+          <div className={styles.buttonContainer}>
             <RectangleButton type="submit">Submit Application</RectangleButton>
             <Collapse in={loading}>
               <CircularProgress />

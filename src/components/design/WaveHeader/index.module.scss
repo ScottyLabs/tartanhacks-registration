@@ -1,0 +1,69 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.waveContainer {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.title {
+  position: absolute;
+  z-index: 1;
+  opacity: 0.6;
+  top: 80px;
+  left: 50px;
+
+  color: $text-color-contrast;
+
+  @include down($breakpoint-sm) {
+    top: 50px;
+  }
+
+  @include down($breakpoint-xs) {
+    top: 40px;
+    left: 30px;
+  }
+}
+
+.subtitle {
+  position: absolute;
+  z-index: 1;
+  color: #fff;
+  opacity: 0.6;
+  top: 140px;
+  left: 60px;
+
+  @include down($breakpoint-sm) {
+    top: 90px;
+  }
+
+  @include down($breakpoint-xs) {
+    top: 75px;
+    left: 35px;
+  }
+}
+
+.waveSvg {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  filter: $drop-shadow;
+
+  @include down($breakpoint-sm) {
+    height: 170px;
+  }
+
+  @include down($breakpoint-xs) {
+    height: 130px;
+  }
+}
+
+.waveSvgStart {
+  stop-color: $wave-gradient-color-start;
+}
+
+.waveSvgEnd {
+  stop-color: $wave-gradient-color-end;
+}
