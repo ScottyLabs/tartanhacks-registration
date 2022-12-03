@@ -1,0 +1,66 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 25px;
+  padding: 2em;
+  margin: 0 auto;
+  flex-direction: column;
+  background-image: linear-gradient(
+    316.54deg,
+    $light-gradient-color-start,
+    $light-gradient-color-end
+  );
+  box-shadow: $box-shadow;
+  backdrop-filter: blur(4px);
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dialogText {
+  margin-bottom: 1em;
+  color: $wave-gradient-color-start;
+}
+
+.headerContainer {
+  text-align: "center";
+  align-self: "center";
+
+  @include down($breakpoint-md) {
+    width: 60%;
+  }
+
+  @include down($breakpoint-sm) {
+    width: 80%;
+  }
+
+  padding-bottom: 0.5rem;
+}
+
+.header {
+  border-bottom: solid $text-color-primary 2px;
+  padding-bottom: 0.5rem;
+
+  @include down($breakpoint-md) {
+    fontsize: 2.5em;
+  }
+
+  @include down($breakpoint-sm) {
+    fontsize: 1.8em;
+  }
+
+  color: $text-color-primary;
+  font-weight: 600;
+}
+
+.link {
+  color: $text-color-primary;
+}
