@@ -191,8 +191,8 @@ export async function getServerSideProps(
     }
   }
 
-  const router = useRouter()
-  const { teamId } = router.query
+
+  const { teamId } = context.params
   const promises = [
     fetchData(actions.auth.loginWithToken(), accessToken),
     fetchData(actions.teams.getTeamInfo(teamId as string), accessToken),
@@ -268,10 +268,6 @@ const TeamDescription = (props: SSRDataAuth<TeamInfoData>["props"]): ReactElemen
   const [changedDescription, setChangedDescription] = useState(props.data?.teamInfo?.description ?? "")
   const [loading, setLoading] = useState(true)
 
-  //check if the user is authenticated or not
-  if (!props.isAuth){
-    router.push("/login")
-  }
 
 
   const handleClose = () => {
@@ -329,6 +325,13 @@ const TeamDescription = (props: SSRDataAuth<TeamInfoData>["props"]): ReactElemen
     }
     setLoading(false)
   }
+
+  useEffect(() => {
+    if (props.isAuth) {
+      router.push("/login")
+    }
+  }, [props.isAuth]) //check if the user is authenticated or not
+
 
   return (
     <>
