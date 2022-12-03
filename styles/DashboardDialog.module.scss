@@ -1,0 +1,89 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  border-radius: 25px;
+  padding: 2em;
+  margin: 0 auto;
+  flex-direction: column;
+  background-image: $dialog-container-gradient;
+  box-shadow: $dialog-container-box-shadow;
+  backdrop-filter: blur(4px);
+
+  @include down($breakpoint-md) {
+    width: 80%;
+  }
+
+  @include down($breakpoint-sm) {
+    width: 70%;
+  }
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.statusHeaderText {
+  margin-bottom: 0.5em !important;
+  color: $text-color-primary;
+}
+
+.dialogText {
+  margin-bottom: 1em;
+  color: $text-color-primary;
+  width: 100%;
+  text-align: center;
+}
+
+.bodyText {
+  color: $text-color-primary;
+}
+
+.statusText {
+  margin-bottom: 1em !important;
+  color: $text-color-secondary;
+  font-weight: 600 !important;
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+
+  @include down($breakpoint-sm) {
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: center;
+  }
+}
+
+.buttonSpacer {
+  width: 10px;
+}
+
+.deadline {
+  font-weight: bold;
+  @include font-size($button-font-sizes);
+}
+
+.appStoreLinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1em;
+  gap: 0.5em;
+}
+
+.dialogHeader {
+  color: $gradient-color-start;
+}
