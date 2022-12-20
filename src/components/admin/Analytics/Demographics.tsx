@@ -1,44 +1,17 @@
-import { makeStyles, TextField, Typography } from "@material-ui/core"
-import { useTheme } from "@material-ui/styles"
-import React, { ReactElement, useEffect, useState } from "react"
+import { Typography } from "@material-ui/core"
+import {
+  AlternateEmail,
+  CalendarToday,
+  Cancel,
+  CheckCircle,
+  Code,
+  Person,
+  School
+} from "@material-ui/icons"
+import { ReactElement } from "react"
 import { useDispatch } from "react-redux"
 import { AnalyticsData } from "src/_types/AnalyticsData"
-import {
-  CheckCircle,
-  Cancel,
-  Person,
-  CalendarToday,
-  School,
-  Code,
-  AlternateEmail
-} from "@material-ui/icons"
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    marginTop: "1em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em"
-  },
-  entry: {
-    display: "flex",
-    alignItems: "center"
-  },
-  subsection: {
-    borderBottom: `solid ${theme.palette.text.primary} 1px`,
-    paddingBottom: "2rem",
-    paddingTop: "1rem"
-  },
-  icon: {
-    marginRight: "0.5em"
-  },
-  iconList: {
-    marginRight: "0.1em"
-  },
-  statusList: {
-    listStyle: "none"
-  }
-}))
+import styles from "./index.module.scss"
 
 const Demographics = ({
   data
@@ -46,8 +19,6 @@ const Demographics = ({
   data?: AnalyticsData | undefined
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   if (data === undefined) {
     return <></>
@@ -127,28 +98,28 @@ const Demographics = ({
             (data.demographic.schools[school].submitted / data.submitted) * 100
           ) +
           "%)"}
-        <ul className={classes.statusList}>
+        <ul className={styles.statusList}>
           <li>
-            <Typography className={classes.entry}>
-              <CheckCircle className={classes.icon} htmlColor="green" />{" "}
+            <Typography className={styles.entry}>
+              <CheckCircle className={styles.icon} htmlColor="green" />{" "}
               submitted: {data.demographic.schools[school].submitted}
             </Typography>
           </li>
           <li>
-            <Typography className={classes.entry}>
-              <CheckCircle className={classes.icon} htmlColor="green" />{" "}
+            <Typography className={styles.entry}>
+              <CheckCircle className={styles.icon} htmlColor="green" />{" "}
               admitted: {data.demographic.schools[school].admitted}
             </Typography>
           </li>
           <li>
-            <Typography className={classes.entry}>
-              <CheckCircle className={classes.icon} htmlColor="green" />{" "}
+            <Typography className={styles.entry}>
+              <CheckCircle className={styles.icon} htmlColor="green" />{" "}
               confirmed: {data.demographic.schools[school].confirmed}
             </Typography>
           </li>
           <li>
-            <Typography className={classes.entry}>
-              <Cancel className={classes.icon} htmlColor="red" /> declined:{" "}
+            <Typography className={styles.entry}>
+              <Cancel className={styles.icon} htmlColor="red" /> declined:{" "}
               {data.demographic.schools[school].declined}
             </Typography>
           </li>
@@ -158,35 +129,35 @@ const Demographics = ({
   }
 
   return (
-    <div className={classes.section}>
+    <div className={styles.section}>
       <Typography variant="h4">DEMOGRAPHICS</Typography>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <Person className={classes.icon} />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <Person className={styles.icon} />
           Female: {data.demographic.gender["Female"] || 0} (
           {Math.round(
             ((data.demographic.gender["Female"] || 0) / data.submitted) * 100
           )}
           %)
         </Typography>
-        <Typography className={classes.entry}>
-          <Person className={classes.icon} />
+        <Typography className={styles.entry}>
+          <Person className={styles.icon} />
           Male: {data.demographic.gender["Male"] || 0} (
           {Math.round(
             ((data.demographic.gender["Male"] || 0) / data.submitted) * 100
           )}
           %)
         </Typography>
-        <Typography className={classes.entry}>
-          <Person className={classes.icon} />
+        <Typography className={styles.entry}>
+          <Person className={styles.icon} />
           Other: {data.demographic.gender["Other"] || 0} (
           {Math.round(
             ((data.demographic.gender["Other"] || 0) / data.submitted) * 100
           )}
           %)
         </Typography>
-        <Typography className={classes.entry}>
-          <Person className={classes.icon} />
+        <Typography className={styles.entry}>
+          <Person className={styles.icon} />
           Did not respond: {data.demographic.gender["Prefer not to say"] || 0} (
           {Math.round(
             ((data.demographic.gender["Prefer not to say"] || 0) /
@@ -196,35 +167,35 @@ const Demographics = ({
           %)
         </Typography>
       </div>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <CalendarToday className={classes.icon} />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <CalendarToday className={styles.icon} />
           Graduation year
         </Typography>
-        <Typography className={classes.entry}>
+        <Typography className={styles.entry}>
           <ul>{parseGraduationYear(data)}</ul>
         </Typography>
-        <Typography className={classes.entry}>
-          <Code className={classes.icon} />
+        <Typography className={styles.entry}>
+          <Code className={styles.icon} />
           Years of Hackathon Experience
         </Typography>
-        <Typography className={classes.entry}>
+        <Typography className={styles.entry}>
           <ul>{parseExperience(data)}</ul>
         </Typography>
       </div>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <School className={classes.icon} />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <School className={styles.icon} />
           CMU Colleges
         </Typography>
-        <Typography className={classes.entry}>
+        <Typography className={styles.entry}>
           <ul>{parseCollege(data)}</ul>
         </Typography>
-        <Typography className={classes.entry}>
-          <AlternateEmail className={classes.icon} />
+        <Typography className={styles.entry}>
+          <AlternateEmail className={styles.icon} />
           Domains
         </Typography>
-        <Typography className={classes.entry}>
+        <Typography className={styles.entry}>
           <ul>{parseDomains(data)}</ul>
         </Typography>
       </div>
