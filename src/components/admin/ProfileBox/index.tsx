@@ -3,7 +3,6 @@ import {
   CircularProgress,
   Collapse,
   Link,
-  makeStyles,
   Table,
   TableBody,
   TableCell,
@@ -18,37 +17,9 @@ import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { Participant } from "types/Participant"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "60%",
-    backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
-    35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
-    boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)",
-    padding: "2em",
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column",
-    maxHeight: "80%",
-    overflow: "auto"
-  },
-  statusLabel: {
-    fontWeight: "bold"
-  },
-  sponsorList: {
-    display: "flex",
-    flexDirection: "column"
-  }
-}))
+import styles from "./index.module.scss"
 
 const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
-  const classes = useStyles()
-
   const sponsors = useSelector((store: RootState) => store?.sponsors?.data)
   const sponsorMap: Record<string, string> = {}
   for (const { _id, name } of sponsors) {
@@ -162,7 +133,7 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
         <TableRow>
           <TableCell>Sponsor Ranking</TableCell>
           <TableCell>
-            <div className={classes.sponsorList}>
+            <div className={styles.sponsorList}>
               {profile.sponsorRanking.map((sponsorId: string, idx: number) => {
                 return <div key={idx}>{sponsorMap[sponsorId] ?? sponsorId}</div>
               })}
@@ -246,7 +217,6 @@ const ProfileBox = React.forwardRef(
     ref
   ): ReactElement => {
     const dispatch = useDispatch()
-    const classes = useStyles()
     const [profile, setProfile] = useState<any>(null)
     const [loading, setLoading] = useState(true)
 
@@ -276,7 +246,7 @@ const ProfileBox = React.forwardRef(
     }, [participant])
 
     return (
-      <Box className={classes.modal}>
+      <Box className={styles.modal}>
         <Collapse in={loading}>
           <CircularProgress />
         </Collapse>
@@ -284,7 +254,7 @@ const ProfileBox = React.forwardRef(
           <>
             <Typography variant="h5">{participant?.email}</Typography>
             <Typography variant="h6">
-              Status: <span className={classes.statusLabel}>{status}</span>
+              Status: <span className={styles.statusLabel}>{status}</span>
             </Typography>
             {profileContent}
           </>

@@ -1,0 +1,28 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60%;
+  background-image: $dialog-container-gradient;
+  box-shadow: $dialog-container-box-shadow;
+  backdrop-filter: blur(4px);
+  padding: 2em;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  max-height: 80%;
+  overflow: auto;
+}
+
+.statusLabel {
+  font-weight: bold;
+}
+
+.sponsorList {
+  display: flex;
+  flex-direction: column;
+}
