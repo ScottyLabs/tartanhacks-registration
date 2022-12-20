@@ -1,0 +1,11 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.tabs {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.tabPanel {
+  width: 100%;
+}

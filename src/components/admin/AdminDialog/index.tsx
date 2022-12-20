@@ -1,26 +1,16 @@
-import { Box, makeStyles, Tab } from "@material-ui/core"
+import { Box, Tab } from "@material-ui/core"
 import { TabContext, TabList, TabPanel } from "@material-ui/lab"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import ParticipantTable from "./ParticipantTable"
-import RecruiterCreationForm from "./RecruiterCreationForm"
-import SponsorCreationForm from "./SponsorCreationForm"
-import AnalyticsTab from "./Analytics"
 import FloatingDiv from "src/components/design/FloatingDiv"
-
-const useStyles = makeStyles((theme) => ({
-  tabs: {
-    width: "100%",
-    justifyContent: "space-between"
-  },
-  tabPanel: {
-    width: "100%"
-  }
-}))
+import AnalyticsTab from "../Analytics"
+import ParticipantTable from "../ParticipantTable"
+import RecruiterCreationForm from "../RecruiterCreationForm"
+import SponsorCreationForm from "../SponsorCreationForm"
+import styles from "./index.module.scss"
 
 const AdminDialog = (): ReactElement => {
-  const classes = useStyles()
   const dispatch = useDispatch()
   const [tabIndex, setTabIndex] = useState("0")
 
@@ -42,7 +32,7 @@ const AdminDialog = (): ReactElement => {
           <TabList
             value={tabIndex}
             onChange={(e, newIndex: string) => setTabIndex(newIndex)}
-            className={classes.tabs}
+            className={styles.tabs}
             variant="scrollable"
             centered
           >
@@ -52,16 +42,16 @@ const AdminDialog = (): ReactElement => {
             <Tab label="Analytics" value="3" />
           </TabList>
         </Box>
-        <TabPanel value="0" className={classes.tabPanel}>
+        <TabPanel value="0" className={styles.tabPanel}>
           <ParticipantTable />
         </TabPanel>
-        <TabPanel value="1" className={classes.tabPanel}>
+        <TabPanel value="1" className={styles.tabPanel}>
           <RecruiterCreationForm />
         </TabPanel>
-        <TabPanel value="2" className={classes.tabPanel}>
+        <TabPanel value="2" className={styles.tabPanel}>
           <SponsorCreationForm />
         </TabPanel>
-        <TabPanel value="3" className={classes.tabPanel}>
+        <TabPanel value="3" className={styles.tabPanel}>
           <AnalyticsTab />
         </TabPanel>
       </TabContext>
