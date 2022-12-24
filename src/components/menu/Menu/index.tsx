@@ -31,25 +31,25 @@ const Menu = (): ReactElement => {
           <div className={styles.menuBox}>
             <MenuItem text="HOME" url="/" />
             <MenuLine />
-            {status === Status.VERIFIED ? (
+            {isAdmin || status === Status.VERIFIED ? (
               <>
                 <MenuItem text="APPLY" url="/apply" />
                 <MenuLine />
               </>
             ) : null}
-            {status === Status.COMPLETED_PROFILE ? (
+            {isAdmin || status === Status.COMPLETED_PROFILE ? (
               <>
                 <MenuItem text="APPLICATION" url="/apply" />
                 <MenuLine />
               </>
             ) : null}
-            {status === Status.ADMITTED ? (
+            {isAdmin || status === Status.ADMITTED ? (
               <>
                 <MenuItem text="CONFIRM" url="/confirmation" />
                 <MenuLine />
               </>
             ) : null}
-            {status === Status.CONFIRMED ? (
+            {isAdmin || status === Status.CONFIRMED ? (
               <>
                 <MenuItem text="TEAM" url="/teams" />
                 <MenuLine />
