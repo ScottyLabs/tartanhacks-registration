@@ -1,37 +1,16 @@
-import { makeStyles, Typography } from "@material-ui/core"
-import { useTheme } from "@material-ui/styles"
-import React, { ReactElement } from "react"
+import { Typography } from "@material-ui/core"
+import {
+  AccessibilityNew,
+  Cancel,
+  CheckCircle,
+  Computer,
+  Person,
+  Restaurant
+} from "@material-ui/icons"
+import { ReactElement } from "react"
 import { useDispatch } from "react-redux"
 import { AnalyticsData } from "src/_types/AnalyticsData"
-import {
-  CheckCircle,
-  Cancel,
-  AccessibilityNew,
-  Restaurant,
-  Person,
-  Computer
-} from "@material-ui/icons"
-
-const useStyles = makeStyles((theme) => ({
-  section: {
-    marginTop: "1em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em"
-  },
-  entry: {
-    display: "flex",
-    alignItems: "center"
-  },
-  subsection: {
-    borderBottom: `solid ${theme.palette.text.primary} 1px`,
-    paddingBottom: "2rem",
-    paddingTop: "1rem"
-  },
-  icon: {
-    marginRight: "0.5em"
-  }
-}))
+import styles from "./index.module.scss"
 
 const Stats = ({
   data
@@ -39,8 +18,6 @@ const Stats = ({
   data?: AnalyticsData | undefined
 }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   if (data === undefined) {
     return <></>
@@ -65,66 +42,66 @@ const Stats = ({
   }
 
   return (
-    <div className={classes.section}>
+    <div className={styles.section}>
       <Typography variant="h4">STATS</Typography>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green" />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <CheckCircle className={styles.icon} htmlColor="green" />
           Total Users: {data.total}
         </Typography>
-        <Typography className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green" />
+        <Typography className={styles.entry}>
+          <CheckCircle className={styles.icon} htmlColor="green" />
           Verified Users: {data.verified} (
           {Math.round((data.verified / data.total) * 100)}%)
         </Typography>
-        <Typography className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green" />
+        <Typography className={styles.entry}>
+          <CheckCircle className={styles.icon} htmlColor="green" />
           Submitted Users: {data.submitted} (
           {Math.round((data.submitted / data.total) * 100)}%)
         </Typography>
       </div>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green" />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <CheckCircle className={styles.icon} htmlColor="green" />
           Admitted: {data.admitted}
         </Typography>
-        <Typography className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green" />
+        <Typography className={styles.entry}>
+          <CheckCircle className={styles.icon} htmlColor="green" />
           Confirmed (Total): {data.confirmed}
         </Typography>
-        <Typography className={classes.entry}>
-          <CheckCircle className={classes.icon} htmlColor="green" />
+        <Typography className={styles.entry}>
+          <CheckCircle className={styles.icon} htmlColor="green" />
           Confirmed (CMU) {data.confirmedCmu}
         </Typography>
-        <Typography className={classes.entry}>
-          <Cancel className={classes.icon} htmlColor="red" />
+        <Typography className={styles.entry}>
+          <Cancel className={styles.icon} htmlColor="red" />
           Declined {data.declined}
         </Typography>
       </div>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <AccessibilityNew className={classes.icon} />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <AccessibilityNew className={styles.icon} />
           Shirt sizes: {parseShirtSizes(data)}
         </Typography>
-        <Typography className={classes.entry}>
-          <Computer className={classes.icon} />
+        <Typography className={styles.entry}>
+          <Computer className={styles.icon} />
           Need Hardware: {data.wantsHardware}
         </Typography>
       </div>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <Restaurant className={classes.icon} />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <Restaurant className={styles.icon} />
           Dietary Restrictions: {parseDietRestrictions(data)}
         </Typography>
       </div>
-      <div className={classes.subsection}>
-        <Typography className={classes.entry}>
-          <Person className={classes.icon} />
+      <div className={styles.subsection}>
+        <Typography className={styles.entry}>
+          <Person className={styles.icon} />
           Attending Physically: {data.attendance.physical} (
           {Math.round((data.attendance.physical / data.submitted) * 100)}%)
         </Typography>
-        <Typography className={classes.entry}>
-          <Computer className={classes.icon} />
+        <Typography className={styles.entry}>
+          <Computer className={styles.icon} />
           Attending Virtually: {data.attendance.virtual} (
           {Math.round((data.attendance.virtual / data.submitted) * 100)}%)
         </Typography>

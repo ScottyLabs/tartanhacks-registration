@@ -9,7 +9,6 @@ import {
   DialogContentText,
   DialogTitle,
   IconButton,
-  makeStyles,
   Modal,
   Snackbar,
   Table,
@@ -20,8 +19,7 @@ import {
   TablePagination,
   TableRow,
   Toolbar,
-  Tooltip,
-  useTheme
+  Tooltip
 } from "@material-ui/core"
 import { Person } from "@material-ui/icons"
 import CloseIcon from "@material-ui/icons/Close"
@@ -31,68 +29,9 @@ import { useDispatch } from "react-redux"
 import { Column, useTable } from "react-table"
 import actions from "src/actions"
 import { Participant } from "types/Participant"
-import RectangleButton from "../design/RectangleButton"
-import ProfileBox from "./ProfileBox"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    display: "flex",
-    alignItems: "center",
-    width: "75%",
-    borderRadius: "25px",
-    padding: "2em",
-    margin: "0 auto",
-    flexDirection: "column",
-    backgroundImage: `linear-gradient(316.54deg, rgba(255, 227, 227, 0.7565) 
-                      35.13%, rgba(255, 255, 255, 0.85) 126.39%)`,
-    boxShadow: "0px 4px 4px rgba(200, 116, 56, 0.25)",
-    backdropFilter: "blur(4px)",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "80%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "70%"
-    },
-    maxHeight: "70%",
-    overflow: "scroll"
-  },
-  dialogContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100%"
-  },
-  spinnerContainer: {
-    display: "flex",
-    justifyContent: "center"
-  },
-  buttonMargin: {
-    marginRight: "1em"
-  },
-  toolbar: {
-    width: "100%",
-    justifyContent: "end"
-  },
-  toolbarContent: {
-    paddingRight: "1em",
-    display: "flex",
-    flexDirection: "row",
-    gap: "1em"
-  },
-  table: {
-    width: "100%"
-  },
-  chipMargin: {
-    marginRight: "0.5em"
-  },
-  chipUnverified: { backgroundColor: theme.palette.unverified },
-  chipVerified: { backgroundColor: theme.palette.verified },
-  chipApplied: { backgroundColor: theme.palette.applied },
-  chipAdmitted: { backgroundColor: theme.palette.admitted },
-  chipRejected: { backgroundColor: theme.palette.rejected },
-  chipDeclined: { backgroundColor: theme.palette.declined },
-  chipConfirmed: { backgroundColor: theme.palette.confirmed }
-}))
+import RectangleButton from "../../design/RectangleButton"
+import ProfileBox from "../ProfileBox"
+import styles from "./index.module.scss"
 
 enum BulkAction {
   ADMIT_ALL = "Admit all",
@@ -101,8 +40,6 @@ enum BulkAction {
 
 const ParticipantTable = (): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
   const [loading, setLoading] = useState(true)
   const [invalidated, setInvalidated] = useState(false)
 
@@ -154,49 +91,49 @@ const ParticipantTable = (): ReactElement => {
       return (
         <Chip
           label="UNVERIFIED"
-          className={`${classes.chipMargin} ${classes.chipUnverified}`}
+          className={`${styles.chipMargin} ${styles.chipUnverified}`}
         />
       )
     } else if (status == Status.VERIFIED) {
       return (
         <Chip
           label="VERIFIED"
-          className={`${classes.chipMargin} ${classes.chipVerified}`}
+          className={`${styles.chipMargin} ${styles.chipVerified}`}
         />
       )
     } else if (status == Status.COMPLETED_PROFILE) {
       return (
         <Chip
           label="APPLIED"
-          className={`${classes.chipMargin} ${classes.chipApplied}`}
+          className={`${styles.chipMargin} ${styles.chipApplied}`}
         />
       )
     } else if (status == Status.ADMITTED) {
       return (
         <Chip
           label="ADMITTED"
-          className={`${classes.chipMargin} ${classes.chipAdmitted}`}
+          className={`${styles.chipMargin} ${styles.chipAdmitted}`}
         />
       )
     } else if (status == Status.REJECTED) {
       return (
         <Chip
           label="REJECTED"
-          className={`${classes.chipMargin} ${classes.chipRejected}`}
+          className={`${styles.chipMargin} ${styles.chipRejected}`}
         />
       )
     } else if (status == Status.DECLINED) {
       return (
         <Chip
           label="DECLINED"
-          className={`${classes.chipMargin} ${classes.chipDeclined}`}
+          className={`${styles.chipMargin} ${styles.chipDeclined}`}
         />
       )
     } else if (status == Status.CONFIRMED) {
       return (
         <Chip
           label="CONFIRMED"
-          className={`${classes.chipMargin} ${classes.chipConfirmed}`}
+          className={`${styles.chipMargin} ${styles.chipConfirmed}`}
         />
       )
     }
@@ -303,7 +240,7 @@ const ParticipantTable = (): ReactElement => {
             return (
               <div>
                 <RectangleButton
-                  className={classes.buttonMargin}
+                  className={styles.buttonMargin}
                   type="button"
                   onClick={() => admitUser(_id)}
                 >
@@ -372,14 +309,14 @@ const ParticipantTable = (): ReactElement => {
         message={snackbarMsg}
         action={snackbarAction}
       />
-      <div className={classes.dialogContent}>
+      <div className={styles.dialogContent}>
         <Collapse in={loading}>
-          <div className={classes.spinnerContainer}>
+          <div className={styles.spinnerContainer}>
             <CircularProgress />
           </div>
         </Collapse>
-        <Toolbar className={classes.toolbar}>
-          <div className={classes.toolbarContent}>
+        <Toolbar className={styles.toolbar}>
+          <div className={styles.toolbarContent}>
             <RectangleButton
               type="button"
               onClick={() => {

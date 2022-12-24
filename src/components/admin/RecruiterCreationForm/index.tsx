@@ -1,66 +1,11 @@
-import {
-  Button,
-  makeStyles,
-  Paper,
-  Snackbar,
-  TextField,
-  Typography
-} from "@material-ui/core"
+import { Button, Snackbar, TextField, Typography } from "@material-ui/core"
 import { Alert, Autocomplete } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
-import React, { ReactElement, useEffect, useState } from "react"
+import { ObjectId } from "mongodb"
+import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
-import { ObjectId } from "mongodb"
-
-const useStyles = makeStyles((theme) => ({
-  container: {
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignSelf: "center"
-  },
-  applicationForm: {
-    width: "80%",
-    display: "flex",
-    flexDirection: "column",
-    alignSelf: "center"
-  },
-  headerContainer: {
-    textAlign: "center",
-    alignSelf: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "60%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    },
-    paddingBottom: "0.5rem"
-  },
-  header: {
-    borderBottom: `solid ${theme.palette.text.primary} 2px`,
-    paddingBottom: "0.5rem",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "2.5em"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "1.8em"
-    },
-    color: theme.palette.text.primary,
-    fontWeight: 600
-  },
-  formContents: {
-    marginTop: "2em",
-    display: "flex",
-    flexDirection: "column",
-    gap: "2em"
-  },
-  buttonContainer: {
-    display: "flex",
-    justifyContent: "center"
-  }
-}))
+import styles from "./index.module.scss"
 
 interface Sponsor {
   name: string
@@ -69,8 +14,6 @@ interface Sponsor {
 
 const RecruiterCreationForm = (): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
 
   const sponsors: Sponsor[] =
     useSelector((state: RootState) => state.sponsors.data) || []
@@ -160,7 +103,7 @@ const RecruiterCreationForm = (): ReactElement => {
   }, [])
 
   return (
-    <div className={classes.container}>
+    <div className={styles.container}>
       <Snackbar
         open={error}
         autoHideDuration={5000}
@@ -170,7 +113,7 @@ const RecruiterCreationForm = (): ReactElement => {
         <Alert severity="error">{errorMessage}</Alert>
       </Snackbar>
       <form
-        className={classes.applicationForm}
+        className={styles.applicationForm}
         onSubmit={async (e) => {
           e.preventDefault()
           if (checkFields()) {
@@ -178,12 +121,12 @@ const RecruiterCreationForm = (): ReactElement => {
           }
         }}
       >
-        <div className={classes.headerContainer}>
-          <Typography variant="h4" className={classes.header}>
+        <div className={styles.headerContainer}>
+          <Typography variant="h4" className={styles.header}>
             Create Recruiter
           </Typography>
         </div>
-        <div className={classes.formContents}>
+        <div className={styles.formContents}>
           <TextField
             label="First Name"
             variant="outlined"
@@ -230,7 +173,7 @@ const RecruiterCreationForm = (): ReactElement => {
               />
             )}
           />
-          <div className={classes.buttonContainer}>
+          <div className={styles.buttonContainer}>
             <Button type="submit" variant="outlined">
               Submit
             </Button>
