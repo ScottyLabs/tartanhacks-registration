@@ -2,60 +2,20 @@ import {
   Collapse,
   LinearProgress,
   Link,
-  makeStyles,
   Snackbar,
   TextField,
   Typography
 } from "@material-ui/core"
 import { Alert } from "@material-ui/lab"
-import { useTheme } from "@material-ui/styles"
 import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
-import RectangleButton from "../design/RectangleButton"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    width: "25%",
-    padding: "1em",
-    textAlign: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      width: "50%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "80%"
-    }
-  },
-  resetForm: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1em",
-    width: "100%"
-  },
-  header: {
-    fontWeight: 600,
-    backgroundImage: `linear-gradient(180deg, ${theme.palette.gradient.start} 19.64%, ${theme.palette.gradient.end} 69.64%)`,
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    marginBottom: "1em"
-  },
-  dialogContent: {
-    display: "flex",
-    flexDirection: "column",
-    marginTop: "-10em",
-    color: theme.palette.gradient.start
-  }
-}))
+import RectangleButton from "../../design/RectangleButton"
+import styles from "./index.module.scss"
 
 const PasswordResetDialog = ({ token }: { token: string }): ReactElement => {
   const dispatch = useDispatch()
-  const theme = useTheme()
-  const classes = useStyles(theme)
   const [password, setPassword] = useState("")
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -77,7 +37,7 @@ const PasswordResetDialog = ({ token }: { token: string }): ReactElement => {
 
   const resetForm = (
     <form
-      className={classes.resetForm}
+      className={styles.resetForm}
       onSubmit={(e) => {
         e.preventDefault()
 
@@ -111,7 +71,7 @@ const PasswordResetDialog = ({ token }: { token: string }): ReactElement => {
   )
 
   return (
-    <div className={classes.dialog}>
+    <div className={styles.dialog}>
       <Collapse in={loading}>
         <LinearProgress />
       </Collapse>
@@ -123,8 +83,8 @@ const PasswordResetDialog = ({ token }: { token: string }): ReactElement => {
       >
         <Alert severity="error">{errorMessage}</Alert>
       </Snackbar>
-      <div className={classes.dialogContent}>
-        <Typography variant="h4" className={classes.header}>
+      <div className={styles.dialogContent}>
+        <Typography variant="h4" className={styles.header}>
           Change Password
         </Typography>
         {updatedPassword ? updatedPasswordMessage : resetForm}
