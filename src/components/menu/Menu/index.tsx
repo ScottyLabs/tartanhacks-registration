@@ -5,8 +5,8 @@ import { ReactElement, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
 import BurgerMenu from "../../design/BurgerMenu"
-import MenuItem from "../MenuItem"
-import MenuLine from "../MenuLine"
+import MenuItem from "./MenuItem"
+import MenuLine from "./MenuLine"
 import styles from "./index.module.scss"
 
 const Menu = (): ReactElement => {
