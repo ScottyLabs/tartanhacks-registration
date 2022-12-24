@@ -13,7 +13,7 @@ import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
-import RectangleButton from "../design/RectangleButton"
+import RectangleButton from "../../design/RectangleButton"
 
 const useStyles = makeStyles((theme) => ({
   dialog: {

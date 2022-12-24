@@ -1,0 +1,46 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  padding: 1em;
+  text-align: center;
+
+  @include down($breakpoint-md) {
+    width: 50%;
+  }
+
+  @include down($breakpoint-sm) {
+    width: 80%;
+  }
+}
+
+.resetForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%;
+}
+
+.header {
+  font-weight: 600;
+  background-image: $dialog-container-gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1em;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: -10em;
+  color: $gradient-color-start;
+}
+
+.emailLabel {
+  font-weight: bold;
+}
