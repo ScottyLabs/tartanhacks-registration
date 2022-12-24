@@ -1,7 +1,6 @@
 import {
   CircularProgress,
   Collapse,
-  makeStyles,
   Snackbar,
   TextField,
   Typography
@@ -129,15 +128,12 @@ const AuthenticationDialog = ({
           </div>
         </form>
       </div>
-      <div className={styles.warningDiv}>
-        <Typography className={styles.warning}>
-          Attention! Only{" "}
-          <span className={styles.emphasize}>undergraduate</span> participants
-          who are at least{" "}
-          <span className={styles.emphasize}>18 years old</span> are eligible
-          for a prize
-        </Typography>
-      </div>
+      <Alert severity="warning" className={styles.warning}>
+        Participants must be undergraduates and least 18 years old!
+      </Alert>
+      <Alert severity="info" className={styles.warning}>
+        TartanHacks 2023 will be completely in-person!
+      </Alert>
     </div>
   )
 }
