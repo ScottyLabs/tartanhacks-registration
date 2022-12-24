@@ -154,8 +154,8 @@ const school = (state: SchoolFields | null = null, action: DispatchAction) => {
     if (action?.data) {
       const { data } = action
       if (data) {
-        const { school, college, level, graduationYear, major } = data
-        state = { school, college, level, graduationYear, major }
+        const { school, college, graduationYear, major } = data
+        state = { school, college, graduationYear, major }
       }
     }
   }
