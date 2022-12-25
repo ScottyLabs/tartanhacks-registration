@@ -100,22 +100,20 @@ const MessagesDialog = ({
           <CircularProgress />
         </div>
       </Collapse>
-      <table className={styles.tableData}>
-        <tbody>
-          {requests.map((request: any, idx: number) => (
-            <Message
-              key={idx}
-              content={request}
-              setSuccessMessage={setSuccessMessage}
-              setNotify={setNotify}
-              isNew={!seen[idx]}
-              isCaptain={isCaptain}
-              handleRemove={handleRemove}
-            />
-          ))}
-          {emptyMessage}
-        </tbody>
-      </table>
+      <div className={styles.tableData}>
+        {requests.map((request: any, idx: number) => (
+          <Message
+            key={idx}
+            content={request}
+            setSuccessMessage={setSuccessMessage}
+            setNotify={setNotify}
+            isNew={!seen[idx]}
+            isCaptain={isCaptain}
+            handleRemove={handleRemove}
+          />
+        ))}
+        {emptyMessage}
+      </div>
     </FloatingDiv>
   )
 }

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import RectangleButton from "src/components/design/RectangleButton"
 import styles from "./Message.module.scss"
+import clsx from "clsx"
 
 const Message = (props: any) => {
   const dispatch = useDispatch()
@@ -42,23 +43,23 @@ const Message = (props: any) => {
         acceptDecline: "INVITE"
       }
   return (
-    <tr className={styles.row}>
-      <td className={styles.newCell}>
+    <div className={styles.tableRow}>
+      <div className={styles.newCell}>
         {props.isNew && props.content.type != types.cancel ? (
           <Typography noWrap variant="subtitle1" className={styles.new}>
             New
           </Typography>
         ) : null}
-      </td>
-      <td className={styles.message}>
+      </div>
+      <div className={styles.message}>
         <Typography variant="h4" className={styles.messageHeader}>
           {message.header}
         </Typography>
         <Typography variant="subtitle1" className={styles.messageText}>
           {message.body}
         </Typography>
-      </td>
-      <td className={styles.buttonCell}>
+      </div>
+      <div className={clsx(styles.buttonCell, styles.leftButton)}>
         {props.content.type == types.acceptDecline ? (
           <form
             onSubmit={async (e) => {
@@ -85,8 +86,8 @@ const Message = (props: any) => {
             </RectangleButton>
           </form>
         ) : null}
-      </td>
-      <td className={styles.buttonCell}>
+      </div>
+      <div className={clsx(styles.buttonCell, styles.rightButton)}>
         {props.content.type == types.acceptDecline ? (
           <form
             onSubmit={async (e) => {
@@ -126,8 +127,8 @@ const Message = (props: any) => {
             </RectangleButton>
           </form>
         )}
-      </td>
-    </tr>
+      </div>
+    </div>
   )
 }
 

@@ -2,11 +2,8 @@
 @import "~/styles/mixins.scss";
 
 .tableData {
-  table-layout: fixed;
   width: 100%;
   text-align: left;
-  border-collapse: collapse;
-  border-spacing: 0 33px;
 }
 .spinnerContainer {
   display: flex;
