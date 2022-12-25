@@ -1,10 +1,5 @@
-import {
-  CircularProgress,
-  Collapse,
-  Snackbar,
-  Typography
-} from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+import { CircularProgress, Collapse, Snackbar, Typography } from "@mui/material"
+import { Alert } from "@mui/material"
 import { AxiosError } from "axios"
 import { useRouter } from "next/dist/client/router"
 import React, { useEffect, useState } from "react"

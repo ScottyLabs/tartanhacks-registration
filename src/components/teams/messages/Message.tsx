@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core"
+import { Typography } from "@mui/material"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import RectangleButton from "src/components/design/RectangleButton"

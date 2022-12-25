@@ -10,9 +10,9 @@ import {
   Link,
   Snackbar,
   Typography
-} from "@material-ui/core"
-import { Computer } from "@material-ui/icons"
-import { Alert } from "@material-ui/lab"
+} from "@mui/material"
+import Computer from "@mui/icons-material/Computer"
+import { Alert } from "@mui/material"
 import { Status, statusToString } from "enums/Status"
 import { DateTime } from "luxon"
 import Image from "next/image"
@@ -139,6 +139,7 @@ const getDialogText = (
                 type="button"
                 startIcon={<Computer />}
                 backgroundColor="#000"
+                className={styles.dashboardLink}
               >
                 Web
               </RectangleButton>

@@ -73,10 +73,11 @@
 .link {
   color: $text-color-contrast;
   width: 100%;
+  text-decoration: none;
 }
 
 .link:hover {
-  text-decoration: none;
+  text-decoration: underline;
   filter: brightness(85%);
   cursor: pointer;
 }

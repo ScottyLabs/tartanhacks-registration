@@ -1,6 +1,5 @@
-import { makeStyles } from "@material-ui/core"
 import { NextPage } from "next"
-import React, { ReactElement } from "react"
+import { ReactElement } from "react"
 import AdminDialog from "src/components/admin/AdminDialog"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"

@@ -1,4 +1,4 @@
-import { Hidden, Typography } from "@material-ui/core"
+import { Hidden, Typography } from "@mui/material"
 import actions from "src/actions"
 import RectangleButton from "src/components/design/RectangleButton"
 import { useRouter } from "next/dist/client/router"

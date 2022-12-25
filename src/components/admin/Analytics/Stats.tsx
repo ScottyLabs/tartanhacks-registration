@@ -1,4 +1,4 @@
-import { Typography } from "@material-ui/core"
+import { Typography } from "@mui/material"
 import {
   AccessibilityNew,
   Cancel,
@@ -6,7 +6,7 @@ import {
   Computer,
   Person,
   Restaurant
-} from "@material-ui/icons"
+} from "@mui/icons-material"
 import { ReactElement } from "react"
 import { useDispatch } from "react-redux"
 import { AnalyticsData } from "src/_types/AnalyticsData"

@@ -9,7 +9,7 @@ import {
   TextField,
   Collapse,
   CircularProgress
-} from "@material-ui/core"
+} from "@mui/material"
 import React, { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { useDispatch } from "react-redux"
@@ -22,7 +22,7 @@ import ContentHeader from "src/components/design/ContentHeader"
 import RectangleButton from "src/components/design/RectangleButton"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
-import { Alert } from "@material-ui/lab"
+import { Alert } from "@mui/material"
 import Menu from "src/components/menu/Menu"
 import BackButton from "src/components/design/BackButton"
 import styles from "styles/ViewTeam.module.scss"

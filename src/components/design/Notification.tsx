@@ -1,11 +1,11 @@
-import { Snackbar, makeStyles } from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+import { Alert, Snackbar } from "@mui/material"
+import { SyntheticEvent } from "react"
 
 export default function Notification(props: any) {
   const { notify, setNotify } = props
 
   const handleClose = (
-    event: React.SyntheticEvent | React.MouseEvent,
+    event: Event | SyntheticEvent<any, Event>,
     reason?: string
   ) => {
     if (reason === "clickaway") {

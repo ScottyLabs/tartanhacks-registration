@@ -8,7 +8,7 @@ import {
   Link,
   makeStyles,
   Typography
-} from "@material-ui/core"
+} from "@mui/material"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"

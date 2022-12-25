@@ -1,4 +1,4 @@
-import { Modal } from "@material-ui/core"
+import { Modal } from "@mui/material"
 import { Status } from "enums/Status"
 import { ReactElement, useState } from "react"
 import { useSelector } from "react-redux"

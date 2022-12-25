@@ -1,4 +1,4 @@
-import { Button } from "@material-ui/core"
+import { Button } from "@mui/material"
 import React, { ReactElement } from "react"
 import styles from "./index.module.scss"
 
@@ -25,7 +25,7 @@ const RectangleButton = ({
         className={`${className} ${styles.button}`}
         onClick={onClick}
         startIcon={startIcon}
-        style={{ backgroundColor }}
+        style={{ backgroundColor, color: "#fff" }}
       >
         {children}
       </Button>

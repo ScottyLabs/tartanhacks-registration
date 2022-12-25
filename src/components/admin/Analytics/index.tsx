@@ -1,10 +1,5 @@
-import {
-  CircularProgress,
-  Collapse,
-  Snackbar,
-  Typography
-} from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+import { CircularProgress, Collapse, Snackbar, Typography } from "@mui/material"
+import { Alert } from "@mui/material"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
