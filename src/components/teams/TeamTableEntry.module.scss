@@ -1,0 +1,69 @@
+@import "styles/variables.scss";
+@import "styles/mixins.scss";
+
+.teamNameCell {
+  width: 50%;
+
+  @include down($breakpoint-sm) {
+    width: 40%;
+    height: 100%;
+  }
+}
+.name {
+  font-weight: 600;
+  color: $gradient-color-start;
+  font-size: 30px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+
+  @include down($breakpoint-sm) {
+    font-size: 16px;
+  }
+}
+.description {
+  font-weight: 400;
+  color: $gradient-color-start;
+  font-size: 20px;
+  padding-left: 5%;
+  width: 95%;
+  right: 27px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  @include down($breakpoint-sm) {
+    height: 0%;
+  }
+}
+.joinButton {
+  padding-right: 15px;
+  text-align: right;
+  @include down($breakpoint-sm) {
+    font-size: 16px;
+  }
+}
+.tableEntryButton {
+  width: 100%;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+
+  border-radius: 10px;
+  background: $gradient-color-end;
+  color: #ffffff;
+
+  @include down($breakpoint-md) {
+    font-size: 20px;
+  }
+  @include down($breakpoint-sm) {
+    font-size: 16px;
+    height: 56px;
+  }
+}
+.viewDetailCell {
+  width: 30%;
+}

@@ -1,0 +1,83 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.newTeamButton {
+  font-size: 30px;
+  font-weight: 600;
+  width: 45%;
+  align-self: center;
+  text-transform: uppercase;
+
+  border-radius: 10px;
+  background: $gradient-color-end;
+  color: #ffffff;
+
+  @include down($breakpoint-md) {
+    font-size: 25px;
+    width: 60%;
+  }
+  @include down($breakpoint-sm) {
+    font-size: 16px;
+    width: 75%;
+  }
+}
+.tableHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 35px;
+}
+.tableBody {
+  display: grid;
+}
+.tableData {
+  table-layout: fixed;
+  width: 100%;
+  text-align: left;
+  border-collapse: separate;
+  border-spacing: 0 33px;
+}
+.tableEntry {
+  display: block;
+  width: 100%;
+}
+.tableHeaderText {
+  font-weight: 400;
+  background-color: $gradient-color-start;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 28px;
+  @include down($breakpoint-sm) {
+    font-size: 20px;
+  }
+}
+.link {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.buttonForm {
+  display: inline-flex;
+  justify-content: center;
+}
+.statusMessageContainer {
+  display: flex;
+  justify-content: center;
+}
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+}
+.noTeamsText {
+  font-weight: 600;
+  color: $color-primary;
+  font-size: 25px;
+  text-align: center;
+  @include down($breakpoint-sm) {
+    font-size: 20px;
+    width: 80%;
+    padding-bottom: 20px;
+  }
+}

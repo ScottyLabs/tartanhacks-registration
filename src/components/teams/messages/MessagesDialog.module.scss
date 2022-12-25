@@ -1,0 +1,29 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.tableData {
+  table-layout: fixed;
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  border-spacing: 0 33px;
+}
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+}
+.statusMessageContainer {
+  display: flex;
+  justify-content: center;
+}
+.noTeamsText {
+  font-weight: 600;
+  color: $color-primary;
+  font-size: 25px;
+  text-align: center;
+  @include down($breakpoint-sm) {
+    font-size: 20px;
+    width: 80%;
+    padding-bottom: 20px;
+  }
+}

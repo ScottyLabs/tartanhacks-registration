@@ -1,7 +1,6 @@
 import {
   CircularProgress,
   Collapse,
-  makeStyles,
   Snackbar,
   Typography
 } from "@material-ui/core"
@@ -22,87 +21,7 @@ import fetchData from "src/util/fetcher"
 import { RootState } from "types/RootState"
 import { SSRDataAuth, TeamData } from "types/SSRData"
 import { Team } from "types/Team"
-
-const useStyles = makeStyles((theme) => ({
-  newTeamButton: {
-    width: "45%",
-    fontSize: "30px",
-    fontWeight: 600,
-    alignSelf: "center",
-    textTransform: "uppercase",
-    borderRadius: "10px",
-    background: theme.palette.gradient.end,
-    color: "#FFFFFF",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "25px",
-      width: "60%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px",
-      width: "75%"
-    }
-  },
-  tableHeader: {
-    width: "100%",
-    display: "flex",
-    justifyContent: "space-between",
-    paddingTop: "35px"
-  },
-  tableBody: {
-    display: "grid"
-  },
-  tableData: {
-    tableLayout: "fixed",
-    width: "100%",
-    textAlign: "left",
-    borderCollapse: "separate",
-    borderSpacing: "0 33px"
-  },
-  tableEntry: {
-    display: "block",
-    width: "100%"
-  },
-  tableHeaderText: {
-    fontWeight: 400,
-    backgroundColor: theme.palette.gradient.start,
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    fontSize: "28px",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "20px"
-    }
-  },
-  link: {
-    background: "none",
-    border: "none",
-    textDecoration: "underline",
-    cursor: "pointer"
-  },
-  buttonForm: {
-    display: "inline-flex",
-    justifyContent: "center"
-  },
-  statusMessageContainer: {
-    display: "flex",
-    justifyContent: "center"
-  },
-  spinnerContainer: {
-    display: "flex",
-    justifyContent: "center"
-  },
-  noTeamsText: {
-    fontWeight: 600,
-    color: theme.palette.primary.main,
-    fontSize: "25px",
-    textAlign: "center",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "20px",
-      width: "80%",
-      paddingBottom: "20px"
-    }
-  }
-}))
+import styles from "styles/ViewTeams.module.scss"
 
 /**
  * get a user's team (if exists, else null), and, if the user has not team,
@@ -184,7 +103,6 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
   const [notify, setNotify] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
   const [loading, setLoading] = useState(true)
-  const classes = useStyles()
 
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
 
@@ -217,8 +135,8 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
   let emptyMessage = null
   if (!loading && teams.length === 0) {
     emptyMessage = (
-      <div className={classes.statusMessageContainer}>
-        <Typography variant="body1" className={classes.noTeamsText}>
+      <div className={styles.statusMessageContainer}>
+        <Typography variant="body1" className={styles.noTeamsText}>
           There are no open teams
         </Typography>
       </div>
@@ -235,29 +153,29 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
           <ContentHeader title="Team" />
           {!loading ? (
             <form
-              className={classes.buttonForm}
+              className={styles.buttonForm}
               onClick={async (e) => {
                 e.preventDefault()
                 router.push("/teams/create")
               }}
             >
-              <RectangleButton type="submit" className={classes.newTeamButton}>
+              <RectangleButton type="submit" className={styles.newTeamButton}>
                 Create new team
               </RectangleButton>
             </form>
           ) : null}
           <Collapse in={loading}>
-            <div className={classes.spinnerContainer}>
+            <div className={styles.spinnerContainer}>
               <CircularProgress />
             </div>
           </Collapse>
-          <div className={classes.tableHeader}>
-            <Typography variant="h4" className={classes.tableHeaderText}>
+          <div className={styles.tableHeader}>
+            <Typography variant="h4" className={styles.tableHeaderText}>
               VIEW OPEN TEAMS
             </Typography>
           </div>
           {emptyMessage}
-          <table className={classes.tableData}>
+          <table className={styles.tableData}>
             <tbody>
               {teams.map((team, idx) => (
                 <TeamTableEntry

@@ -1,0 +1,89 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.newCell {
+  padding-top: 5px;
+  width: 60px;
+  vertical-align: top;
+  @include down($breakpoint-sm) {
+    width: 40px;
+  }
+}
+.new {
+  color: $color-primary;
+  font-size: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  top: 0px;
+  width: 100%;
+  @include down($breakpoint-sm) {
+    font-size: 13px;
+  }
+}
+.message {
+  padding-right: 15px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  @include down($breakpoint-sm) {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.tableEntryButton {
+  padding-left: 15px;
+  padding-right: 15px;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 10px;
+  background: $gradient-color-end;
+  color: #ffffff;
+  @include down($breakpoint-md) {
+    font-size: 20px;
+  }
+  @include down($breakpoint-sm) {
+    font-size: 13px;
+    height: 56px;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.buttonCell {
+  width: 20%;
+  padding-left: 20px;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  @include down($breakpoint-md) {
+    width: 25%;
+    paddingleft: 5px;
+  }
+}
+.row {
+  border-bottom: 7px solid #f7c06260;
+}
+.messageHeader {
+  font-weight: 600;
+  color: $gradient-color-start;
+  font-size: 30px;
+  display: block;
+  margin-left: 0;
+  @include down($breakpoint-sm) {
+    font-size: 16px;
+  }
+}
+.messageText {
+  padding-top: 30px;
+  font-weight: 400;
+  color: $gradient-color-start;
+  font-size: 20px;
+  display: block;
+  word-wrap: break-word;
+  @include down($breakpoint-sm) {
+    font-size: 12px;
+    padding-top: 10px;
+  }
+}
