@@ -238,7 +238,7 @@ const ParticipantTable = (): ReactElement => {
           const { _id, status } = original
           if (status == Status.COMPLETED_PROFILE) {
             return (
-              <div>
+              <div className={styles.buttonContainer}>
                 <RectangleButton
                   className={styles.buttonMargin}
                   type="button"

@@ -34,7 +34,6 @@ const AdminDialog = (): ReactElement => {
             onChange={(e, newIndex: string) => setTabIndex(newIndex)}
             className={styles.tabs}
             variant="scrollable"
-            centered
           >
             <Tab label="Participants" value="0" />
             <Tab label="Recruiters" value="1" />
