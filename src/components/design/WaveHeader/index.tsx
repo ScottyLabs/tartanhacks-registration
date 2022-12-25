@@ -1,4 +1,4 @@
-import { Link } from "@material-ui/core"
+import { Link } from "@mui/material"
 import NextLink from "next/link"
 import { ReactElement } from "react"
 import Text from "../Text"

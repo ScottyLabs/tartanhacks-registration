@@ -1,11 +1,11 @@
+import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles"
 import type { AppProps } from "next/app"
-import { StylesProvider, ThemeProvider } from "@material-ui/styles"
-import { theme } from "src/themes/theme"
 import Head from "next/head"
-import "styles/globals.scss"
+import { ReactElement } from "react"
 import { Provider } from "react-redux"
 import store from "src/store"
-import { ReactElement } from "react"
+import { theme } from "src/themes/theme"
+import "styles/globals.scss"
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
   return (
@@ -31,13 +31,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           }}
         />
       </Head>
-      <StylesProvider injectFirst>
+      <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
             <Component {...pageProps} />
           </Provider>
         </ThemeProvider>
-      </StylesProvider>
+      </StyledEngineProvider>
     </>
   )
 }

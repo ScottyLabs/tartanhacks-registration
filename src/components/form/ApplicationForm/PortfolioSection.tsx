@@ -4,7 +4,7 @@ import {
   Collapse,
   TextField,
   Typography
-} from "@material-ui/core"
+} from "@mui/material"
 import React, {
   Dispatch,
   ReactElement,

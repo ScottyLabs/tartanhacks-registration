@@ -5,8 +5,8 @@ import {
   Paper,
   Snackbar,
   Typography
-} from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+} from "@mui/material"
+import { Alert } from "@mui/material"
 import { useRouter } from "next/dist/client/router"
 import React, { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"

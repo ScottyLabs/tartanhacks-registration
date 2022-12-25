@@ -8,8 +8,8 @@ import {
   TableCell,
   TableRow,
   Typography
-} from "@material-ui/core"
-import { Cancel, Check, OpenInNew } from "@material-ui/icons"
+} from "@mui/material"
+import { Cancel, Check, OpenInNew } from "@mui/icons-material"
 import { Ethnicity, Gender } from "enums/Profile"
 import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useState } from "react"

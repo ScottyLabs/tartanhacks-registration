@@ -4,8 +4,8 @@ import {
   Snackbar,
   TextField,
   Typography
-} from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+} from "@mui/material"
+import { Alert } from "@mui/material"
 import { ReactElement, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"

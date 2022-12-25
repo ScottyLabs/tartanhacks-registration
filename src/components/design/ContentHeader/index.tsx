@@ -1,4 +1,4 @@
-import { Hidden, Typography } from "@material-ui/core"
+import { Hidden, Typography } from "@mui/material"
 import styles from "./index.module.scss"
 
 const ContentHeader = (props: any) => {

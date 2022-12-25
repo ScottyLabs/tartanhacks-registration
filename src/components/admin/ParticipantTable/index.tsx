@@ -20,9 +20,9 @@ import {
   TableRow,
   Toolbar,
   Tooltip
-} from "@material-ui/core"
-import { Person } from "@material-ui/icons"
-import CloseIcon from "@material-ui/icons/Close"
+} from "@mui/material"
+import { Person } from "@mui/icons-material"
+import CloseIcon from "@mui/icons-material/Close"
 import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useMemo, useState } from "react"
 import { useDispatch } from "react-redux"

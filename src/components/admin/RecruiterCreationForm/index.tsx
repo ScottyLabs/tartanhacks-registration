@@ -1,6 +1,5 @@
-import { Button, Snackbar, TextField, Typography } from "@material-ui/core"
-import { Alert, Autocomplete } from "@material-ui/lab"
-import { ObjectId } from "mongodb"
+import { Button, Snackbar, TextField, Typography } from "@mui/material"
+import { Alert, Autocomplete } from "@mui/material"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
@@ -9,7 +8,7 @@ import styles from "./index.module.scss"
 
 interface Sponsor {
   name: string
-  _id: ObjectId
+  _id: string
 }
 
 const RecruiterCreationForm = (): ReactElement => {

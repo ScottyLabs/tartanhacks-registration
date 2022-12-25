@@ -1,5 +1,5 @@
-import { TextField, Typography } from "@material-ui/core"
-import { Autocomplete } from "@material-ui/lab"
+import { TextField, Typography } from "@mui/material"
+import { Autocomplete } from "@mui/material"
 import { HackathonExperience } from "enums/Profile"
 import React, {
   Dispatch,

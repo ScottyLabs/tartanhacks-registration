@@ -1,5 +1,5 @@
-import { Button, Snackbar, TextField, Typography } from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+import { Button, Snackbar, TextField, Typography } from "@mui/material"
+import { Alert } from "@mui/material"
 import { ReactElement, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"

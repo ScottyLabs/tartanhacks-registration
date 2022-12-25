@@ -1,4 +1,4 @@
-import { CircularProgress, Collapse } from "@material-ui/core"
+import { CircularProgress, Collapse } from "@mui/material"
 import { useRouter } from "next/dist/client/router"
 import { FunctionComponent, ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"

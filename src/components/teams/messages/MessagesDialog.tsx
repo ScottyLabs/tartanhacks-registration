@@ -1,4 +1,4 @@
-import { CircularProgress, Collapse, Typography } from "@material-ui/core"
+import { CircularProgress, Collapse, Typography } from "@mui/material"
 import React, {
   ReactElement,
   useState,

@@ -1,4 +1,4 @@
-import { CircularProgress, Collapse, Link, Typography } from "@material-ui/core"
+import { CircularProgress, Collapse, Link, Typography } from "@mui/material"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"

@@ -1,4 +1,4 @@
-import { useTheme } from "@material-ui/core"
+import { useTheme } from "@mui/material"
 import React, { MouseEventHandler, ReactElement } from "react"
 
 const BurgerMenu = ({

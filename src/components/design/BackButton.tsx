@@ -1,9 +1,9 @@
-import { IconButton, Tooltip } from "@material-ui/core"
+import { IconButton, Tooltip } from "@mui/material"
 import { useRouter } from "next/dist/client/router"
-import { ArrowBack } from "@material-ui/icons"
+import { ArrowBack } from "@mui/icons-material"
 import RectangleButton from "./RectangleButton"
 import NextLink from "next/link"
-import Link from "@material-ui/core/Link"
+import Link from "@mui/material/Link"
 
 const BackButton = (props: any) => {
   const link = props.link

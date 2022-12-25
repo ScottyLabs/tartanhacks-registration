@@ -4,8 +4,8 @@ import {
   Snackbar,
   TextField,
   Typography
-} from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+} from "@mui/material"
+import { Alert } from "@mui/material"
 import { useRouter } from "next/dist/client/router"
 import NextLink from "next/link"
 import { ReactElement, useState } from "react"

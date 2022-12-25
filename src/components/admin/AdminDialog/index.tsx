@@ -1,5 +1,5 @@
-import { Box, Tab } from "@material-ui/core"
-import { TabContext, TabList, TabPanel } from "@material-ui/lab"
+import { Box, Tab } from "@mui/material"
+import { TabContext, TabList, TabPanel } from "@mui/lab"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"

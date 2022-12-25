@@ -1,5 +1,5 @@
-import { Snackbar, TextField, Typography } from "@material-ui/core"
-import { Alert } from "@material-ui/lab"
+import { Snackbar, TextField, Typography } from "@mui/material"
+import { Alert } from "@mui/material"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
