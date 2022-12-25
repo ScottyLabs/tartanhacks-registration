@@ -1,13 +1,12 @@
 import { Modal } from "@material-ui/core"
-import { useTheme } from "@material-ui/styles"
 import { Status } from "enums/Status"
 import { ReactElement, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
 import BurgerMenu from "../../design/BurgerMenu"
+import styles from "./index.module.scss"
 import MenuItem from "./MenuItem"
 import MenuLine from "./MenuLine"
-import styles from "./index.module.scss"
 
 const Menu = (): ReactElement => {
   const [open, setOpen] = useState(false)

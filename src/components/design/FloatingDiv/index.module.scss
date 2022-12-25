@@ -1,0 +1,37 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.floatingDiv {
+  position: relative;
+  top: 25%;
+  width: 80%;
+  margin: auto;
+  padding-bottom: 40px;
+  margin-bottom: 400px;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  box-sizing: border-box;
+
+  background-image: $dialog-container-gradient;
+  box-shadow: $dialog-container-box-shadow;
+  backdrop-filter: blur(4px);
+  border-radius: 25px;
+
+  @include down($breakpoint-md) {
+    width: 90%;
+    top: 15%;
+    margin-bottom: 150px;
+  }
+
+  @include down($breakpoint-sm) {
+    margin-bottom: 50px;
+  }
+}
+
+.content {
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+  gap: 1em;
+}
