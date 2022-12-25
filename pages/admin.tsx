@@ -6,26 +6,16 @@ import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
 import Menu from "src/components/menu/Menu"
 import AdminLayout from "src/layouts/AdminLayout"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  }
-}))
+import styles from "styles/Home.module.scss"
 
 const AdminPage: NextPage = (): ReactElement => {
-  const classes = useStyles()
   return (
     <>
       <WaveBackground />
       <Menu />
       <div>
         <ScottyLabsHeader />
-        <div className={classes.dialog}>
+        <div className={styles.dialog}>
           <AdminDialog />
         </div>
       </div>
