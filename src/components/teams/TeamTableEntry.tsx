@@ -1,6 +1,6 @@
 import { Hidden, Typography } from "@material-ui/core"
 import actions from "src/actions"
-import RectangleButton from "src/components/design/RectangleButton/RectangleButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import { useRouter } from "next/dist/client/router"
 import { useDispatch } from "react-redux"
 import styles from "./TeamTableEntry.module.scss"

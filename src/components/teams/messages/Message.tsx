@@ -1,7 +1,7 @@
 import { Typography } from "@material-ui/core"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import RectangleButton from "src/components/design/RectangleButton/RectangleButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import styles from "./Message.module.scss"
 import clsx from "clsx"
 

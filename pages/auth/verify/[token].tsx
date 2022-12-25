@@ -1,19 +1,18 @@
 import {
-  Button,
   CircularProgress,
   Collapse,
   Link,
   makeStyles,
   Typography
 } from "@material-ui/core"
+import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import RectangleButton from "src/components/design/RectangleButton/RectangleButton"
+import RectangleButton from "src/components/design/RectangleButton"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
-import NextLink from "next/link"
 
 const useStyles = makeStyles((theme) => ({
   failure: {
