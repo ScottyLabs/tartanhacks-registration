@@ -1,5 +1,5 @@
-import { useTheme } from "@mui/material"
-import React, { MouseEventHandler, ReactElement } from "react"
+import { MouseEventHandler, ReactElement } from "react"
+import styles from "./index.module.scss"
 
 const BurgerMenu = ({
   className,
@@ -8,7 +8,6 @@ const BurgerMenu = ({
   className?: string
   onClick?: MouseEventHandler<SVGSVGElement> | undefined
 }): ReactElement => {
-  const theme = useTheme()
   return (
     <svg
       width="70"
@@ -24,7 +23,7 @@ const BurgerMenu = ({
         y1="2.5"
         x2="67.5"
         y2="2.5"
-        stroke={theme.palette.text.primary}
+        className={styles.line}
         strokeWidth="5"
         strokeLinecap="round"
       />
@@ -33,7 +32,7 @@ const BurgerMenu = ({
         y1="22.5"
         x2="67.5"
         y2="22.5"
-        stroke={theme.palette.text.primary}
+        className={styles.line}
         strokeWidth="5"
         strokeLinecap="round"
       />
@@ -42,7 +41,7 @@ const BurgerMenu = ({
         y1="42.5"
         x2="67.5"
         y2="42.5"
-        stroke={theme.palette.text.primary}
+        className={styles.line}
         strokeWidth="5"
         strokeLinecap="round"
       />

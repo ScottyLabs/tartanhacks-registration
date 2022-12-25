@@ -11,7 +11,7 @@ import {
   Snackbar,
   Typography
 } from "@mui/material"
-import { Computer } from "@mui/icons-material"
+import Computer from "@mui/icons-material/Computer"
 import { Alert } from "@mui/material"
 import { Status, statusToString } from "enums/Status"
 import { DateTime } from "luxon"
@@ -139,6 +139,7 @@ const getDialogText = (
                 type="button"
                 startIcon={<Computer />}
                 backgroundColor="#000"
+                className={styles.dashboardLink}
               >
                 Web
               </RectangleButton>

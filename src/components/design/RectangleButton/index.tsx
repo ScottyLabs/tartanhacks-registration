@@ -25,7 +25,7 @@ const RectangleButton = ({
         className={`${className} ${styles.button}`}
         onClick={onClick}
         startIcon={startIcon}
-        style={{ backgroundColor }}
+        style={{ backgroundColor, color: "#fff" }}
       >
         {children}
       </Button>
