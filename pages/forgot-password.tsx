@@ -3,7 +3,7 @@ import { ReactElement } from "react"
 import PasswordResetDialog from "src/components/auth/RequestResetDialog"
 import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
 import WaveHeader from "src/components/design/WaveHeader"
-import styles from "../styles/ForgotPassword.module.scss"
+import styles from "../styles/Auth.module.scss"
 
 const ForgotPasswordPage: NextPage = (): ReactElement => {
   return (

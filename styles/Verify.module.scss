@@ -1,0 +1,47 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+.failure {
+  border: solid 3px $color-error;
+}
+
+.success {
+  border: solid 3px $color-success;
+}
+
+.loading {
+  border: solid 3px $color-loading;
+}
+
+.dialog {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2em;
+  box-sizing: border-box;
+  background-image: $dialog-container-gradient;
+  box-shadow: $dialog-container-box-shadow;
+  backdrop-filter: blur(4px);
+  border-radius: 10px;
+  margin-top: -5em;
+}
+
+.dialogText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  margin-bottom: 5em;
+}
