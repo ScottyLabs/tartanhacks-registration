@@ -304,8 +304,7 @@ const TeamDescription = () => {
               className={styles.textField}
               placeholder="Your team's name"
               InputProps={{
-                className: styles.textFieldInput,
-                styles: { notchedOutline: styles.textFieldInput }
+                className: styles.textFieldInput
               }}
               onChange={(e) => {
                 setChangedName(e.target.value)
@@ -330,8 +329,7 @@ const TeamDescription = () => {
               className={styles.textField}
               placeholder="Your team's description"
               InputProps={{
-                className: styles.textFieldInput,
-                styles: { notchedOutline: styles.textFieldInput }
+                className: styles.textFieldInput
               }}
               onChange={(e) => {
                 setChangedDescription(e.target.value)
@@ -358,8 +356,7 @@ const TeamDescription = () => {
                 "e.g. user@example.com\n        teammate@tartanhacks.cmu.edu"
               }
               InputProps={{
-                className: styles.textFieldInput,
-                styles: { notchedOutline: styles.textFieldInput }
+                className: styles.textFieldInput
               }}
               onChange={(e) => {
                 setInvitations(
