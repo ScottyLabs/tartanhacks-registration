@@ -292,7 +292,7 @@ const TeamDescription = () => {
           </Alert>
         </Snackbar>
 
-        <Dialog open={open === dialogOpen.Name} onClose={handleClose}>
+        <Dialog open={open === dialogOpen.Name} onClose={handleClose} fullWidth>
           <DialogTitle className={styles.dialogHeader}>
             Edit Team Name
           </DialogTitle>
@@ -317,7 +317,11 @@ const TeamDescription = () => {
           </DialogActions>
         </Dialog>
 
-        <Dialog open={open === dialogOpen.Description} onClose={handleClose}>
+        <Dialog
+          open={open === dialogOpen.Description}
+          onClose={handleClose}
+          fullWidth
+        >
           <DialogTitle className={styles.dialogHeader}>
             Edit Team Description
           </DialogTitle>
@@ -342,7 +346,11 @@ const TeamDescription = () => {
           </DialogActions>
         </Dialog>
 
-        <Dialog open={open === dialogOpen.Invite} onClose={handleClose}>
+        <Dialog
+          open={open === dialogOpen.Invite}
+          onClose={handleClose}
+          fullWidth
+        >
           <DialogTitle className={styles.dialogHeader}>
             Invite New Members
           </DialogTitle>
