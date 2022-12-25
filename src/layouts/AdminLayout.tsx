@@ -6,6 +6,7 @@ import actions from "src/actions"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
 import { RootState } from "types/RootState"
+import styles from "./index.module.scss"
 
 /**
  * Layout to hide content that requires authentication at an admin level.
