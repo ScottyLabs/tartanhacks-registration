@@ -8,24 +8,23 @@ const Message = (props: any) => {
   const dispatch = useDispatch()
 
   const getMessage = (request: any) => {
-    const header =
-      request.type === "JOIN"
-        ? "JOIN REQUEST"
-        : request.type === "INVITE"
-        ? "INVITATION"
-        : request.type
-    const body =
-      (request.type === "JOIN"
-        ? props.isCaptain
-          ? "Sent by user"
-          : "Sent to team"
-        : request.type === "INVITE"
-        ? props.isCaptain
-          ? "For user"
-          : "From team"
-        : request.type) +
-      " " +
-      (props.isCaptain ? request.user.email : request.team.name)
+    let header = request.type
+    let prefix = request.type
+    switch (request.type) {
+      case "JOIN":
+        header = "JOIN REQUEST"
+        prefix = props.isCaptain ? "Sent by user" : "Sent to team"
+        break
+
+      case "INVITATION":
+        header = "INVITATION"
+        prefix = props.isCaptain ? "For user" : "From team"
+        break
+    }
+
+    const bodyContent = props.isCaptain ? request.user.email : request.team.name
+    const body = `${prefix} <${bodyContent}>`
+
     return {
       header: header,
       body: body
