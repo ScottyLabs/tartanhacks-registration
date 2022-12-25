@@ -13,7 +13,7 @@ import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
-import RectangleButton from "src/components/design/RectangleButton"
+import RectangleButton from "src/components/design/RectangleButton/RectangleButton"
 import styles from "./index.module.scss"
 
 const ConfirmationDialog = (): ReactElement => {
