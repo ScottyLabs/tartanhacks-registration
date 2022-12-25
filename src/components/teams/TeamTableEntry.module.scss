@@ -54,7 +54,7 @@
 
   border-radius: 10px;
   background: $gradient-color-end;
-  color: #ffffff;
+  color: $text-color-contrast;
 
   @include down($breakpoint-md) {
     font-size: 20px;

@@ -53,7 +53,7 @@
   margin-top: 50px;
   border-radius: 10px;
   background: $color-primary;
-  color: #ffffff;
+  color: $text-color-contrast;
   @include down($breakpoint-md) {
     fontsize: 25px;
     width: 60%;
@@ -74,7 +74,7 @@
   padding-right: 25px;
   border-radius: 10px;
   background: $color-primary;
-  color: #ffffff;
+  color: $text-color-contrast;
   @include down($breakpoint-md) {
     font-size: 25px;
     padding-right: 50px;
