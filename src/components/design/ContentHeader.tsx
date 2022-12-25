@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     display: "block",
     width: "50%",
     margin: "0 auto",
+    textAlign: "center",
     [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
       fontSize: "28px",
       width: "70%"
@@ -28,9 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
   headerDiv: {
     width: "100%",
-    textAlign: "center",
     position: "relative",
-    paddingTop: "42px"
+    paddingTop: "42px",
+    display: "flex",
+    justifyContent: "center"
   },
   hrDivider: {
     width: "25%",
