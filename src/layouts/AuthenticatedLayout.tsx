@@ -1,29 +1,12 @@
-import { CircularProgress, Collapse, makeStyles } from "@material-ui/core"
+import { CircularProgress, Collapse } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
-import React, {
-  FunctionComponent,
-  ReactElement,
-  useEffect,
-  useState
-} from "react"
+import { FunctionComponent, ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
 import { RootState } from "types/RootState"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  spinner: {
-    marginBottom: "5em"
-  }
-}))
+import styles from "./index.module.scss"
 
 /**
  * Layout to hide content that requires authentication.
@@ -31,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
  * login the user using the stored login token in the browser
  */
 const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
-  const classes = useStyles()
   const dispatch = useDispatch()
   const router = useRouter()
   const [loading, setLoading] = useState(true)
@@ -73,9 +55,9 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
         <WaveBackground />
         <div>
           <ScottyLabsHeader />
-          <div className={classes.dialog}>
+          <div className={styles.dialog}>
             <Collapse in={loading}>
-              <CircularProgress className={classes.spinner} />
+              <CircularProgress className={styles.spinner} />
             </Collapse>
           </div>
         </div>

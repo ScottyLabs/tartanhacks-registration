@@ -1,29 +1,11 @@
-import React, {
-  ReactElement,
-  FunctionComponent,
-  useEffect,
-  useState
-} from "react"
-import { useDispatch, useSelector } from "react-redux"
+import { CircularProgress, Collapse } from "@material-ui/core"
 import { useRouter } from "next/dist/client/router"
-import { RootState } from "types/RootState"
-import { Collapse, CircularProgress, makeStyles } from "@material-ui/core"
+import { FunctionComponent, ReactElement, useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
-import actions from "src/actions"
-
-const useStyles = makeStyles((theme) => ({
-  dialog: {
-    width: "100%",
-    height: "100%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  spinner: {
-    marginBottom: "5em"
-  }
-}))
+import { RootState } from "types/RootState"
 
 /**
  * Layout to hide content that requires authentication at an admin level.
@@ -32,7 +14,6 @@ const useStyles = makeStyles((theme) => ({
  */
 const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
   const dispatch = useDispatch()
-  const classes = useStyles()
   const router = useRouter()
   const [loading, setLoading] = useState(false)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
@@ -63,9 +44,9 @@ const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
         <WaveBackground />
         <div>
           <ScottyLabsHeader />
-          <div className={classes.dialog}>
+          <div className={styles.dialog}>
             <Collapse in={loading}>
-              <CircularProgress className={classes.spinner} />
+              <CircularProgress className={styles.spinner} />
             </Collapse>
           </div>
         </div>
