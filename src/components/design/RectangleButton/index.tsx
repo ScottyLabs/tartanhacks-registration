@@ -1,18 +1,6 @@
-import { Button, makeStyles } from "@material-ui/core"
+import { Button } from "@material-ui/core"
 import React, { ReactElement } from "react"
-
-const useStyles = makeStyles((theme) => ({
-  button: {
-    backgroundColor: theme.palette.button.main,
-    borderRadius: "10px",
-    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.15)",
-    color: "white",
-    "&:hover": {
-      backgroundColor: theme.palette.button.main,
-      filter: "brightness(95%)"
-    }
-  }
-}))
+import styles from "./index.module.scss"
 
 const RectangleButton = ({
   className,
@@ -29,13 +17,12 @@ const RectangleButton = ({
   startIcon?: ReactElement
   backgroundColor?: string
 }): ReactElement => {
-  const classes = useStyles()
   return (
     <>
       <Button
         variant="contained"
         type={type}
-        className={`${className} ${classes.button}`}
+        className={`${className} ${styles.button}`}
         onClick={onClick}
         startIcon={startIcon}
         style={{ backgroundColor }}

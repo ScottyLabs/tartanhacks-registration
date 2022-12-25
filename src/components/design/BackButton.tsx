@@ -19,17 +19,6 @@ const BackButton = (props: any) => {
           </RectangleButton>
         </Link>
       </NextLink>
-
-      {/* <IconButton
-        className={props.className}
-        color="primary"
-        onClick={() => {
-          router.push(link)
-        }}
-      >
-        <ArrowBack />
-        &nbsp;BACK
-      </IconButton> */}
     </Tooltip>
   )
 }

@@ -1,0 +1,45 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.header {
+  @include font-size($h1-font-sizes);
+
+  color: $gradient-color-start;
+  text-overflow: "ellipsis";
+  white-space: nowrap;
+  overflow: hidden;
+  display: block;
+  width: 50%;
+  margin: 0 auto;
+  text-align: center;
+
+  @include down($breakpoint-md) {
+    width: 70%;
+  }
+
+  @include down($breakpoint-sm) {
+    width: 80%;
+    padding-bottom: 20px;
+  }
+}
+
+.longTitle {
+  @include down($breakpoint-sm) {
+    margin-left: 0;
+  }
+}
+
+.headerDiv {
+  width: 100%;
+  position: relative;
+  padding-top: 42px;
+  display: flex;
+  justify-content: center;
+}
+
+.hrDivider {
+  width: 25%;
+  border: 0;
+  height: 10x;
+  border-top: 1px solid $gradient-color-start;
+}
