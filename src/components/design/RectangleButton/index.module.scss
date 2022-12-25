@@ -1,0 +1,14 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.button {
+  background-color: $button-color;
+  border-radius: 10px;
+  box-shadow: $drop-shadow;
+  color: $text-color-contrast;
+}
+
+.button:hover {
+  background-color: $button-color;
+  filter: brightness(95%);
+}
