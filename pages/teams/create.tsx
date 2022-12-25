@@ -1,99 +1,23 @@
+import { Snackbar, TextField, Typography } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
+import { useRouter } from "next/router"
 import { useState } from "react"
-import { makeStyles, Typography, TextField, Snackbar } from "@material-ui/core"
-import { AuthenticatedLayout } from "src/layouts"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
+import BackButton from "src/components/design/BackButton"
+import ContentHeader from "src/components/design/ContentHeader"
+import FloatingDiv from "src/components/design/FloatingDiv"
+import RectangleButton from "src/components/design/RectangleButton"
 import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
-import FloatingDiv from "src/components/design/FloatingDiv"
-import ContentHeader from "src/components/design/ContentHeader"
-import { useDispatch } from "react-redux"
-import { useRouter } from "next/router"
-import RectangleButton from "src/components/design/RectangleButton"
-import actions from "src/actions"
-import { useSelector } from "react-redux"
-import { RootState } from "types/RootState"
-import { Alert } from "@material-ui/lab"
 import Menu from "src/components/menu/Menu"
-import BackButton from "src/components/design/BackButton"
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    paddingTop: "30px",
-    fontWeight: 400,
-    backgroundColor: theme.palette.gradient.start,
-    backgroundClip: "text",
-    WebkitBackgroundClip: "text",
-    WebkitTextFillColor: "transparent",
-    fontSize: "28px",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "20px"
-    }
-  },
-  content: {
-    alignItems: "left"
-  },
-  annotation: {
-    paddingTop: "30px",
-    paddingBottom: "10px",
-    fontWeight: 600,
-    color: theme.palette.gradient.start,
-    fontSize: "20px",
-    display: "block",
-    wordWrap: "break-word",
-    width: "80%",
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      width: "100%"
-    }
-  },
-  memberList: {
-    listStyleType: "none",
-    padding: 0,
-    margin: 0
-  },
-  createButton: {
-    width: "45%",
-    fontSize: "30px",
-    fontWeight: 600,
-    textTransform: "uppercase",
-    marginTop: "50px",
-    borderRadius: "10px",
-    background: theme.palette.primary.main,
-    color: "#FFFFFF",
-    padding: "20px",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "25px",
-      width: "60%"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px",
-      width: "75%"
-    }
-  },
-  textField: {
-    backgroundColor: "white",
-    borderRadius: "10px",
-    boxShadow: "0px 4px 4px rgba(219, 121, 52, 0.5)"
-  },
-  textFieldInput: {
-    border: "none",
-    color: theme.palette.gradient.start
-  },
-  backButton: {
-    marginTop: "20px",
-    alignSelf: "flex-start",
-    fontSize: "24px",
-    [theme.breakpoints.down(theme.breakpoints.values.tablet)]: {
-      fontSize: "20px"
-    },
-    [theme.breakpoints.down(theme.breakpoints.values.mobile)]: {
-      fontSize: "16px"
-    }
-  }
-}))
+import { AuthenticatedLayout } from "src/layouts"
+import styles from "styles/CreateTeam.module.scss"
+import { RootState } from "types/RootState"
 
 const TeamCreate = () => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const classes = useStyles()
   const [teamName, setTeamName] = useState("")
   const [teamDescription, setTeamDescription] = useState("")
   const [addMembers, setAddMembers] = useState<any>([])
@@ -107,10 +31,10 @@ const TeamCreate = () => {
         <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
-          <BackButton link="/teams" className={classes.backButton} />
+          <BackButton link="/teams" className={styles.backButton} />
           <ContentHeader title="Create New Team" longTitle={true} />
-          <div className={classes.content}>
-            <Typography variant="h4" className={classes.title}>
+          <div className={styles.content}>
+            <Typography variant="h4" className={styles.title}>
               BASIC INFO
             </Typography>
             <form
@@ -135,7 +59,7 @@ const TeamCreate = () => {
                 }
               }}
             >
-              <Typography variant="subtitle1" className={classes.annotation}>
+              <Typography variant="subtitle1" className={styles.annotation}>
                 Team Name*
               </Typography>
               <TextField
@@ -144,17 +68,17 @@ const TeamCreate = () => {
                 placeholder="Your team's name"
                 fullWidth={true}
                 value={teamName}
-                className={classes.textField}
+                className={styles.textField}
                 InputProps={{
-                  className: classes.textFieldInput,
-                  classes: { notchedOutline: classes.textFieldInput }
+                  className: styles.textFieldInput,
+                  classes: { notchedOutline: styles.textFieldInput }
                 }}
                 onChange={(e) => {
                   setTeamName(e.target.value)
                 }}
               />
 
-              <Typography variant="subtitle1" className={classes.annotation}>
+              <Typography variant="subtitle1" className={styles.annotation}>
                 Team Description*
               </Typography>
               <TextField
@@ -163,17 +87,17 @@ const TeamCreate = () => {
                 placeholder="Your team's description"
                 fullWidth={true}
                 value={teamDescription}
-                className={classes.textField}
+                className={styles.textField}
                 InputProps={{
-                  className: classes.textFieldInput,
-                  classes: { notchedOutline: classes.textFieldInput }
+                  className: styles.textFieldInput,
+                  classes: { notchedOutline: styles.textFieldInput }
                 }}
                 onChange={(e) => {
                   setTeamDescription(e.target.value)
                 }}
               />
 
-              <Typography variant="subtitle1" className={classes.annotation}>
+              <Typography variant="subtitle1" className={styles.annotation}>
                 Invite New Member
               </Typography>
               <TextField
@@ -182,11 +106,11 @@ const TeamCreate = () => {
                   "e.g. user@example.com\n        teammate@tartanhacks.cmu.edu"
                 }
                 fullWidth={true}
-                className={classes.textField}
+                className={styles.textField}
                 multiline
                 InputProps={{
-                  className: classes.textFieldInput,
-                  classes: { notchedOutline: classes.textFieldInput }
+                  className: styles.textFieldInput,
+                  classes: { notchedOutline: styles.textFieldInput }
                 }}
                 onChange={(e) => {
                   setAddMembers(
@@ -196,7 +120,7 @@ const TeamCreate = () => {
                   )
                 }}
               />
-              <RectangleButton type="submit" className={classes.createButton}>
+              <RectangleButton type="submit" className={styles.createButton}>
                 CREATE NEW TEAM
               </RectangleButton>
             </form>
