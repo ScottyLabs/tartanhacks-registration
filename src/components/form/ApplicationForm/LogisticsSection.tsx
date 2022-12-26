@@ -45,7 +45,7 @@ const LogisticsSection = ({
   const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
   const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null)
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
-  const [attendingPhysically, setAttendingPhysically] = useState<boolean>(false)
+  const [attendingPhysically, setAttendingPhysically] = useState<boolean>(true)
   const [address, setAddress] = useState<string>("")
   const [region, setRegion] = useState<Region | null>(null)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
@@ -118,7 +118,7 @@ const LogisticsSection = ({
           setPhoneNumber(e.target.value)
         }}
       />
-      <TextField
+      {/* <TextField
         label="Mailing Address"
         variant="outlined"
         helperText="We use this to send prizes. Swag will not be shipped to remote participants."
@@ -128,7 +128,7 @@ const LogisticsSection = ({
         onChange={(e) => {
           setAddress(e.target.value)
         }}
-      />
+      /> */}
       <Autocomplete
         options={Object.values(Region)}
         value={region}
@@ -178,21 +178,6 @@ const LogisticsSection = ({
         />
       </FormGroup>
       {/* In person attendance question only visible to CMU students */}
-      {
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                value={attendingPhysically}
-                checked={attendingPhysically}
-                onChange={(e, checked) => setAttendingPhysically(checked)}
-                disabled={!isCMUStudent}
-              />
-            }
-            label="Will you be attending in-person? (CMU students only)"
-          />
-        </FormGroup>
-      }
     </div>
   )
 }
