@@ -47,7 +47,7 @@ const LogisticsSection = ({
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
   const [attendingPhysically, setAttendingPhysically] = useState<boolean>(true)
   const [address, setAddress] = useState<string>("")
-  const [region, setRegion] = useState<Region | null>(null)
+  const [region, setRegion] = useState<Region>(Region.URBAN)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
 
   const [phoneNumberErrorStatus, setPhoneNumberErrorStatus] = useState(false)
@@ -129,7 +129,7 @@ const LogisticsSection = ({
           setAddress(e.target.value)
         }}
       /> */}
-      <Autocomplete
+      {/* <Autocomplete
         options={Object.values(Region)}
         value={region}
         onChange={(e, value) => setRegion(value)}
@@ -142,7 +142,7 @@ const LogisticsSection = ({
             required
           />
         )}
-      />
+      /> */}
       <TextField
         label="Dietary Restrictions"
         variant="outlined"

@@ -128,11 +128,11 @@ const AuthenticationDialog = ({
           </div>
         </form>
       </div>
-      <Alert severity="warning" className={styles.warning}>
-        Participants must be undergraduates and least 18 years old!
+      <Alert severity="info" className={styles.warning}>
+        TartanHacks 2023 will be completely in-person!
       </Alert>
       <Alert severity="warning" className={styles.warning}>
-        TartanHacks 2023 will be completely in-person!
+        Participants must be undergraduates and least 18 years old!
       </Alert>
     </div>
   )
