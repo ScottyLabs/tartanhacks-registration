@@ -158,7 +158,7 @@ const ApplicationForm = (): ReactElement => {
         }}
       >
         <div className={styles.headerContainer}>
-          <Typography variant="h3" className={styles.header}>
+          <Typography variant="h4" className={styles.header}>
             Application
           </Typography>
         </div>
