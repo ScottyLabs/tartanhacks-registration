@@ -160,7 +160,7 @@ const AuthenticationDialog = ({
         TartanHacks 2023 will be completely in-person!
       </Alert>
       <Alert severity="warning" className={styles.warning}>
-        Participants must be undergraduates and least 18 years old!
+        Participants must be undergraduates and at least 18 years old
       </Alert>
     </div>
   )
