@@ -105,7 +105,7 @@ const getDialogText = (
           <br />
           <br />
           <Typography variant="body1">
-            Once you&apos;re all set, download our Dashboard App!
+            Once you&apos;re all set, download TartanHacks Passport!
           </Typography>
           <div className={styles.appStoreLinks}>
             <Link
