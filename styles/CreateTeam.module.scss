@@ -14,9 +14,14 @@
   align-items: left;
 }
 
+.content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
 .annotation {
   padding-top: 30px;
-  padding-bottom: 10px;
   color: $gradient-color-start;
   display: block;
   word-wrap: break-word;

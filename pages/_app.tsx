@@ -1,4 +1,4 @@
-import { StyledEngineProvider, ThemeProvider } from "@mui/material/styles"
+import { StyledEngineProvider, ThemeProvider } from "@mui/material"
 import type { AppProps } from "next/app"
 import Head from "next/head"
 import { ReactElement } from "react"
@@ -30,13 +30,13 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
           `}
         </Script>
       </Head>
-      <StyledEngineProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <StyledEngineProvider injectFirst>
             <Component {...pageProps} />
-          </Provider>
-        </ThemeProvider>
-      </StyledEngineProvider>
+          </StyledEngineProvider>
+        </Provider>
+      </ThemeProvider>
     </>
   )
 }

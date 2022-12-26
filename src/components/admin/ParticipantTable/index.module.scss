@@ -62,29 +62,48 @@
 }
 
 .chipUnverified {
-  background-color: $status-color-unverified;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-unverified;
+  }
 }
 
 .chipVerified {
-  background-color: $status-color-verified;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-verified;
+  }
 }
 
 .chipApplied {
-  background-color: $status-color-applied;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-applied;
+  }
 }
 
 .chipAdmitted {
-  background-color: $status-color-admitted;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-admitted;
+  }
 }
 
 .chipRejected {
-  background-color: $status-color-rejected;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-rejected;
+  }
 }
 
 .chipDeclined {
-  background-color: $status-color-declined;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-declined;
+  }
 }
 
 .chipConfirmed {
-  background-color: $status-color-confirmed;
+  &:global(.MuiChip-root) {
+    background-color: $status-color-confirmed;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  gap: 5px;
 }

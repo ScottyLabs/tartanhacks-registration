@@ -4,11 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:local": "NODE_ENV=local next dev",
-    "dev:prod": "NODE_ENV=production next dev",
+    "dev:local": "APP_ENV=local next dev",
+    "dev:stg": "APP_ENV=staging next dev",
+    "dev:prod": "APP_ENV=production next dev",
     "build": "next build",
-    "start": "next start",
-    "start:staging": "NODE_ENV=staging next start",
+    "start": "APP_ENV=production next start",
+    "start:staging": "APP_ENV=staging next start",
     "lint": "npm run lint:pretty && npm run lint:only && next lint",
     "lint:only": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
     "lint:pretty": "prettier --write ."

@@ -3,9 +3,9 @@ import {
   Collapse,
   Snackbar,
   TextField,
-  Typography
+  Typography,
+  Alert
 } from "@mui/material"
-import { Alert } from "@mui/material"
 import { useRouter } from "next/dist/client/router"
 import NextLink from "next/link"
 import { ReactElement, useState } from "react"
@@ -131,7 +131,7 @@ const AuthenticationDialog = ({
       <Alert severity="warning" className={styles.warning}>
         Participants must be undergraduates and least 18 years old!
       </Alert>
-      <Alert severity="info" className={styles.warning}>
+      <Alert severity="warning" className={styles.warning}>
         TartanHacks 2023 will be completely in-person!
       </Alert>
     </div>

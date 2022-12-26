@@ -105,7 +105,7 @@ const getDialogText = (
           <br />
           <br />
           <Typography variant="body1">
-            Once you&apos;re all set, download our Dashboard App!
+            Once you&apos;re all set, download TartanHacks Passport!
           </Typography>
           <div className={styles.appStoreLinks}>
             <Link
@@ -231,9 +231,15 @@ const DashboardDialog = (): ReactElement => {
     (state: RootState) => state?.settings?.confirmTime
   )
 
-  const closeTimeStr = DateTime.fromJSDate(closeTime).toFormat("dd LLL yyyy")
-  const confirmTimeStr =
-    DateTime.fromJSDate(confirmTime).toFormat("dd LLL yyyy")
+  const closeTimeDt = DateTime.fromJSDate(closeTime)
+  const confirmTimeDt = DateTime.fromJSDate(confirmTime)
+
+  const closeTimeStr = closeTimeDt.isValid
+    ? closeTimeDt.toFormat("dd LLL yyyy")
+    : ""
+  const confirmTimeStr = confirmTimeDt.isValid
+    ? confirmTimeDt.toFormat("dd LLL yyyy")
+    : ""
 
   const status =
     useSelector((state: RootState) => state?.accounts?.data?.status) ?? null

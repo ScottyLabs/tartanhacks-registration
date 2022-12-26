@@ -48,7 +48,7 @@ const Verification = (): ReactElement => {
       <br />
       <NextLink href="/" passHref>
         <Link underline="none">
-          <RectangleButton type="button">Back to Login</RectangleButton>
+          <RectangleButton type="button">Back to Home</RectangleButton>
         </Link>
       </NextLink>
     </>
