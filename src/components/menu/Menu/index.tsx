@@ -38,7 +38,7 @@ const Menu = (): ReactElement => {
             ) : null}
             {status === Status.COMPLETED_PROFILE ? (
               <>
-                <MenuItem text="APPLICATION" url="/apply" />
+                <MenuItem text="EDIT APPLICATION" url="/apply" />
                 <MenuLine />
               </>
             ) : null}
