@@ -16,47 +16,48 @@ import styles from "./index.module.scss"
 const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
   const dispatch = useDispatch()
   const router = useRouter()
-  const [loading, setLoading] = useState(true)
+  const [loadingLogin, setLoadingLogin] = useState(true)
+  const [loadingTime, setLoadingTime] = useState(true)
   const currentUser = useSelector((state: RootState) => state?.accounts?.data)
 
   useEffect(() => {
     const loginWithToken = async () => {
-      setLoading(true)
+      setLoadingLogin(true)
       try {
         await dispatch(actions.auth.loginWithToken())
       } catch (err) {
         // Login token expired or invalid
         router.push("/login")
       }
-      setLoading(false)
+      setLoadingLogin(false)
     }
     loginWithToken()
   }, [])
 
   useEffect(() => {
     const getData = async () => {
-      setLoading(true)
+      setLoadingTime(true)
       try {
         dispatch(actions.settings.getCloseTime())
         dispatch(actions.settings.getConfirmTime())
       } catch (err) {
         console.error(err)
       }
-      setLoading(false)
+      setLoadingTime(false)
     }
     if (currentUser?._id != null) {
       getData()
     }
   }, [currentUser])
 
-  if (loading || currentUser == null) {
+  if (loadingLogin || loadingTime || currentUser == null) {
     return (
       <>
         <WaveBackground />
         <div>
           <ScottyLabsHeader />
           <div className={styles.dialog}>
-            <Collapse in={loading}>
+            <Collapse in={loadingLogin}>
               <CircularProgress className={styles.spinner} />
             </Collapse>
           </div>

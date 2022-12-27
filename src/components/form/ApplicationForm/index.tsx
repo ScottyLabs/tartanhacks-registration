@@ -203,7 +203,11 @@ const ApplicationForm = (): ReactElement => {
             isCMUStudent={isCMUStudent}
           />
           <div className={styles.buttonContainer}>
-            <RectangleButton type="submit">Submit Application</RectangleButton>
+            <RectangleButton type="submit">
+              {application?.fetchedProfile
+                ? "Save Application"
+                : "Submit Application"}
+            </RectangleButton>
             <Collapse in={loading}>
               <CircularProgress />
             </Collapse>

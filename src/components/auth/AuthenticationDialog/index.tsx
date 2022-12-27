@@ -27,16 +27,24 @@ const AuthenticationDialog = ({
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [passwordsMatch, setPasswordsMatch] = useState(true)
+
   const errorMessage = useSelector((state: RootState) => state?.accounts?.error)
 
   const register = async () => {
     setLoading(true)
-    try {
-      await dispatch(actions.auth.register(email, password))
-      router.push("/")
-    } catch (err) {
-      console.error(err)
-      setError(true)
+    if (password === confirmPassword) {
+      setPasswordsMatch(true)
+      try {
+        await dispatch(actions.auth.register(email, password))
+        router.push("/")
+      } catch (err) {
+        console.error(err)
+        setError(true)
+      }
+    } else {
+      setPasswordsMatch(false)
     }
     setLoading(false)
   }
@@ -56,12 +64,17 @@ const AuthenticationDialog = ({
     <div className={styles.wrapper}>
       <div className={styles.dialog}>
         <Snackbar
-          open={error}
+          open={error || !passwordsMatch}
           autoHideDuration={5000}
-          onClose={(e) => setError(false)}
+          onClose={(e) => {
+            setError(false)
+            setPasswordsMatch(true)
+          }}
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         >
-          <Alert severity="error">{errorMessage}</Alert>
+          <Alert severity="error">
+            {error ? errorMessage : "Passwords don't match"}
+          </Alert>
         </Snackbar>
         <form
           className={styles.registrationForm}
@@ -106,6 +119,21 @@ const AuthenticationDialog = ({
               setPassword(e.target.value)
             }}
           />
+          {registration ? (
+            <TextField
+              required
+              type="password"
+              name="confirm_password"
+              size="medium"
+              label="Confirm password"
+              variant="outlined"
+              fullWidth={true}
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value)
+              }}
+            />
+          ) : null}
           <RectangleButton type="submit">
             {registration ? "Register" : "Login"}
           </RectangleButton>
@@ -132,7 +160,7 @@ const AuthenticationDialog = ({
         TartanHacks 2023 will be completely in-person!
       </Alert>
       <Alert severity="warning" className={styles.warning}>
-        Participants must be undergraduates and least 18 years old!
+        Participants must be undergraduates and at least 18 years old
       </Alert>
     </div>
   )
