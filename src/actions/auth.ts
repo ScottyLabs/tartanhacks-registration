@@ -24,7 +24,7 @@ export const verify = (token: string): DispatchAction => ({
 })
 
 export const resendVerification = (email: string): DispatchAction => ({
-  type: DispatchActionType.AUTH_VERIFY,
+  type: DispatchActionType.AUTH_VERIFY_RESEND,
   useAPI: true,
   request: {
     path: "/auth/verify/resend",
