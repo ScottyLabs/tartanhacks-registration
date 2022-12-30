@@ -61,7 +61,7 @@ const ConfirmationDialog = (): ReactElement => {
             </Typography>
           </div>
           <div className={styles.dialogText}>
-            <FormGroup>
+            <FormGroup className={styles.formGroup}>
               <FormControlLabel
                 control={
                   <Checkbox
