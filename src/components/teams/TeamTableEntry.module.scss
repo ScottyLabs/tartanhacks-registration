@@ -53,7 +53,6 @@
   text-transform: uppercase;
 
   border-radius: 10px;
-  background: $gradient-color-end;
   color: $text-color-contrast;
 
   @include down($breakpoint-md) {

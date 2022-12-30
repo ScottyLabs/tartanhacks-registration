@@ -27,8 +27,12 @@ const WaveFooter = (): ReactElement => {
               y2="465"
               gradientUnits="userSpaceOnUse"
             >
-              <stop stopColor="#F6C744" />
-              <stop offset="1" stopColor="#F68F44" stopOpacity="0.53" />
+              <stop className={styles.gradientEnd} />
+              <stop
+                className={styles.gradientStart}
+                offset="1"
+                stopOpacity="0.53"
+              />
             </linearGradient>
           </defs>
         </svg>

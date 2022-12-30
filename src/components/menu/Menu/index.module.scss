@@ -49,7 +49,16 @@
   top: 8rem;
   right: 5rem;
   position: absolute;
-  width: 15rem;
+  width: 20rem;
+
+  @include down($breakpoint-md) {
+    right: 3rem;
+  }
+
+  @include down($breakpoint-xs) {
+    right: 1rem;
+    width: 19rem;
+  }
 
   text-align: center;
   padding: 1em;
