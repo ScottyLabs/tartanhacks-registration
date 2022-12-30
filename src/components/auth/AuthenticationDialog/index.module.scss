@@ -53,13 +53,14 @@
   flex-direction: column;
   align-items: center;
   margin-top: 1em;
-  color: $text-color-alt;
+  color: $text-color-primary;
 }
 
 .link {
   font-weight: bold;
   text-decoration: none;
   color: $text-color-primary;
+  margin-bottom: 1rem;
 }
 
 .link:hover {
