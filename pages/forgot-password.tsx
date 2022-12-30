@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { ReactElement } from "react"
 import PasswordResetDialog from "src/components/auth/RequestResetDialog"
-import ScottyLabsIcon from "src/components/design/ScottyLabsIcon/ScottyLabsIcon"
+import ScottyLabsIcon from "src/components/design/ScottyLabsIcon"
 import WaveHeader from "src/components/design/WaveHeader"
 import styles from "../styles/Auth.module.scss"
 
