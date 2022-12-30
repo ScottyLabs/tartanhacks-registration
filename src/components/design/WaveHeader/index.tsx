@@ -14,7 +14,7 @@ const WaveHeader = (): ReactElement => {
               TartanHacks
             </Text>
             <Text variant="h2" className={styles.subtitle}>
-              Feb 4-6, 2022
+              Feb 3-4, 2023
             </Text>
           </Link>
         </NextLink>
