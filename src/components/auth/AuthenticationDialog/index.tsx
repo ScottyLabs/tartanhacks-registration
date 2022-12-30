@@ -4,7 +4,8 @@ import {
   Snackbar,
   TextField,
   Typography,
-  Alert
+  Alert,
+  LinearProgress
 } from "@mui/material"
 import { useRouter } from "next/dist/client/router"
 import NextLink from "next/link"
@@ -91,9 +92,6 @@ const AuthenticationDialog = ({
           <Typography variant="h4" className={styles.header}>
             Welcome
           </Typography>
-          <Collapse in={loading}>
-            <CircularProgress />
-          </Collapse>
           <TextField
             required
             name="email"
@@ -102,6 +100,7 @@ const AuthenticationDialog = ({
             variant="outlined"
             fullWidth={true}
             value={email}
+            disabled={loading}
             onChange={(e) => {
               setEmail(e.target.value)
             }}
@@ -115,6 +114,7 @@ const AuthenticationDialog = ({
             variant="outlined"
             fullWidth={true}
             value={password}
+            disabled={loading}
             onChange={(e) => {
               setPassword(e.target.value)
             }}
@@ -129,11 +129,15 @@ const AuthenticationDialog = ({
               variant="outlined"
               fullWidth={true}
               value={confirmPassword}
+              disabled={loading}
               onChange={(e) => {
                 setConfirmPassword(e.target.value)
               }}
             />
           ) : null}
+          <Collapse in={loading}>
+            <LinearProgress />
+          </Collapse>
           <RectangleButton type="submit">
             {registration ? "Register" : "Login"}
           </RectangleButton>

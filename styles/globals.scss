@@ -16,6 +16,10 @@ body {
   @include font-size($body-font-sizes);
 }
 
+body {
+  background-color: $body-background-color;
+}
+
 div#__next,
 div#__next > div {
   height: 100%;

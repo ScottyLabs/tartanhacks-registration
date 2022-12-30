@@ -4,15 +4,15 @@
 .newTeamButton {
   font-size: 30px;
   font-weight: 600;
-  width: 45%;
+  width: 50%;
   align-self: center;
   text-transform: uppercase;
 
   border-radius: 10px;
-  background: $gradient-color-end;
+  background: $button-color;
   color: $text-color-contrast;
 
-  @include down($breakpoint-md) {
+  @include down($breakpoint-lg) {
     font-size: 25px;
     width: 60%;
   }

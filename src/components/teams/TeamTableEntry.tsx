@@ -52,7 +52,7 @@ const TeamTableEntry = (props: any) => {
             }}
           >
             <RectangleButton type="submit" className={styles.tableEntryButton}>
-              View Detail
+              Details
             </RectangleButton>
           </form>
         </td>
