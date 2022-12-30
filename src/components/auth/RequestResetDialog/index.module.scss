@@ -48,3 +48,14 @@
 .emailLabel {
   font-weight: bold;
 }
+
+.link {
+  font-weight: bold;
+  text-decoration: none;
+  color: $text-color-primary;
+}
+
+.link:hover {
+  text-decoration: underline;
+  filter: brightness(85%);
+}
