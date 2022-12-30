@@ -59,7 +59,7 @@ const EssaySection = ({
         Essays
       </Typography>
       <Typography variant="body1">
-        Why do you want to join TartanHacks?
+        Why do you want to join TartanHacks? (200 words)
       </Typography>
       <TextField
         label="Write answer here"
