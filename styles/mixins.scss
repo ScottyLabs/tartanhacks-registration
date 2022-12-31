@@ -30,6 +30,12 @@ $breakpoints: (
   }
 }
 
+@mixin height-down($screen) {
+  @media (max-height: $screen) {
+    @content;
+  }
+}
+
 /* Font size mapping mixin */
 @mixin font-size($font-sizes) {
   @each $breakpoint, $font-size in $font-sizes {

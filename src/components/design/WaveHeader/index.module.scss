@@ -6,6 +6,10 @@
   width: 100%;
   overflow: hidden;
   line-height: 0;
+
+  @include height-down($breakpoint-sm) {
+    display: none;
+  }
 }
 
 .title {
