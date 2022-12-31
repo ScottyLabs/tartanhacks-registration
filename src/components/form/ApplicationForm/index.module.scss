@@ -62,14 +62,6 @@
 .header {
   border-bottom: solid $text-color-primary 2px;
   padding-bottom: 1rem;
-
-  @include down($breakpoint-md) {
-    fontsize: 2.5em;
-  }
-
-  @include down($breakpoint-sm) {
-    fontsize: 1.8em;
-  }
 }
 
 .formContents {

@@ -22,3 +22,11 @@
     height: 10em;
   }
 }
+
+.gradientStart {
+  stop-color: $gradient-color-start;
+}
+
+.gradientEnd {
+  stop-color: $gradient-color-end;
+}

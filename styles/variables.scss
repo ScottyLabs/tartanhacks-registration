@@ -1,11 +1,14 @@
 // Colors
-$color-primary: #ffc738;
-$color-secondary: #07054c;
-$color-primary-darker: #db4d20;
+$color-primary: #4200ff;
+$color-secondary: #6e9afd;
+$color-primary-darker: #3f0ea8;
+$color-contrast: #ffb700;
+
+$body-background-color: #f7f1e2;
 
 // Text colors
-$text-color-primary: #db4d20;
-$text-color-secondary: #ffb700;
+$text-color-primary: $color-primary;
+$text-color-secondary: $color-contrast;
 $text-color-contrast: #fff;
 $text-color-alt: #fdcd60;
 $text-color-unfocused: #999999;
@@ -25,25 +28,25 @@ $color-loading: #ffc107;
 $color-error: #f44336;
 
 // Gradient colors
-$gradient-color-start: #aa5418;
-$gradient-color-end: #ffc738;
+$gradient-color-start: $color-primary-darker;
+$gradient-color-end: $color-secondary;
 
-$wave-gradient-color-start: #ffc738;
-$wave-gradient-color-end: #db4d20;
+$wave-gradient-color-start: $color-primary;
+$wave-gradient-color-end: $color-primary-darker;
 
 $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;
 
 $dialog-container-gradient: linear-gradient(
   316.54deg,
-  rgba(244, 236, 232, 0.757) 35.13%,
-  rgba(255, 255, 255, 0.8) 126.39%
+  rgba(110, 154, 253, 0.95) 3%,
+  rgba(247, 241, 226, 0.95) 60%,
+  rgba(247, 241, 226, 0.95) 126.39%
 );
 
 // Additional component colors
-$background-color: $color-primary;
-$button-color: #ffc738;
-$button-color-focused: #ffc738;
+$button-color: $color-primary;
+$button-color-focused: $color-primary;
 
 // Component properties
 
@@ -62,7 +65,8 @@ $h2-font-sizes: (
   sm: 1.5rem
 );
 $body-font-sizes: (
-  default: 1rem
+  default: 1rem,
+  xs: 0.8rem
 );
 $subtitle-font-sizes: (
   default: 0.8rem

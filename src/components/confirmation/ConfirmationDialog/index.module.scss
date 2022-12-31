@@ -17,6 +17,11 @@
   );
   box-shadow: $box-shadow;
   backdrop-filter: blur(4px);
+
+  @include down($breakpoint-md) {
+    width: 90%;
+    padding: 1em;
+  }
 }
 
 .dialogContent {
@@ -28,6 +33,16 @@
 .dialogText {
   margin-bottom: 1em;
   color: $wave-gradient-color-start;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+
+  @include down($breakpoint-sm) {
+    margin-top: 1em;
+    gap: 1em;
+  }
 }
 
 .headerContainer {

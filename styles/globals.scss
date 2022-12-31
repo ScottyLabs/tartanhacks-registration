@@ -10,10 +10,14 @@ body {
   width: 100%;
   padding: 0;
   margin: 0;
-  font-family: "Poppins Light", sans-serif;
+  font-family: "Poppins", "Roboto", sans-serif;
   color: $text-color-primary;
   overflow-x: hidden;
   @include font-size($body-font-sizes);
+}
+
+body {
+  background-color: $body-background-color;
 }
 
 div#__next,
