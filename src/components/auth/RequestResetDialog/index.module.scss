@@ -5,17 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25%;
+  width: 100%;
   padding: 1em;
+  margin: 0 auto;
   text-align: center;
-
-  @include down($breakpoint-md) {
-    width: 50%;
-  }
-
-  @include down($breakpoint-sm) {
-    width: 80%;
-  }
 }
 
 .resetForm {
@@ -36,6 +29,7 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1em;
+  padding-bottom: 1em;
 }
 
 .dialogContent {
@@ -47,4 +41,16 @@
 
 .emailLabel {
   font-weight: bold;
+}
+
+.link {
+  font-weight: bold;
+  text-decoration: none;
+  color: $text-color-primary;
+  margin-top: 2em;
+}
+
+.link:hover {
+  text-decoration: underline;
+  filter: brightness(85%);
 }
