@@ -34,6 +34,10 @@
   bottom: 0;
 
   @include down($breakpoint-md) {
+    width: 60%;
+  }
+
+  @include down($breakpoint-sm) {
     width: 100%;
   }
 }
