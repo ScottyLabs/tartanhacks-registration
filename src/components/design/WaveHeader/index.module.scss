@@ -17,12 +17,15 @@
 
   color: $text-color-contrast;
 
+  @include down($breakpoint-md) {
+    top: 40px;
+  }
+
   @include down($breakpoint-sm) {
-    top: 50px;
+    top: 40px;
   }
 
   @include down($breakpoint-xs) {
-    top: 40px;
     left: 30px;
   }
 }
@@ -35,8 +38,12 @@
   top: 140px;
   left: 60px;
 
-  @include down($breakpoint-sm) {
+  @include down($breakpoint-md) {
     top: 90px;
+  }
+
+  @include down($breakpoint-sm) {
+    top: 80px;
   }
 
   @include down($breakpoint-xs) {
@@ -55,8 +62,12 @@
     height: 220px;
   }
 
+  @include down($breakpoint-md) {
+    height: 150px;
+  }
+
   @include down($breakpoint-sm) {
-    height: 170px;
+    height: 140px;
   }
 
   @include down($breakpoint-xs) {
