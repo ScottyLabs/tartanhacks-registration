@@ -5,8 +5,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 25%;
+  width: 20rem;
   padding: 1em;
+  margin: 0 auto;
   text-align: center;
 
   @include down($breakpoint-md) {
@@ -53,6 +54,7 @@
   font-weight: bold;
   text-decoration: none;
   color: $text-color-primary;
+  margin-top: 2em;
 }
 
 .link:hover {
