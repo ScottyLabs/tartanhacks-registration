@@ -51,6 +51,10 @@
   height: 250px;
   filter: $drop-shadow;
 
+  @include down($breakpoint-lg) {
+    height: 220px;
+  }
+
   @include down($breakpoint-sm) {
     height: 170px;
   }
@@ -61,9 +65,9 @@
 }
 
 .waveSvgStart {
-  stop-color: $wave-gradient-color-start;
+  stop-color: $wave-gradient-color-end;
 }
 
 .waveSvgEnd {
-  stop-color: $wave-gradient-color-end;
+  stop-color: $wave-gradient-color-start;
 }
