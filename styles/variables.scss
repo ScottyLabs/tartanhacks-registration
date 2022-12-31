@@ -31,8 +31,8 @@ $color-error: #f44336;
 $gradient-color-start: $color-primary-darker;
 $gradient-color-end: $color-secondary;
 
-$wave-gradient-color-start: $color-primary;
-$wave-gradient-color-end: $color-primary-darker;
+$wave-gradient-color-start: $color-secondary;
+$wave-gradient-color-end: $color-primary;
 
 $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;
@@ -53,15 +53,18 @@ $button-color-focused: $color-primary;
 // Font sizes
 $hero-font-sizes: (
   default: 5rem,
+  md: 3.5rem,
   sm: 2.5rem,
   xs: 2rem
 );
 $h1-font-sizes: (
   default: 3rem,
+  md: 2.5rem,
   sm: 2rem
 );
 $h2-font-sizes: (
   default: 2rem,
+  md: 1.8rem,
   sm: 1.5rem
 );
 $body-font-sizes: (

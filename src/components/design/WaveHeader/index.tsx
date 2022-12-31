@@ -37,11 +37,7 @@ const WaveHeader = (): ReactElement => {
               gradientUnits="userSpaceOnUse"
             >
               <stop className={styles.waveSvgStart} />
-              <stop
-                className={styles.waveSvgEnd}
-                offset="1"
-                stopOpacity="0.88"
-              />
+              <stop className={styles.waveSvgEnd} offset="1" />
             </linearGradient>
           </defs>
         </svg>

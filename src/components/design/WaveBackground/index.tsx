@@ -24,11 +24,7 @@ const WaveBackground = (): ReactElement => {
               gradientUnits="userSpaceOnUse"
             >
               <stop className={styles.gradientStart} />
-              <stop
-                offset="1"
-                className={styles.gradientStop}
-                stopOpacity="0.53"
-              />
+              <stop offset="1" className={styles.gradientStop} />
             </linearGradient>
           </defs>
         </svg>
