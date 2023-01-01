@@ -9,6 +9,7 @@ import {
   makeStyles,
   Typography
 } from "@mui/material"
+import AnalyticsEvent from "enums/AnalyticsEvent"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
@@ -35,6 +36,7 @@ const ConfirmationDialog = (): ReactElement => {
           willMentor
         )
       )
+      window.gtag("event", AnalyticsEvent.ATTENDANCE_CONFIRMED)
     } catch (err) {
       console.error(err)
     }
