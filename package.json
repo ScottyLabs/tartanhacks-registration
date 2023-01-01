@@ -41,6 +41,7 @@
     "sass": "^1.56.0"
   },
   "devDependencies": {
+    "@types/gtag.js": "^0.0.12",
     "@types/luxon": "^2.0.7",
     "@types/react": "17.0.19",
     "@types/react-redux": "^7.1.18",
