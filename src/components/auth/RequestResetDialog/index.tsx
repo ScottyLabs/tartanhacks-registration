@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../../design/RectangleButton"
+import NextLink from "next/link"
 import styles from "./index.module.scss"
 
 const RequestResetDialog = (): ReactElement => {
@@ -89,6 +90,10 @@ const RequestResetDialog = (): ReactElement => {
           Account Recovery
         </Typography>
         {sentEmail ? sentEmailMessage : resetForm}
+
+        <NextLink href="/login" passHref>
+          <a className={styles.link}>Return to login</a>
+        </NextLink>
       </div>
     </div>
   )
