@@ -1,5 +1,4 @@
 import {
-  CircularProgress,
   Collapse,
   Snackbar,
   TextField,
@@ -7,6 +6,7 @@ import {
   Alert,
   LinearProgress
 } from "@mui/material"
+import AnalyticsEvent from "enums/AnalyticsEvent"
 import { useRouter } from "next/dist/client/router"
 import NextLink from "next/link"
 import { ReactElement, useState } from "react"
@@ -39,6 +39,7 @@ const AuthenticationDialog = ({
       setPasswordsMatch(true)
       try {
         await dispatch(actions.auth.register(email, password))
+        window.gtag("event", AnalyticsEvent.ACCOUNT_CREATED)
         router.push("/")
       } catch (err) {
         console.error(err)
@@ -67,7 +68,7 @@ const AuthenticationDialog = ({
         <Snackbar
           open={error || !passwordsMatch}
           autoHideDuration={5000}
-          onClose={(e) => {
+          onClose={() => {
             setError(false)
             setPasswordsMatch(true)
           }}

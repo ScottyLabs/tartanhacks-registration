@@ -21,6 +21,7 @@ import PortfolioSection from "./PortfolioSection"
 import SchoolSection from "./SchoolSection"
 import WorkAuthorizationSection from "./WorkAuthorizationSection"
 import styles from "./index.module.scss"
+import AnalyticsEvent from "enums/AnalyticsEvent"
 
 const ApplicationForm = (): ReactElement => {
   const dispatch = useDispatch()
@@ -108,6 +109,7 @@ const ApplicationForm = (): ReactElement => {
     setLoading(true)
     try {
       await dispatch(actions.application.submitForm(data))
+      window.gtag("event", AnalyticsEvent.APPLICATION_SUBMITTED)
     } catch (err: any) {
       setError(true)
       setErrorMessage(err.data)

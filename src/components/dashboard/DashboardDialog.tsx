@@ -24,6 +24,7 @@ import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import styles from "styles/DashboardDialog.module.scss"
+import AnalyticsEvent from "enums/AnalyticsEvent"
 
 const getDialogText = (
   status: Status,
@@ -266,6 +267,7 @@ const DashboardDialog = (): ReactElement => {
     setDecliningAcceptance(true)
     try {
       await dispatch(actions.user.declineAcceptance())
+      window.gtag("event", AnalyticsEvent.ATTENDANCE_DECLINED)
       setSnackbarMessage("Cancelled registration")
       setSnackbarState("success")
       setSnackbarOpen(true)

@@ -3,6 +3,7 @@ import React, { ReactElement } from "react"
 import { theme } from "src/themes/theme"
 import createEmotionServer from "@emotion/server/create-instance"
 import createEmotionCache from "src/util/createEmotionCache"
+import Script from "next/script"
 
 class MyDocument extends Document {
   render(): ReactElement {

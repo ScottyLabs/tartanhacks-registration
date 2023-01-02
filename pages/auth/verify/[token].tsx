@@ -1,4 +1,5 @@
 import { CircularProgress, Collapse, Link, Typography } from "@mui/material"
+import AnalyticsEvent from "enums/AnalyticsEvent"
 import NextLink from "next/link"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
@@ -24,6 +25,7 @@ const Verification = (): ReactElement => {
     const verify = async () => {
       try {
         const { status } = await dispatch(actions.auth.verify(token as string))
+        window.gtag("event", AnalyticsEvent.EMAIL_VERIFIED)
         setVerificationStatus(status)
       } catch (err) {
         setVerificationStatus("SUCCESS")
