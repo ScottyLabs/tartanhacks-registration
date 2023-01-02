@@ -9,25 +9,6 @@ import { theme } from "src/themes/theme"
 import "styles/globals.scss"
 
 const App = ({ Component, pageProps }: AppProps): ReactElement => {
-  const googleAnalytics = (
-    <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.GOOGLE_ANALYTICS_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="google-analytics" strategy="afterInteractive">
-        {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', '${process.env.GOOGLE_ANALYTICS_ID}', {
-          page_path: window.location.pathname,
-        });
-        `}
-      </Script>
-    </>
-  )
-
   return (
     <>
       <Head>
@@ -45,7 +26,6 @@ const App = ({ Component, pageProps }: AppProps): ReactElement => {
       <ThemeProvider theme={theme}>
         <Provider store={store}>
           <StyledEngineProvider injectFirst>
-            {process.env.GOOGLE_ANALYTICS_ID ? googleAnalytics : null}
             <Component {...pageProps} />
           </StyledEngineProvider>
         </Provider>
