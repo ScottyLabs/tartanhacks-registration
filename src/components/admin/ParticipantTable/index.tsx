@@ -21,7 +21,7 @@ import {
   Toolbar,
   Tooltip
 } from "@mui/material"
-import { Person } from "@mui/icons-material"
+import PersonIcon from "@mui/icons-material/Person"
 import CloseIcon from "@mui/icons-material/Close"
 import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useMemo, useState } from "react"
@@ -220,12 +220,13 @@ const ParticipantTable = (): ReactElement => {
             <Tooltip title="View profile">
               <IconButton
                 color="primary"
+                component="label"
                 onClick={() => {
                   setSelected(original)
                   setProfileOpen(true)
                 }}
               >
-                <Person />
+                <PersonIcon />
               </IconButton>
             </Tooltip>
           )
