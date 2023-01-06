@@ -217,18 +217,16 @@ const ParticipantTable = (): ReactElement => {
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
           return (
-            <Tooltip title="View profile">
-              <IconButton
-                color="primary"
-                component="label"
-                onClick={() => {
-                  setSelected(original)
-                  setProfileOpen(true)
-                }}
-              >
-                <PersonIcon />
-              </IconButton>
-            </Tooltip>
+            <RectangleButton
+              className={styles.buttonMargin}
+              type="button"
+              onClick={() => {
+                setSelected(original)
+                setProfileOpen(true)
+              }}
+            >
+              Profile
+            </RectangleButton>
           )
         }
       },
