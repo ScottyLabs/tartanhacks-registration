@@ -217,18 +217,16 @@ const ParticipantTable = (): ReactElement => {
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
           return (
-            <Tooltip title="View profile">
-              <IconButton
-                color="primary"
-                component="label"
-                onClick={() => {
-                  setSelected(original)
-                  setProfileOpen(true)
-                }}
-              >
-                <PersonIcon />
-              </IconButton>
-            </Tooltip>
+            <RectangleButton
+              className={styles.buttonMargin}
+              type="button"
+              onClick={() => {
+                setSelected(original)
+                setProfileOpen(true)
+              }}
+            >
+              Profile
+            </RectangleButton>
           )
         }
       },
@@ -320,6 +318,7 @@ const ParticipantTable = (): ReactElement => {
           <div className={styles.toolbarContent}>
             <RectangleButton
               type="button"
+              disabled
               onClick={() => {
                 setBulkAction(BulkAction.ADMIT_ALL)
                 setDialogOpen(true)
@@ -329,6 +328,7 @@ const ParticipantTable = (): ReactElement => {
             </RectangleButton>
             <RectangleButton
               type="button"
+              disabled
               onClick={() => {
                 setBulkAction(BulkAction.REJECT_ALL)
                 setDialogOpen(true)
