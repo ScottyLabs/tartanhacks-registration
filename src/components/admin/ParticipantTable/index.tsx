@@ -399,6 +399,10 @@ const ParticipantTable = (): ReactElement => {
           </Table>
         </TableContainer>
         <TablePagination
+          showFirstButton
+          showLastButton
+          backIconButtonProps={{ className: styles.paginationButton }}
+          nextIconButtonProps={{ className: styles.paginationButton }}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}

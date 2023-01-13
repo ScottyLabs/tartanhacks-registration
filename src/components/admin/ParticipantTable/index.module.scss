@@ -107,3 +107,10 @@
   display: flex;
   gap: 5px;
 }
+
+.paginationButton {
+  &:global(.MuiSvgIcon-root) {
+    height: 12px;
+    width: 12px;
+  }
+}
