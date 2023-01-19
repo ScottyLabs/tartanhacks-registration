@@ -36,7 +36,14 @@ const Stats = ({
     if (data === undefined) {
       return ""
     }
-    return Array.from(Object.keys(data.dietaryRestrictions))
+
+    const removeKeys = ["none", "n/a", "none.", "no", ""]
+    const restrictions = Object.keys(data.dietaryRestrictions)
+    const filtered = restrictions.filter(
+      (key) => !removeKeys.includes(key.toLowerCase().trim())
+    )
+
+    return filtered
       .map((r) => r + " (" + data.dietaryRestrictions[r] + ")")
       .join(", ")
   }

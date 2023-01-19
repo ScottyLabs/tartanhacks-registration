@@ -105,8 +105,8 @@ const getDialogText = (
           </NextLink>
           <br />
           <br />
-          <Typography variant="body1">
-            Once you&apos;re all set, download TartanHacks Passport!
+          {/* <Typography variant="body1">
+            Once you&apos;re all set, download TartanHacks Dashboard!
           </Typography>
           <div className={styles.appStoreLinks}>
             <Link
@@ -145,7 +145,7 @@ const getDialogText = (
                 Web
               </RectangleButton>
             </Link>
-          </div>
+          </div> */}
         </div>
       </>
     )

@@ -318,7 +318,6 @@ const ParticipantTable = (): ReactElement => {
           <div className={styles.toolbarContent}>
             <RectangleButton
               type="button"
-              disabled
               onClick={() => {
                 setBulkAction(BulkAction.ADMIT_ALL)
                 setDialogOpen(true)
@@ -328,7 +327,6 @@ const ParticipantTable = (): ReactElement => {
             </RectangleButton>
             <RectangleButton
               type="button"
-              disabled
               onClick={() => {
                 setBulkAction(BulkAction.REJECT_ALL)
                 setDialogOpen(true)
