@@ -79,7 +79,9 @@ const cleanDietaryRestrictions = (
     "allergic to",
     "diet",
     "must be",
-    "it needs to be"
+    "it needs to be",
+    "free",
+    "don't eat"
   ]
   const entries = Object.entries(data.dietaryRestrictions).map(
     ([name, count]) => {
