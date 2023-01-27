@@ -167,7 +167,8 @@ const getDialogText = (
 const getButtonBox = (
   status: Status,
   resendVerification: () => Promise<void>,
-  setShowDeclineDialog: (b: boolean) => void
+  setShowDeclineDialog: (b: boolean) => void,
+  isLate: boolean
 ): ReactElement => {
   if (status === Status.UNVERIFIED) {
     return (
@@ -176,7 +177,15 @@ const getButtonBox = (
       </RectangleButton>
     )
   } else if (status === Status.VERIFIED) {
-    return (
+    return isLate ? (
+      <Typography
+        style={{
+          color: "red"
+        }}
+      >
+        The application deadline has passed
+      </Typography>
+    ) : (
       <Link href="/apply" className={styles.link}>
         <RectangleButton type="submit">
           COMPLETE YOUR APPLICATION
@@ -192,21 +201,39 @@ const getButtonBox = (
       </div>
     )
   } else if (status === Status.ADMITTED) {
-    return (
-      <div className={styles.buttonBox}>
-        <Link href="/confirmation" className={styles.link}>
-          <RectangleButton type="submit">CONFIRM</RectangleButton>
-        </Link>
-        <div className={styles.buttonSpacer}></div>
-        <RectangleButton
-          type="button"
-          onClick={() => {
-            setShowDeclineDialog(true)
+    return isLate ? (
+      <Typography
+        style={{
+          color: "red"
+        }}
+      >
+        The confirmation deadline has passed
+      </Typography>
+    ) : (
+      <>
+        <div className={styles.buttonBox}>
+          <Link href="/confirmation" className={styles.link}>
+            <RectangleButton type="submit">CONFIRM</RectangleButton>
+          </Link>
+          <div className={styles.buttonSpacer}></div>
+          <RectangleButton
+            type="button"
+            onClick={() => {
+              setShowDeclineDialog(true)
+            }}
+          >
+            SORRY, I CAN&apos;T MAKE IT
+          </RectangleButton>
+        </div>
+        <Typography
+          style={{
+            paddingTop: "10px",
+            color: "red"
           }}
         >
-          SORRY, I CAN&apos;T MAKE IT
-        </RectangleButton>
-      </div>
+          You need to confirm in order to attend the event
+        </Typography>
+      </>
     )
   } else {
     return <></>
@@ -233,6 +260,7 @@ const DashboardDialog = (): ReactElement => {
 
   const closeTimeDt = DateTime.fromJSDate(closeTime)
   const confirmTimeDt = DateTime.fromJSDate(confirmTime)
+  const curDt = DateTime.now()
 
   const closeTimeStr = closeTimeDt.isValid
     ? closeTimeDt.toFormat("dd LLL yyyy")
@@ -276,10 +304,17 @@ const DashboardDialog = (): ReactElement => {
   }
 
   const dialogText = getDialogText(status, closeTimeStr, confirmTimeStr)
+  const isLate =
+    status === Status.VERIFIED
+      ? curDt > closeTimeDt
+      : status === Status.ADMITTED
+      ? curDt > confirmTimeDt
+      : false
   const buttonBox = getButtonBox(
     status,
     resendVerification,
-    setShowDeclineDialog
+    setShowDeclineDialog,
+    isLate
   )
 
   return (
