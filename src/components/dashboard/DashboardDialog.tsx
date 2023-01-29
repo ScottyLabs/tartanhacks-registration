@@ -24,6 +24,7 @@ import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import styles from "styles/DashboardDialog.module.scss"
+import AnalyticsEvent from "enums/AnalyticsEvent"
 
 const getDialogText = (
   status: Status,
@@ -104,8 +105,8 @@ const getDialogText = (
           </NextLink>
           <br />
           <br />
-          <Typography variant="body1">
-            Once you&apos;re all set, download TartanHacks Passport!
+          {/* <Typography variant="body1">
+            Once you&apos;re all set, download TartanHacks Dashboard!
           </Typography>
           <div className={styles.appStoreLinks}>
             <Link
@@ -144,7 +145,7 @@ const getDialogText = (
                 Web
               </RectangleButton>
             </Link>
-          </div>
+          </div> */}
         </div>
       </>
     )
@@ -177,7 +178,15 @@ const getButtonBox = (
       </RectangleButton>
     )
   } else if (status === Status.VERIFIED) {
-    return (
+    return isLate ? (
+      <Typography
+        style={{
+          color: "red"
+        }}
+      >
+        The application deadline has passed
+      </Typography>
+    ) : (
       <Link href="/apply" className={styles.link}>
         <RectangleButton type="submit">
           COMPLETE YOUR APPLICATION
@@ -217,6 +226,14 @@ const getButtonBox = (
             SORRY, I CAN&apos;T MAKE IT
           </RectangleButton>
         </div>
+        <Typography
+          style={{
+            paddingTop: "10px",
+            color: "red"
+          }}
+        >
+          You need to confirm in order to attend the event
+        </Typography>
       </>
     )
   } else {
@@ -278,6 +295,7 @@ const DashboardDialog = (): ReactElement => {
     setDecliningAcceptance(true)
     try {
       await dispatch(actions.user.declineAcceptance())
+      window.gtag("event", AnalyticsEvent.ATTENDANCE_DECLINED)
       setSnackbarMessage("Cancelled registration")
       setSnackbarState("success")
       setSnackbarOpen(true)

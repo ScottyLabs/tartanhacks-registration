@@ -21,7 +21,7 @@ import {
   Toolbar,
   Tooltip
 } from "@mui/material"
-import { Person } from "@mui/icons-material"
+import PersonIcon from "@mui/icons-material/Person"
 import CloseIcon from "@mui/icons-material/Close"
 import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useMemo, useState } from "react"
@@ -217,17 +217,16 @@ const ParticipantTable = (): ReactElement => {
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
           return (
-            <Tooltip title="View profile">
-              <IconButton
-                color="primary"
-                onClick={() => {
-                  setSelected(original)
-                  setProfileOpen(true)
-                }}
-              >
-                <Person />
-              </IconButton>
-            </Tooltip>
+            <RectangleButton
+              className={styles.buttonMargin}
+              type="button"
+              onClick={() => {
+                setSelected(original)
+                setProfileOpen(true)
+              }}
+            >
+              Profile
+            </RectangleButton>
           )
         }
       },
