@@ -177,15 +177,7 @@ const getButtonBox = (
       </RectangleButton>
     )
   } else if (status === Status.VERIFIED) {
-    return isLate ? (
-      <Typography
-        style={{
-          color: "red"
-        }}
-      >
-        The application deadline has passed
-      </Typography>
-    ) : (
+    return (
       <Link href="/apply" className={styles.link}>
         <RectangleButton type="submit">
           COMPLETE YOUR APPLICATION
@@ -207,7 +199,7 @@ const getButtonBox = (
           color: "red"
         }}
       >
-        The confirmation deadline has passed
+        Sorry, the confirmation deadline has passed.
       </Typography>
     ) : (
       <>
@@ -225,14 +217,6 @@ const getButtonBox = (
             SORRY, I CAN&apos;T MAKE IT
           </RectangleButton>
         </div>
-        <Typography
-          style={{
-            paddingTop: "10px",
-            color: "red"
-          }}
-        >
-          You need to confirm in order to attend the event
-        </Typography>
       </>
     )
   } else {
@@ -353,6 +337,18 @@ const DashboardDialog = (): ReactElement => {
           <br />
           <CircularProgress />
         </Collapse>
+        {status !== Status.CONFIRMED && status !== Status.ADMITTED && (
+          <Alert
+            severity="error"
+            style={{
+              marginTop: "20px"
+            }}
+          >
+            Unfortunately, due to overwhelming demand, we have reached our
+            capacity for TartanHacks 2023. If you&apos;d like to be placed on a
+            waitlist, please complete the registration process.
+          </Alert>
+        )}
       </div>
       <Dialog
         open={showDeclineDialog}

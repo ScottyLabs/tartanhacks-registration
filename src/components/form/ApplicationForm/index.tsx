@@ -161,6 +161,18 @@ const ApplicationForm = (): ReactElement => {
           <Typography variant="h4" className={styles.header}>
             Application
           </Typography>
+          {
+            <Alert
+              severity="error"
+              style={{
+                marginTop: "20px"
+              }}
+            >
+              Unfortunately, due to overwhelming demand, we have reached our
+              capacity for TartanHacks 2023. If you&apos;d like to be placed on
+              a waitlist, please complete the registration process.
+            </Alert>
+          }
         </div>
         <div className={styles.formContents}>
           <BasicSection
