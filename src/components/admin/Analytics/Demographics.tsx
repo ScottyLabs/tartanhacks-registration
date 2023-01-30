@@ -108,19 +108,7 @@ const Demographics = ({
           <li>
             <Typography className={styles.entry}>
               <CheckCircle className={styles.icon} htmlColor="green" />{" "}
-              admitted: {data.demographic.schools[school].admitted}
-            </Typography>
-          </li>
-          <li>
-            <Typography className={styles.entry}>
-              <CheckCircle className={styles.icon} htmlColor="green" />{" "}
               confirmed: {data.demographic.schools[school].confirmed}
-            </Typography>
-          </li>
-          <li>
-            <Typography className={styles.entry}>
-              <Cancel className={styles.icon} htmlColor="red" /> declined:{" "}
-              {data.demographic.schools[school].declined}
             </Typography>
           </li>
         </ul>
@@ -193,7 +181,7 @@ const Demographics = ({
         </Typography>
         <Typography className={styles.entry}>
           <AlternateEmail className={styles.icon} />
-          Domains
+          Schools
         </Typography>
         <Typography className={styles.entry}>
           <ul>{parseDomains(data)}</ul>

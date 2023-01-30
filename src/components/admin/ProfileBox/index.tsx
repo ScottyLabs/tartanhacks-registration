@@ -149,7 +149,7 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           <TableCell>Resume</TableCell>
           <TableCell>
             <Link href={profile.resume} target="_blank">
-              <OpenInNew />
+              <OpenInNew className={styles.icon} />
             </Link>
           </TableCell>
         </TableRow>
@@ -177,13 +177,21 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
         <TableRow>
           <TableCell>Wants Hardware</TableCell>
           <TableCell>
-            {profile.wantsHardware ? <Check /> : <Cancel />}
+            {profile.wantsHardware ? (
+              <Check className={styles.icon} />
+            ) : (
+              <Cancel className={styles.icon} />
+            )}
           </TableCell>
         </TableRow>
         <TableRow>
           <TableCell>Attending Physically</TableCell>
           <TableCell>
-            {profile.attendingPhysically ? <Check /> : <Cancel />}
+            {profile.attendingPhysically ? (
+              <Check className={styles.icon} />
+            ) : (
+              <Cancel className={styles.icon} />
+            )}
           </TableCell>
         </TableRow>
         <TableRow>

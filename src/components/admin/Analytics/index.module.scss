@@ -72,6 +72,7 @@
 
 .icon {
   margin-right: 0.5rem;
+  height: 2rem;
 }
 
 .iconList {
@@ -80,4 +81,12 @@
 
 .statusList {
   list-style: none;
+}
+
+.greenIcon {
+  fill: "green";
+}
+
+.redIcon {
+  fill: "red";
 }

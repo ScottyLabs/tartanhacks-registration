@@ -8,7 +8,8 @@ const RectangleButton = ({
   type,
   onClick,
   startIcon,
-  backgroundColor
+  backgroundColor,
+  disabled
 }: {
   className?: string
   children?: ReactElement | string
@@ -16,10 +17,12 @@ const RectangleButton = ({
   onClick?: React.MouseEventHandler<HTMLButtonElement> | undefined
   startIcon?: ReactElement
   backgroundColor?: string
+  disabled?: boolean
 }): ReactElement => {
   return (
     <>
       <Button
+        disabled={disabled}
         variant="contained"
         type={type}
         className={`${className} ${styles.button}`}

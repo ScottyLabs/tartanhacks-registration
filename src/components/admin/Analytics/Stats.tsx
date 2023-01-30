@@ -1,4 +1,3 @@
-import { Typography } from "@mui/material"
 import {
   AccessibilityNew,
   Cancel,
@@ -7,38 +6,123 @@ import {
   Person,
   Restaurant
 } from "@mui/icons-material"
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography
+} from "@mui/material"
 import { ReactElement } from "react"
-import { useDispatch } from "react-redux"
 import { AnalyticsData } from "src/_types/AnalyticsData"
 import styles from "./index.module.scss"
+
+interface DietaryRestriction {
+  name: string
+  count: number
+}
+
+function DietaryRestrictionsTable({
+  dietaryRestrictions
+}: {
+  dietaryRestrictions: DietaryRestriction[]
+}): JSX.Element {
+  return (
+    <TableContainer component={Paper}>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Dietary Restriction</TableCell>
+            <TableCell>Number</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {dietaryRestrictions.map((restriction) => (
+            <TableRow key={restriction.name}>
+              <TableCell>{restriction.name}</TableCell>
+              <TableCell>{restriction.count}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  )
+}
+
+const parseShirtSizes = (data: AnalyticsData | undefined): string => {
+  if (data === undefined) {
+    return ""
+  }
+  return Array.from(Object.keys(data.shirtSizes))
+    .map((size) => size + " (" + data.shirtSizes[size] + ")")
+    .join(", ")
+}
+
+const cleanDietaryRestrictions = (
+  data: AnalyticsData | undefined
+): DietaryRestriction[] => {
+  if (data === undefined) {
+    return []
+  }
+
+  // Remove none and n/a
+  // Filter out noise words
+  const invalidKeys = ["none", "na", "no", "nil", ""]
+  const removeKeys = [
+    ".",
+    "/",
+    "no ",
+    "allergy",
+    "allergic to",
+    "diet",
+    "must be",
+    "it needs to be",
+    "free",
+    "don't eat"
+  ]
+  const entries = Object.entries(data.dietaryRestrictions).map(
+    ([name, count]) => {
+      let lower = name.toLocaleLowerCase()
+      for (const remove of removeKeys) {
+        lower = lower.replace(remove, "")
+      }
+      return [lower.trim(), count]
+    }
+  ) as [string, number][]
+  const filtered = entries.filter(
+    ([key]) => !invalidKeys.includes(key.toLowerCase().trim())
+  )
+
+  // Merge duplicates
+  const merged = {} as Record<string, number>
+  for (const [name, count] of filtered) {
+    if (merged[name] == null) {
+      merged[name] = 0
+    }
+    merged[name] += count
+  }
+
+  const restrictions = Object.entries(merged).map(([name, count]) => ({
+    name,
+    count
+  }))
+  const sorted = restrictions.sort((a, b) =>
+    a.count === b.count ? a.name.localeCompare(b.name) : b.count - a.count
+  )
+
+  return sorted
+}
 
 const Stats = ({
   data
 }: {
   data?: AnalyticsData | undefined
 }): ReactElement => {
-  const dispatch = useDispatch()
-
   if (data === undefined) {
     return <></>
-  }
-
-  const parseShirtSizes = (data: AnalyticsData | undefined): string => {
-    if (data === undefined) {
-      return ""
-    }
-    return Array.from(Object.keys(data.shirtSizes))
-      .map((size) => size + " (" + data.shirtSizes[size] + ")")
-      .join(", ")
-  }
-
-  const parseDietRestrictions = (data: AnalyticsData | undefined): string => {
-    if (data === undefined) {
-      return ""
-    }
-    return Array.from(Object.keys(data.dietaryRestrictions))
-      .map((r) => r + " (" + data.dietaryRestrictions[r] + ")")
-      .join(", ")
   }
 
   return (
@@ -91,7 +175,10 @@ const Stats = ({
       <div className={styles.subsection}>
         <Typography className={styles.entry}>
           <Restaurant className={styles.icon} />
-          Dietary Restrictions: {parseDietRestrictions(data)}
+          Dietary Restrictions:
+          <DietaryRestrictionsTable
+            dietaryRestrictions={cleanDietaryRestrictions(data)}
+          />
         </Typography>
       </div>
       <div className={styles.subsection}>
