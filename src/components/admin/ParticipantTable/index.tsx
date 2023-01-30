@@ -183,7 +183,16 @@ const ParticipantTable = (): ReactElement => {
     const getParticipants = async () => {
       setLoading(true)
       try {
-        const { data } = await dispatch(actions.user.getParticipants())
+        const { data } = (await dispatch(actions.user.getParticipants())) as {
+          data: Participant[]
+        }
+        data.sort((a, b) => {
+          const statusComp = a.status.localeCompare(b.status)
+          if (statusComp !== 0) {
+            return statusComp
+          }
+          return a.email.localeCompare(b.email)
+        })
         setParticipants(data)
       } catch (err) {
         console.error(err)

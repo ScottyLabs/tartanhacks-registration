@@ -193,21 +193,28 @@ const getButtonBox = (
       </div>
     )
   } else if (status === Status.ADMITTED) {
-    return isLate ? (
-      <Typography
-        style={{
-          color: "red"
-        }}
-      >
-        Sorry, the confirmation deadline has passed.
-      </Typography>
-    ) : (
+    return (
       <>
         <div className={styles.buttonBox}>
           <Link href="/confirmation" className={styles.link}>
             <RectangleButton type="submit">CONFIRM</RectangleButton>
           </Link>
           <div className={styles.buttonSpacer}></div>
+          <RectangleButton
+            type="button"
+            onClick={() => {
+              setShowDeclineDialog(true)
+            }}
+          >
+            SORRY, I CAN&apos;T MAKE IT
+          </RectangleButton>
+        </div>
+      </>
+    )
+  } else if (status === Status.CONFIRMED) {
+    return (
+      <>
+        <div className={styles.buttonBox}>
           <RectangleButton
             type="button"
             onClick={() => {

@@ -51,7 +51,7 @@ const Menu = (): ReactElement => {
                 <MenuLine />
               </>
             ) : null}
-            {status === Status.ADMITTED && !isLate ? (
+            {status === Status.ADMITTED ? (
               <>
                 <MenuItem text="CONFIRM" url="/confirmation" />
                 <MenuLine />

@@ -57,90 +57,80 @@ const ConfirmationDialog = (): ReactElement => {
       <Collapse in={loading}>
         <LinearProgress />
       </Collapse>
-      {isLate ? (
-        <Typography
-          style={{
-            color: "red"
-          }}
-        >
-          Sorry, the confirmation deadline has passed.
-        </Typography>
-      ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault()
-            confirm()
-          }}
-        >
-          <div className={styles.dialogContent}>
-            <div className={styles.headerContainer}>
-              <Typography variant="h4" className={styles.header}>
-                Confirmation
-              </Typography>
-            </div>
-            <div className={styles.dialogText}>
-              <FormGroup className={styles.formGroup}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      required
-                      checked={signatureLiability}
-                      onChange={(e) => setSignatureLiability(e.target.checked)}
-                    />
-                  }
-                  label={
-                    <Typography>
-                      I agree with the{" "}
-                      <Link
-                        target="_blank"
-                        href="/THLiabilityWaiver.pdf"
-                        className={styles.link}
-                      >
-                        TartanHacks Liability Waiver
-                      </Link>
-                      .*
-                    </Typography>
-                  }
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      required
-                      checked={signatureCodeOfConduct}
-                      onChange={(e) =>
-                        setSignatureCodeOfConduct(e.target.checked)
-                      }
-                    />
-                  }
-                  label={
-                    <Typography>
-                      I agree with the{" "}
-                      <Link
-                        target="_blank"
-                        href="/THCodeOfConduct.pdf"
-                        className={styles.link}
-                      >
-                        TartanHacks Code of Conduct
-                      </Link>
-                      .*
-                    </Typography>
-                  }
-                />
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={willMentor}
-                      onChange={(e) => setWillMentor(e.target.checked)}
-                    />
-                  }
-                  label="Are you willing to help other hackers as a mentor?"
-                />
-              </FormGroup>
-            </div>
-            <RectangleButton type="submit">CONFIRM</RectangleButton>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault()
+          confirm()
+        }}
+      >
+        <div className={styles.dialogContent}>
+          <div className={styles.headerContainer}>
+            <Typography variant="h4" className={styles.header}>
+              Confirmation
+            </Typography>
           </div>
-        </form>
-      )}
+          <div className={styles.dialogText}>
+            <FormGroup className={styles.formGroup}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    required
+                    checked={signatureLiability}
+                    onChange={(e) => setSignatureLiability(e.target.checked)}
+                  />
+                }
+                label={
+                  <Typography>
+                    I agree with the{" "}
+                    <Link
+                      target="_blank"
+                      href="/THLiabilityWaiver.pdf"
+                      className={styles.link}
+                    >
+                      TartanHacks Liability Waiver
+                    </Link>
+                    .*
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    required
+                    checked={signatureCodeOfConduct}
+                    onChange={(e) =>
+                      setSignatureCodeOfConduct(e.target.checked)
+                    }
+                  />
+                }
+                label={
+                  <Typography>
+                    I agree with the{" "}
+                    <Link
+                      target="_blank"
+                      href="/THCodeOfConduct.pdf"
+                      className={styles.link}
+                    >
+                      TartanHacks Code of Conduct
+                    </Link>
+                    .*
+                  </Typography>
+                }
+              />
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={willMentor}
+                    onChange={(e) => setWillMentor(e.target.checked)}
+                  />
+                }
+                label="Are you willing to help other hackers as a mentor?"
+              />
+            </FormGroup>
+          </div>
+          <RectangleButton type="submit">CONFIRM</RectangleButton>
+        </div>
+      </form>
     </div>
   )
 }
