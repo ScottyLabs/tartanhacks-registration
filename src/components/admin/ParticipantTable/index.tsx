@@ -331,6 +331,7 @@ const ParticipantTable = (): ReactElement => {
                 setBulkAction(BulkAction.ADMIT_ALL)
                 setDialogOpen(true)
               }}
+              disabled
             >
               Admit All
             </RectangleButton>
