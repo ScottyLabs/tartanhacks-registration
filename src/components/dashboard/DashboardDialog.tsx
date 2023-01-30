@@ -52,6 +52,8 @@ const getDialogText = (
   } else if (status == Status.COMPLETED_PROFILE) {
     return (
       <>
+        {/**
+        TODO uncomment
         <div className={styles.dialogText}>
           <Typography variant="body1">Welcome back!</Typography>
         </div>
@@ -62,6 +64,7 @@ const getDialogText = (
             <span className={styles.deadline}>{confirmTime}</span>
           </Typography>
         </div>
+         */}
       </>
     )
   } else if (status === Status.ADMITTED) {
@@ -195,22 +198,19 @@ const getButtonBox = (
     )
   } else if (status === Status.COMPLETED_PROFILE) {
     return (
+      <>
+        {/*
+        TODO uncomment
       <div className={styles.buttonBox}>
         <Link href="/apply" className={styles.link}>
           <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
         </Link>
       </div>
+        */}
+      </>
     )
   } else if (status === Status.ADMITTED) {
-    return isLate ? (
-      <Typography
-        style={{
-          color: "red"
-        }}
-      >
-        The confirmation deadline has passed
-      </Typography>
-    ) : (
+    return (
       <>
         <div className={styles.buttonBox}>
           <Link href="/confirmation" className={styles.link}>
@@ -234,6 +234,21 @@ const getButtonBox = (
         >
           You need to confirm in order to attend the event
         </Typography>
+      </>
+    )
+  } else if (status === Status.CONFIRMED) {
+    return (
+      <>
+        <div className={styles.buttonBox}>
+          <RectangleButton
+            type="button"
+            onClick={() => {
+              setShowDeclineDialog(true)
+            }}
+          >
+            SORRY, I CAN&apos;T MAKE IT
+          </RectangleButton>
+        </div>
       </>
     )
   } else {
@@ -355,6 +370,32 @@ const DashboardDialog = (): ReactElement => {
           <br />
           <CircularProgress />
         </Collapse>
+        {status === Status.COMPLETED_PROFILE && (
+          <Alert
+            severity="error"
+            style={{
+              marginTop: "20px"
+            }}
+          >
+            Unfortunately, due to overwhelming demand, we have reached our
+            capacity for TartanHacks 2023. We will process the waitlist and let
+            you know by February 3rd, 10pm EST.
+          </Alert>
+        )}
+        {status !== Status.CONFIRMED &&
+          status !== Status.ADMITTED &&
+          status !== Status.COMPLETED_PROFILE && (
+            <Alert
+              severity="error"
+              style={{
+                marginTop: "20px"
+              }}
+            >
+              Unfortunately, due to overwhelming demand, we have reached our
+              capacity for TartanHacks 2023. If you&apos;d like to be placed on
+              a waitlist, please complete the registration process.
+            </Alert>
+          )}
       </div>
       <Dialog
         open={showDeclineDialog}

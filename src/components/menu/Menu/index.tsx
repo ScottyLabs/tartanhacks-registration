@@ -1,5 +1,6 @@
 import { Modal } from "@mui/material"
 import { Status } from "enums/Status"
+import { DateTime } from "luxon"
 import { ReactElement, useState } from "react"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
@@ -19,6 +20,14 @@ const Menu = (): ReactElement => {
   const isAdmin = useSelector(
     (state: RootState) => state?.accounts?.data?.admin
   )
+
+  const confirmTime = useSelector(
+    (state: RootState) => state?.settings?.confirmTime
+  )
+  const confirmTimeDt = DateTime.fromJSDate(confirmTime)
+  const curDt = DateTime.now()
+
+  const isLate = curDt > confirmTimeDt
 
   return (
     <div className={styles.menuBurgerContainer}>

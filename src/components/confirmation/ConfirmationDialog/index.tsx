@@ -12,10 +12,12 @@ import {
 import AnalyticsEvent from "enums/AnalyticsEvent"
 import { useRouter } from "next/router"
 import { ReactElement, useEffect, useState } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import RectangleButton from "src/components/design/RectangleButton"
 import styles from "./index.module.scss"
+import { RootState } from "types/RootState"
+import { DateTime } from "luxon"
 
 const ConfirmationDialog = (): ReactElement => {
   const router = useRouter()
@@ -25,6 +27,14 @@ const ConfirmationDialog = (): ReactElement => {
   const [signatureLiability, setSignatureLiability] = useState(false)
   const [signatureCodeOfConduct, setSignatureCodeOfConduct] = useState(false)
   const [willMentor, setWillMentor] = useState(false)
+
+  const confirmTime = useSelector(
+    (state: RootState) => state?.settings?.confirmTime
+  )
+  const confirmTimeDt = DateTime.fromJSDate(confirmTime)
+  const curDt = DateTime.now()
+
+  const isLate = curDt > confirmTimeDt
 
   const confirm = async () => {
     setLoading(true)
@@ -49,7 +59,6 @@ const ConfirmationDialog = (): ReactElement => {
       <Collapse in={loading}>
         <LinearProgress />
       </Collapse>
-
       <form
         onSubmit={(e) => {
           e.preventDefault()
