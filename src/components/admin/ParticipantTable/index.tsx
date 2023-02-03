@@ -18,10 +18,10 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  TextField,
   Toolbar,
   Tooltip
 } from "@mui/material"
-import PersonIcon from "@mui/icons-material/Person"
 import CloseIcon from "@mui/icons-material/Close"
 import { Status } from "enums/Status"
 import React, { ReactElement, useEffect, useMemo, useState } from "react"
@@ -56,6 +56,8 @@ const ParticipantTable = (): ReactElement => {
 
   const [snackbarMsg, setSnackbarMsg] = useState("")
   const snackbarDuration = 3000
+
+  const [searchString, setSearchString] = useState("")
 
   const openSnackbar = (msg: string) => {
     setSnackbarMsg(msg)
@@ -347,6 +349,19 @@ const ParticipantTable = (): ReactElement => {
           </div>
         </Toolbar>
         <TableContainer>
+          <TextField
+            variant="outlined"
+            placeholder="Search"
+            fullWidth={true}
+            value={searchString}
+            InputProps={{
+              classes: { notchedOutline: styles.textFieldInput }
+            }}
+            onChange={(e) => {
+              setSearchString(e.target.value)
+              setPage(0)
+            }}
+          />
           <Table {...getTableProps()}>
             <TableHead>
               {
@@ -378,6 +393,7 @@ const ParticipantTable = (): ReactElement => {
               {
                 // Loop over the table rows
                 rows
+                  .filter((row) => row.original.email.startsWith(searchString))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, rowIdx) => {
                     // Prepare the row for display
