@@ -15,6 +15,7 @@ import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../../design/RectangleButton"
 import styles from "./index.module.scss"
+import WaitlistAlert from "src/components/waitlist"
 
 const AuthenticationDialog = ({
   registration = false
@@ -161,11 +162,9 @@ const AuthenticationDialog = ({
           </div>
         </form>
       </div>
-      <Alert severity="error" className={styles.warning}>
-        Unfortunately, due to overwhelming demand, we have reached our capacity
-        for TartanHacks 2023. If you&apos;d like to be placed on a waitlist,
-        please complete the registration process.
-      </Alert>
+      <div className={styles.warning}>
+            <WaitlistAlert completedProfile={false}/>
+      </div>
       <Alert severity="info" className={styles.warning}>
         TartanHacks 2023 will be completely in-person!
       </Alert>

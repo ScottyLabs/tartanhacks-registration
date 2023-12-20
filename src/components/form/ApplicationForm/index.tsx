@@ -22,6 +22,7 @@ import SchoolSection from "./SchoolSection"
 import WorkAuthorizationSection from "./WorkAuthorizationSection"
 import styles from "./index.module.scss"
 import AnalyticsEvent from "enums/AnalyticsEvent"
+import WaitlistAlert from "src/components/waitlist"
 
 const ApplicationForm = (): ReactElement => {
   const dispatch = useDispatch()
@@ -163,18 +164,7 @@ const ApplicationForm = (): ReactElement => {
           <Typography variant="h4" className={styles.header}>
             Application
           </Typography>
-          {
-            <Alert
-              severity="error"
-              style={{
-                marginTop: "20px"
-              }}
-            >
-              Unfortunately, due to overwhelming demand, we have reached our
-              capacity for TartanHacks 2023. If you&apos;d like to be placed on
-              a waitlist, please complete the registration process.
-            </Alert>
-          }
+          {<WaitlistAlert completedProfile={false}/>}
         </div>
         <div className={styles.formContents}>
           <BasicSection
