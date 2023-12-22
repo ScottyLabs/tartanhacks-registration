@@ -163,7 +163,7 @@ const AuthenticationDialog = ({
         </form>
       </div>
       <div className={styles.warning}>
-            <WaitlistAlert completedProfile={false}/>
+        <WaitlistAlert completedProfile={false} />
       </div>
       <Alert severity="info" className={styles.warning}>
         TartanHacks 2023 will be completely in-person!

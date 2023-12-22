@@ -5,16 +5,16 @@ export enum Status {
   ADMITTED = "ADMITTED",
   REJECTED = "REJECTED",
   CONFIRMED = "CONFIRMED",
-  DECLINED = "DECLINED"
+  DECLINED = "DECLINED",
+  WAITLISTED = "WAITLISTED"
 }
 
 /**
  * Returns a more user-friendly string representation of a Status entry
  */
 export function statusToString(status: Status): string {
-  //TODO change to "APPLIED"
   if (status === Status.COMPLETED_PROFILE) {
-    return "WAITLISTED"
+    return "APPLIED"
   } else {
     return status
   }

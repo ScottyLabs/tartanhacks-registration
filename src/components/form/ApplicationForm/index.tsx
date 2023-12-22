@@ -164,7 +164,7 @@ const ApplicationForm = (): ReactElement => {
           <Typography variant="h4" className={styles.header}>
             Application
           </Typography>
-          {<WaitlistAlert completedProfile={false}/>}
+          {<WaitlistAlert completedProfile={false} />}
         </div>
         <div className={styles.formContents}>
           <BasicSection

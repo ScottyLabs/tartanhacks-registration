@@ -33,6 +33,16 @@ const confirmTime = (state = {}, action: DispatchAction) => {
   return state
 }
 
+const waitlistStatus = (state = {}, action: DispatchAction) => {
+  switch (action.type) {
+    case DispatchActionType.WAITLIST_STATUS:
+      if (action.status == RequestStatus.SUCCESS) {
+        return action.data
+      }
+  }
+  return state
+}
+
 const error = (state = null, action: DispatchAction) => {
   switch (action.type) {
     case DispatchActionType.SETTINGS_OPEN_TIME:
@@ -59,6 +69,7 @@ export default combineReducers({
   openTime,
   closeTime,
   confirmTime,
+  waitlistStatus,
   error,
   status
 })

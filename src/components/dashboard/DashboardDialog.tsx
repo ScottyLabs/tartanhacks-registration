@@ -200,14 +200,11 @@ const getButtonBox = (
   } else if (status === Status.COMPLETED_PROFILE) {
     return (
       <>
-        {/*
-        TODO uncomment
-      <div className={styles.buttonBox}>
-        <Link href="/apply" className={styles.link}>
-          <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
-        </Link>
-      </div>
-        */}
+        <div className={styles.buttonBox}>
+          <Link href="/apply" className={styles.link}>
+            <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
+          </Link>
+        </div>
       </>
     )
   } else if (status === Status.ADMITTED) {
@@ -372,13 +369,13 @@ const DashboardDialog = (): ReactElement => {
           <CircularProgress />
         </Collapse>
         {status === Status.COMPLETED_PROFILE && (
-            <WaitlistAlert completedProfile={true}/>
+          <WaitlistAlert completedProfile={true} />
         )}
         {status !== Status.CONFIRMED &&
           status !== Status.ADMITTED &&
           status !== Status.COMPLETED_PROFILE &&
           status !== Status.DECLINED && (
-            <WaitlistAlert completedProfile={false}/>
+            <WaitlistAlert completedProfile={false} />
           )}
       </div>
       <Dialog
