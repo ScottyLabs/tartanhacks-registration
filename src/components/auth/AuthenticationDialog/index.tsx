@@ -166,7 +166,7 @@ const AuthenticationDialog = ({
         <WaitlistAlert completedProfile={false} />
       </div>
       <Alert severity="info" className={styles.warning}>
-        TartanHacks 2023 will be completely in-person!
+        TartanHacks 2024 will be completely in-person!
       </Alert>
       <Alert severity="warning" className={styles.warning}>
         Participants must be undergraduates and at least 18 years old
