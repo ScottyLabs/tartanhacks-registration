@@ -3,21 +3,27 @@ import NextLink from "next/link"
 import { ReactElement } from "react"
 import Text from "../Text"
 import styles from "./index.module.scss"
+import ScottyLabsIcon from "../ScottyLabsIcon"
 
 const WaveHeader = (): ReactElement => {
   return (
     <>
       <div className={styles.waveContainer}>
-        <NextLink href="/" passHref>
-          <Link>
-            <Text variant="hero" className={styles.title}>
-              TartanHacks
-            </Text>
-            <Text variant="h2" className={styles.subtitle}>
-              Feb 3-4, 2023
-            </Text>
-          </Link>
-        </NextLink>
+        <div className={styles.headerAssets}>
+          <div className={styles.link}>
+            <NextLink href="/" passHref>
+              <Link>
+                <Text variant="h1" className={styles.title}>
+                  TartanHacks
+                </Text>
+                <Text variant="h2" className={styles.subtitle}>
+                  Feb 2-3, 2024
+                </Text>
+              </Link>
+            </NextLink>
+          </div>
+          <ScottyLabsIcon className={styles.scottyIcon} />
+        </div>
         <svg
           className={styles.waveSvg}
           viewBox="0 0 1440 420"

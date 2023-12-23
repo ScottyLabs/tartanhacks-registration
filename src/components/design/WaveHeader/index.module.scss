@@ -5,55 +5,64 @@
   position: absolute;
   width: 100%;
   overflow: hidden;
-  line-height: 0;
 
   @include height-down($breakpoint-sm) {
     display: none;
   }
 }
 
-.title {
+.headerAssets {
   position: absolute;
-  z-index: 1;
-  opacity: 0.6;
-  top: 80px;
-  left: 50px;
-
-  color: $text-color-contrast;
+  left: 60px;
+  top: 40px;
+  display: flex;
 
   @include down($breakpoint-md) {
-    top: 40px;
-  }
-
-  @include down($breakpoint-sm) {
-    top: 40px;
-  }
-
-  @include down($breakpoint-xs) {
-    left: 30px;
+    top: 10px;
+    left: 50px;
   }
 }
 
-.subtitle {
-  position: absolute;
+.link {
+  display: flex;
+  flex-direction: column;
+}
+
+.scottyIcon {
+  position: relative;
+  height: 100px;
+  top: 10px;
   z-index: 1;
-  color: #fff;
+  filter: invert(1);
   opacity: 0.6;
-  top: 140px;
-  left: 60px;
 
   @include down($breakpoint-md) {
-    top: 90px;
+    height: 80px;
   }
 
   @include down($breakpoint-sm) {
-    top: 80px;
+    height: 60px;
   }
 
   @include down($breakpoint-xs) {
-    top: 75px;
-    left: 35px;
+    display: none;
   }
+}
+
+.title {
+  position: relative;
+  z-index: 1;
+  opacity: 0.6;
+  font-weight: 600;
+
+  color: $text-color-contrast;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 1;
+  color: #fff;
+  opacity: 0.6;
 }
 
 .waveSvg {
@@ -61,10 +70,6 @@
   width: 100%;
   height: 250px;
   filter: $drop-shadow;
-
-  @include down($breakpoint-lg) {
-    height: 220px;
-  }
 
   @include down($breakpoint-md) {
     height: 150px;

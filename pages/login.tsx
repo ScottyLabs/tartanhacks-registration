@@ -15,9 +15,6 @@ const LoginPage: NextPage = (): ReactElement => {
   return (
     <div>
       <WaveHeader />
-      <div className={styles.scottyContainer}>
-        <ScottyLabsIcon className={styles.scottyIcon} />
-      </div>
       <div className={styles.dialog}>
         <AuthenticationDialog registration={false} />
       </div>
