@@ -4,6 +4,7 @@
 .waveContainer {
   position: absolute;
   width: 100%;
+  top: 0;
   overflow: hidden;
 
   @include height-down($breakpoint-sm) {
