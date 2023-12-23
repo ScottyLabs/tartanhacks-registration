@@ -25,6 +25,7 @@ import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import styles from "styles/DashboardDialog.module.scss"
 import AnalyticsEvent from "enums/AnalyticsEvent"
+import WaitlistAlert from "../waitlist"
 
 const getDialogText = (
   status: Status,
@@ -199,14 +200,11 @@ const getButtonBox = (
   } else if (status === Status.COMPLETED_PROFILE) {
     return (
       <>
-        {/*
-        TODO uncomment
-      <div className={styles.buttonBox}>
-        <Link href="/apply" className={styles.link}>
-          <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
-        </Link>
-      </div>
-        */}
+        <div className={styles.buttonBox}>
+          <Link href="/apply" className={styles.link}>
+            <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
+          </Link>
+        </div>
       </>
     )
   } else if (status === Status.ADMITTED) {
@@ -371,30 +369,13 @@ const DashboardDialog = (): ReactElement => {
           <CircularProgress />
         </Collapse>
         {status === Status.COMPLETED_PROFILE && (
-          <Alert
-            severity="error"
-            style={{
-              marginTop: "20px"
-            }}
-          >
-            Unfortunately, due to overwhelming demand, we have reached our
-            capacity for TartanHacks 2023. We will process the waitlist and let
-            you know by February 3rd, 10pm EST.
-          </Alert>
+          <WaitlistAlert completedProfile={true} />
         )}
         {status !== Status.CONFIRMED &&
           status !== Status.ADMITTED &&
-          status !== Status.COMPLETED_PROFILE && (
-            <Alert
-              severity="error"
-              style={{
-                marginTop: "20px"
-              }}
-            >
-              Unfortunately, due to overwhelming demand, we have reached our
-              capacity for TartanHacks 2023. If you&apos;d like to be placed on
-              a waitlist, please complete the registration process.
-            </Alert>
+          status !== Status.COMPLETED_PROFILE &&
+          status !== Status.DECLINED && (
+            <WaitlistAlert completedProfile={false} />
           )}
       </div>
       <Dialog

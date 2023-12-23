@@ -34,3 +34,14 @@ export const getConfirmTime = (): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const getWaitlistStatus = (): DispatchAction => ({
+  type: DispatchActionType.WAITLIST_STATUS,
+  useAPI: true,
+  request: {
+    path: "/settings/waitlist",
+    method: "GET",
+    body: {}
+  },
+  status: RequestStatus.PENDING
+})

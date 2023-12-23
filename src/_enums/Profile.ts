@@ -69,5 +69,5 @@ export enum Region {
   URBAN = "Urban"
 }
 
-export const GraduationYears = ["2022", "2023", "2024", "2025", "2026", "2027"]
+export const GraduationYears = ["2023", "2024", "2025", "2026", "2027", "2028"]
 export type GraduationYear = typeof GraduationYears[number]
