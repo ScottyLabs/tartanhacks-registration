@@ -13,7 +13,7 @@ const LoginPage: NextPage = (): ReactElement => {
   }, [])
   return (
     <div>
-      <WaveHeader />
+      <WaveHeader variant="dark" />
       <div className={styles.dialog}>
         <AuthenticationDialog registration={false} />
       </div>

@@ -7,18 +7,18 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 150px;
+  margin-top: 250px;
 
   @include down($breakpoint-sm) {
+    margin-top: 150px;
+  }
+
+  @include height-down($breakpoint-sm) {
     margin-top: 140px;
   }
 
   @include down($breakpoint-xs) {
     margin-top: 130px;
-  }
-
-  @include height-down($breakpoint-sm) {
-    margin-top: 30px;
   }
 }
 

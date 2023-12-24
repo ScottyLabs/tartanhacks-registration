@@ -12,7 +12,7 @@ const RegisterPage: NextPage = (): ReactElement => {
   }, [])
   return (
     <div>
-      <WaveHeader />
+      <WaveHeader variant="dark" />
       <div className={styles.dialog}>
         <AuthenticationDialog registration={true} />
       </div>

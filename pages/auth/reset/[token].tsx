@@ -9,7 +9,7 @@ const PasswordResetPage = () => {
 
   return (
     <div>
-      <WaveHeader />
+      <WaveHeader variant="dark" />
       <div className={styles.dialog}>
         <PasswordResetDialog token={token as string} />
       </div>
