@@ -45,3 +45,14 @@
 .spinner {
   margin-bottom: 5em;
 }
+
+.backButton {
+  margin-top: 1em !important;
+  padding: 1em 3em !important;
+  font-size: large !important;
+
+  @include down($breakpoint-lg) {
+    padding: 0.5em 1em !important;
+    font-size: medium !important;
+  }
+}

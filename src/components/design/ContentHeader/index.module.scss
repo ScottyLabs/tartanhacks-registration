@@ -5,17 +5,11 @@
   @include font-size($h1-font-sizes);
 
   color: $gradient-color-start;
-  text-overflow: "ellipsis";
-  white-space: nowrap;
   overflow: hidden;
   display: block;
-  width: 50%;
+  width: 70%;
   margin: 0 auto;
   text-align: center;
-
-  @include down($breakpoint-md) {
-    width: 70%;
-  }
 
   @include down($breakpoint-sm) {
     width: 80%;

@@ -41,21 +41,13 @@
 }
 
 .createButton {
-  width: 20%;
-  @include font-size($body-font-sizes);
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-top: 50px;
-  border-radius: 10px;
-  background: $color-primary;
-  color: $text-color-contrast;
-  padding: 20px;
+  margin-top: 2em !important;
+  padding: 1em 3em !important;
+  font-size: large !important;
 
-  @include down($breakpoint-md) {
-    width: 60%;
-  }
-  @include down($breakpoint-sm) {
-    width: 75%;
+  @include down($breakpoint-lg) {
+    padding: 0.5em 1em !important;
+    font-size: medium !important;
   }
 }
 

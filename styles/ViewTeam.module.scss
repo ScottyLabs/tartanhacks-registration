@@ -5,12 +5,12 @@
   padding-top: 30px;
   font-weight: 600;
   color: $gradient-color-start;
-  font-size: 30px;
+  font-size: 2em !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   @include down($breakpoint-sm) {
-    font-size: 20px;
+    font-size: 1.5em !important;
   }
 }
 .shortenedSubtitle {
@@ -96,17 +96,8 @@
   justify-content: space-between;
   flex-wrap: wrap;
 }
-.shortenedText {
-  width: 40%;
-  @include down($breakpoint-md) {
-    width: 100%;
-  }
-  @include down($breakpoint-sm) {
-    width: 80%;
-  }
-}
 .longText {
-  width: 50%;
+  width: 70%;
   @include down($breakpoint-md) {
     width: 100%;
   }
