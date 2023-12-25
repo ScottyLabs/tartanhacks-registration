@@ -14,7 +14,9 @@ interface WaveHeaderProps {
 const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
   const wave = (
     <svg
-      className={styles.waveSvg}
+      className={`${styles.waveSvg} ${
+        variant == "light" ? styles.waveSvgLight : ""
+      }`}
       viewBox="0 0 1440 420"
       preserveAspectRatio="none"
     >
@@ -113,7 +115,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
     <>
       <div className={styles.waveContainer}>
         {inner.get(variant)}
-        {variant != "light" && wave}
+        {wave}
       </div>
     </>
   )

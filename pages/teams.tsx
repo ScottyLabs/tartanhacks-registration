@@ -17,6 +17,7 @@ import { RootState } from "types/RootState"
 import { SSRDataAuth, TeamData } from "types/SSRData"
 import { Team } from "types/Team"
 import styles from "styles/ViewTeams.module.scss"
+import WaveHeader from "src/components/design/WaveHeader"
 
 /**
  * get a user's team (if exists, else null), and, if the user has not team,
@@ -141,8 +142,8 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
   return (
     <>
       <Menu />
+      <WaveHeader variant="light" />
       <div>
-        <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
           <ContentHeader title="Team" />
