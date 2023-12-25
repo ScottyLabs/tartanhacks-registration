@@ -88,7 +88,7 @@ const SchoolSection = ({
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
-        School Information
+        School
       </Typography>
       <Autocomplete
         options={schools as string[]}

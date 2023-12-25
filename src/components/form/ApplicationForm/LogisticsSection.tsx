@@ -1,5 +1,6 @@
 import {
   Checkbox,
+  Chip,
   FormControlLabel,
   FormGroup,
   TextField,
@@ -20,6 +21,7 @@ import isValidPhoneNumber from "src/util/isValidPhoneNumber"
 import { LogisticsFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
 import styles from "./index.module.scss"
+import { dietaryRestrictionsList } from "src/util/lists"
 
 const LogisticsSection = ({
   validate,
@@ -42,7 +44,7 @@ const LogisticsSection = ({
     useSelector((state: RootState) => state?.application?.logistics) ?? {}
 
   // Logistics information
-  const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
+  const [dietaryRestrictions, setDietaryRestrictions] = useState<string[]>([])
   const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null)
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
   const [attendingPhysically, setAttendingPhysically] = useState<boolean>(true)
@@ -66,7 +68,7 @@ const LogisticsSection = ({
 
     if (valid) {
       const data: LogisticsFields = {
-        dietaryRestrictions,
+        dietaryRestrictions: dietaryRestrictions,
         shirtSize: shirtSize as ShirtSize,
         wantsHardware,
         address,
@@ -90,7 +92,7 @@ const LogisticsSection = ({
 
   useEffect(() => {
     if (fetchedProfile) {
-      setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? "")
+      setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? [])
       setShirtSize(logisticsFields.shirtSize ?? null)
       setWantsHardware(logisticsFields.wantsHardware ?? false)
       setAddress(logisticsFields.address ?? "")
@@ -143,14 +145,29 @@ const LogisticsSection = ({
           />
         )}
       /> */}
-      <TextField
-        label="Dietary Restrictions"
-        variant="outlined"
-        fullWidth
+      <Autocomplete
+        options={dietaryRestrictionsList}
         value={dietaryRestrictions}
-        onChange={(e) => {
-          setDietaryRestrictions(e.target.value)
-        }}
+        onChange={(e, value) => setDietaryRestrictions(value)}
+        multiple
+        freeSolo
+        renderTags={(value: string[], getTagProps) =>
+          value.map((option: string, index: number) => (
+            <Chip
+              variant="outlined"
+              label={option}
+              {...getTagProps({ index })}
+              key={index}
+            />
+          ))
+        }
+        renderInput={(params) => (
+          <TextField
+            variant="outlined"
+            {...params}
+            label="Dietary restrictions"
+          />
+        )}
       />
       <Autocomplete
         options={Object.values(ShirtSize)}

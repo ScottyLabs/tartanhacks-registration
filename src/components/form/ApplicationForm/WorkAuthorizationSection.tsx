@@ -48,7 +48,6 @@ const WorkAuthorizationSection = ({
     null
   )
   const [workLocation, setWorkLocation] = useState<string>("")
-  const [workStrengths, setWorkStrengths] = useState<string>("")
   const [sponsorRanking, setSponsorRanking] = useState<Sponsor[]>([])
 
   const validateForm = async () => {
@@ -56,7 +55,6 @@ const WorkAuthorizationSection = ({
     const data: WorkAuthorizationFields = {
       workPermission: workPermission as WorkPermission,
       workLocation,
-      workStrengths,
       sponsorRanking: sponsorRankingIds
     }
     await dispatch(actions.application.saveWorkAuth(data))
@@ -75,7 +73,6 @@ const WorkAuthorizationSection = ({
     if (fetchedProfile) {
       setWorkPermission(workAuthFields?.workPermission ?? null)
       setWorkLocation(workAuthFields?.workLocation ?? "")
-      setWorkStrengths(workAuthFields?.workStrengths ?? "")
 
       const sponsorRankingPopulated = workAuthFields?.sponsorRanking?.map(
         (sponsorId) => sponsorMap[sponsorId]
@@ -114,15 +111,6 @@ const WorkAuthorizationSection = ({
         value={workLocation}
         onChange={(e) => {
           setWorkLocation(e.target.value)
-        }}
-      />
-      <TextField
-        label="Relevant Skills"
-        variant="outlined"
-        fullWidth
-        value={workStrengths}
-        onChange={(e) => {
-          setWorkStrengths(e.target.value)
         }}
       />
       {/* <Autocomplete
