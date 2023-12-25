@@ -17,7 +17,6 @@ import actions from "src/actions"
 import { AuthenticatedLayout } from "src/layouts"
 import WaveFooter from "src/components/design/WaveFooter"
 import FloatingDiv from "src/components/design/FloatingDiv"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import ContentHeader from "src/components/design/ContentHeader"
 import RectangleButton from "src/components/design/RectangleButton"
 import { useSelector } from "react-redux"
@@ -26,6 +25,7 @@ import { Alert } from "@mui/material"
 import Menu from "src/components/menu/Menu"
 import BackButton from "src/components/design/BackButton"
 import styles from "styles/ViewTeam.module.scss"
+import WaveHeader from "src/components/design/WaveHeader"
 
 enum dialogOpen {
   No,
@@ -157,8 +157,8 @@ const TeamDescription = () => {
   return (
     <>
       <Menu />
+      <WaveHeader variant="light" />
       <div>
-        <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
           {ownTeamFetched && !isOwnTeam ? (
@@ -226,7 +226,7 @@ const TeamDescription = () => {
               ) : null}
             </div>
             <div className={styles.editableText}>
-              <div className={styles.shortenedText}>
+              <div className={styles.longText}>
                 <Typography variant="h4" className={styles.title}>
                   TEAM MEMBERS
                 </Typography>

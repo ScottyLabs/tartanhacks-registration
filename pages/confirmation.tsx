@@ -4,12 +4,12 @@ import { AuthenticatedLayout, DialogLayout } from "src/layouts"
 import ConfirmationDialog from "src/components/confirmation/ConfirmationDialog"
 import Menu from "src/components/menu/Menu"
 import WaveBackground from "src/components/design/WaveBackground"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import styles from "../styles/Confirmation.module.scss"
 import { useRouter } from "next/router"
 import { Status } from "enums/Status"
 import { useSelector } from "react-redux"
 import { RootState } from "types/RootState"
+import WaveHeader from "src/components/design/WaveHeader"
 
 const ConfirmationPage: NextPage = (): ReactElement => {
   const status =
@@ -33,8 +33,8 @@ const ConfirmationPage: NextPage = (): ReactElement => {
     <>
       <WaveBackground />
       <Menu />
+      <WaveHeader variant="light" />
       <div className={styles.dialog}>
-        <ScottyLabsHeader />
         <ConfirmationDialog />
       </div>
     </>

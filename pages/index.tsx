@@ -1,7 +1,6 @@
 import { NextPage } from "next"
 import { ReactElement } from "react"
 import DashboardDialog from "src/components/dashboard/DashboardDialog"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
 import WaveHeader from "src/components/design/WaveHeader"
 import Menu from "src/components/menu/Menu"
