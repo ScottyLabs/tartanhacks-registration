@@ -55,7 +55,7 @@
 
 .statusText {
   margin-bottom: 1em !important;
-  color: $text-color-secondary;
+  color: $text-color-primary;
   font-weight: 600 !important;
 }
 
@@ -94,4 +94,20 @@
 
 .dashboardLink {
   color: $text-color-alt;
+}
+
+.dashboardButton {
+  padding: 1em 3em !important;
+  font-size: large !important;
+
+  @include down($breakpoint-lg) {
+    padding: 0.5em 1em !important;
+    font-size: medium !important;
+  }
+}
+
+.confirmButtons {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
 }

@@ -75,6 +75,40 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
       </Typography>
     </div>
   )
+
+  inner.set(
+    "light",
+    <div className={`${styles.headerAssets} ${styles.light}`}>
+      <ScottyLabsIcon className={`${styles.scottyIcon} ${styles.uninvert}`} />
+      <div className={styles.link}>
+        <NextLink href="/" passHref>
+          <Link underline="none">
+            <div className={styles.titleContainer}>
+              <Text
+                variant="h1"
+                className={`${styles.title} ${styles.textDark}`}
+              >
+                TartanHacks
+              </Text>
+              <Text
+                variant="h2"
+                className={`${styles.subtitle} ${styles.textDark} ${styles.byline}`}
+              >
+                by Scottylabs
+              </Text>
+            </div>
+            <Text
+              variant="h2"
+              className={`${styles.subtitle} ${styles.textDark}`}
+            >
+              Feb 2-3, 2024
+            </Text>
+          </Link>
+        </NextLink>
+      </div>
+    </div>
+  )
+
   return (
     <>
       <div className={styles.waveContainer}>

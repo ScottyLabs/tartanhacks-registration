@@ -17,10 +17,11 @@
   left: 60px;
   top: 40px;
   display: flex;
+  gap: 1em;
 
   @include down($breakpoint-md) {
     top: 10px;
-    left: 50px;
+    left: 10px;
   }
 }
 
@@ -62,8 +63,9 @@
 .subtitle {
   position: relative;
   z-index: 1;
-  color: #fff;
+  color: $text-color-contrast;
   opacity: 0.6;
+  font-weight: 100;
 }
 
 .waveSvg {
@@ -138,5 +140,32 @@
 
   @include down($breakpoint-sm) {
     font-size: 2.5em;
+  }
+}
+
+.textDark {
+  color: $text-color-primary;
+}
+
+.uninvert {
+  filter: none !important;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+
+.light {
+  @include height-down($breakpoint-md) {
+    display: none;
+  }
+}
+
+.byline {
+  @include down($breakpoint-md) {
+    display: none;
   }
 }

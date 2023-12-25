@@ -102,13 +102,6 @@ const getDialogText = (
             In the meantime, join a team or create one with your friends!
           </Typography>
           <br />
-          <NextLink href="/teams" passHref>
-            <Link underline="none">
-              <RectangleButton type="button">Browse Teams</RectangleButton>
-            </Link>
-          </NextLink>
-          <br />
-          <br />
           {/* <Typography variant="body1">
             Once you&apos;re all set, download TartanHacks Dashboard!
           </Typography>
@@ -236,18 +229,28 @@ const getButtonBox = (
     )
   } else if (status === Status.CONFIRMED) {
     return (
-      <>
+      <div className={styles.confirmButtons}>
+        <NextLink href="/teams" passHref>
+          <Link underline="none">
+            <RectangleButton type="button" className={styles.dashboardButton}>
+              Browse Teams
+            </RectangleButton>
+          </Link>
+        </NextLink>
+        <br />
+        <br />
         <div className={styles.buttonBox}>
           <RectangleButton
             type="button"
             onClick={() => {
               setShowDeclineDialog(true)
             }}
+            className={styles.dashboardButton}
           >
             SORRY, I CAN&apos;T MAKE IT
           </RectangleButton>
         </div>
-      </>
+      </div>
     )
   } else {
     return <></>
