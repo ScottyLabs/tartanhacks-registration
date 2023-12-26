@@ -20,7 +20,7 @@ class MyDocument extends Document {
             content={"https://register.tartanhacks.com"}
           />
           <meta property="og:description" content="Register for TartanHacks" />
-          <link rel={"icon"} type={"image/x-icon"} href={"/favicon.ico"} />
+          <link rel={"icon"} type={"image/x-icon"} href={"/favicon.png"} />
         </Head>
         <body>
           <Main />
