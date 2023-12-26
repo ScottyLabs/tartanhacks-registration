@@ -102,7 +102,7 @@ const getDialogText = (
             In the meantime, join a team or create one with your friends!
           </Typography>
           <br />
-          {/* <Typography variant="body1">
+          <Typography variant="body1">
             Once you&apos;re all set, download TartanHacks Dashboard!
           </Typography>
           <div className={styles.appStoreLinks}>
@@ -142,7 +142,7 @@ const getDialogText = (
                 Web
               </RectangleButton>
             </Link>
-          </div> */}
+          </div>
         </div>
       </>
     )
