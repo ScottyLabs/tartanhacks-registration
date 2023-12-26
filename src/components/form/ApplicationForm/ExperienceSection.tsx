@@ -42,8 +42,9 @@ const ExperienceSection = ({
 
   const validateForm = async () => {
     const data: ExperienceFields = {
-      coursework: "",
-      languages: "",
+      courses,
+      programmingLanguages,
+      otherSkills,
       hackathonExperience: hackathonExperience as HackathonExperience
     }
     await dispatch(actions.application.saveExperience(data))

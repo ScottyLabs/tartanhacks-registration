@@ -46,8 +46,10 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
           gender,
           genderOther,
           ethnicity,
-          ethnicityOther
-        } = data
+          ethnicityOther,
+          age,
+          middleName
+        } = data as BasicFields
         state = {
           displayName,
           firstName,
@@ -55,7 +57,9 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
           gender,
           genderOther,
           ethnicity,
-          ethnicityOther
+          ethnicityOther,
+          age,
+          middleName
         }
       }
     }
@@ -87,8 +91,18 @@ const experience = (
     if (action?.data) {
       const { data } = action
       if (data) {
-        const { coursework, languages, hackathonExperience } = data
-        state = { coursework, languages, hackathonExperience }
+        const {
+          courses,
+          programmingLanguages,
+          hackathonExperience,
+          otherSkills
+        } = data as ExperienceFields
+        state = {
+          courses,
+          programmingLanguages,
+          hackathonExperience,
+          otherSkills
+        }
       }
     }
   }
@@ -112,8 +126,9 @@ const logistics = (
           address,
           region,
           phoneNumber,
-          attendingPhysically
-        } = data
+          attendingPhysically,
+          notes
+        } = data as LogisticsFields
         state = {
           dietaryRestrictions,
           shirtSize,
@@ -121,7 +136,8 @@ const logistics = (
           address,
           region,
           phoneNumber,
-          attendingPhysically
+          attendingPhysically,
+          notes
         }
       }
     }
@@ -172,9 +188,8 @@ const workAuth = (
     if (action?.data) {
       const { data } = action
       if (data) {
-        const { workPermission, workLocation, workStrengths, sponsorRanking } =
-          data
-        state = { workPermission, workLocation, workStrengths, sponsorRanking }
+        const { workPermission, workLocation, sponsorRanking } = data
+        state = { workPermission, workLocation, sponsorRanking }
       }
     }
   }

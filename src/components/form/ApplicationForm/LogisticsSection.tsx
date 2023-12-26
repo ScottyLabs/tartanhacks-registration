@@ -49,6 +49,7 @@ const LogisticsSection = ({
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
   const [attendingPhysically, setAttendingPhysically] = useState<boolean>(true)
   const [address, setAddress] = useState<string>("")
+  const [notes, setNotes] = useState<string>("")
   const [region, setRegion] = useState<Region>(Region.URBAN)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
 
@@ -74,7 +75,8 @@ const LogisticsSection = ({
         address,
         region: region as Region,
         phoneNumber,
-        attendingPhysically
+        attendingPhysically,
+        notes
       }
       await dispatch(actions.application.saveLogistics(data))
     }
@@ -99,6 +101,7 @@ const LogisticsSection = ({
       setRegion(logisticsFields.region ?? null)
       setPhoneNumber(logisticsFields.phoneNumber ?? "")
       setAttendingPhysically(logisticsFields.attendingPhysically ?? false)
+      setNotes(logisticsFields.notes ?? "")
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
@@ -194,7 +197,17 @@ const LogisticsSection = ({
           label="Will you use hardware?"
         />
       </FormGroup>
-      {/* In person attendance question only visible to CMU students */}
+      <TextField
+        variant="outlined"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        fullWidth={true}
+        multiline
+        label="Additional notes"
+        placeholder={
+          "Any additional details that you would like us to know!\n\n"
+        }
+      />
     </div>
   )
 }

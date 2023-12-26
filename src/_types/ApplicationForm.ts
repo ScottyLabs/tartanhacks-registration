@@ -12,6 +12,7 @@ import {
 export interface BasicFields {
   displayName: string
   firstName: string
+  middleName?: string
   lastName: string
   gender: Gender
   genderOther?: string
@@ -28,8 +29,6 @@ export interface SchoolFields {
 }
 
 export interface ExperienceFields {
-  coursework?: string
-  languages?: string
   hackathonExperience: HackathonExperience
   programmingLanguages?: string[]
   courses?: string[]
@@ -61,6 +60,7 @@ export interface LogisticsFields {
   region: Region
   phoneNumber: string
   attendingPhysically: boolean
+  notes?: string
 }
 
 export type ApplicationForm = BasicFields &

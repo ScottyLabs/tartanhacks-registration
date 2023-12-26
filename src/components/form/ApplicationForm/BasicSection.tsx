@@ -45,7 +45,7 @@ const BasicSection = ({
   // Error fields
   const [displayNameErrorStatus, setDisplayNameErrorStatus] = useState(false)
   const [ageErrorStatus, setAgeErrorStatus] = useState(false)
-  const [AgeHelper, setAgeHelper] = useState<string>("")
+  const [ageHelper, setAgeHelper] = useState<string>("")
   const [displayNameHelper, setDisplayNameHelper] = useState<string>(
     "Your display name is used in your leaderboard ranking"
   )
@@ -84,8 +84,10 @@ const BasicSection = ({
         firstName,
         lastName,
         gender: gender as Gender,
-        ethnicity: ethnicity as Ethnicity
+        ethnicity: ethnicity as Ethnicity,
+        middleName
       }
+      data.age = ageNum
       if (gender === Gender.OTHER) {
         data.genderOther = genderOther
       }
@@ -111,7 +113,9 @@ const BasicSection = ({
       setDisplayName(basicFields?.displayName)
       setFirstName(basicFields?.firstName)
       setMiddleName(basicFields?.firstName)
-      setAge(String(basicFields?.age) ?? "")
+      if (basicFields?.age) {
+        setAge(String(basicFields?.age))
+      }
       setLastName(basicFields?.lastName)
       setGender(basicFields?.gender)
       setGenderOther(basicFields?.genderOther ?? "")
@@ -208,6 +212,8 @@ const BasicSection = ({
       </div>
       <TextField
         label="Age"
+        error={ageErrorStatus}
+        helperText={ageHelper}
         variant="outlined"
         fullWidth
         value={age}
