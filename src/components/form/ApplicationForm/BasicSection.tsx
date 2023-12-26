@@ -112,7 +112,7 @@ const BasicSection = ({
     if (fetchedProfile) {
       setDisplayName(basicFields?.displayName)
       setFirstName(basicFields?.firstName)
-      setMiddleName(basicFields?.firstName)
+      setMiddleName(basicFields?.middleName ?? "")
       if (basicFields?.age) {
         setAge(String(basicFields?.age))
       }
