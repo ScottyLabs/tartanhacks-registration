@@ -15,7 +15,7 @@ import { SchoolFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
 import styles from "./index.module.scss"
 
-const CMU = "Carnegie Mellon University"
+const CMU = "CMU | Carnegie Mellon University"
 
 const SchoolSection = ({
   validate,
@@ -51,7 +51,7 @@ const SchoolSection = ({
       graduationYear: graduationYear as string,
       major
     }
-    if (school === "Carnegie Mellon University") {
+    if (school === CMU) {
       data.college = college as CMUCollege
     }
     await dispatch(actions.application.saveSchool(data))
@@ -88,34 +88,36 @@ const SchoolSection = ({
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
-        School Information
+        School
       </Typography>
-      <Autocomplete
-        options={schools as string[]}
-        value={school}
-        onChange={(e, value) => {
-          setSchool(value)
-          setIsCMUStudent(value == CMU)
-        }}
-        renderInput={(params) => (
-          <TextField variant="outlined" {...params} label="School" required />
-        )}
-      />
-      {school === CMU ? (
+      <div className={styles.fieldRow}>
         <Autocomplete
-          options={Object.values(CMUCollege)}
-          value={college}
-          onChange={(e, value) => setCollege(value)}
+          options={schools as string[]}
+          value={school}
+          onChange={(e, value) => {
+            setSchool(value)
+            setIsCMUStudent(value == CMU)
+          }}
           renderInput={(params) => (
-            <TextField
-              variant="outlined"
-              {...params}
-              label="College (CMU)"
-              required
-            />
+            <TextField variant="outlined" {...params} label="School" required />
           )}
         />
-      ) : null}
+        {school === CMU ? (
+          <Autocomplete
+            options={Object.values(CMUCollege)}
+            value={college}
+            onChange={(e, value) => setCollege(value)}
+            renderInput={(params) => (
+              <TextField
+                variant="outlined"
+                {...params}
+                label="College (CMU)"
+                required
+              />
+            )}
+          />
+        ) : null}
+      </div>
       <Autocomplete
         options={GraduationYears}
         value={graduationYear}

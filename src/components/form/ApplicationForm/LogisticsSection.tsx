@@ -1,5 +1,6 @@
 import {
   Checkbox,
+  Chip,
   FormControlLabel,
   FormGroup,
   TextField,
@@ -20,6 +21,7 @@ import isValidPhoneNumber from "src/util/isValidPhoneNumber"
 import { LogisticsFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
 import styles from "./index.module.scss"
+import { dietaryRestrictionsList } from "src/util/lists"
 
 const LogisticsSection = ({
   validate,
@@ -42,11 +44,12 @@ const LogisticsSection = ({
     useSelector((state: RootState) => state?.application?.logistics) ?? {}
 
   // Logistics information
-  const [dietaryRestrictions, setDietaryRestrictions] = useState<string>("")
+  const [dietaryRestrictions, setDietaryRestrictions] = useState<string[]>([])
   const [shirtSize, setShirtSize] = useState<ShirtSize | null>(null)
   const [wantsHardware, setWantsHardware] = useState<boolean>(false)
   const [attendingPhysically, setAttendingPhysically] = useState<boolean>(true)
   const [address, setAddress] = useState<string>("")
+  const [notes, setNotes] = useState<string>("")
   const [region, setRegion] = useState<Region>(Region.URBAN)
   const [phoneNumber, setPhoneNumber] = useState<string>("")
 
@@ -66,13 +69,14 @@ const LogisticsSection = ({
 
     if (valid) {
       const data: LogisticsFields = {
-        dietaryRestrictions,
+        dietaryRestrictions: dietaryRestrictions,
         shirtSize: shirtSize as ShirtSize,
         wantsHardware,
         address,
         region: region as Region,
         phoneNumber,
-        attendingPhysically
+        attendingPhysically,
+        notes
       }
       await dispatch(actions.application.saveLogistics(data))
     }
@@ -90,13 +94,14 @@ const LogisticsSection = ({
 
   useEffect(() => {
     if (fetchedProfile) {
-      setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? "")
+      setDietaryRestrictions(logisticsFields.dietaryRestrictions ?? [])
       setShirtSize(logisticsFields.shirtSize ?? null)
       setWantsHardware(logisticsFields.wantsHardware ?? false)
       setAddress(logisticsFields.address ?? "")
       setRegion(logisticsFields.region ?? null)
       setPhoneNumber(logisticsFields.phoneNumber ?? "")
       setAttendingPhysically(logisticsFields.attendingPhysically ?? false)
+      setNotes(logisticsFields.notes ?? "")
     }
     // eslint-disable-next-line
   }, [fetchedProfile])
@@ -143,14 +148,29 @@ const LogisticsSection = ({
           />
         )}
       /> */}
-      <TextField
-        label="Dietary Restrictions"
-        variant="outlined"
-        fullWidth
+      <Autocomplete
+        options={dietaryRestrictionsList}
         value={dietaryRestrictions}
-        onChange={(e) => {
-          setDietaryRestrictions(e.target.value)
-        }}
+        onChange={(e, value) => setDietaryRestrictions(value)}
+        multiple
+        freeSolo
+        renderTags={(value: string[], getTagProps) =>
+          value.map((option: string, index: number) => (
+            <Chip
+              variant="outlined"
+              label={option}
+              {...getTagProps({ index })}
+              key={index}
+            />
+          ))
+        }
+        renderInput={(params) => (
+          <TextField
+            variant="outlined"
+            {...params}
+            label="Dietary restrictions"
+          />
+        )}
       />
       <Autocomplete
         options={Object.values(ShirtSize)}
@@ -177,7 +197,17 @@ const LogisticsSection = ({
           label="Will you use hardware?"
         />
       </FormGroup>
-      {/* In person attendance question only visible to CMU students */}
+      <TextField
+        variant="outlined"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        fullWidth={true}
+        multiline
+        label="Additional notes"
+        placeholder={
+          "Any additional details that you would like us to know!\n\n"
+        }
+      />
     </div>
   )
 }

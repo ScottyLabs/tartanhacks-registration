@@ -4,56 +4,68 @@
 .waveContainer {
   position: absolute;
   width: 100%;
+  top: 0;
   overflow: hidden;
-  line-height: 0;
 
   @include height-down($breakpoint-sm) {
     display: none;
   }
 }
 
-.title {
+.headerAssets {
   position: absolute;
-  z-index: 1;
-  opacity: 0.6;
-  top: 80px;
-  left: 50px;
-
-  color: $text-color-contrast;
+  left: 60px;
+  top: 40px;
+  display: flex;
+  gap: 1em;
 
   @include down($breakpoint-md) {
-    top: 40px;
-  }
-
-  @include down($breakpoint-sm) {
-    top: 40px;
-  }
-
-  @include down($breakpoint-xs) {
-    left: 30px;
+    top: 10px;
+    left: 10px;
   }
 }
 
-.subtitle {
-  position: absolute;
-  z-index: 1;
-  color: #fff;
+.link {
+  display: flex;
+  flex-direction: column;
+}
+
+.scottyIcon {
+  position: relative;
+  height: 100px;
+  top: 10px;
+  z-index: 11;
+  filter: invert(1);
   opacity: 0.6;
-  top: 140px;
-  left: 60px;
 
   @include down($breakpoint-md) {
-    top: 90px;
+    height: 80px;
   }
 
   @include down($breakpoint-sm) {
-    top: 80px;
+    height: 60px;
   }
 
   @include down($breakpoint-xs) {
-    top: 75px;
-    left: 35px;
+    display: none;
   }
+}
+
+.title {
+  position: relative;
+  z-index: 11;
+  opacity: 0.6;
+  font-weight: 600;
+
+  color: $text-color-contrast;
+}
+
+.subtitle {
+  position: relative;
+  z-index: 11;
+  color: $text-color-contrast;
+  opacity: 0.6;
+  font-weight: 100;
 }
 
 .waveSvg {
@@ -61,10 +73,7 @@
   width: 100%;
   height: 250px;
   filter: $drop-shadow;
-
-  @include down($breakpoint-lg) {
-    height: 220px;
-  }
+  z-index: 10;
 
   @include down($breakpoint-md) {
     height: 150px;
@@ -85,4 +94,85 @@
 
 .waveSvgEnd {
   stop-color: $wave-gradient-color-start;
+}
+
+.nodate {
+  position: absolute;
+  width: 100%;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.nodate .link {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.nodate .scottyIcon {
+  height: 60px;
+
+  @include down($breakpoint-md) {
+    height: 40px;
+  }
+
+  @include down($breakpoint-sm) {
+    height: 30px;
+  }
+
+  @include down($breakpoint-xs) {
+    display: none;
+  }
+}
+
+.nodate .regText {
+  z-index: 11;
+  opacity: 0.6;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: $text-color-contrast;
+
+  @include down($breakpoint-md) {
+    font-size: 3em;
+  }
+
+  @include down($breakpoint-sm) {
+    font-size: 2.5em;
+  }
+}
+
+.textDark {
+  color: $text-color-primary;
+  opacity: 1;
+}
+
+.uninvert {
+  filter: none;
+  opacity: 1;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+
+.light {
+  @include height-down($breakpoint-sm) {
+    display: none;
+  }
+}
+
+.byline {
+  @include down($breakpoint-md) {
+    display: none;
+  }
+}
+
+.waveSvgLight {
+  filter: invert(1);
 }

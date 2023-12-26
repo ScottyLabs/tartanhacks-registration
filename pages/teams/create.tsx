@@ -8,8 +8,8 @@ import BackButton from "src/components/design/BackButton"
 import ContentHeader from "src/components/design/ContentHeader"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import RectangleButton from "src/components/design/RectangleButton"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
+import WaveHeader from "src/components/design/WaveHeader"
 import Menu from "src/components/menu/Menu"
 import { AuthenticatedLayout } from "src/layouts"
 import styles from "styles/CreateTeam.module.scss"
@@ -28,14 +28,14 @@ const TeamCreate = () => {
     <>
       <Menu />
       <div>
-        <ScottyLabsHeader />
+        <WaveHeader variant="light" />
         <WaveFooter />
         <FloatingDiv>
           <BackButton link="/teams" className={styles.backButton} />
           <ContentHeader title="Create New Team" longTitle={true} />
           <div className={styles.content}>
             <Typography variant="h4" className={styles.title}>
-              BASIC INFO
+              Basic Info
             </Typography>
             <form
               onSubmit={async (e) => {

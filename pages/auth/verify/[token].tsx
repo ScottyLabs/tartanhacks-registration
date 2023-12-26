@@ -6,8 +6,8 @@ import { ReactElement, useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import RectangleButton from "src/components/design/RectangleButton"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
+import WaveHeader from "src/components/design/WaveHeader"
 import styles from "styles/Verify.module.scss"
 
 const Verification = (): ReactElement => {
@@ -25,10 +25,15 @@ const Verification = (): ReactElement => {
     const verify = async () => {
       try {
         const { status } = await dispatch(actions.auth.verify(token as string))
+        console.log(status)
         window.gtag("event", AnalyticsEvent.EMAIL_VERIFIED)
         setVerificationStatus(status)
-      } catch (err) {
-        setVerificationStatus("SUCCESS")
+      } catch (err: any) {
+        if (err.data === "Bad token") {
+          setVerificationStatus("FAILURE")
+        } else {
+          setVerificationStatus("EXPIRED")
+        }
       } finally {
         setLoading(false)
       }
@@ -39,18 +44,20 @@ const Verification = (): ReactElement => {
 
   const failure = (
     <>
-      <Typography variant="h4">This is an invalid token</Typography>
+      <Typography variant="h2">This is an invalid token</Typography>
       <Typography variant="body1">Please request a new one</Typography>
     </>
   )
 
   const success = (
     <>
-      <Typography variant="h4">You are verified!</Typography>
+      <Typography variant="h2">You are verified!</Typography>
       <br />
       <NextLink href="/" passHref>
         <Link underline="none">
-          <RectangleButton type="button">Back to Home</RectangleButton>
+          <RectangleButton type="button" className={styles.backButton}>
+            Back to Home
+          </RectangleButton>
         </Link>
       </NextLink>
     </>
@@ -58,7 +65,7 @@ const Verification = (): ReactElement => {
 
   const expired = (
     <>
-      <Typography variant="h4">This token has expired</Typography>
+      <Typography variant="h2">This token has expired</Typography>
       <Typography variant="body1">Please request a new one</Typography>
     </>
   )
@@ -79,7 +86,7 @@ const Verification = (): ReactElement => {
     <>
       <WaveBackground />
       <div>
-        <ScottyLabsHeader />
+        <WaveHeader variant="light" />
         <div className={styles.dialog}>
           <div className={`${styles.dialogContent} ${dialogClass}`}>
             <Collapse in={loading}>

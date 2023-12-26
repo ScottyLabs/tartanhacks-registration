@@ -140,24 +140,26 @@ const PortfolioSection = ({
           setGithub(e.target.value)
         }}
       />
-      <TextField
-        label="Design"
-        variant="outlined"
-        fullWidth
-        value={design}
-        onChange={(e) => {
-          setDesign(e.target.value)
-        }}
-      />
-      <TextField
-        label="Website"
-        variant="outlined"
-        fullWidth
-        value={website}
-        onChange={(e) => {
-          setWebsite(e.target.value)
-        }}
-      />
+      <div className={styles.fieldRow}>
+        <TextField
+          label="Design"
+          variant="outlined"
+          fullWidth
+          value={design}
+          onChange={(e) => {
+            setDesign(e.target.value)
+          }}
+        />
+        <TextField
+          label="Website"
+          variant="outlined"
+          fullWidth
+          value={website}
+          onChange={(e) => {
+            setWebsite(e.target.value)
+          }}
+        />
+      </div>
     </div>
   )
 }

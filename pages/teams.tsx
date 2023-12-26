@@ -8,7 +8,6 @@ import actions from "src/actions"
 import ContentHeader from "src/components/design/ContentHeader"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import RectangleButton from "src/components/design/RectangleButton"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
 import Menu from "src/components/menu/Menu"
 import TeamTableEntry from "src/components/teams/TeamTableEntry"
@@ -17,6 +16,7 @@ import { RootState } from "types/RootState"
 import { SSRDataAuth, TeamData } from "types/SSRData"
 import { Team } from "types/Team"
 import styles from "styles/ViewTeams.module.scss"
+import WaveHeader from "src/components/design/WaveHeader"
 
 /**
  * get a user's team (if exists, else null), and, if the user has not team,
@@ -141,8 +141,8 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
   return (
     <>
       <Menu />
+      <WaveHeader variant="light" />
       <div>
-        <ScottyLabsHeader />
         <WaveFooter />
         <FloatingDiv>
           <ContentHeader title="Team" />
@@ -166,7 +166,7 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
           </Collapse>
           <div className={styles.tableHeader}>
             <Typography variant="h4" className={styles.tableHeaderText}>
-              VIEW OPEN TEAMS
+              Open Teams
             </Typography>
           </div>
           {emptyMessage}

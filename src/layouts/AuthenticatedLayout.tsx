@@ -3,10 +3,10 @@ import { useRouter } from "next/dist/client/router"
 import { FunctionComponent, ReactElement, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveBackground from "src/components/design/WaveBackground"
 import { RootState } from "types/RootState"
 import styles from "./index.module.scss"
+import WaveHeader from "src/components/design/WaveHeader"
 
 /**
  * Layout to hide content that requires authentication.
@@ -55,7 +55,7 @@ const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
       <>
         <WaveBackground />
         <div>
-          <ScottyLabsHeader />
+          <WaveHeader variant="light" />
           <div className={styles.dialog}>
             <Collapse in={loadingLogin}>
               <CircularProgress className={styles.spinner} />

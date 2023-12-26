@@ -5,6 +5,7 @@ $breakpoint-xs: 320px;
 $breakpoint-sm: 481px;
 $breakpoint-md: 769px;
 $breakpoint-lg: 1200px;
+
 $breakpoints: (
   xs: $breakpoint-xs,
   sm: $breakpoint-sm,
@@ -32,6 +33,12 @@ $breakpoints: (
 
 @mixin height-down($screen) {
   @media (max-height: $screen) {
+    @content;
+  }
+}
+
+@mixin both-down($width, $height) {
+  @media ((max-height: $width) or (max-width: $height)) {
     @content;
   }
 }

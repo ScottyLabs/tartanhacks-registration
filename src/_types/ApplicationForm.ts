@@ -12,11 +12,13 @@ import {
 export interface BasicFields {
   displayName: string
   firstName: string
+  middleName?: string
   lastName: string
   gender: Gender
   genderOther?: string
   ethnicity: Ethnicity
   ethnicityOther?: string
+  age?: number
 }
 
 export interface SchoolFields {
@@ -27,15 +29,15 @@ export interface SchoolFields {
 }
 
 export interface ExperienceFields {
-  coursework?: string
-  languages?: string
   hackathonExperience: HackathonExperience
+  programmingLanguages?: string[]
+  courses?: string[]
+  otherSkills?: string[]
 }
 
 export interface WorkAuthorizationFields {
   workPermission: WorkPermission
   workLocation?: string
-  workStrengths: string
   sponsorRanking: string[]
 }
 
@@ -51,13 +53,14 @@ export interface EssayFields {
 }
 
 export interface LogisticsFields {
-  dietaryRestrictions?: string
+  dietaryRestrictions?: string[]
   shirtSize: ShirtSize
   wantsHardware: boolean
   address: string
   region: Region
   phoneNumber: string
   attendingPhysically: boolean
+  notes?: string
 }
 
 export type ApplicationForm = BasicFields &

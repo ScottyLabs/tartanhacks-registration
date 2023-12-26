@@ -108,6 +108,8 @@ const ApplicationForm = (): ReactElement => {
       ...workAuth
     }
     setLoading(true)
+    console.log("data", data)
+    console.log("application", application)
     try {
       await dispatch(actions.application.submitForm(data))
       window.gtag("event", AnalyticsEvent.APPLICATION_SUBMITTED)

@@ -102,13 +102,6 @@ const getDialogText = (
             In the meantime, join a team or create one with your friends!
           </Typography>
           <br />
-          <NextLink href="/teams" passHref>
-            <Link underline="none">
-              <RectangleButton type="button">Browse Teams</RectangleButton>
-            </Link>
-          </NextLink>
-          <br />
-          <br />
           {/* <Typography variant="body1">
             Once you&apos;re all set, download TartanHacks Dashboard!
           </Typography>
@@ -177,7 +170,11 @@ const getButtonBox = (
 ): ReactElement => {
   if (status === Status.UNVERIFIED) {
     return (
-      <RectangleButton type="button" onClick={() => resendVerification()}>
+      <RectangleButton
+        type="button"
+        onClick={() => resendVerification()}
+        className={styles.dashboardButton}
+      >
         RESEND VERIFICATION EMAIL
       </RectangleButton>
     )
@@ -192,7 +189,7 @@ const getButtonBox = (
       </Typography>
     ) : (
       <Link href="/apply" className={styles.link}>
-        <RectangleButton type="submit">
+        <RectangleButton type="submit" className={styles.dashboardButton}>
           COMPLETE YOUR APPLICATION
         </RectangleButton>
       </Link>
@@ -202,7 +199,9 @@ const getButtonBox = (
       <>
         <div className={styles.buttonBox}>
           <Link href="/apply" className={styles.link}>
-            <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
+            <RectangleButton type="submit" className={styles.dashboardButton}>
+              EDIT APPLICATION
+            </RectangleButton>
           </Link>
         </div>
       </>
@@ -212,7 +211,9 @@ const getButtonBox = (
       <>
         <div className={styles.buttonBox}>
           <Link href="/confirmation" className={styles.link}>
-            <RectangleButton type="submit">CONFIRM</RectangleButton>
+            <RectangleButton type="submit" className={styles.dashboardButton}>
+              CONFIRM
+            </RectangleButton>
           </Link>
           <div className={styles.buttonSpacer}></div>
           <RectangleButton
@@ -220,6 +221,7 @@ const getButtonBox = (
             onClick={() => {
               setShowDeclineDialog(true)
             }}
+            className={styles.dashboardButton}
           >
             SORRY, I CAN&apos;T MAKE IT
           </RectangleButton>
@@ -236,18 +238,28 @@ const getButtonBox = (
     )
   } else if (status === Status.CONFIRMED) {
     return (
-      <>
+      <div className={styles.confirmButtons}>
+        <NextLink href="/teams" passHref>
+          <Link underline="none">
+            <RectangleButton type="button" className={styles.dashboardButton}>
+              Browse Teams
+            </RectangleButton>
+          </Link>
+        </NextLink>
+        <br />
+        <br />
         <div className={styles.buttonBox}>
           <RectangleButton
             type="button"
             onClick={() => {
               setShowDeclineDialog(true)
             }}
+            className={styles.dashboardButton}
           >
             SORRY, I CAN&apos;T MAKE IT
           </RectangleButton>
         </div>
-      </>
+      </div>
     )
   } else {
     return <></>

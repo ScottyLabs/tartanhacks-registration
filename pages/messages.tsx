@@ -2,8 +2,8 @@ import { Snackbar } from "@mui/material"
 import { Alert } from "@mui/material"
 import React, { useState } from "react"
 import { useSelector } from "react-redux"
-import ScottyLabsHeader from "src/components/design/ScottyLabsHeader"
 import WaveFooter from "src/components/design/WaveFooter"
+import WaveHeader from "src/components/design/WaveHeader"
 import Menu from "src/components/menu/Menu"
 import MessagesDialog from "src/components/teams/messages/MessagesDialog"
 import { AuthenticatedLayout } from "src/layouts"
@@ -17,8 +17,8 @@ const Messages = () => {
   return (
     <>
       <Menu />
+      <WaveHeader variant="light" />
       <div>
-        <ScottyLabsHeader />
         <WaveFooter />
         <MessagesDialog setSuccessMessage={setSuccessMessage} />
         <Snackbar

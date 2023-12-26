@@ -34,14 +34,18 @@ const BasicSection = ({
   // Basic information
   const [displayName, setDisplayName] = useState<string>("")
   const [firstName, setFirstName] = useState<string>("")
+  const [middleName, setMiddleName] = useState<string>("")
   const [lastName, setLastName] = useState<string>("")
   const [gender, setGender] = useState<Gender | null>(null)
   const [genderOther, setGenderOther] = useState<string>("")
   const [ethnicity, setEthnicity] = useState<Ethnicity | null>(null)
   const [ethnicityOther, setEthnicityOther] = useState<string>("")
+  const [age, setAge] = useState<string>("")
 
   // Error fields
   const [displayNameErrorStatus, setDisplayNameErrorStatus] = useState(false)
+  const [ageErrorStatus, setAgeErrorStatus] = useState(false)
+  const [ageHelper, setAgeHelper] = useState<string>("")
   const [displayNameHelper, setDisplayNameHelper] = useState<string>(
     "Your display name is used in your leaderboard ranking"
   )
@@ -64,14 +68,26 @@ const BasicSection = ({
       )
     }
 
+    const ageNum = parseInt(age)
+    if (age && (ageNum < 0 || isNaN(ageNum))) {
+      valid = false
+      setAgeErrorStatus(true)
+      setAgeHelper("Please enter a valid age")
+    } else {
+      setAgeErrorStatus(false)
+      setAgeHelper("")
+    }
+
     if (valid) {
       const data: BasicFields = {
         displayName,
         firstName,
         lastName,
         gender: gender as Gender,
-        ethnicity: ethnicity as Ethnicity
+        ethnicity: ethnicity as Ethnicity,
+        middleName
       }
+      data.age = ageNum
       if (gender === Gender.OTHER) {
         data.genderOther = genderOther
       }
@@ -96,6 +112,10 @@ const BasicSection = ({
     if (fetchedProfile) {
       setDisplayName(basicFields?.displayName)
       setFirstName(basicFields?.firstName)
+      setMiddleName(basicFields?.firstName)
+      if (basicFields?.age) {
+        setAge(String(basicFields?.age))
+      }
       setLastName(basicFields?.lastName)
       setGender(basicFields?.gender)
       setGenderOther(basicFields?.genderOther ?? "")
@@ -108,7 +128,7 @@ const BasicSection = ({
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
-        BASIC DETAILS
+        Personal Info
       </Typography>
       <TextField
         label="Display Name"
@@ -133,6 +153,15 @@ const BasicSection = ({
         }}
       />
       <TextField
+        label="Middle Names"
+        variant="outlined"
+        fullWidth
+        value={middleName}
+        onChange={(e) => {
+          setMiddleName(e.target.value)
+        }}
+      />
+      <TextField
         label="Last Name"
         variant="outlined"
         required
@@ -142,43 +171,56 @@ const BasicSection = ({
           setLastName(e.target.value)
         }}
       />
-      <Autocomplete
-        options={Object.values(Gender)}
-        value={gender}
-        onChange={(e, value) => setGender(value)}
-        renderInput={(params) => (
-          <TextField variant="outlined" {...params} label="Gender" required />
-        )}
-      />
-      {gender === Gender.OTHER ? (
-        <TextField
-          variant="outlined"
-          value={genderOther}
-          label="Gender (other)"
-          onChange={(e) => setGenderOther(e.target.value)}
+      <div className={styles.fieldRow}>
+        <Autocomplete
+          options={Object.values(Gender)}
+          value={gender}
+          onChange={(e, value) => setGender(value)}
+          renderInput={(params) => (
+            <TextField variant="outlined" {...params} label="Gender" required />
+          )}
         />
-      ) : null}
-      <Autocomplete
-        options={Object.values(Ethnicity)}
-        value={ethnicity}
-        onChange={(e, value) => setEthnicity(value)}
-        renderInput={(params) => (
+        {gender === Gender.OTHER ? (
           <TextField
             variant="outlined"
-            {...params}
-            label="Ethnicity"
-            required
+            value={genderOther}
+            label="Gender (other)"
+            onChange={(e) => setGenderOther(e.target.value)}
           />
-        )}
-      />
-      {ethnicity === Ethnicity.OTHER ? (
-        <TextField
-          variant="outlined"
-          value={ethnicityOther}
-          label="Ethnicity (other)"
-          onChange={(e) => setEthnicityOther(e.target.value)}
+        ) : null}
+        <Autocomplete
+          options={Object.values(Ethnicity)}
+          value={ethnicity}
+          onChange={(e, value) => setEthnicity(value)}
+          renderInput={(params) => (
+            <TextField
+              variant="outlined"
+              {...params}
+              label="Ethnicity"
+              required
+            />
+          )}
         />
-      ) : null}
+        {ethnicity === Ethnicity.OTHER ? (
+          <TextField
+            variant="outlined"
+            value={ethnicityOther}
+            label="Ethnicity (other)"
+            onChange={(e) => setEthnicityOther(e.target.value)}
+          />
+        ) : null}
+      </div>
+      <TextField
+        label="Age"
+        error={ageErrorStatus}
+        helperText={ageHelper}
+        variant="outlined"
+        fullWidth
+        value={age}
+        onChange={(e) => {
+          setAge(e.target.value)
+        }}
+      />
     </div>
   )
 }

@@ -12,7 +12,7 @@
 .name {
   font-weight: 600;
   color: $gradient-color-start;
-  font-size: 30px;
+  font-size: 2em !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -20,13 +20,12 @@
   width: 100%;
 
   @include down($breakpoint-sm) {
-    font-size: 16px;
+    font-size: 1.5em !important;
   }
 }
 .description {
   font-weight: 400;
   color: $gradient-color-start;
-  font-size: 20px;
   padding-left: 5%;
   width: 95%;
   right: 27px;
@@ -46,23 +45,13 @@
   }
 }
 .tableEntryButton {
-  width: 100%;
-  font-size: 30px;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
+  padding: 1em 3em !important;
+  font-size: large !important;
 
-  border-radius: 10px;
-  color: $text-color-contrast;
-
-  @include down($breakpoint-md) {
-    font-size: 20px;
-  }
-  @include down($breakpoint-sm) {
-    font-size: 16px;
-    height: 56px;
+  @include down($breakpoint-lg) {
+    padding: 0.5em 1em !important;
+    font-size: medium !important;
   }
 }
 .viewDetailCell {
-  width: 30%;
 }

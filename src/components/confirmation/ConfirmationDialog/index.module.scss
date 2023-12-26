@@ -10,11 +10,7 @@
   padding: 2em;
   margin: 0 auto;
   flex-direction: column;
-  background-image: linear-gradient(
-    316.54deg,
-    $light-gradient-color-start,
-    $light-gradient-color-end
-  );
+  background-image: $dialog-container-gradient;
   box-shadow: $box-shadow;
   backdrop-filter: blur(4px);
 
