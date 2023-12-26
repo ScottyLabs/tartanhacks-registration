@@ -10,21 +10,18 @@ const Message = (props: any) => {
 
   const getMessage = (request: any) => {
     let header = request.type
-    let prefix = request.type
     switch (request.type) {
       case "JOIN":
-        header = "NEW REQUEST"
-        prefix = props.isCaptain ? "Sent by user" : "Sent to team"
+        header = "JOIN REQUEST"
         break
 
-      case "INVITATION":
-        header = "NEW INVITATION"
-        prefix = props.isCaptain ? "For user" : "From team"
+      case "INVITE":
+        header = "INVITATION"
         break
     }
 
     const bodyContent = props.isCaptain ? request.user.email : request.team.name
-    const body = `${prefix} <${bodyContent}>`
+    const body = `<${bodyContent}>`
 
     return {
       header: header,

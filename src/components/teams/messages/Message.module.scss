@@ -3,6 +3,7 @@
 
 .tableRow {
   display: grid;
+  width: 100%;
 
   @include up($breakpoint-sm) {
     grid-template-areas: "new body body body body body left right";
@@ -18,11 +19,7 @@
 .newCell {
   grid-area: new;
   padding-top: 5px;
-  width: 60px;
   vertical-align: top;
-  @include down($breakpoint-sm) {
-    width: 40px;
-  }
 }
 .new {
   color: $color-primary;
@@ -54,16 +51,21 @@
   border-radius: 10px;
   background: $gradient-color-end;
   color: $text-color-contrast;
+  
+  padding: 1em 3em !important;
+  font-size: large !important;
 
-  @include font-size($body-font-sizes);
+  @include down($breakpoint-lg) {
+    padding: 0.5em 1em !important;
+    font-size: medium !important;
+  }
 }
 .buttonCell {
-  width: 20%;
-  padding-left: 20px;
+  width: fit-content;
+  padding-left: 10px;
   padding-bottom: 30px;
   padding-top: 10px;
   @include down($breakpoint-md) {
-    width: 25%;
     paddingleft: 5px;
   }
 }
@@ -73,22 +75,16 @@
 .messageHeader {
   font-weight: 600;
   color: $gradient-color-start;
-  font-size: 30px;
   display: block;
-  margin-left: 0;
-  @include down($breakpoint-sm) {
-    font-size: 16px;
-  }
+  margin: 0;
 }
 .messageText {
-  padding-top: 30px;
+  padding-top: 15px;
   font-weight: 400;
   color: $gradient-color-start;
-  font-size: 20px;
   display: block;
   word-wrap: break-word;
   @include down($breakpoint-sm) {
-    font-size: 12px;
     padding-top: 10px;
   }
 }

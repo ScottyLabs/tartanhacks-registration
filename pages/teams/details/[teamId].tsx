@@ -368,9 +368,7 @@ const TeamDescription = () => {
               }}
               onChange={(e) => {
                 setInvitations(
-                  e.target.value.match(
-                    /([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+.[a-zA-Z0-9._-]+)/gi
-                  )
+                  e.target.value.split('\n').filter((elem: string) => elem !== "").map((elem: string) => elem.trim())
                 )
               }}
             />
