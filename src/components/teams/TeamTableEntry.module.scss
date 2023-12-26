@@ -45,23 +45,13 @@
   }
 }
 .tableEntryButton {
-  width: 100%;
-  font-size: 30px;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
+  padding: 1em 3em !important;
+  font-size: large !important;
 
-  border-radius: 10px;
-  color: $text-color-contrast;
-
-  @include down($breakpoint-md) {
-    font-size: 20px;
-  }
-  @include down($breakpoint-sm) {
-    font-size: 16px;
-    height: 56px;
+  @include down($breakpoint-lg) {
+    padding: 0.5em 1em !important;
+    font-size: medium !important;
   }
 }
 .viewDetailCell {
-  width: 30%;
 }

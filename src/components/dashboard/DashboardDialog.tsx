@@ -170,7 +170,11 @@ const getButtonBox = (
 ): ReactElement => {
   if (status === Status.UNVERIFIED) {
     return (
-      <RectangleButton type="button" onClick={() => resendVerification()}>
+      <RectangleButton
+        type="button"
+        onClick={() => resendVerification()}
+        className={styles.dashboardButton}
+      >
         RESEND VERIFICATION EMAIL
       </RectangleButton>
     )
@@ -185,7 +189,7 @@ const getButtonBox = (
       </Typography>
     ) : (
       <Link href="/apply" className={styles.link}>
-        <RectangleButton type="submit">
+        <RectangleButton type="submit" className={styles.dashboardButton}>
           COMPLETE YOUR APPLICATION
         </RectangleButton>
       </Link>
@@ -195,7 +199,9 @@ const getButtonBox = (
       <>
         <div className={styles.buttonBox}>
           <Link href="/apply" className={styles.link}>
-            <RectangleButton type="submit">EDIT APPLICATION</RectangleButton>
+            <RectangleButton type="submit" className={styles.dashboardButton}>
+              EDIT APPLICATION
+            </RectangleButton>
           </Link>
         </div>
       </>
@@ -205,7 +211,9 @@ const getButtonBox = (
       <>
         <div className={styles.buttonBox}>
           <Link href="/confirmation" className={styles.link}>
-            <RectangleButton type="submit">CONFIRM</RectangleButton>
+            <RectangleButton type="submit" className={styles.dashboardButton}>
+              CONFIRM
+            </RectangleButton>
           </Link>
           <div className={styles.buttonSpacer}></div>
           <RectangleButton
@@ -213,6 +221,7 @@ const getButtonBox = (
             onClick={() => {
               setShowDeclineDialog(true)
             }}
+            className={styles.dashboardButton}
           >
             SORRY, I CAN&apos;T MAKE IT
           </RectangleButton>

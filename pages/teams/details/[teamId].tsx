@@ -368,7 +368,10 @@ const TeamDescription = () => {
               }}
               onChange={(e) => {
                 setInvitations(
-                  e.target.value.split('\n').filter((elem: string) => elem !== "").map((elem: string) => elem.trim())
+                  e.target.value
+                    .split("\n")
+                    .filter((elem: string) => elem !== "")
+                    .map((elem: string) => elem.trim())
                 )
               }}
             />

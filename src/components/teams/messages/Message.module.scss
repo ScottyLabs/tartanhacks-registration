@@ -5,14 +5,14 @@
   display: grid;
   width: 100%;
 
-  @include up($breakpoint-sm) {
+  @include up($breakpoint-md) {
     grid-template-areas: "new body body body body body left right";
   }
 
-  @include down($breakpoint-sm) {
+  @include down($breakpoint-md) {
     grid-template-areas:
       "new body body body body body"
-      "left left left right right right";
+      "skip left left right right right";
   }
 }
 
@@ -37,7 +37,6 @@
 .message {
   grid-area: body;
   padding-right: 15px;
-  padding-left: 30px;
   padding-bottom: 30px;
   padding-top: 10px;
   @include down($breakpoint-sm) {
@@ -51,7 +50,7 @@
   border-radius: 10px;
   background: $gradient-color-end;
   color: $text-color-contrast;
-  
+
   padding: 1em 3em !important;
   font-size: large !important;
 
