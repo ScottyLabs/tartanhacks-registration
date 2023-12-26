@@ -12,7 +12,7 @@
 .name {
   font-weight: 600;
   color: $gradient-color-start;
-  font-size: 30px;
+  font-size: 2em !important;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -20,13 +20,12 @@
   width: 100%;
 
   @include down($breakpoint-sm) {
-    font-size: 16px;
+    font-size: 1.5em !important;
   }
 }
 .description {
   font-weight: 400;
   color: $gradient-color-start;
-  font-size: 20px;
   padding-left: 5%;
   width: 95%;
   right: 27px;

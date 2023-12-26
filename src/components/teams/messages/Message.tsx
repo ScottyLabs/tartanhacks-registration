@@ -13,12 +13,12 @@ const Message = (props: any) => {
     let prefix = request.type
     switch (request.type) {
       case "JOIN":
-        header = "JOIN REQUEST"
+        header = "NEW REQUEST"
         prefix = props.isCaptain ? "Sent by user" : "Sent to team"
         break
 
       case "INVITATION":
-        header = "INVITATION"
+        header = "NEW INVITATION"
         prefix = props.isCaptain ? "For user" : "From team"
         break
     }

@@ -166,7 +166,7 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
           </Collapse>
           <div className={styles.tableHeader}>
             <Typography variant="h4" className={styles.tableHeaderText}>
-              VIEW OPEN TEAMS
+            Open Teams
             </Typography>
           </div>
           {emptyMessage}
