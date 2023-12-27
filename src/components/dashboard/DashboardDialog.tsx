@@ -26,6 +26,7 @@ import RectangleButton from "../design/RectangleButton"
 import styles from "styles/DashboardDialog.module.scss"
 import AnalyticsEvent from "enums/AnalyticsEvent"
 import WaitlistAlert from "../waitlist"
+import FloatingDiv from "../design/FloatingDiv"
 
 const getDialogText = (
   status: Status,
@@ -354,7 +355,7 @@ const DashboardDialog = (): ReactElement => {
       >
         <Alert severity={snackbarState}>{snackbarMessage}</Alert>
       </Snackbar>
-      <div className={styles.dialog}>
+      <FloatingDiv>
         <div className={styles.dialogContent}>
           <Collapse in={loading}>
             <CircularProgress />
@@ -389,7 +390,7 @@ const DashboardDialog = (): ReactElement => {
           status !== Status.DECLINED && (
             <WaitlistAlert completedProfile={false} />
           )}
-      </div>
+      </FloatingDiv>
       <Dialog
         open={showDeclineDialog}
         onClose={() => {

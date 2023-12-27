@@ -3,8 +3,8 @@
 
 .floatingDiv {
   position: relative;
-  top: 35%;
   width: 80%;
+  top: 250px;
   margin: auto;
   padding-top: 40px;
   padding-bottom: 40px;
@@ -21,16 +21,18 @@
 
   @include down($breakpoint-md) {
     width: 90%;
-    top: 25%;
-    margin-bottom: 150px;
   }
 
-  @include height-down($breakpoint-md) {
-    top: 45%;
+  @include down($breakpoint-md) {
+    top: 150px;
   }
 
   @include down($breakpoint-sm) {
-    margin-bottom: 50px;
+    top: 140px;
+  }
+
+  @include down($breakpoint-xs) {
+    top: 130px;
   }
 }
 
