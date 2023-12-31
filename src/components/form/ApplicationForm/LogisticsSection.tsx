@@ -21,7 +21,7 @@ import isValidPhoneNumber from "src/util/isValidPhoneNumber"
 import { LogisticsFields } from "types/ApplicationForm"
 import { RootState } from "types/RootState"
 import styles from "./index.module.scss"
-import { dietaryRestrictionsList } from "src/util/lists"
+import { dietaryRestrictionsList, shirtSizeVerbose } from "src/util/lists"
 
 const LogisticsSection = ({
   validate,
@@ -109,7 +109,7 @@ const LogisticsSection = ({
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
-        LOGISTICS INFORMATION
+        Logistics
       </Typography>
       <TextField
         label="Phone Number"
@@ -168,14 +168,14 @@ const LogisticsSection = ({
           <TextField
             variant="outlined"
             {...params}
-            label="Dietary restrictions"
+            label="Dietary considerations"
           />
         )}
       />
       <Autocomplete
-        options={Object.values(ShirtSize)}
+        options={shirtSizeVerbose}
         value={shirtSize}
-        onChange={(e, value) => setShirtSize(value)}
+        onChange={(e, value) => setShirtSize(value?.split(" ")[0] as ShirtSize)}
         renderInput={(params) => (
           <TextField
             variant="outlined"

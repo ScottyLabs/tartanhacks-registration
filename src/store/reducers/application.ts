@@ -155,8 +155,8 @@ const portfolio = (
     if (action?.data) {
       const { data } = action
       if (data) {
-        const { github, resume, design, website } = data
-        state = { github, resume, design, website }
+        const { github, linkedin, resume, design, website } = data
+        state = { github, linkedin, resume, design, website }
       }
     }
   }

@@ -43,6 +43,7 @@ export interface WorkAuthorizationFields {
 
 export interface PortfolioFields {
   github: string
+  linkedin?: string
   resume: string
   design?: string
   website?: string

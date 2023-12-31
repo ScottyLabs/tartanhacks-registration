@@ -1,4 +1,5 @@
 import {
+  Alert,
   Button,
   CircularProgress,
   Collapse,
@@ -42,11 +43,14 @@ const PortfolioSection = ({
 
   // Portfolio
   const [github, setGithub] = useState<string>("")
+  const [linkedin, setLinkedin] = useState<string>("")
   const [resume, setResume] = useState<string>("")
   const [resumeFileName, setResumeFileName] = useState<string>()
   const [design, setDesign] = useState<string>("")
   const [website, setWebsite] = useState<string>("")
   const [uploading, setUploading] = useState(false)
+
+  const [uploadError, setUploadError] = useState(false)
 
   const uploadResume = async (file: File) => {
     try {
@@ -75,6 +79,7 @@ const PortfolioSection = ({
     if (valid) {
       const data: PortfolioFields = {
         github,
+        linkedin,
         resume,
         design,
         website
@@ -96,6 +101,7 @@ const PortfolioSection = ({
   useEffect(() => {
     if (fetchedProfile) {
       setGithub(portfolioFields.github ?? "")
+      setLinkedin(portfolioFields.linkedin ?? "")
       setDesign(portfolioFields.design ?? "")
       setWebsite(portfolioFields.website ?? "")
       if (portfolioFields.resume) {
@@ -109,7 +115,7 @@ const PortfolioSection = ({
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
-        PORTFOLIO
+        Portfolio
       </Typography>
       <div className={styles.resumeUploadContainer}>
         <Button variant="outlined" component="label">
@@ -119,7 +125,12 @@ const PortfolioSection = ({
             hidden
             onChange={(e) => {
               if (e.target.files && e.target.files.length > 0) {
-                uploadResume(e.target.files[0])
+                if (e.target.files[0].name.endsWith(".pdf")) {
+                  uploadResume(e.target.files[0])
+                  setUploadError(false)
+                } else {
+                  setUploadError(true)
+                }
               }
             }}
           />
@@ -129,27 +140,32 @@ const PortfolioSection = ({
         </Collapse>
         <Typography variant="body2">{resumeFileName}</Typography>
       </div>
-      <TextField
-        label="GitHub Username"
-        variant="outlined"
-        helperText="We use GitHub to handle project submissions"
-        required
-        fullWidth
-        value={github}
-        onChange={(e) => {
-          setGithub(e.target.value)
-        }}
-      />
+      {uploadError && (
+        <Alert severity="error">Please upload your resume as a PDF file</Alert>
+      )}
       <div className={styles.fieldRow}>
         <TextField
-          label="Design"
+          label="GitHub username"
           variant="outlined"
+          helperText="We use GitHub to handle project submissions"
+          required
           fullWidth
-          value={design}
+          value={github}
           onChange={(e) => {
-            setDesign(e.target.value)
+            setGithub(e.target.value)
           }}
         />
+        <TextField
+          label="LinkedIn profile URL"
+          variant="outlined"
+          fullWidth
+          value={linkedin}
+          onChange={(e) => {
+            setLinkedin(e.target.value)
+          }}
+        />
+      </div>
+      <div className={styles.fieldRow}>
         <TextField
           label="Website"
           variant="outlined"
@@ -157,6 +173,15 @@ const PortfolioSection = ({
           value={website}
           onChange={(e) => {
             setWebsite(e.target.value)
+          }}
+        />
+        <TextField
+          label="Design portfolio"
+          variant="outlined"
+          fullWidth
+          value={design}
+          onChange={(e) => {
+            setDesign(e.target.value)
           }}
         />
       </div>

@@ -53,6 +53,8 @@ const EssaySection = ({
     // eslint-disable-next-line
   }, [fetchedProfile])
 
+  const maxChars = 5000
+
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
@@ -68,8 +70,9 @@ const EssaySection = ({
         fullWidth
         multiline
         value={essay}
+        helperText={`${essay.length}/${maxChars}`}
         onChange={(e) => {
-          setEssay(e.target.value)
+          setEssay(e.target.value.slice(0, maxChars))
         }}
       />
     </div>
