@@ -73,6 +73,10 @@ const BasicSection = ({
       valid = false
       setAgeErrorStatus(true)
       setAgeHelper("Please enter a valid age")
+    } else if (age && ageNum < 18) {
+      valid = false
+      setAgeErrorStatus(true)
+      setAgeHelper("You must be at least 18 years old to apply")
     } else {
       setAgeErrorStatus(false)
       setAgeHelper("")
