@@ -96,7 +96,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
                 variant="h2"
                 className={`${styles.subtitle} ${styles.textDark} ${styles.byline}`}
               >
-                by Scottylabs
+                by ScottyLabs
               </Text>
             </div>
             <Text

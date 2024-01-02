@@ -58,7 +58,7 @@ const EssaySection = ({
   return (
     <div className={styles.section}>
       <Typography variant="h5" className={styles.sectionHeader}>
-        Essays
+        Short Response
       </Typography>
       <Typography variant="body1">
         Why do you want to join TartanHacks? (200 words)
