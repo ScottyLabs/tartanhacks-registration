@@ -15,7 +15,6 @@ import actions from "src/actions"
 import { RootState } from "types/RootState"
 import RectangleButton from "../../design/RectangleButton"
 import styles from "./index.module.scss"
-import WaitlistAlert from "src/components/waitlist"
 
 const AuthenticationDialog = ({
   registration = false
@@ -161,9 +160,6 @@ const AuthenticationDialog = ({
             )}
           </div>
         </form>
-      </div>
-      <div className={styles.warning}>
-        <WaitlistAlert completedProfile={false} />
       </div>
       <Alert severity="info" className={styles.warning}>
         Participants must be undergraduates and at least 18 years old

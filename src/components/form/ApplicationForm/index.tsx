@@ -22,7 +22,6 @@ import SchoolSection from "./SchoolSection"
 import WorkAuthorizationSection from "./WorkAuthorizationSection"
 import styles from "./index.module.scss"
 import AnalyticsEvent from "enums/AnalyticsEvent"
-import WaitlistAlert from "src/components/waitlist"
 
 const ApplicationForm = (): ReactElement => {
   const dispatch = useDispatch()
@@ -166,7 +165,6 @@ const ApplicationForm = (): ReactElement => {
           <Typography variant="h4" className={styles.header}>
             Application
           </Typography>
-          {<WaitlistAlert completedProfile={false} />}
         </div>
         <div className={styles.formContents}>
           <BasicSection

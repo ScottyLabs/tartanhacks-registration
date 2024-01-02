@@ -25,7 +25,6 @@ import { RootState } from "types/RootState"
 import RectangleButton from "../design/RectangleButton"
 import styles from "styles/DashboardDialog.module.scss"
 import AnalyticsEvent from "enums/AnalyticsEvent"
-import WaitlistAlert from "../waitlist"
 import FloatingDiv from "../design/FloatingDiv"
 
 const getDialogText = (
@@ -381,15 +380,6 @@ const DashboardDialog = (): ReactElement => {
           <br />
           <CircularProgress />
         </Collapse>
-        {status === Status.COMPLETED_PROFILE && (
-          <WaitlistAlert completedProfile={true} />
-        )}
-        {status !== Status.CONFIRMED &&
-          status !== Status.ADMITTED &&
-          status !== Status.COMPLETED_PROFILE &&
-          status !== Status.DECLINED && (
-            <WaitlistAlert completedProfile={false} />
-          )}
       </FloatingDiv>
       <Dialog
         open={showDeclineDialog}
