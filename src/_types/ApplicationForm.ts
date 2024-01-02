@@ -30,9 +30,6 @@ export interface SchoolFields {
 
 export interface ExperienceFields {
   hackathonExperience: HackathonExperience
-  programmingLanguages?: string[]
-  courses?: string[]
-  otherSkills?: string[]
 }
 
 export interface WorkAuthorizationFields {

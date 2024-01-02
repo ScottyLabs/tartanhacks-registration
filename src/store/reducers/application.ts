@@ -91,17 +91,9 @@ const experience = (
     if (action?.data) {
       const { data } = action
       if (data) {
-        const {
-          courses,
-          programmingLanguages,
-          hackathonExperience,
-          otherSkills
-        } = data as ExperienceFields
+        const { hackathonExperience } = data as ExperienceFields
         state = {
-          courses,
-          programmingLanguages,
-          hackathonExperience,
-          otherSkills
+          hackathonExperience
         }
       }
     }

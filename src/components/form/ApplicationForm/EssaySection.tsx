@@ -61,7 +61,7 @@ const EssaySection = ({
         Short Response
       </Typography>
       <Typography variant="body1">
-        Why do you want to join TartanHacks? (200 words)
+        What do you want to build at TartanHacks? (1 paragraph)
       </Typography>
       <TextField
         label="Write answer here"
@@ -70,7 +70,7 @@ const EssaySection = ({
         fullWidth
         multiline
         value={essay}
-        helperText={`${essay.length}/${maxChars}`}
+        helperText={"No need to have a polished idea, just follow your heart!"}
         onChange={(e) => {
           setEssay(e.target.value.slice(0, maxChars))
         }}
