@@ -32,7 +32,15 @@ const getDialogText = (
   closeTime: string,
   confirmTime: string
 ): ReactElement => {
-  if (status === Status.VERIFIED) {
+  if (status === Status.UNVERIFIED) {
+    return (
+      <div className={styles.dialogText}>
+        <Typography variant="body1">
+          Check your email to get verified
+        </Typography>
+      </div>
+    )
+  } else if (status === Status.VERIFIED) {
     return (
       <>
         <div className={styles.dialogText}>
@@ -42,10 +50,13 @@ const getDialogText = (
         </div>
         <div className={styles.dialogText}>
           <Typography variant="body1">
-            If you do not complete your application by
-            <br />
-            <span className={styles.deadline}>{closeTime}</span>, you will not
-            be admitted!
+            Non-CMU students need to complete their application by 11:59pm EST,
+            January 19th.
+          </Typography>
+        </div>
+        <div className={styles.dialogText}>
+          <Typography variant="body1">
+            CMU students have time until January 26th.
           </Typography>
         </div>
       </>
@@ -53,19 +64,21 @@ const getDialogText = (
   } else if (status == Status.COMPLETED_PROFILE) {
     return (
       <>
-        {/**
-        TODO uncomment
         <div className={styles.dialogText}>
-          <Typography variant="body1">Welcome back!</Typography>
+          <Typography variant="body1">Thank you for applying!</Typography>
         </div>
         <div className={styles.dialogText}>
           <Typography variant="body1">
-            You can edit your information until
-            <br />
-            <span className={styles.deadline}>{confirmTime}</span>
+            Once we consider your application, you will receive an email from{" "}
+            <b>tartanhacks@scottylabs.org</b>
           </Typography>
         </div>
-         */}
+        <div className={styles.dialogText}>
+          <Typography variant="body1">
+            In the meantime, you can edit your application by clicking the
+            button below
+          </Typography>
+        </div>
       </>
     )
   } else if (status === Status.ADMITTED) {
@@ -101,6 +114,8 @@ const getDialogText = (
           <Typography variant="body1">
             In the meantime, join a team or create one with your friends!
           </Typography>
+          {/**
+           *
           <br />
           <Typography variant="body1">
             Once you&apos;re all set, download TartanHacks Dashboard!
@@ -143,6 +158,7 @@ const getDialogText = (
               </RectangleButton>
             </Link>
           </div>
+           */}
         </div>
       </>
     )
@@ -232,7 +248,9 @@ const getButtonBox = (
             color: "red"
           }}
         >
-          You need to confirm in order to attend the event
+          <Alert severity="warning">
+            You need to confirm in order to attend the event!
+          </Alert>
         </Typography>
       </>
     )
