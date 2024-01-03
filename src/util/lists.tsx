@@ -58,11 +58,5 @@ export const shirtSizeVerbose = [
   "M (Medium)",
   "L (Large)",
   "XL (Extra large)",
-  "XXL (Extra extra large)",
-  "WXS (Women's extra small)",
-  "WS (Women's small)",
-  "WM (Women's medium)",
-  "WL (Women's large)",
-  "WXL (Women's extra large)",
-  "WXXL (Women's extra extra large)"
+  "XXL (Extra extra large)"
 ]

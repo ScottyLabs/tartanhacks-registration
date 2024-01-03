@@ -54,13 +54,7 @@ export enum ShirtSize {
   M = "M",
   L = "L",
   XL = "XL",
-  XXL = "XXL",
-  WXS = "WXS",
-  WS = "WS",
-  WM = "WM",
-  WL = "WL",
-  WXL = "WXL",
-  WXXL = "WXXL"
+  XXL = "XXL"
 }
 
 export enum Region {
