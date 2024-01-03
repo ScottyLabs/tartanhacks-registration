@@ -19,6 +19,34 @@ interface Sponsor {
   _id: string
 }
 
+enum AuthorizationString {
+  CITIZEN = "I am a US citizen",
+  SPONSORSHIP = "I will need employer sponsorship at some point in the future",
+  NO_SPONSORSHIP = "I will NOT need employer sponsorship at some point in the future"
+}
+
+const statusToString = (status: WorkPermission): AuthorizationString => {
+  switch (status) {
+    case WorkPermission.CITIZEN:
+      return AuthorizationString.CITIZEN
+    case WorkPermission.SPONSORSHIP:
+      return AuthorizationString.SPONSORSHIP
+    case WorkPermission.NO_SPONSORSHIP:
+      return AuthorizationString.NO_SPONSORSHIP
+  }
+}
+
+const stringToStatus = (status: AuthorizationString): WorkPermission => {
+  switch (status) {
+    case AuthorizationString.CITIZEN:
+      return WorkPermission.CITIZEN
+    case AuthorizationString.SPONSORSHIP:
+      return WorkPermission.SPONSORSHIP
+    case AuthorizationString.NO_SPONSORSHIP:
+      return WorkPermission.NO_SPONSORSHIP
+  }
+}
+
 const WorkAuthorizationSection = ({
   validate,
   setValidate,
@@ -44,16 +72,15 @@ const WorkAuthorizationSection = ({
     sponsorMap[sponsor._id] = sponsor
   }
 
-  const [workPermission, setWorkPermission] = useState<WorkPermission | null>(
-    null
-  )
+  const [workPermission, setWorkPermission] =
+    useState<AuthorizationString | null>(null)
   const [workLocation, setWorkLocation] = useState<string>("")
   const [sponsorRanking, setSponsorRanking] = useState<Sponsor[]>([])
 
   const validateForm = async () => {
     const sponsorRankingIds = sponsorRanking.map((sponsor) => sponsor._id)
     const data: WorkAuthorizationFields = {
-      workPermission: workPermission as WorkPermission,
+      workPermission: stringToStatus(workPermission as AuthorizationString),
       workLocation,
       sponsorRanking: sponsorRankingIds
     }
@@ -71,7 +98,11 @@ const WorkAuthorizationSection = ({
 
   useEffect(() => {
     if (fetchedProfile) {
-      setWorkPermission(workAuthFields?.workPermission ?? null)
+      if (workAuthFields?.workPermission) {
+        setWorkPermission(statusToString(workAuthFields?.workPermission))
+      } else {
+        setWorkPermission(null)
+      }
       setWorkLocation(workAuthFields?.workLocation ?? "")
 
       const sponsorRankingPopulated = workAuthFields?.sponsorRanking?.map(
@@ -93,7 +124,7 @@ const WorkAuthorizationSection = ({
         Sponsor Information
       </Typography>
       <Autocomplete
-        options={Object.values(WorkPermission)}
+        options={Object.values(AuthorizationString)}
         value={workPermission}
         onChange={(e, value) => setWorkPermission(value)}
         renderInput={(params) => (
