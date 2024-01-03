@@ -73,7 +73,10 @@ const PortfolioSection = ({
     if (!resume || resume === "") {
       valid = false
       setError(true)
+      setUploadError(true)
       await dispatch(actions.application.errorMissingResume())
+    } else {
+      setUploadError(false)
     }
 
     if (valid) {
