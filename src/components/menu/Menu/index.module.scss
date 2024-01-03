@@ -82,7 +82,7 @@
 .link {
   color: $text-color-contrast;
   width: 100%;
-  text-decoration: none;
+  text-decoration: none !important;
 }
 
 .link:hover {

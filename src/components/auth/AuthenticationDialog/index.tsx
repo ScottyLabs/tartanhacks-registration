@@ -164,8 +164,8 @@ const AuthenticationDialog = ({
       <Alert severity="warning" className={styles.warning}>
         Participants must be at least 18 years old
       </Alert>
-      <Alert severity="info" className={styles.warning}>
-        Applications close at 11:59pm EST on January 19th for non-CMU students
+      <Alert severity="warning" className={styles.warning}>
+        Application closes at 11:59pm EST on January 19th for non-CMU students
         and on January 26th for CMU students
       </Alert>
     </div>

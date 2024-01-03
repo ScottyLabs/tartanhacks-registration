@@ -14,22 +14,20 @@ interface WaveHeaderProps {
 const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
   const wave = (
     <svg
-      className={`${styles.waveSvg} ${
-        variant == "light" ? styles.waveSvgLight : ""
-      }`}
+      className={styles.waveSvg}
       viewBox="0 0 1440 420"
       preserveAspectRatio="none"
     >
       <path
         d="M1440 251.445C1337.08 331.37 1135.65 328.667 662.609 328.667C246.957 328.667 117.54 329.706 0 407L5.72619e-05 -248L1440 -248L1440 251.445Z"
-        fill="url(#paint0_linear)"
+        fill={variant === "light" ? "white" : "url(#paint0_linear)"}
       />
       <defs>
         <linearGradient
           id="paint0_linear"
-          x1="720"
+          x1="1020"
           y1="407"
-          x2="720"
+          x2="0"
           y2="-248"
           gradientUnits="userSpaceOnUse"
         >
@@ -81,7 +79,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
   inner.set(
     "light",
     <div className={`${styles.headerAssets} ${styles.light}`}>
-      <ScottyLabsIcon className={`${styles.scottyIcon} ${styles.uninvert}`} />
+      <ScottyLabsIcon className={`${styles.scottyIcon} ${styles.redIcon}`} />
       <div className={styles.link}>
         <NextLink href="/" passHref>
           <Link underline="none">

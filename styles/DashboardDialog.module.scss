@@ -39,23 +39,23 @@
 
 .statusHeaderText {
   margin-bottom: 0.5em !important;
-  color: $text-color-primary;
+  color: $color-primary-darker;
 }
 
 .dialogText {
   margin-bottom: 1em;
-  color: $text-color-primary;
+  color: $color-primary-darker;
   width: 100%;
   text-align: center;
 }
 
 .bodyText {
-  color: $text-color-primary;
+  color: $color-primary-darker;
 }
 
 .statusText {
   margin-bottom: 1em !important;
-  color: $text-color-primary;
+  color: $text-color-secondary;
   font-weight: 600 !important;
 }
 
@@ -99,6 +99,7 @@
 .dashboardButton {
   padding: 1em 3em !important;
   font-size: large !important;
+  background-color: $color-secondary-darker !important;
 
   @include down($breakpoint-lg) {
     padding: 0.5em 1em !important;
