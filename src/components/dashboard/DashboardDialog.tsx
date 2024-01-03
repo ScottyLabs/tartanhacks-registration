@@ -27,11 +27,7 @@ import styles from "styles/DashboardDialog.module.scss"
 import AnalyticsEvent from "enums/AnalyticsEvent"
 import FloatingDiv from "../design/FloatingDiv"
 
-const getDialogText = (
-  status: Status,
-  closeTime: string,
-  confirmTime: string
-): ReactElement => {
+const getDialogText = (status: Status): ReactElement => {
   if (status === Status.UNVERIFIED) {
     return (
       <div className={styles.dialogText}>
@@ -87,9 +83,14 @@ const getDialogText = (
         <div className={styles.dialogText}>
           <Typography variant="body1">Welcome to Tartanhacks!</Typography>
           <Typography variant="body1">
-            Please confirm your attendance by
+            We are excited to have you join us!
           </Typography>
-          <span className={styles.deadline}>{confirmTime}</span>
+        </div>
+        <div className={styles.dialogText}>
+          <Typography variant="body1">
+            Please confirm your attendance within 5 days of receiving the
+            acceptance email to secure your spot.
+          </Typography>
         </div>
       </>
     )
@@ -306,13 +307,6 @@ const DashboardDialog = (): ReactElement => {
   const confirmTimeDt = DateTime.fromJSDate(confirmTime)
   const curDt = DateTime.now()
 
-  const closeTimeStr = closeTimeDt.isValid
-    ? closeTimeDt.toFormat("dd LLL yyyy")
-    : ""
-  const confirmTimeStr = confirmTimeDt.isValid
-    ? confirmTimeDt.toFormat("dd LLL yyyy")
-    : ""
-
   const status =
     useSelector((state: RootState) => state?.accounts?.data?.status) ?? null
   const statusStr = statusToString(status)
@@ -348,7 +342,7 @@ const DashboardDialog = (): ReactElement => {
     setDecliningAcceptance(false)
   }
 
-  const dialogText = getDialogText(status, closeTimeStr, confirmTimeStr)
+  const dialogText = getDialogText(status)
   const isLate =
     status === Status.VERIFIED
       ? curDt > closeTimeDt
