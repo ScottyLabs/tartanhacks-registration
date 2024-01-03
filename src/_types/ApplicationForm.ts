@@ -24,6 +24,7 @@ export interface BasicFields {
 export interface SchoolFields {
   school: string
   college?: CMUCollege
+  collegeLevel: CollegeLevel
   graduationYear: string
   major: string
 }

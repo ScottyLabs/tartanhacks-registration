@@ -1,6 +1,11 @@
 import { TextField, Typography } from "@mui/material"
 import { Autocomplete } from "@mui/material"
-import { CMUCollege, GraduationYear, GraduationYears } from "enums/Profile"
+import {
+  CMUCollege,
+  CollegeLevel,
+  GraduationYear,
+  GraduationYears
+} from "enums/Profile"
 import React, {
   Dispatch,
   ReactElement,
@@ -40,6 +45,7 @@ const SchoolSection = ({
   const [schools, setSchools] = useState<string[]>([])
   const [school, setSchool] = useState<string | null>(null)
   const [college, setCollege] = useState<CMUCollege | null>(null)
+  const [collegeLevel, setCollegeLevel] = useState<CollegeLevel | null>(null)
   const [graduationYear, setGraduationYear] = useState<GraduationYear | null>(
     null
   )
@@ -49,7 +55,8 @@ const SchoolSection = ({
     const data: SchoolFields = {
       school: school as string,
       graduationYear: graduationYear as string,
-      major
+      major,
+      collegeLevel: collegeLevel as CollegeLevel
     }
     if (school === CMU) {
       data.college = college as CMUCollege
@@ -70,6 +77,7 @@ const SchoolSection = ({
     if (fetchedProfile) {
       setSchool(schoolFields.school)
       setCollege(schoolFields.college ?? null)
+      setCollegeLevel(schoolFields.collegeLevel)
       setGraduationYear(schoolFields.graduationYear?.toString() ?? null)
       setMajor(schoolFields.major)
       setIsCMUStudent(schoolFields.school == CMU)
@@ -118,29 +126,46 @@ const SchoolSection = ({
           />
         ) : null}
       </div>
-      <Autocomplete
-        options={GraduationYears}
-        value={graduationYear}
-        onChange={(e, value) => setGraduationYear(value)}
-        renderInput={(params) => (
-          <TextField
-            variant="outlined"
-            {...params}
-            label="Graduation Year"
-            required
-          />
-        )}
-      />
-      <TextField
-        label="Major"
-        variant="outlined"
-        fullWidth
-        required
-        value={major}
-        onChange={(e) => {
-          setMajor(e.target.value)
-        }}
-      />
+      <div className={styles.fieldRow}>
+        <Autocomplete
+          options={Object.values(CollegeLevel)}
+          value={collegeLevel}
+          onChange={(e, value) => {
+            setCollegeLevel(value)
+          }}
+          renderInput={(params) => (
+            <TextField
+              variant="outlined"
+              {...params}
+              label="Academic program"
+              required
+            />
+          )}
+        />
+        <Autocomplete
+          options={GraduationYears}
+          value={graduationYear}
+          onChange={(e, value) => setGraduationYear(value)}
+          renderInput={(params) => (
+            <TextField
+              variant="outlined"
+              {...params}
+              label="Graduation Year"
+              required
+            />
+          )}
+        />
+        <TextField
+          label="Major"
+          variant="outlined"
+          fullWidth
+          required
+          value={major}
+          onChange={(e) => {
+            setMajor(e.target.value)
+          }}
+        />
+      </div>
     </div>
   )
 }
