@@ -18,6 +18,7 @@ import RectangleButton from "src/components/design/RectangleButton"
 import styles from "./index.module.scss"
 import { RootState } from "types/RootState"
 import { DateTime } from "luxon"
+import FloatingDiv from "src/components/design/FloatingDiv"
 
 const ConfirmationDialog = (): ReactElement => {
   const router = useRouter()
@@ -55,7 +56,7 @@ const ConfirmationDialog = (): ReactElement => {
   }
 
   return (
-    <div className={styles.dialog}>
+    <FloatingDiv>
       <Collapse in={loading}>
         <LinearProgress />
       </Collapse>
@@ -133,7 +134,7 @@ const ConfirmationDialog = (): ReactElement => {
           <RectangleButton type="submit">CONFIRM</RectangleButton>
         </div>
       </form>
-    </div>
+    </FloatingDiv>
   )
 }
 
