@@ -81,9 +81,8 @@ const getDialogText = (status: Status): ReactElement => {
     return (
       <>
         <div className={styles.dialogText}>
-          <Typography variant="body1">Welcome to Tartanhacks!</Typography>
           <Typography variant="body1">
-            We are excited to have you join us!
+            Welcome to Tartanhacks! We are excited to have you join us.
           </Typography>
         </div>
         <div className={styles.dialogText}>
