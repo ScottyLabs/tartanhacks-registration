@@ -71,24 +71,9 @@ const cleanDietaryRestrictions = (
   // Remove none and n/a
   // Filter out noise words
   const invalidKeys = ["none", "na", "no", "nil", ""]
-  const removeKeys = [
-    ".",
-    "/",
-    "no ",
-    "allergy",
-    "allergic to",
-    "diet",
-    "must be",
-    "it needs to be",
-    "free",
-    "don't eat"
-  ]
   const entries = Object.entries(data.dietaryRestrictions).map(
     ([name, count]) => {
-      let lower = name.toLocaleLowerCase()
-      for (const remove of removeKeys) {
-        lower = lower.replace(remove, "")
-      }
+      const lower = name.toLocaleLowerCase()
       return [lower.trim(), count]
     }
   ) as [string, number][]
