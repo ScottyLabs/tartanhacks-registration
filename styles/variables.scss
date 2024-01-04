@@ -1,15 +1,14 @@
 // Colors
-$color-primary: #1028f1;
-$color-secondary: #ff7aa5;
-$color-secondary-darker: #e56c82;
-$color-primary-darker: #02435f;
+$color-primary: #000;
+$color-secondary: #000;
+$color-primary-darker: #000;
 $color-contrast: #fff;
 
 $body-background-color: #fff;
 
 // Text colors
-$text-color-primary: #0372a1;
-$text-color-secondary: #e56c82;
+$text-color-primary: $color-primary;
+$text-color-secondary: $color-contrast;
 $text-color-contrast: #fff;
 $text-color-alt: #fdcd60;
 $text-color-unfocused: #999999;
@@ -32,20 +31,20 @@ $color-error: #f44336;
 $gradient-color-start: $color-primary-darker;
 $gradient-color-end: $color-secondary;
 
-$wave-gradient-color-start: $color-primary;
-$wave-gradient-color-end: $color-secondary;
+$wave-gradient-color-start: $color-secondary;
+$wave-gradient-color-end: $color-primary;
 
 $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;
 
 $dialog-container-gradient: linear-gradient(
   316.54deg,
-  rgba(255, 255, 255, 0.85),
-  rgba(230, 246, 252, 0.85)
+  rgba(255, 255, 255, 0.95) 3%,
+  rgba(0, 0, 0, 0.4) 150%
 );
 
 // Additional component colors
-$button-color: $color-primary-darker;
+$button-color: $color-primary;
 $button-color-focused: $color-primary;
 
 // Component properties

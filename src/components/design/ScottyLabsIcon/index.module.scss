@@ -2,6 +2,6 @@
 @import "~/styles/mixins.scss";
 
 .svgContainer svg {
-  fill: white;
+  fill: $color-primary;
   height: 100%;
 }

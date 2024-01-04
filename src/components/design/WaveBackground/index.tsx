@@ -17,9 +17,9 @@ const WaveBackground = (): ReactElement => {
           <defs>
             <linearGradient
               id="paint0_linear"
-              x1="1020"
+              x1="720"
               y1="0"
-              x2="0"
+              x2="720"
               y2="465"
               gradientUnits="userSpaceOnUse"
             >

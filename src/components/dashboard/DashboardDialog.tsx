@@ -386,11 +386,11 @@ const DashboardDialog = (): ReactElement => {
               {buttonBox}
             </>
           )}
-          <Collapse in={sendingVerification}>
-            <br />
-            <CircularProgress />
-          </Collapse>
         </div>
+        <Collapse in={sendingVerification}>
+          <br />
+          <CircularProgress />
+        </Collapse>
       </FloatingDiv>
       <Dialog
         open={showDeclineDialog}

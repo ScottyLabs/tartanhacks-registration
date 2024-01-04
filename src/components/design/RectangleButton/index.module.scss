@@ -2,7 +2,7 @@
 @import "~/styles/mixins.scss";
 
 .button {
-  background-color: $button-color !important;
+  background-color: $button-color;
   border-radius: 10px;
   box-shadow: $drop-shadow;
   opacity: 0.7;

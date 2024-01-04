@@ -28,9 +28,6 @@
 .link {
   display: flex;
   flex-direction: column;
-  > a {
-    text-decoration: none;
-  }
 }
 
 .scottyIcon {
@@ -38,6 +35,7 @@
   height: 100px;
   top: 10px;
   z-index: 11;
+  filter: invert(1);
   opacity: 0.6;
 
   @include down($breakpoint-md) {
@@ -147,15 +145,13 @@
 }
 
 .textDark {
-  color: $text-color-secondary;
+  color: $text-color-primary;
   opacity: 1;
 }
 
-.redIcon {
+.uninvert {
+  filter: none;
   opacity: 1;
-  > svg {
-    fill: $color-secondary !important;
-  }
 }
 
 .titleContainer {
@@ -177,6 +173,6 @@
   }
 }
 
-.waveSvgWhite {
-  stop-color: white;
+.waveSvgLight {
+  filter: invert(1);
 }
