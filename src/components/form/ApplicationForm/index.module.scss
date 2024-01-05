@@ -22,7 +22,7 @@
   margin-bottom: 3em;
   margin-top: 5em;
   z-index: 5;
-  background-image: $dialog-container-gradient;
+  background-image: $dialog-container-gradient-lighter;
 
   @include down($breakpoint-md) {
     width: 90%;
