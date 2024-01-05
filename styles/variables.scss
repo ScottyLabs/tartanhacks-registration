@@ -4,6 +4,11 @@ $color-secondary: #000;
 $color-primary-darker: #000;
 $color-contrast: #fff;
 
+$color-theme-blue: #1028f1;
+$color-theme-pink: #ff7aa5;
+$color-theme-yellow: #f2dc00;
+$color-theme-purple: #735fff;
+
 $body-background-color: #fff;
 
 // Text colors
@@ -31,8 +36,8 @@ $color-error: #f44336;
 $gradient-color-start: $color-primary-darker;
 $gradient-color-end: $color-secondary;
 
-$wave-gradient-color-start: $color-secondary;
-$wave-gradient-color-end: $color-primary;
+$wave-gradient-color-start: #1b1818;
+$wave-gradient-color-end: #1b1818;
 
 $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;
@@ -41,6 +46,12 @@ $dialog-container-gradient: linear-gradient(
   316.54deg,
   rgba(255, 255, 255, 0.95) 3%,
   rgba(0, 0, 0, 0.4) 150%
+);
+
+$dialog-container-gradient-lighter: linear-gradient(
+  316.54deg,
+  rgba(255, 255, 255, 0.95) 3%,
+  rgba(0, 0, 0, 0.4) 200%
 );
 
 // Additional component colors

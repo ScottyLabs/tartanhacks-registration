@@ -37,41 +37,41 @@ const Menu = (): ReactElement => {
       <Modal open={open} onClose={handleClose}>
         <div className={styles.menuWrapper}>
           <div className={styles.menuBox}>
-            <MenuItem text="HOME" url="/" />
+            <MenuItem text="HOME" url="/" id={0} />
             <MenuLine />
             {status === Status.VERIFIED ? (
               <>
-                <MenuItem text="APPLY" url="/apply" />
+                <MenuItem text="APPLY" url="/apply" id={1} />
                 <MenuLine />
               </>
             ) : null}
             {status === Status.COMPLETED_PROFILE ? (
               <>
-                <MenuItem text="EDIT APPLICATION" url="/apply" />
+                <MenuItem text="EDIT APPLICATION" url="/apply" id={1} />
                 <MenuLine />
               </>
             ) : null}
             {status === Status.ADMITTED ? (
               <>
-                <MenuItem text="CONFIRM" url="/confirmation" />
+                <MenuItem text="CONFIRM" url="/confirmation" id={1} />
                 <MenuLine />
               </>
             ) : null}
             {isAdmin || status === Status.CONFIRMED ? (
               <>
-                <MenuItem text="TEAM" url="/teams" />
+                <MenuItem text="TEAM" url="/teams" id={1} />
                 <MenuLine />
-                <MenuItem text="MESSAGES" url="/messages" />
+                <MenuItem text="MESSAGES" url="/messages" id={2} />
                 <MenuLine />
               </>
             ) : null}
             {isAdmin ? (
               <>
-                <MenuItem text="ADMIN" url="/admin" />
+                <MenuItem text="ADMIN" url="/admin" id={1} />
                 <MenuLine />
               </>
             ) : null}
-            <MenuItem text="LOGOUT" url="/logout" />
+            <MenuItem text="LOGOUT" url="/logout" id={3} />
           </div>
         </div>
       </Modal>
