@@ -3,7 +3,6 @@ import NextLink from "next/link"
 import { ReactElement } from "react"
 import Text from "../Text"
 import styles from "./index.module.scss"
-import ScottyLabsIcon from "../ScottyLabsIcon"
 import Logo from "../Logo"
 import clsx from "clsx"
 
@@ -16,9 +15,7 @@ interface WaveHeaderProps {
 const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
   const wave = (
     <svg
-      className={`${styles.waveSvg} ${
-        variant == "light" ? styles.waveSvgLight : ""
-      }`}
+      className={styles.waveSvg}
       viewBox="0 0 1440 420"
       preserveAspectRatio="none"
     >
@@ -93,7 +90,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
     <>
       <div className={styles.waveContainer}>
         {inner.get(variant)}
-        {wave}
+        {variant == "dark" && wave}
       </div>
     </>
   )

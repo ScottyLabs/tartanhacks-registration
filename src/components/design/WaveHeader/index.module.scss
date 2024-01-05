@@ -123,6 +123,10 @@
 }
 
 .light {
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+
   @include height-down($breakpoint-sm) {
     display: none;
   }
@@ -132,8 +136,4 @@
   @include down($breakpoint-md) {
     display: none;
   }
-}
-
-.waveSvgLight {
-  filter: invert(1);
 }

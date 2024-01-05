@@ -17,6 +17,21 @@
   filter: $drop-shadow;
 }
 
+.strokeLeft {
+  position: absolute;
+  bottom: 0;
+  max-height: 30%;
+  max-width: 40%;
+}
+
+.strokeRight {
+  position: absolute;
+  bottom: 0;
+  max-height: 30%;
+  max-width: 40%;
+  right: 0;
+}
+
 .scottyIcon {
   position: relative;
   width: 75px;
