@@ -7,7 +7,7 @@ import styles from "../styles/Auth.module.scss"
 const ForgotPasswordPage: NextPage = (): ReactElement => {
   return (
     <div>
-      <WaveHeader variant="nodate" />
+      <WaveHeader variant="dark" />
       <div className={styles.dialog}>
         <PasswordResetDialog />
       </div>

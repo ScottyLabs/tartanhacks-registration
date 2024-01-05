@@ -14,14 +14,11 @@
 
 .headerAssets {
   position: absolute;
-  left: 60px;
-  top: 40px;
   display: flex;
   gap: 1em;
 
-  @include down($breakpoint-md) {
-    top: 10px;
-    left: 10px;
+  @include down($breakpoint-xs) {
+    display: none;
   }
 }
 
@@ -30,13 +27,17 @@
   flex-direction: column;
 }
 
-.scottyIcon {
+.headerAssetsDark {
+  flex-direction: column;
+  align-items: center;
+  gap: 0em;
+}
+
+.logo {
   position: relative;
-  height: 100px;
-  top: 10px;
+  height: 130px;
+  width: 100%;
   z-index: 11;
-  filter: invert(1);
-  opacity: 0.6;
 
   @include down($breakpoint-md) {
     height: 80px;
@@ -48,6 +49,21 @@
 
   @include down($breakpoint-xs) {
     display: none;
+  }
+}
+
+.logoLarge {
+  position: relative;
+  height: 160px;
+  width: 100%;
+  z-index: 11;
+
+  @include down($breakpoint-md) {
+    height: 80px;
+  }
+
+  @include down($breakpoint-sm) {
+    height: 60px;
   }
 }
 
@@ -64,8 +80,6 @@
   position: relative;
   z-index: 11;
   color: $text-color-contrast;
-  opacity: 0.6;
-  font-weight: 100;
 }
 
 .waveSvg {
@@ -96,61 +110,8 @@
   stop-color: $wave-gradient-color-start;
 }
 
-.nodate {
-  position: absolute;
-  width: 100%;
-  top: 10px;
-  display: flex;
-  flex-direction: column;
-}
-
-.nodate .link {
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-}
-
-.nodate .scottyIcon {
-  height: 60px;
-
-  @include down($breakpoint-md) {
-    height: 40px;
-  }
-
-  @include down($breakpoint-sm) {
-    height: 30px;
-  }
-
-  @include down($breakpoint-xs) {
-    display: none;
-  }
-}
-
-.nodate .regText {
-  z-index: 11;
-  opacity: 0.6;
-  font-weight: 600;
-  text-align: center;
-  text-transform: uppercase;
-
-  color: $text-color-contrast;
-
-  @include down($breakpoint-md) {
-    font-size: 3em;
-  }
-
-  @include down($breakpoint-sm) {
-    font-size: 2.5em;
-  }
-}
-
 .textDark {
   color: $text-color-primary;
-  opacity: 1;
-}
-
-.uninvert {
-  filter: none;
   opacity: 1;
 }
 

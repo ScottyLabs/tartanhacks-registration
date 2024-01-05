@@ -4,8 +4,10 @@ import { ReactElement } from "react"
 import Text from "../Text"
 import styles from "./index.module.scss"
 import ScottyLabsIcon from "../ScottyLabsIcon"
+import Logo from "../Logo"
+import clsx from "clsx"
 
-type WaveHeaderVariant = "dark" | "nodate" | "light"
+type WaveHeaderVariant = "dark" | "light"
 
 interface WaveHeaderProps {
   variant: WaveHeaderVariant
@@ -42,38 +44,12 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
   const inner = new Map<WaveHeaderVariant, ReactElement>()
   inner.set(
     "dark",
-    <div className={styles.headerAssets}>
-      <div className={styles.link}>
-        <NextLink href="/" passHref>
-          <Link>
-            <Text variant="h1" className={styles.title}>
-              TartanHacks
-            </Text>
-            <Text variant="h2" className={styles.subtitle}>
-              Feb 2-3, 2024
-            </Text>
-          </Link>
-        </NextLink>
-      </div>
-      <ScottyLabsIcon className={styles.scottyIcon} />
-    </div>
-  )
-
-  inner.set(
-    "nodate",
-    <div className={styles.nodate}>
-      <div className={styles.link}>
-        <NextLink href="/" passHref>
-          <Link>
-            <Text variant="h1" className={styles.title}>
-              TartanHacks
-            </Text>
-          </Link>
-        </NextLink>
-        <ScottyLabsIcon className={styles.scottyIcon} />
-      </div>
-      <Typography variant="h1" className={styles.regText}>
-        Registration
+    <div className={clsx(styles.headerAssets, styles.headerAssetsDark)}>
+      <Link href="/">
+        <Logo className={styles.logoLarge} variant="large" />
+      </Link>
+      <Typography variant="body1" className={styles.subtitle}>
+        Feb 2-3, 2024
       </Typography>
     </div>
   )
@@ -81,7 +57,9 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
   inner.set(
     "light",
     <div className={`${styles.headerAssets} ${styles.light}`}>
-      <ScottyLabsIcon className={`${styles.scottyIcon} ${styles.uninvert}`} />
+      <Link href="/">
+        <Logo className={styles.logo} variant="medium" />
+      </Link>
       <div className={styles.link}>
         <NextLink href="/" passHref>
           <Link underline="none">
