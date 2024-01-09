@@ -41,7 +41,7 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
         <TableRow>
           <TableCell>Full Name</TableCell>
           <TableCell>
-            {profile.firstName} {profile.lastName}
+            {profile.firstName} {profile.middleName} {profile.lastName}
           </TableCell>
         </TableRow>
         <TableRow>
@@ -98,14 +98,6 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Coursework</TableCell>
-          <TableCell>{profile.coursework}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Languages</TableCell>
-          <TableCell>{profile.languages}</TableCell>
-        </TableRow>
-        <TableRow>
           <TableCell>Number of hackathons attended</TableCell>
           <TableCell>{profile.hackathonExperience}</TableCell>
         </TableRow>
@@ -123,20 +115,6 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           <TableCell>{profile.workLocation}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Work Strengths</TableCell>
-          <TableCell>{profile.workStrengths}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Sponsor Ranking</TableCell>
-          <TableCell>
-            <div className={styles.sponsorList}>
-              {profile.sponsorRanking.map((sponsorId: string, idx: number) => {
-                return <div key={idx}>{sponsorMap[sponsorId] ?? sponsorId}</div>
-              })}
-            </div>
-          </TableCell>
-        </TableRow>
-        <TableRow>
           <TableCell>
             <Typography variant="h6">Portfolio</Typography>
           </TableCell>
@@ -144,6 +122,10 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
         <TableRow>
           <TableCell>GitHub</TableCell>
           <TableCell>{profile.github}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>LinkedIn</TableCell>
+          <TableCell>{profile.linkedin}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>Resume</TableCell>
@@ -168,7 +150,7 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
         </TableRow>
         <TableRow>
           <TableCell>Dietary Restrictions</TableCell>
-          <TableCell>{profile.dietaryRestrictions}</TableCell>
+          <TableCell>{profile.dietaryRestrictions.join(", ")}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>Shirt Size</TableCell>
@@ -185,26 +167,16 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
           </TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Attending Physically</TableCell>
-          <TableCell>
-            {profile.attendingPhysically ? (
-              <Check className={styles.icon} />
-            ) : (
-              <Cancel className={styles.icon} />
-            )}
-          </TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Address</TableCell>
-          <TableCell>{profile.address}</TableCell>
-        </TableRow>
-        <TableRow>
           <TableCell>Region</TableCell>
           <TableCell>{profile.region}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell>Phone Number</TableCell>
           <TableCell>{profile.phoneNumber}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Additional Notes</TableCell>
+          <TableCell>{profile.notes}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
