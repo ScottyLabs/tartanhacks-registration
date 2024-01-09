@@ -392,7 +392,7 @@ const ParticipantTable = (): ReactElement => {
               {
                 // Loop over the table rows
                 rows
-                  .filter((row) => row.original.email.startsWith(searchString))
+                  .filter((row) => row.original.email.includes(searchString))
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, rowIdx) => {
                     // Prepare the row for display
