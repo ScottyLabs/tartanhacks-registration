@@ -111,6 +111,12 @@ const Demographics = ({
               confirmed: {data.demographic.schools[school].confirmed}
             </Typography>
           </li>
+          <li>
+            <Typography className={styles.entry}>
+              <CheckCircle className={styles.icon} htmlColor="green" />{" "}
+              admitted: {data.demographic.schools[school].admitted}
+            </Typography>
+          </li>
         </ul>
       </li>
     ))
