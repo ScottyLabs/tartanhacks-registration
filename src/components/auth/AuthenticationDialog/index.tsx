@@ -166,8 +166,8 @@ const AuthenticationDialog = ({
       </Alert>
       <Alert severity="info" className={styles.warning}>
         Applications for non-CMU/non-Pittsburgh students are now closed.
-        Applications for CMU/Pittsburgh students close on January 26th
-        at 11:59 PM EST. 
+        Applications for CMU/Pittsburgh students close on January 26th at 11:59
+        PM EST.
       </Alert>
     </div>
   )
