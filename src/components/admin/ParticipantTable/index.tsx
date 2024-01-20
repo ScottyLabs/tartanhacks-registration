@@ -140,6 +140,17 @@ const ParticipantTable = (): ReactElement => {
     }
   }
 
+  const getAdminChip = (admin: boolean) => {
+    if (admin) {
+      return (
+        <Chip
+          label="ADMIN"
+          className={`${styles.chipMargin} ${styles.chipAdmin}`}
+        />
+      )
+    }
+  }
+
   const admitUser = async (userId: string) => {
     try {
       await dispatch(actions.user.admitUser(userId))
@@ -219,7 +230,12 @@ const ParticipantTable = (): ReactElement => {
         accessor: "status",
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
-          return getStatusChips(original.status)
+          return (
+            <div>
+              {getStatusChips(original.status)}
+              {getAdminChip(original.admin)}
+            </div>
+          )
         }
       },
       {
