@@ -301,7 +301,10 @@ const ParticipantTable = (): ReactElement => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <ProfileBox participant={selected as Participant} />
+        <ProfileBox
+          participant={selected as Participant}
+          setProfileOpen={setProfileOpen}
+        />
       </Modal>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogTitle>{bulkAction}</DialogTitle>
