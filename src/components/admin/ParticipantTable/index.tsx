@@ -394,9 +394,20 @@ const ParticipantTable = (): ReactElement => {
                 rows
                   .filter(
                     (row) =>
-                      row.original.email.trim().toLowerCase().includes(searchString.trim().toLowerCase()) ||
-                      row.original.status.trim().toLowerCase().includes(searchString.trim().toLowerCase()) ||
-                      (row.original.status.includes("COMPLETED_PROFILE") && searchString.trim().toLowerCase() == "applied")
+                      row.original.email
+                        .trim()
+                        .toLowerCase()
+                        .includes(searchString.trim().toLowerCase()) ||
+                      row.original.status
+                        .trim()
+                        .toLowerCase()
+                        .includes(searchString.trim().toLowerCase()) ||
+                      (row.original.status.includes("COMPLETED_PROFILE") &&
+                        searchString.trim().toLowerCase() == "applied") ||
+                      (!row.original.status.includes(
+                        searchString.trim().toLowerCase()
+                      ) &&
+                        searchString.trim().toLowerCase() == "admin")
                   )
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, rowIdx) => {
