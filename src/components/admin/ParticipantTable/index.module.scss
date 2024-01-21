@@ -103,6 +103,12 @@
   }
 }
 
+.chipAdmin {
+  &:global(.MuiChip-root) {
+    background-color: $status-color-admin;
+  }
+}
+
 .buttonContainer {
   display: flex;
   gap: 5px;

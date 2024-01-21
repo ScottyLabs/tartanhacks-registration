@@ -109,3 +109,23 @@ export const declineAcceptance = (): DispatchAction => ({
   },
   status: RequestStatus.PENDING
 })
+
+export const addAdmin = (id: string): DispatchAction => ({
+  type: DispatchActionType.ADD_ADMIN,
+  useAPI: true,
+  request: {
+    path: `/admin/${id}`,
+    method: "POST"
+  },
+  status: RequestStatus.PENDING
+})
+
+export const removeAdmin = (id: string): DispatchAction => ({
+  type: DispatchActionType.REMOVE_ADMIN,
+  useAPI: true,
+  request: {
+    path: `/admin/remove/${id}`,
+    method: "POST"
+  },
+  status: RequestStatus.PENDING
+})

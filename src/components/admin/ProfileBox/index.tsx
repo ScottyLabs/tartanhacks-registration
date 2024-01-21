@@ -12,12 +12,19 @@ import {
 import { Cancel, Check, OpenInNew } from "@mui/icons-material"
 import { Ethnicity, Gender } from "enums/Profile"
 import { Status } from "enums/Status"
-import React, { ReactElement, useEffect, useState } from "react"
+import React, {
+  SetStateAction,
+  Dispatch,
+  ReactElement,
+  useEffect,
+  useState
+} from "react"
 import { useDispatch, useSelector } from "react-redux"
 import actions from "src/actions"
 import { Participant } from "types/Participant"
 import { RootState } from "types/RootState"
 import styles from "./index.module.scss"
+import RectangleButton from "../../design/RectangleButton"
 
 const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
   const sponsors = useSelector((store: RootState) => store?.sponsors?.data)
@@ -183,12 +190,62 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
   )
 }
 
+const AdminSettings = ({
+  participant,
+  dispatch,
+  setProfileOpen
+}: {
+  participant?: any
+  dispatch: Dispatch<any>
+  setProfileOpen: Dispatch<SetStateAction<boolean>>
+}): ReactElement => {
+  if (participant?.admin) {
+    return (
+      <RectangleButton
+        className={styles.buttonMargin}
+        type="button"
+        onClick={async () => {
+          try {
+            await dispatch(actions.user.removeAdmin(participant?._id))
+            if (participant) participant.admin = false
+            setProfileOpen(false)
+          } catch (err) {
+            console.error("Error removing user admin")
+          }
+        }}
+      >
+        Remove Admin
+      </RectangleButton>
+    )
+  } else {
+    return (
+      <RectangleButton
+        className={styles.buttonMargin}
+        type="button"
+        onClick={async () => {
+          try {
+            await dispatch(actions.user.addAdmin(participant?._id))
+            if (participant) participant.admin = true
+            setProfileOpen(false)
+          } catch (err) {
+            console.error("Error making user admin")
+          }
+        }}
+      >
+        Make Admin
+      </RectangleButton>
+    )
+  }
+}
+
 const ProfileBox = React.forwardRef(
   (
     {
-      participant
+      participant,
+      setProfileOpen
     }: {
       participant: Participant
+      setProfileOpen: Dispatch<SetStateAction<boolean>>
     },
     ref
   ): ReactElement => {
@@ -222,20 +279,27 @@ const ProfileBox = React.forwardRef(
     }, [participant])
 
     return (
-      <Box className={styles.modal}>
-        <Collapse in={loading}>
-          <CircularProgress />
-        </Collapse>
-        {loading ? null : (
-          <>
-            <Typography variant="h5">{participant?.email}</Typography>
-            <Typography variant="h6">
-              Status: <span className={styles.statusLabel}>{status}</span>
-            </Typography>
-            {profileContent}
-          </>
-        )}
-      </Box>
+      <>
+        <Box className={styles.modal}>
+          <Collapse in={loading}>
+            <CircularProgress />
+          </Collapse>
+          {loading ? null : (
+            <>
+              <Typography variant="h5">{participant?.email}</Typography>
+              <Typography variant="h6">
+                Status: <span className={styles.statusLabel}>{status}</span>
+              </Typography>
+              <AdminSettings
+                participant={participant}
+                dispatch={dispatch}
+                setProfileOpen={setProfileOpen}
+              />
+              {profileContent}
+            </>
+          )}
+        </Box>
+      </>
     )
   }
 )
