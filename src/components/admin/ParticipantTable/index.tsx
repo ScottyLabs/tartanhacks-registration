@@ -394,16 +394,20 @@ const ParticipantTable = (): ReactElement => {
                 rows
                   .filter(
                     (row) =>
+                      // Search by email
                       row.original.email
                         .trim()
                         .toLowerCase()
                         .includes(searchString.trim().toLowerCase()) ||
+                      // Search by status
                       row.original.status
                         .trim()
                         .toLowerCase()
                         .includes(searchString.trim().toLowerCase()) ||
+                      // Search for Applied status
                       (row.original.status.includes("COMPLETED_PROFILE") &&
                         searchString.trim().toLowerCase() == "applied") ||
+                      // Search for admins
                       (!row.original.status.includes(
                         searchString.trim().toLowerCase()
                       ) &&
