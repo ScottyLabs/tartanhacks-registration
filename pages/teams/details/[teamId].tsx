@@ -183,9 +183,7 @@ const TeamDescription = () => {
             <div className={styles.buttonContainer}>
               <BackButton link="/teams" className={styles.backButton} />
               <form onSubmit={handleJoinTeam}>
-                <RectangleButton type="submit" className={styles.joinButton}>
-                  Join
-                </RectangleButton>
+                <RectangleButton type="submit">Join</RectangleButton>
               </form>
             </div>
           ) : null}
