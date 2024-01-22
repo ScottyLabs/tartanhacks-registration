@@ -31,7 +31,9 @@ const TeamCreate = () => {
         <WaveHeader variant="light" />
         <WaveFooter />
         <FloatingDiv>
-          <BackButton link="/teams" className={styles.backButton} />
+          <div>
+            <BackButton link="/teams" className={styles.backButton} />
+          </div>
           <ContentHeader title="Create New Team" longTitle={true} />
           <div className={styles.content}>
             <Typography variant="h4" className={styles.title}>
