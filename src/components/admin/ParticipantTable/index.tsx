@@ -411,7 +411,27 @@ const ParticipantTable = (): ReactElement => {
               {
                 // Loop over the table rows
                 rows
-                  .filter((row) => row.original.email.includes(searchString))
+                  .filter(
+                    (row) =>
+                      // Search by email
+                      row.original.email
+                        .trim()
+                        .toLowerCase()
+                        .includes(searchString.trim().toLowerCase()) ||
+                      // Search by status
+                      row.original.status
+                        .trim()
+                        .toLowerCase()
+                        .includes(searchString.trim().toLowerCase()) ||
+                      // Search for Applied status
+                      (row.original.status.includes("COMPLETED_PROFILE") &&
+                        searchString.trim().toLowerCase() == "applied") ||
+                      // Search for admins
+                      (!row.original.status.includes(
+                        searchString.trim().toLowerCase()
+                      ) &&
+                        searchString.trim().toLowerCase() == "admin")
+                  )
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, rowIdx) => {
                     // Prepare the row for display
