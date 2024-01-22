@@ -55,6 +55,7 @@ const TeamDescription = () => {
   const [successMessage, setSuccessMessage] = useState("")
   const [isOwnTeam, setIsOwnTeam] = useState(false)
   const errorMessage = useSelector((state: RootState) => state?.teams?.error)
+  const [joinErrorMessage, setJoinErrorMessage] = useState(errorMessage)
   const user = useSelector((state: RootState) => state?.accounts?.data)
   const [isCaptain, setIsCaptain] = useState(false)
   const [open, setOpen] = useState(dialogOpen.No)
@@ -114,6 +115,23 @@ const TeamDescription = () => {
     }
   }
 
+  const handleJoinTeam = async (e: any) => {
+    e.preventDefault()
+    try {
+      await dispatch(actions.teams.joinTeamRequest(teamInfo._id))
+      checkJoinError(false)
+    } catch (err) {
+      checkJoinError(true)
+    }
+  }
+
+  const checkJoinError = (isError: boolean) => {
+    setNotify(isError ? "error" : "success")
+    if (!isError) {
+      setSuccessMessage("Join request sent successfully")
+    }
+  }
+
   useEffect(() => {
     if (teamId === undefined || user._id === undefined) {
       setLoading(false)
@@ -162,7 +180,14 @@ const TeamDescription = () => {
         <WaveFooter />
         <FloatingDiv>
           {ownTeamFetched && !isOwnTeam ? (
-            <BackButton link="/teams" className={styles.backButton} />
+            <div className={styles.buttonContainer}>
+              <BackButton link="/teams" className={styles.backButton} />
+              <form onSubmit={handleJoinTeam}>
+                <RectangleButton type="submit" className={styles.joinButton}>
+                  Join
+                </RectangleButton>
+              </form>
+            </div>
           ) : null}
           <div className={styles.spinnerContainer}>
             <Collapse in={loading}>
