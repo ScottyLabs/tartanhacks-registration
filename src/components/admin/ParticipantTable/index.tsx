@@ -182,9 +182,9 @@ const ParticipantTable = (): ReactElement => {
     }
   }
 
-  const sendResetPassword = async (userId: string) => {
+  const requestReset = async (email: string) => {
     try {
-      // await dispatch(actions.user.sendResetPassword(userId))
+      await dispatch(actions.auth.requestReset(email))
       openSnackbar("Sent reset password email!")
     } catch (err) {
       openSnackbar("Error sending reset password email")
@@ -342,8 +342,8 @@ const ParticipantTable = (): ReactElement => {
                 <Divider />
                 <MenuItem
                   onClick={async () => {
-                    await sendResetPassword(_id)
-                    handleClose
+                    await requestReset(original.email)
+                    handleClose()
                   }}
                 >
                   <ListItemIcon>
