@@ -8,7 +8,12 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Divider,
   IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
   Modal,
   Snackbar,
   Table,
@@ -31,6 +36,12 @@ import { Participant } from "types/Participant"
 import RectangleButton from "../../design/RectangleButton"
 import ProfileBox from "../ProfileBox"
 import styles from "./index.module.scss"
+import {
+  CheckOutlined,
+  ClearOutlined,
+  LockResetOutlined,
+  MoreHorizRounded
+} from "@mui/icons-material"
 
 enum BulkAction {
   ADMIT_ALL = "Admit all",
@@ -171,6 +182,15 @@ const ParticipantTable = (): ReactElement => {
     }
   }
 
+  const sendResetPassword = async (userId: string) => {
+    try {
+      // await dispatch(actions.user.sendResetPassword(userId))
+      openSnackbar("Sent reset password email!")
+    } catch (err) {
+      openSnackbar("Error sending reset password email")
+    }
+  }
+
   const admitAll = async () => {
     try {
       await dispatch(actions.user.admitAll())
@@ -261,24 +281,79 @@ const ParticipantTable = (): ReactElement => {
         Cell: ({ cell }: { cell: any }) => {
           const original: Participant = cell.row.original
           const { _id, status } = original
-          if (status == Status.COMPLETED_PROFILE) {
-            return (
-              <div className={styles.buttonContainer}>
-                <RectangleButton
-                  className={styles.buttonMargin}
-                  type="button"
-                  onClick={() => admitUser(_id)}
-                >
-                  Admit
-                </RectangleButton>
-                <RectangleButton type="button" onClick={() => rejectUser(_id)}>
-                  Reject
-                </RectangleButton>
-              </div>
-            )
-          } else {
-            return <></>
+
+          const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(
+            null
+          )
+          const open = Boolean(anchorEl)
+          const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+            setAnchorEl(event.currentTarget)
           }
+          const handleClose = () => {
+            setAnchorEl(null)
+          }
+
+          return (
+            <div>
+              <IconButton
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+              >
+                <MoreHorizRounded />
+              </IconButton>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button"
+                }}
+              >
+                {status === Status.COMPLETED_PROFILE && (
+                  <>
+                    <MenuItem
+                      onClick={async () => {
+                        await admitUser(_id)
+                        handleClose()
+                      }}
+                    >
+                      <ListItemIcon>
+                        <CheckOutlined fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText>Accept</ListItemText>
+                    </MenuItem>
+                    <MenuItem
+                      onClick={async () => {
+                        await rejectUser(_id)
+                        handleClose()
+                      }}
+                    >
+                      <ListItemIcon>
+                        <ClearOutlined fontSize="small" />
+                      </ListItemIcon>
+                      <ListItemText>Reject</ListItemText>
+                    </MenuItem>
+                  </>
+                )}
+                <Divider />
+                <MenuItem
+                  onClick={async () => {
+                    await sendResetPassword(_id)
+                    handleClose
+                  }}
+                >
+                  <ListItemIcon>
+                    <LockResetOutlined fontSize="small" />
+                  </ListItemIcon>
+                  <ListItemText>Reset Password</ListItemText>
+                </MenuItem>
+              </Menu>
+            </div>
+          )
         }
       }
     ],
