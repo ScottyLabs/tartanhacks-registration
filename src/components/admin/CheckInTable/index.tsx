@@ -35,7 +35,7 @@ const CheckInTable = (): ReactElement => {
       }
       setLoading(false)
     }
-    getCheckIn().then()
+    getCheckIn()
   }, [dispatch])
 
   const columns: Column<CheckIn>[] = useMemo(
