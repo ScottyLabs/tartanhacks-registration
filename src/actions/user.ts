@@ -41,6 +41,15 @@ export const getParticipants = (): DispatchAction => ({
   status: RequestStatus.PENDING
 })
 
+export const getTeams = (): DispatchAction => ({
+  type: DispatchActionType.TEAMS_VIEW,
+  useAPI: true,
+  request: {
+    path: "/teams",
+    method: "GET"
+  },
+  status: RequestStatus.PENDING
+})
 export const admitUser = (id: string): DispatchAction => ({
   type: DispatchActionType.ADMIT_USER,
   useAPI: true,

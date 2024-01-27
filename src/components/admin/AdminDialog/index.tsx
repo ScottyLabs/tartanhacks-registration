@@ -5,19 +5,20 @@ import { useDispatch } from "react-redux"
 import actions from "src/actions"
 import FloatingDiv from "src/components/design/FloatingDiv"
 import AnalyticsTab from "../Analytics"
+import Teams from "../Teams"
 import ParticipantTable from "../ParticipantTable"
 import RecruiterCreationForm from "../RecruiterCreationForm"
 import SponsorCreationForm from "../SponsorCreationForm"
 import styles from "./index.module.scss"
+import axios from "axios"
 
 const AdminDialog = (): ReactElement => {
-  const dispatch = useDispatch()
   const [tabIndex, setTabIndex] = useState("0")
 
   useEffect(() => {
     const querySponsors = async () => {
       try {
-        await dispatch(actions.sponsors.list())
+        // await dispatch(actions.sponsors.list())
       } catch (err) {
         console.error(err)
       }
@@ -36,21 +37,25 @@ const AdminDialog = (): ReactElement => {
             variant="scrollable"
           >
             <Tab label="Participants" value="0" />
-            <Tab label="Recruiters" value="1" />
-            <Tab label="Sponsors" value="2" />
-            <Tab label="Analytics" value="3" />
+            <Tab label="Teams" value="1" />
+            <Tab label="Recruiters" value="2" />
+            <Tab label="Sponsors" value="3" />
+            <Tab label="Analytics" value="4" />
           </TabList>
         </Box>
         <TabPanel value="0" className={styles.tabPanel}>
           <ParticipantTable />
         </TabPanel>
         <TabPanel value="1" className={styles.tabPanel}>
-          <RecruiterCreationForm />
+          <Teams />
         </TabPanel>
         <TabPanel value="2" className={styles.tabPanel}>
-          <SponsorCreationForm />
+          <RecruiterCreationForm />
         </TabPanel>
         <TabPanel value="3" className={styles.tabPanel}>
+          <SponsorCreationForm />
+        </TabPanel>
+        <TabPanel value="4" className={styles.tabPanel}>
           <AnalyticsTab />
         </TabPanel>
       </TabContext>

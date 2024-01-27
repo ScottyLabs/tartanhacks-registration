@@ -26,6 +26,7 @@ const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
         await dispatch(actions.auth.loginWithToken())
       } catch (err) {
         // Login token expired or invalid
+        console.log("invalid token")
         router.push("/login")
       }
       setLoading(false)
@@ -35,7 +36,8 @@ const AdminLayout = (Page: FunctionComponent) => (): ReactElement => {
 
   useEffect(() => {
     if (currentUser?._id && !currentUser.admin) {
-      router.push("/")
+      console.log("not auth")
+      // router.push("/")
     }
   }, [currentUser])
 

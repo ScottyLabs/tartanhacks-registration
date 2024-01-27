@@ -1,0 +1,271 @@
+import {
+  Typography,
+  Button,
+  Chip,
+  CircularProgress,
+  Collapse,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  IconButton,
+  Modal,
+  Snackbar,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TablePagination,
+  TableRow,
+  TextField,
+  Toolbar
+} from "@mui/material"
+import { Alert, Autocomplete } from "@mui/material"
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined"
+import { ReactElement, useEffect, useMemo, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import actions from "src/actions"
+import { RootState } from "types/RootState"
+import styles from "./index.module.scss"
+import axios from "axios"
+import { Team } from "types/Team"
+import { Column, useTable } from "react-table"
+import { Participant } from "types/Participant"
+import ProfileBox from "../ProfileBox"
+import RectangleButton from "src/components/design/RectangleButton"
+import admin from "pages/admin"
+export default () => {
+  const dispatch = useDispatch()
+
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [teams, setTeams] = useState<Team[]>([])
+
+  const [selectedUser, setSelectedUser] = useState<Participant | null>(null)
+  const [canSelectedUserBePromoted, setCanSelectedUserBePromoted] =
+    useState(false)
+
+  const [editing, setEditing] = useState<Team | null>(null)
+
+  const [profileOpen, setProfileOpen] = useState(false)
+  const user = useSelector((state: RootState) => state.accounts.data)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const { data } = (await dispatch(actions.user.getTeams())) as {
+          data: Team[]
+        }
+        setTeams(data)
+        console.log(teams)
+      } catch (err) {
+        setError(true)
+        setErrorMessage(err as string)
+      }
+    }
+    fetchData()
+  }, [])
+
+  const columns: Column<Team>[] = useMemo(
+    () => [
+      {
+        Header: "Name",
+        accessor: "name",
+        Cell: ({ cell }: { cell: any }) => {
+          return (
+            <span className={styles.withIcon}>
+              {editing == cell.row.original ? (
+                <input value={"editing"} />
+              ) : (
+                cell.row.original.name
+              )}
+              <EditOutlinedIcon
+                width="24"
+                height="24"
+                className={styles.editIcon}
+                onClick={() => {
+                  setEditing(cell.row.original)
+                  console.log(editing)
+                }}
+              />{" "}
+            </span>
+          )
+        }
+      },
+      {
+        Header: "Description",
+        accessor: "description"
+      },
+      {
+        Header: "Leader",
+        accessor: "admin",
+        Cell: ({ cell }: { cell: any }) => {
+          const original: Team = cell.row.original
+          const adminAsParticipant = original.members.find(
+            (m) => m._id == original.admin._id
+          )
+          if (!adminAsParticipant) {
+            setErrorMessage("Error: Admin is not in team")
+            setError(true)
+            return
+          }
+          return (
+            <RectangleButton
+              className={styles.buttonMargin}
+              type="button"
+              onClick={() => {
+                setSelectedUser(adminAsParticipant)
+                setProfileOpen(true)
+              }}
+            >
+              Profile
+            </RectangleButton>
+          )
+        }
+      },
+      {
+        Header: "Members",
+        accessor: "members",
+        Cell: ({ cell }: { cell: any }) => {
+          const members: Participant[] = cell.row.original.members
+          return members.map((member) => (
+            <RectangleButton
+              className={styles.buttonMargin}
+              type="button"
+              onClick={() => {
+                setSelectedUser(member)
+                setProfileOpen(true)
+              }}
+            >
+              {member.email}
+            </RectangleButton>
+          ))
+        }
+      }
+    ],
+    []
+  )
+
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    useTable<Team>({
+      columns,
+      data: teams,
+      initialState: {
+        hiddenColumns: ["_id"]
+      }
+    })
+
+  return (
+    <>
+      <Modal
+        open={profileOpen}
+        onClose={() => setProfileOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <ProfileBox participant={selectedUser as Participant} />
+      </Modal>
+      <div className={styles.container}>
+        <Snackbar
+          open={error}
+          autoHideDuration={5000}
+          onClose={(e) => setError(false)}
+          anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+        >
+          <Alert severity="error">{errorMessage}</Alert>
+        </Snackbar>
+        <form
+          className={styles.applicationForm}
+          onSubmit={async (e) => {
+            e.preventDefault()
+          }}
+        >
+          <div className={styles.headerContainer}>
+            <Typography variant="h4" className={styles.header}>
+              View Teams
+            </Typography>
+            {}
+          </div>
+          <div className={styles.formContents}>
+            <div className={styles.buttonContainer}></div>
+          </div>
+        </form>
+        <TableContainer>
+          <TextField
+            variant="outlined"
+            placeholder="Search"
+            fullWidth={true}
+            // value={searchString}
+            InputProps={{
+              classes: { notchedOutline: styles.textFieldInput }
+            }}
+            onChange={(e) => {
+              //   setSearchString(e.target.value)
+              //   setPage(0)
+            }}
+          />
+          <Table {...getTableProps()}>
+            <TableHead>
+              {
+                // Loop over the header rows
+                headerGroups.map((headerGroup, headerIdx) => (
+                  // Apply the header row props
+                  <TableRow
+                    {...headerGroup.getHeaderGroupProps()}
+                    key={headerIdx}
+                  >
+                    {
+                      // Loop over the headers in each row
+                      headerGroup.headers.map((column, cellIdx) => (
+                        // Apply the header cell props
+                        <TableCell {...column.getHeaderProps()} key={cellIdx}>
+                          {
+                            // Render the header
+                            column.render("Header")
+                          }
+                        </TableCell>
+                      ))
+                    }
+                  </TableRow>
+                ))
+              }
+            </TableHead>
+            {/* Apply the table body props */}
+            <TableBody {...getTableBodyProps()}>
+              {
+                // Loop over the table rows
+                rows
+                  //   .filter((row) => row.original.email.includes(searchString))
+                  //   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, rowIdx) => {
+                    // Prepare the row for display
+                    prepareRow(row)
+                    return (
+                      // Apply the row props
+                      <TableRow {...row.getRowProps()} key={rowIdx}>
+                        {
+                          // Loop over the rows cells
+                          row.cells.map((cell, cellIdx) => {
+                            // Apply the cell props
+                            return (
+                              <TableCell {...cell.getCellProps()} key={cellIdx}>
+                                {
+                                  // Render the cell contents
+                                  cell.render("Cell")
+                                }
+                              </TableCell>
+                            )
+                          })
+                        }
+                      </TableRow>
+                    )
+                  })
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </>
+  )
+}
