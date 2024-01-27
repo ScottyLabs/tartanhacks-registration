@@ -15,7 +15,6 @@ import actions from "src/actions"
 import styles from "./index.module.scss"
 import { CheckIn } from "types/CheckIn"
 
-
 const CheckInTable = (): ReactElement => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(true)
@@ -34,10 +33,9 @@ const CheckInTable = (): ReactElement => {
       setLoading(false)
     }
     getCheckIn().then()
-
   }, [dispatch])
 
-  const columns: Column<CheckIn>[]= useMemo(
+  const columns: Column<CheckIn>[] = useMemo(
     () => [
       {
         Header: "ID",
@@ -52,12 +50,30 @@ const CheckInTable = (): ReactElement => {
         accessor: "description"
       },
       {
-        Header: "Points",
-        accessor: "points"
+        Header: () => (
+          <div
+            style={{
+              textAlign: "center"
+            }}
+          >
+            Points
+          </div>
+        ),
+        accessor: "points",
+        Cell: (row) => <div style={{ textAlign: "center" }}>{row.value}</div>
       },
       {
-        Header: "Check-In Count",
-        accessor: "checkinCount"
+        Header: () => (
+          <div
+            style={{
+              textAlign: "center"
+            }}
+          >
+            Check-In Count
+          </div>
+        ),
+        accessor: "checkinCount",
+        Cell: (row) => <div style={{ textAlign: "center" }}>{row.value}</div>
       }
     ],
     []
@@ -108,32 +124,29 @@ const CheckInTable = (): ReactElement => {
             </TableHead>
             {/* Apply the table body props */}
             <TableBody {...getTableBodyProps()}>
-              {
-                rows
-                  .map((row, rowIdx) => {
-                    // Prepare the row for display
-                    prepareRow(row)
-                    return (
-                      // Apply the row props
-                      <TableRow {...row.getRowProps()} key={rowIdx}>
-                        {
-                          // Loop over the rows cells
-                          row.cells.map((cell, cellIdx) => {
-                            // Apply the cell props
-                            return (
-                              <TableCell {...cell.getCellProps()} key={cellIdx}>
-                                {
-                                  // Render the cell contents
-                                  cell.render("Cell")
-                                }
-                              </TableCell>
-                            )
-                          })
-                        }
-                      </TableRow>
-                    )
-                  })
-              }
+              {rows.map((row, rowIdx) => {
+                // Prepare the row for display
+                prepareRow(row)
+                return (
+                  // Apply the row props
+                  <TableRow {...row.getRowProps()} key={rowIdx}>
+                    {
+                      // Loop over the rows cells
+                      row.cells.map((cell, cellIdx) => {
+                        // Apply the cell props
+                        return (
+                          <TableCell {...cell.getCellProps()} key={cellIdx}>
+                            {
+                              // Render the cell contents
+                              cell.render("Cell")
+                            }
+                          </TableCell>
+                        )
+                      })
+                    }
+                  </TableRow>
+                )
+              })}
             </TableBody>
           </Table>
         </TableContainer>
