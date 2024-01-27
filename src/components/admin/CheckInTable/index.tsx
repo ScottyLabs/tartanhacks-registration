@@ -49,10 +49,6 @@ const CheckInTable = (): ReactElement => {
         accessor: "name"
       },
       {
-        Header: "Description",
-        accessor: "description"
-      },
-      {
         Header: () => (
           <div
             style={{
