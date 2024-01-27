@@ -7,6 +7,7 @@ import * as settings from "./settings"
 import * as requests from "./requests"
 import * as recruiters from "./recruiters"
 import * as analytics from "./analytics"
+import * as checkin from "./checkin"
 
 export default {
   auth,
@@ -17,5 +18,6 @@ export default {
   settings,
   requests,
   recruiters,
-  analytics
+  analytics,
+  checkin
 }
