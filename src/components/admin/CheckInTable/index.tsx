@@ -26,6 +26,9 @@ const CheckInTable = (): ReactElement => {
       setLoading(true)
       try {
         const { data } = await dispatch(actions.checkin.allCheckInItems())
+        data.sort((a: { startTime: number }, b: { startTime: number }) => {
+          return a.startTime > b.startTime
+        })
         setCheckIns(data)
       } catch (err) {
         console.error(err)
