@@ -140,11 +140,11 @@ const Stats = ({
         </Typography>
         <Typography className={styles.entry}>
           <CheckCircle className={styles.icon} htmlColor="green" />
-          Confirmed (CMU) {data.confirmedCmu}
+          Confirmed (CMU): {data.confirmedCmu}
         </Typography>
         <Typography className={styles.entry}>
           <Cancel className={styles.icon} htmlColor="red" />
-          Declined {data.declined}
+          Declined: {data.declined}
         </Typography>
       </div>
       <div className={styles.subsection}>
