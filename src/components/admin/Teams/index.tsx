@@ -36,6 +36,7 @@ import { Participant } from "types/Participant"
 import ProfileBox from "../ProfileBox"
 import RectangleButton from "src/components/design/RectangleButton"
 import admin from "pages/admin"
+import EditTeam from "../EditTeam"
 export default () => {
   const dispatch = useDispatch()
 
@@ -44,12 +45,17 @@ export default () => {
   const [teams, setTeams] = useState<Team[]>([])
 
   const [selectedUser, setSelectedUser] = useState<Participant | null>(null)
-  const [canSelectedUserBePromoted, setCanSelectedUserBePromoted] =
-    useState(false)
 
-  const [editing, setEditing] = useState<Team | null>(null)
+  const [selectedTeam, setSelectedTeam] = useState<Team | null>(null)
 
+  const [page, setPage] = useState(0)
+  const [rowsPerPage, setRowsPerPage] = useState(5)
+
+  const [teamOpen, setTeamOpen] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+
+  const [search, setSearch] = useState("")
+
   const user = useSelector((state: RootState) => state.accounts.data)
   useEffect(() => {
     const fetchData = async () => {
@@ -71,27 +77,7 @@ export default () => {
     () => [
       {
         Header: "Name",
-        accessor: "name",
-        Cell: ({ cell }: { cell: any }) => {
-          return (
-            <span className={styles.withIcon}>
-              {editing == cell.row.original ? (
-                <input value={"editing"} />
-              ) : (
-                cell.row.original.name
-              )}
-              <EditOutlinedIcon
-                width="24"
-                height="24"
-                className={styles.editIcon}
-                onClick={() => {
-                  setEditing(cell.row.original)
-                  console.log(editing)
-                }}
-              />{" "}
-            </span>
-          )
-        }
+        accessor: "name"
       },
       {
         Header: "Description",
@@ -142,6 +128,19 @@ export default () => {
             </RectangleButton>
           ))
         }
+      },
+      {
+        Header: "Actions",
+        Cell: (cell) => (
+          <RectangleButton
+            onClick={() => {
+              setTeamOpen(true)
+              setSelectedTeam(cell.row.original)
+            }}
+          >
+            Edit
+          </RectangleButton>
+        )
       }
     ],
     []
@@ -159,12 +158,21 @@ export default () => {
   return (
     <>
       <Modal
-        open={profileOpen}
-        onClose={() => setProfileOpen(false)}
+        open={profileOpen || teamOpen}
+        onClose={() => {
+          setProfileOpen(false)
+          setTeamOpen(false)
+        }}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <ProfileBox participant={selectedUser as Participant} />
+        {profileOpen ? (
+          <ProfileBox participant={selectedUser as Participant} />
+        ) : teamOpen ? (
+          <EditTeam team={selectedTeam} />
+        ) : (
+          <div></div>
+        )}
       </Modal>
       <div className={styles.container}>
         <Snackbar
@@ -181,12 +189,6 @@ export default () => {
             e.preventDefault()
           }}
         >
-          <div className={styles.headerContainer}>
-            <Typography variant="h4" className={styles.header}>
-              View Teams
-            </Typography>
-            {}
-          </div>
           <div className={styles.formContents}>
             <div className={styles.buttonContainer}></div>
           </div>
@@ -194,15 +196,15 @@ export default () => {
         <TableContainer>
           <TextField
             variant="outlined"
-            placeholder="Search"
+            placeholder="Search by team name..."
             fullWidth={true}
-            // value={searchString}
+            value={search}
             InputProps={{
               classes: { notchedOutline: styles.textFieldInput }
             }}
             onChange={(e) => {
-              //   setSearchString(e.target.value)
-              //   setPage(0)
+              setSearch(e.target.value)
+              setPage(0)
             }}
           />
           <Table {...getTableProps()}>
@@ -236,8 +238,8 @@ export default () => {
               {
                 // Loop over the table rows
                 rows
-                  //   .filter((row) => row.original.email.includes(searchString))
-                  //   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .filter((row) => row.original.name.includes(search))
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, rowIdx) => {
                     // Prepare the row for display
                     prepareRow(row)
@@ -265,6 +267,18 @@ export default () => {
             </TableBody>
           </Table>
         </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          count={rows.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={(e, newPage: number) => setPage(newPage)}
+          onRowsPerPageChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+            setRowsPerPage(parseInt(event.target.value, 10))
+            setPage(0)
+          }}
+        />
       </div>
     </>
   )
