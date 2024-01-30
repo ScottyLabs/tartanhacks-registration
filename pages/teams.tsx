@@ -173,7 +173,7 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>["props"]) {
           <table className={styles.tableData}>
             <tbody>
               {teams
-                .sort((a, b) => +a.id - +b.id)
+                .sort((a, b) => +a._id - +b._id)
                 .map((team, idx) => (
                   <TeamTableEntry
                     team={team}
