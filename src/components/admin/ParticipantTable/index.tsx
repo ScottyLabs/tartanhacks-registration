@@ -444,7 +444,7 @@ const ParticipantTable = (): ReactElement => {
         <TableContainer>
           <TextField
             variant="outlined"
-            placeholder="Search"
+            placeholder="Search by email or status"
             fullWidth={true}
             value={searchString}
             InputProps={{
@@ -498,13 +498,11 @@ const ParticipantTable = (): ReactElement => {
                         .trim()
                         .toLowerCase()
                         .includes(searchString.trim().toLowerCase()) ||
-                      // Search for Applied status
+                      // Search for applied status
                       (row.original.status.includes("COMPLETED_PROFILE") &&
                         searchString.trim().toLowerCase() == "applied") ||
                       // Search for admins
-                      (!row.original.status.includes(
-                        searchString.trim().toLowerCase()
-                      ) &&
+                      (row.original.admin &&
                         searchString.trim().toLowerCase() == "admin")
                   )
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)

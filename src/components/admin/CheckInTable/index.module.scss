@@ -1,0 +1,42 @@
+@import "~/styles/variables.scss";
+@import "~/styles/mixins.scss";
+
+.dialog {
+  display: flex;
+  align-items: center;
+  width: 75%;
+  border-radius: 25px;
+  padding: 2rem;
+  margin: 0 auto;
+  flex-direction: column;
+  background-image: $dialog-container-gradient;
+  box-shadow: $dialog-container-box-shadow;
+  backdrop-filter: blur(4px);
+
+  max-height: 70%;
+  overflow: scroll;
+
+  @include down($breakpoint-md) {
+    width: 80%;
+  }
+
+  @include down($breakpoint-sm) {
+    width: 70%;
+  }
+}
+
+.dialogContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.spinnerContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.table {
+  width: 100%;
+}

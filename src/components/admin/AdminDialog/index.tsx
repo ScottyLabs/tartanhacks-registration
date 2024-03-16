@@ -9,6 +9,7 @@ import Teams from "../Teams"
 import ParticipantTable from "../ParticipantTable"
 import RecruiterCreationForm from "../RecruiterCreationForm"
 import SponsorCreationForm from "../SponsorCreationForm"
+import CheckInTable from "../CheckInTable"
 import styles from "./index.module.scss"
 import axios from "axios"
 
@@ -41,6 +42,7 @@ const AdminDialog = (): ReactElement => {
             <Tab label="Recruiters" value="2" />
             <Tab label="Sponsors" value="3" />
             <Tab label="Analytics" value="4" />
+            <Tab label="Check-in Items" value="5" />
           </TabList>
         </Box>
         <TabPanel value="0" className={styles.tabPanel}>
@@ -57,6 +59,9 @@ const AdminDialog = (): ReactElement => {
         </TabPanel>
         <TabPanel value="4" className={styles.tabPanel}>
           <AnalyticsTab />
+        </TabPanel>
+        <TabPanel value="4" className={styles.tabPanel}>
+          <CheckInTable />
         </TabPanel>
       </TabContext>
     </FloatingDiv>

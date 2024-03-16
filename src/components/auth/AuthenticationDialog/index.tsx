@@ -165,7 +165,7 @@ const AuthenticationDialog = ({
         Participants must be at least 18 years old
       </Alert>
       <Alert severity="info" className={styles.warning}>
-        Applications close on January 26th at 11:59 PM EST.
+        Applications will be accepted on a first-come, first-serve rolling basis
       </Alert>
     </div>
   )
