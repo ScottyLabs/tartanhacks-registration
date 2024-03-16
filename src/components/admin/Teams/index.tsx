@@ -140,6 +140,11 @@ export default () => {
 						</RectangleButton>
 					));
 				},
+				getProps: () => {
+					return {
+						class: "team-cell"
+					}
+				}
 			},
 			{
 				Header: 'Actions',
@@ -261,9 +266,14 @@ export default () => {
 							{
 								// Loop over the table rows
 								rows
-									.filter((row) =>
-										row.original.name.includes(search),
-									)
+									.filter((row) => {
+										const query = search.toLowerCase()
+										const obj = row.original;
+										return obj.name.toLowerCase().includes(query) ||
+											obj.description.toLowerCase().includes(query) ||
+											obj.members.some((member) => (member.firstName + member.lastName)
+												.toLowerCase().includes(query))
+									})
 									.slice(
 										page * rowsPerPage,
 										page * rowsPerPage + rowsPerPage,
