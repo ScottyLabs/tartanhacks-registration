@@ -1,57 +1,57 @@
-@import "styles/variables.scss";
-@import "styles/mixins.scss";
+@import 'styles/variables.scss';
+@import 'styles/mixins.scss';
 
 .teamNameCell {
-  width: 50%;
+	width: 50%;
 
-  @include down($breakpoint-sm) {
-    width: 40%;
-    height: 100%;
-  }
+	@include down($breakpoint-sm) {
+		width: 40%;
+		height: 100%;
+	}
 }
 .name {
-  font-weight: 600;
-  color: $gradient-color-start;
-  font-size: 2em !important;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  display: block;
-  width: 100%;
+	font-weight: 600;
+	color: $gradient-color-start;
+	font-size: 2em !important;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	width: 100%;
 
-  @include down($breakpoint-sm) {
-    font-size: 1.5em !important;
-  }
+	@include down($breakpoint-sm) {
+		font-size: 1.5em !important;
+	}
 }
 .description {
-  font-weight: 400;
-  color: $gradient-color-start;
-  padding-left: 5%;
-  width: 95%;
-  right: 27px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  display: block;
-  @include down($breakpoint-sm) {
-    height: 0%;
-  }
+	font-weight: 400;
+	color: $gradient-color-start;
+	padding-left: 5%;
+	width: 95%;
+	right: 27px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	@include down($breakpoint-sm) {
+		height: 0%;
+	}
 }
 .joinButton {
-  padding-right: 15px;
-  text-align: right;
-  @include down($breakpoint-sm) {
-    font-size: 16px;
-  }
+	padding-right: 15px;
+	text-align: right;
+	@include down($breakpoint-sm) {
+		font-size: 16px;
+	}
 }
 .tableEntryButton {
-  padding: 1em 3em !important;
-  font-size: large !important;
+	padding: 1em 3em !important;
+	font-size: large !important;
 
-  @include down($breakpoint-lg) {
-    padding: 0.5em 1em !important;
-    font-size: medium !important;
-  }
+	@include down($breakpoint-lg) {
+		padding: 0.5em 1em !important;
+		font-size: medium !important;
+	}
 }
 .viewDetailCell {
 }

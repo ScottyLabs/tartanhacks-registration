@@ -1,121 +1,121 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .burgerLine {
-  width: 3rem;
-  height: 0.25rem;
-  background-color: $color-primary;
-  border-radius: 10px;
-  position: relative;
-  margin-bottom: 2px;
+	width: 3rem;
+	height: 0.25rem;
+	background-color: $color-primary;
+	border-radius: 10px;
+	position: relative;
+	margin-bottom: 2px;
 }
 
 .burgerWrapper {
-  top: 0;
-  right: 0;
+	top: 0;
+	right: 0;
 
-  position: absolute;
-  margin: 3% 3% 0 0;
-  cursor: pointer;
-  padding: 0;
-  z-index: 100;
+	position: absolute;
+	margin: 3% 3% 0 0;
+	cursor: pointer;
+	padding: 0;
+	z-index: 100;
 
-  @include down($breakpoint-md) {
-    margin: 5% 5% 0 0;
-  }
+	@include down($breakpoint-md) {
+		margin: 5% 5% 0 0;
+	}
 
-  @include down($breakpoint-sm) {
-    margin: 8% 5% 0 0;
-  }
+	@include down($breakpoint-sm) {
+		margin: 8% 5% 0 0;
+	}
 }
 
 .burger {
-  height: 3rem;
-  width: 3rem;
+	height: 3rem;
+	width: 3rem;
 
-  @include down($breakpoint-sm) {
-    height: 2rem;
-    width: 2rem;
-  }
+	@include down($breakpoint-sm) {
+		height: 2rem;
+		width: 2rem;
+	}
 }
 
 .menuWrapper {
-  top: 0;
-  width: 100%;
-  position: absolute;
+	top: 0;
+	width: 100%;
+	position: absolute;
 }
 
 .menuBox {
-  top: 8rem;
-  right: 5rem;
-  position: absolute;
-  width: 20rem;
+	top: 8rem;
+	right: 5rem;
+	position: absolute;
+	width: 20rem;
 
-  @include down($breakpoint-md) {
-    right: 3rem;
-  }
+	@include down($breakpoint-md) {
+		right: 3rem;
+	}
 
-  @include down($breakpoint-xs) {
-    right: 1rem;
-    width: 19rem;
-  }
+	@include down($breakpoint-xs) {
+		right: 1rem;
+		width: 19rem;
+	}
 
-  text-align: center;
-  padding: 1em;
-  background: $color-primary-darker;
+	text-align: center;
+	padding: 1em;
+	background: $color-primary-darker;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 
-  box-shadow: $box-shadow;
-  border-radius: 10px;
+	box-shadow: $box-shadow;
+	border-radius: 10px;
 }
 
 .menuBurgerContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 
 .link {
-  color: $text-color-contrast;
-  width: 100%;
-  text-decoration: none;
+	color: $text-color-contrast;
+	width: 100%;
+	text-decoration: none;
 }
 
 .link:hover {
-  text-decoration: underline;
-  cursor: pointer;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .menuItem0:hover {
-  background-color: $color-theme-blue;
+	background-color: $color-theme-blue;
 }
 
 .menuItem1:hover {
-  background-color: $color-theme-purple;
-  color: black;
+	background-color: $color-theme-purple;
+	color: black;
 }
 
 .menuItem2:hover {
-  background-color: $color-theme-yellow;
-  color: black;
+	background-color: $color-theme-yellow;
+	color: black;
 }
 
 .menuItem3:hover {
-  background-color: $color-theme-pink;
-  color: black;
+	background-color: $color-theme-pink;
+	color: black;
 }
 
 .menuLine {
-  position: relative;
-  width: 100%;
-  height: 7px;
+	position: relative;
+	width: 100%;
+	height: 7px;
 }
 
 .menuItem {
-  padding: 2em;
-  text-align: center;
+	padding: 2em;
+	text-align: center;
 }
