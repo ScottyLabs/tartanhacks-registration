@@ -217,7 +217,7 @@ export default () => {
 				<TableContainer>
 					<TextField
 						variant="outlined"
-						placeholder="Search by team name..."
+						placeholder="Search by team name, team description, or member name"
 						fullWidth={true}
 						value={search}
 						InputProps={{
@@ -267,12 +267,12 @@ export default () => {
 								// Loop over the table rows
 								rows
 									.filter((row) => {
-										const query = search.toLowerCase()
+										const query = search.trim().toLowerCase()
 										const obj = row.original;
-										return obj.name.toLowerCase().includes(query) ||
-											obj.description.toLowerCase().includes(query) ||
-											obj.members.some((member) => (member.firstName + member.lastName)
-												.toLowerCase().includes(query))
+										return obj.name.trim().toLowerCase().includes(query) ||
+											obj.description.trim().toLowerCase().includes(query) ||
+											obj.members.some((member) => (member.firstName + ' ' + member.lastName)
+												.trim().toLowerCase().includes(query))
 									})
 									.slice(
 										page * rowsPerPage,
