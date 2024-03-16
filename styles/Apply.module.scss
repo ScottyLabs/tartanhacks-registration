@@ -1,14 +1,14 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import './variables.scss';
+@import './mixins.scss';
 
 .background {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-top: 10em;
-  box-sizing: border-box;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	padding-top: 10em;
+	box-sizing: border-box;
 
-  @include down($breakpoint-md) {
-    padding-top: 3em;
-  }
+	@include down($breakpoint-md) {
+		padding-top: 3em;
+	}
 }

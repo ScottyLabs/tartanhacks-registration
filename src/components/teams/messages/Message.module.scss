@@ -1,97 +1,97 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .tableRow {
-  display: grid;
-  width: 100%;
+	display: grid;
+	width: 100%;
 
-  @include up($breakpoint-md) {
-    grid-template-areas: "new body body body body body left right";
-  }
+	@include up($breakpoint-md) {
+		grid-template-areas: 'new body body body body body left right';
+	}
 
-  @include down($breakpoint-md) {
-    grid-template-areas:
-      "new body body body body body"
-      "skip left left right right right";
-  }
+	@include down($breakpoint-md) {
+		grid-template-areas:
+			'new body body body body body'
+			'skip left left right right right';
+	}
 }
 
 .newCell {
-  grid-area: new;
-  padding-top: 5px;
-  vertical-align: top;
+	grid-area: new;
+	padding-top: 5px;
+	vertical-align: top;
 }
 .new {
-  color: $color-primary;
-  font-size: 20px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  display: block;
-  top: 0px;
-  width: 100%;
-  @include down($breakpoint-sm) {
-    font-size: 13px;
-  }
+	color: $color-primary;
+	font-size: 20px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	display: block;
+	top: 0px;
+	width: 100%;
+	@include down($breakpoint-sm) {
+		font-size: 13px;
+	}
 }
 .message {
-  grid-area: body;
-  padding-right: 15px;
-  padding-bottom: 30px;
-  padding-top: 10px;
-  @include down($breakpoint-sm) {
-    padding-left: 0px;
-    padding-right: 0px;
-  }
+	grid-area: body;
+	padding-right: 15px;
+	padding-bottom: 30px;
+	padding-top: 10px;
+	@include down($breakpoint-sm) {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
 }
 .tableEntryButton {
-  text-align: center;
-  text-transform: uppercase;
-  border-radius: 10px;
-  background: $gradient-color-end;
-  color: $text-color-contrast;
+	text-align: center;
+	text-transform: uppercase;
+	border-radius: 10px;
+	background: $gradient-color-end;
+	color: $text-color-contrast;
 
-  padding: 1em 3em !important;
-  font-size: large !important;
+	padding: 1em 3em !important;
+	font-size: large !important;
 
-  @include down($breakpoint-lg) {
-    padding: 0.5em 1em !important;
-    font-size: medium !important;
-  }
+	@include down($breakpoint-lg) {
+		padding: 0.5em 1em !important;
+		font-size: medium !important;
+	}
 }
 .buttonCell {
-  width: fit-content;
-  padding-left: 10px;
-  padding-bottom: 30px;
-  padding-top: 10px;
-  @include down($breakpoint-md) {
-    paddingleft: 5px;
-  }
+	width: fit-content;
+	padding-left: 10px;
+	padding-bottom: 30px;
+	padding-top: 10px;
+	@include down($breakpoint-md) {
+		paddingleft: 5px;
+	}
 }
 .row {
-  border-bottom: 7px solid #f7c06260;
+	border-bottom: 7px solid #f7c06260;
 }
 .messageHeader {
-  font-weight: 600;
-  color: $gradient-color-start;
-  display: block;
-  margin: 0;
+	font-weight: 600;
+	color: $gradient-color-start;
+	display: block;
+	margin: 0;
 }
 .messageText {
-  padding-top: 15px;
-  font-weight: 400;
-  color: $gradient-color-start;
-  display: block;
-  word-wrap: break-word;
-  @include down($breakpoint-sm) {
-    padding-top: 10px;
-  }
+	padding-top: 15px;
+	font-weight: 400;
+	color: $gradient-color-start;
+	display: block;
+	word-wrap: break-word;
+	@include down($breakpoint-sm) {
+		padding-top: 10px;
+	}
 }
 
 .leftButton {
-  grid-area: left;
+	grid-area: left;
 }
 
 .rightButton {
-  grid-area: right;
+	grid-area: right;
 }

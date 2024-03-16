@@ -20,9 +20,9 @@
  * @returns true if the phone number is valid and false otherwise
  */
 export default (phoneNumber: string): boolean => {
-  return (
-    phoneNumber.match(
-      /^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/
-    ) != null
-  )
-}
+	return (
+		phoneNumber.match(
+			/^\s*(?:\+?(\d{1,3}))?[-. (]*(\d{3})[-. )]*(\d{3})[-. ]*(\d{4})(?: *x(\d+))?\s*$/,
+		) != null
+	);
+};

@@ -1,12 +1,12 @@
-import { CircularProgress, Collapse } from "@mui/material"
-import { useRouter } from "next/dist/client/router"
-import { FunctionComponent, ReactElement, useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import actions from "src/actions"
-import WaveBackground from "src/components/design/WaveBackground"
-import { RootState } from "types/RootState"
-import styles from "./index.module.scss"
-import WaveHeader from "src/components/design/WaveHeader"
+import { CircularProgress, Collapse } from '@mui/material';
+import { useRouter } from 'next/dist/client/router';
+import { FunctionComponent, ReactElement, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import actions from 'src/actions';
+import WaveBackground from 'src/components/design/WaveBackground';
+import { RootState } from 'types/RootState';
+import styles from './index.module.scss';
+import WaveHeader from 'src/components/design/WaveHeader';
 
 /**
  * Layout to hide content that requires authentication.
@@ -14,59 +14,61 @@ import WaveHeader from "src/components/design/WaveHeader"
  * login the user using the stored login token in the browser
  */
 const AuthenticatedLayout = (Page: FunctionComponent) => (): ReactElement => {
-  const dispatch = useDispatch()
-  const router = useRouter()
-  const [loadingLogin, setLoadingLogin] = useState(true)
-  const [loadingTime, setLoadingTime] = useState(true)
-  const currentUser = useSelector((state: RootState) => state?.accounts?.data)
+	const dispatch = useDispatch();
+	const router = useRouter();
+	const [loadingLogin, setLoadingLogin] = useState(true);
+	const [loadingTime, setLoadingTime] = useState(true);
+	const currentUser = useSelector(
+		(state: RootState) => state?.accounts?.data,
+	);
 
-  useEffect(() => {
-    const loginWithToken = async () => {
-      setLoadingLogin(true)
-      try {
-        await dispatch(actions.auth.loginWithToken())
-      } catch (err) {
-        // Login token expired or invalid
-        router.push("/login")
-      }
-      setLoadingLogin(false)
-    }
-    loginWithToken()
-  }, [])
+	useEffect(() => {
+		const loginWithToken = async () => {
+			setLoadingLogin(true);
+			try {
+				await dispatch(actions.auth.loginWithToken());
+			} catch (err) {
+				// Login token expired or invalid
+				router.push('/login');
+			}
+			setLoadingLogin(false);
+		};
+		loginWithToken();
+	}, []);
 
-  useEffect(() => {
-    const getData = async () => {
-      setLoadingTime(true)
-      try {
-        dispatch(actions.settings.getCloseTime())
-        dispatch(actions.settings.getConfirmTime())
-      } catch (err) {
-        console.error(err)
-      }
-      setLoadingTime(false)
-    }
-    if (currentUser?._id != null) {
-      getData()
-    }
-  }, [currentUser])
+	useEffect(() => {
+		const getData = async () => {
+			setLoadingTime(true);
+			try {
+				dispatch(actions.settings.getCloseTime());
+				dispatch(actions.settings.getConfirmTime());
+			} catch (err) {
+				console.error(err);
+			}
+			setLoadingTime(false);
+		};
+		if (currentUser?._id != null) {
+			getData();
+		}
+	}, [currentUser]);
 
-  if (loadingLogin || loadingTime || currentUser == null) {
-    return (
-      <>
-        <WaveBackground />
-        <div>
-          <WaveHeader variant="light" />
-          <div className={styles.dialog}>
-            <Collapse in={loadingLogin}>
-              <CircularProgress className={styles.spinner} />
-            </Collapse>
-          </div>
-        </div>
-      </>
-    )
-  }
+	if (loadingLogin || loadingTime || currentUser == null) {
+		return (
+			<>
+				<WaveBackground />
+				<div>
+					<WaveHeader variant="light" />
+					<div className={styles.dialog}>
+						<Collapse in={loadingLogin}>
+							<CircularProgress className={styles.spinner} />
+						</Collapse>
+					</div>
+				</div>
+			</>
+		);
+	}
 
-  return <Page />
-}
+	return <Page />;
+};
 
-export default AuthenticatedLayout
+export default AuthenticatedLayout;

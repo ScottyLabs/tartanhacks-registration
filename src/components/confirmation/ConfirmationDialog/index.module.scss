@@ -1,77 +1,77 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .dialog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  border-radius: 25px;
-  padding: 2em;
-  margin: 0 auto;
-  flex-direction: column;
-  background-image: $dialog-container-gradient;
-  box-shadow: $box-shadow;
-  backdrop-filter: blur(4px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	border-radius: 25px;
+	padding: 2em;
+	margin: 0 auto;
+	flex-direction: column;
+	background-image: $dialog-container-gradient;
+	box-shadow: $box-shadow;
+	backdrop-filter: blur(4px);
 
-  @include down($breakpoint-md) {
-    width: 90%;
-    padding: 1em;
-  }
+	@include down($breakpoint-md) {
+		width: 90%;
+		padding: 1em;
+	}
 }
 
 .dialogContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .dialogText {
-  margin-bottom: 1em;
-  color: $wave-gradient-color-start;
+	margin-bottom: 1em;
+	color: $wave-gradient-color-start;
 }
 
 .formGroup {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  @include down($breakpoint-sm) {
-    margin-top: 1em;
-    gap: 1em;
-  }
+	@include down($breakpoint-sm) {
+		margin-top: 1em;
+		gap: 1em;
+	}
 }
 
 .headerContainer {
-  text-align: "center";
-  align-self: "center";
+	text-align: 'center';
+	align-self: 'center';
 
-  @include down($breakpoint-md) {
-    width: 60%;
-  }
+	@include down($breakpoint-md) {
+		width: 60%;
+	}
 
-  @include down($breakpoint-sm) {
-    width: 80%;
-  }
+	@include down($breakpoint-sm) {
+		width: 80%;
+	}
 
-  padding-bottom: 0.5rem;
+	padding-bottom: 0.5rem;
 }
 
 .header {
-  border-bottom: solid $text-color-primary 2px;
-  padding-bottom: 0.5rem;
+	border-bottom: solid $text-color-primary 2px;
+	padding-bottom: 0.5rem;
 
-  @include down($breakpoint-md) {
-    fontsize: 2.5em;
-  }
+	@include down($breakpoint-md) {
+		fontsize: 2.5em;
+	}
 
-  @include down($breakpoint-sm) {
-    fontsize: 1.8em;
-  }
+	@include down($breakpoint-sm) {
+		fontsize: 1.8em;
+	}
 
-  color: $text-color-primary;
-  font-weight: 600;
+	color: $text-color-primary;
+	font-weight: 600;
 }
 
 .link {
-  color: $text-color-primary;
+	color: $text-color-primary;
 }

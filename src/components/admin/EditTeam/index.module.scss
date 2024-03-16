@@ -22,11 +22,10 @@
 	font-weight: bold;
 }
 
-.sponsorList {
-	display: flex;
-	flex-direction: column;
-}
-
 .icon {
 	height: 2rem;
+}
+
+#save_button {
+	float: left;
 }

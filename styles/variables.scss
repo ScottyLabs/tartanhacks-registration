@@ -44,15 +44,15 @@ $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;
 
 $dialog-container-gradient: linear-gradient(
-  316.54deg,
-  rgba(255, 255, 255, 0.95) 3%,
-  rgba(0, 0, 0, 0.4) 150%
+	316.54deg,
+	rgba(255, 255, 255, 0.95) 3%,
+	rgba(0, 0, 0, 0.4) 150%
 );
 
 $dialog-container-gradient-lighter: linear-gradient(
-  316.54deg,
-  rgba(255, 255, 255, 0.95) 3%,
-  rgba(0, 0, 0, 0.4) 200%
+	316.54deg,
+	rgba(255, 255, 255, 0.95) 3%,
+	rgba(0, 0, 0, 0.4) 200%
 );
 
 // Additional component colors
@@ -63,33 +63,33 @@ $button-color-focused: $color-primary;
 
 // Font sizes
 $hero-font-sizes: (
-  default: 5rem,
-  md: 3.5rem,
-  sm: 2.5rem,
-  xs: 2rem
+	default: 5rem,
+	md: 3.5rem,
+	sm: 2.5rem,
+	xs: 2rem,
 );
 $h1-font-sizes: (
-  default: 3rem,
-  md: 2.5rem,
-  sm: 2rem
+	default: 3rem,
+	md: 2.5rem,
+	sm: 2rem,
 );
 $h2-font-sizes: (
-  default: 2rem,
-  md: 1.8rem,
-  sm: 1.5rem
+	default: 2rem,
+	md: 1.8rem,
+	sm: 1.5rem,
 );
 $body-font-sizes: (
-  default: 1rem,
-  xs: 0.8rem
+	default: 1rem,
+	xs: 0.8rem,
 );
 $subtitle-font-sizes: (
-  default: 0.8rem
+	default: 0.8rem,
 );
 $subtitle1-font-sizes: (
-  default: 0.6rem
+	default: 0.6rem,
 );
 $button-font-sizes: (
-  default: 1.3rem
+	default: 1.3rem,
 );
 
 // Container paddings
@@ -97,7 +97,7 @@ $container-padding: 1em 1.5em 1em 1.5em;
 
 // Shadows
 $box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.07),
-  0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
+	0 4px 8px rgba(0, 0, 0, 0.07), 0 8px 16px rgba(0, 0, 0, 0.07);
 $drop-shadow: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.2));
 $text-shadow: 1px 1px 10px #0005;
 $drop-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);

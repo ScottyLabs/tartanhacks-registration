@@ -39,7 +39,12 @@
 
 .buttonMargin {
 	margin-right: 1em;
-}
+	margin-bottom: 1em;
+  }
+  
+.buttonMargin:last-child {
+	margin-right: 0;
+  }
 
 .toolbar {
 	width: 100%;
@@ -103,13 +108,17 @@
 	}
 }
 
-.chipAdmin {
-	&:global(.MuiChip-root) {
-		background-color: $status-color-admin;
-	}
-}
-
 .buttonContainer {
 	display: flex;
 	gap: 5px;
+}
+
+.withIcon {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.editIcon {
+	cursor: pointer;
 }

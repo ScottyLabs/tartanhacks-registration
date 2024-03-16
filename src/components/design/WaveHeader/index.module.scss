@@ -1,139 +1,139 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .waveContainer {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  overflow: hidden;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	overflow: hidden;
 
-  @include height-down($breakpoint-sm) {
-    display: none;
-  }
+	@include height-down($breakpoint-sm) {
+		display: none;
+	}
 }
 
 .headerAssets {
-  position: absolute;
-  display: flex;
-  gap: 1em;
+	position: absolute;
+	display: flex;
+	gap: 1em;
 
-  @include down($breakpoint-xs) {
-    display: none;
-  }
+	@include down($breakpoint-xs) {
+		display: none;
+	}
 }
 
 .link {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 .headerAssetsDark {
-  flex-direction: column;
-  align-items: center;
-  gap: 0em;
+	flex-direction: column;
+	align-items: center;
+	gap: 0em;
 }
 
 .logo {
-  position: relative;
-  height: 130px;
-  width: 100%;
-  z-index: 11;
+	position: relative;
+	height: 130px;
+	width: 100%;
+	z-index: 11;
 
-  @include down($breakpoint-md) {
-    height: 80px;
-  }
+	@include down($breakpoint-md) {
+		height: 80px;
+	}
 
-  @include down($breakpoint-sm) {
-    height: 60px;
-  }
+	@include down($breakpoint-sm) {
+		height: 60px;
+	}
 
-  @include down($breakpoint-xs) {
-    display: none;
-  }
+	@include down($breakpoint-xs) {
+		display: none;
+	}
 }
 
 .logoLarge {
-  position: relative;
-  height: 160px;
-  width: 100%;
-  z-index: 11;
+	position: relative;
+	height: 160px;
+	width: 100%;
+	z-index: 11;
 
-  @include down($breakpoint-md) {
-    height: 80px;
-  }
+	@include down($breakpoint-md) {
+		height: 80px;
+	}
 
-  @include down($breakpoint-sm) {
-    height: 60px;
-  }
+	@include down($breakpoint-sm) {
+		height: 60px;
+	}
 }
 
 .title {
-  position: relative;
-  z-index: 11;
-  opacity: 0.6;
-  font-weight: 600;
+	position: relative;
+	z-index: 11;
+	opacity: 0.6;
+	font-weight: 600;
 
-  color: $text-color-contrast;
+	color: $text-color-contrast;
 }
 
 .subtitle {
-  position: relative;
-  z-index: 11;
-  color: $text-color-contrast;
+	position: relative;
+	z-index: 11;
+	color: $text-color-contrast;
 }
 
 .waveSvg {
-  position: relative;
-  width: 100%;
-  height: 250px;
-  filter: $drop-shadow;
-  z-index: 10;
+	position: relative;
+	width: 100%;
+	height: 250px;
+	filter: $drop-shadow;
+	z-index: 10;
 
-  @include down($breakpoint-md) {
-    height: 150px;
-  }
+	@include down($breakpoint-md) {
+		height: 150px;
+	}
 
-  @include down($breakpoint-sm) {
-    height: 140px;
-  }
+	@include down($breakpoint-sm) {
+		height: 140px;
+	}
 
-  @include down($breakpoint-xs) {
-    height: 130px;
-  }
+	@include down($breakpoint-xs) {
+		height: 130px;
+	}
 }
 
 .waveSvgStart {
-  stop-color: $wave-gradient-color-end;
+	stop-color: $wave-gradient-color-end;
 }
 
 .waveSvgEnd {
-  stop-color: $wave-gradient-color-start;
+	stop-color: $wave-gradient-color-start;
 }
 
 .textDark {
-  color: $text-color-primary;
-  opacity: 1;
+	color: $text-color-primary;
+	opacity: 1;
 }
 
 .titleContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 1em;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1em;
 }
 
 .light {
-  width: 100%;
-  background-color: white;
-  z-index: 10;
+	width: 100%;
+	background-color: white;
+	z-index: 10;
 
-  @include height-down($breakpoint-sm) {
-    display: none;
-  }
+	@include height-down($breakpoint-sm) {
+		display: none;
+	}
 }
 
 .byline {
-  @include down($breakpoint-md) {
-    display: none;
-  }
+	@include down($breakpoint-md) {
+		display: none;
+	}
 }
