@@ -21,9 +21,9 @@ module.exports = {
   },
   rules: {
     "@typescript-eslint/camelcase": ["off", { properties: "never" }],
-    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/quotes": "off",
     camelcase: "off",
-    "comma-dangle": ["error", "never"],
+    "comma-dangle": "off",
     "no-extra-semi": 2,
     "no-irregular-whitespace": 2,
     "no-lonely-if": 2,

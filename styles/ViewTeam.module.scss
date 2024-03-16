@@ -1,146 +1,146 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import './variables.scss';
+@import './mixins.scss';
 
 .title {
-  padding-top: 30px;
-  font-weight: 600;
-  color: $gradient-color-start;
-  font-size: 2em !important;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  @include down($breakpoint-sm) {
-    font-size: 1.5em !important;
-  }
+	padding-top: 30px;
+	font-weight: 600;
+	color: $gradient-color-start;
+	font-size: 2em !important;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	@include down($breakpoint-sm) {
+		font-size: 1.5em !important;
+	}
 }
 .shortenedSubtitle {
-  width: 100%;
-  padding-top: 30px;
-  font-weight: 400;
-  color: $gradient-color-start;
-  font-size: 20px;
-  display: block;
-  word-wrap: break-word;
-  @include down($breakpoint-sm) {
-    width: 100%;
-  }
-  @include down($breakpoint-md) {
-    width: 80%;
-  }
+	width: 100%;
+	padding-top: 30px;
+	font-weight: 400;
+	color: $gradient-color-start;
+	font-size: 20px;
+	display: block;
+	word-wrap: break-word;
+	@include down($breakpoint-sm) {
+		width: 100%;
+	}
+	@include down($breakpoint-md) {
+		width: 80%;
+	}
 }
 .content {
-  align-items: left;
+	align-items: left;
 }
 .subtitle {
-  padding-top: 30px;
-  font-weight: 400;
-  color: $gradient-color-start;
-  font-size: 20px;
-  display: block;
-  word-wrap: break-word;
-  width: 100%;
+	padding-top: 30px;
+	font-weight: 400;
+	color: $gradient-color-start;
+	font-size: 20px;
+	display: block;
+	word-wrap: break-word;
+	width: 100%;
 }
 .memberList {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 .leaveButton {
-  width: 45%;
-  font-size: 30px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-top: 50px;
-  border-radius: 10px;
-  background: $color-primary;
-  color: $text-color-contrast;
-  @include down($breakpoint-md) {
-    fontsize: 25px;
-    width: 60%;
-  }
-  @include down($breakpoint-sm) {
-    fontsize: 16px;
-    width: 75%;
-  }
+	width: 45%;
+	font-size: 30px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-top: 50px;
+	border-radius: 10px;
+	background: $color-primary;
+	color: $text-color-contrast;
+	@include down($breakpoint-md) {
+		fontsize: 25px;
+		width: 60%;
+	}
+	@include down($breakpoint-sm) {
+		fontsize: 16px;
+		width: 75%;
+	}
 }
 .editButton {
-  width: 100%;
+	width: 100%;
 
-  font-size: 30px;
-  font-weight: 600;
-  text-transform: uppercase;
-  margin-top: 50px;
-  padding-left: 25px;
-  padding-right: 25px;
-  border-radius: 10px;
-  background: $color-primary;
-  color: $text-color-contrast;
-  @include down($breakpoint-md) {
-    font-size: 25px;
-    padding-right: 50px;
-    padding-left: 50px;
-  }
-  @include down($breakpoint-sm) {
-    font-size: 16px;
-    padding-right: 25px;
-    padding-left: 25px;
-  }
+	font-size: 30px;
+	font-weight: 600;
+	text-transform: uppercase;
+	margin-top: 50px;
+	padding-left: 25px;
+	padding-right: 25px;
+	border-radius: 10px;
+	background: $color-primary;
+	color: $text-color-contrast;
+	@include down($breakpoint-md) {
+		font-size: 25px;
+		padding-right: 50px;
+		padding-left: 50px;
+	}
+	@include down($breakpoint-sm) {
+		font-size: 16px;
+		padding-right: 25px;
+		padding-left: 25px;
+	}
 }
 .buttonForm {
-  width: 100%;
-  display: inline-flex;
-  justify-content: center;
+	width: 100%;
+	display: inline-flex;
+	justify-content: center;
 }
 .editableText {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 }
 .longText {
-  width: 70%;
-  @include down($breakpoint-md) {
-    width: 100%;
-  }
-  @include down($breakpoint-sm) {
-    width: 80%;
-  }
+	width: 70%;
+	@include down($breakpoint-md) {
+		width: 100%;
+	}
+	@include down($breakpoint-sm) {
+		width: 80%;
+	}
 }
 .editButtonForm {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 .textField {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 4px rgba(219, 121, 52, 0.5);
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0px 4px 4px rgba(219, 121, 52, 0.5);
 }
 .textFieldInput {
-  border: none;
-  color: $gradient-color-start;
+	border: none;
+	color: $gradient-color-start;
 }
 .dialogHeader {
-  color: $gradient-color-start;
+	color: $gradient-color-start;
 }
 .backButton {
-  margin-top: 20px;
-  align-self: flex-start;
-  font-size: 24px;
-  @include down($breakpoint-md) {
-    font-size: 20px;
-  }
-  @include down($breakpoint-sm) {
-    font-size: 16px;
-  }
+	margin-top: 20px;
+	align-self: flex-start;
+	font-size: 24px;
+	@include down($breakpoint-md) {
+		font-size: 20px;
+	}
+	@include down($breakpoint-sm) {
+		font-size: 16px;
+	}
 }
 .spinnerContainer {
-  margin-top: 1em;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	margin-top: 1em;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .buttonContainer {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }

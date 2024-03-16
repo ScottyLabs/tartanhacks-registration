@@ -1,70 +1,70 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import './variables.scss';
+@import './mixins.scss';
 
 .title {
-  @include font-size($h1-font-sizes);
-  padding-top: 30px;
-  background-color: $gradient-color-start;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+	@include font-size($h1-font-sizes);
+	padding-top: 30px;
+	background-color: $gradient-color-start;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .content {
-  align-items: left;
+	align-items: left;
 }
 
 .content form {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+	display: flex;
+	flex-direction: column;
+	gap: 1em;
 }
 
 .annotation {
-  padding-top: 30px;
-  color: $gradient-color-start;
-  display: block;
-  word-wrap: break-word;
-  width: 80%;
+	padding-top: 30px;
+	color: $gradient-color-start;
+	display: block;
+	word-wrap: break-word;
+	width: 80%;
 
-  @include down($breakpoint-sm) {
-    width: 100%;
-  }
+	@include down($breakpoint-sm) {
+		width: 100%;
+	}
 
-  @include font-size($body-font-sizes);
+	@include font-size($body-font-sizes);
 }
 
 .membersList {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
 }
 
 .createButton {
-  margin-top: 2em !important;
-  padding: 1em 3em !important;
-  font-size: large !important;
+	margin-top: 2em !important;
+	padding: 1em 3em !important;
+	font-size: large !important;
 
-  @include down($breakpoint-lg) {
-    padding: 0.5em 1em !important;
-    font-size: medium !important;
-  }
+	@include down($breakpoint-lg) {
+		padding: 0.5em 1em !important;
+		font-size: medium !important;
+	}
 }
 
 .textField {
-  background-color: $text-color-contrast;
-  border-radius: 10px;
-  box-shadow: $dialog-container-box-shadow;
+	background-color: $text-color-contrast;
+	border-radius: 10px;
+	box-shadow: $dialog-container-box-shadow;
 }
 
 .textFieldInput {
-  border: none;
-  color: $gradient-color-start;
+	border: none;
+	color: $gradient-color-start;
 }
 
 .backButton {
-  margin-top: 20px;
-  align-self: flex-start;
+	margin-top: 20px;
+	align-self: flex-start;
 
-  @include font-size($body-font-sizes);
+	@include font-size($body-font-sizes);
 }

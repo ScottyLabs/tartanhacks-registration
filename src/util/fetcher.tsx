@@ -1,5 +1,5 @@
-import axios, { Method } from "axios"
-import { RemoteDispatchAction } from "types/DispatchAction"
+import axios, { Method } from 'axios';
+import { RemoteDispatchAction } from 'types/DispatchAction';
 
 /**
  * send an axios request
@@ -8,15 +8,15 @@ import { RemoteDispatchAction } from "types/DispatchAction"
  * @param accessToken the user's accessToken cookie
  */
 export default function fetchData(
-  action: RemoteDispatchAction,
-  accessToken: string
+	action: RemoteDispatchAction,
+	accessToken: string,
 ): Promise<any> {
-  return axios({
-    method: action.request.method as Method, // method must not be FILE
-    url: `${process.env.BACKEND_URL}${action.request.path}`,
-    headers: {
-      "x-access-token": accessToken
-    },
-    data: action.request.body ?? undefined
-  }).then((res) => res.data)
+	return axios({
+		method: action.request.method as Method, // method must not be FILE
+		url: `${process.env.BACKEND_URL}${action.request.path}`,
+		headers: {
+			'x-access-token': accessToken,
+		},
+		data: action.request.body ?? undefined,
+	}).then((res) => res.data);
 }

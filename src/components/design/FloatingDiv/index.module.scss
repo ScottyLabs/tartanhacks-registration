@@ -1,44 +1,44 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .floatingDiv {
-  position: relative;
-  width: 80%;
-  top: 250px;
-  margin: auto;
-  padding-top: 40px;
-  padding-bottom: 40px;
-  margin-bottom: 400px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  box-sizing: border-box;
+	position: relative;
+	width: 80%;
+	top: 250px;
+	margin: auto;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-bottom: 400px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: center;
+	box-sizing: border-box;
 
-  background-image: $dialog-container-gradient;
-  box-shadow: $dialog-container-box-shadow;
-  backdrop-filter: blur(4px);
-  border-radius: 25px;
+	background-image: $dialog-container-gradient;
+	box-shadow: $dialog-container-box-shadow;
+	backdrop-filter: blur(4px);
+	border-radius: 25px;
 
-  @include down($breakpoint-md) {
-    width: 90%;
-  }
+	@include down($breakpoint-md) {
+		width: 90%;
+	}
 
-  @include down($breakpoint-md) {
-    top: 150px;
-  }
+	@include down($breakpoint-md) {
+		top: 150px;
+	}
 
-  @include down($breakpoint-sm) {
-    top: 140px;
-  }
+	@include down($breakpoint-sm) {
+		top: 140px;
+	}
 
-  @include down($breakpoint-xs) {
-    top: 130px;
-  }
+	@include down($breakpoint-xs) {
+		top: 130px;
+	}
 }
 
 .content {
-  display: flex;
-  width: 95%;
-  flex-direction: column;
-  gap: 1em;
+	display: flex;
+	width: 95%;
+	flex-direction: column;
+	gap: 1em;
 }

@@ -1,70 +1,70 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import './variables.scss';
+@import './mixins.scss';
 
 .failure {
-  border: solid 3px $color-error;
+	border: solid 3px $color-error;
 }
 
 .success {
-  border: solid 3px $color-success;
+	border: solid 3px $color-success;
 }
 
 .loading {
-  border: solid 3px $color-loading;
+	border: solid 3px $color-loading;
 }
 
 .dialog {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 5;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 5;
 }
 
 .dialogContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2em;
-  box-sizing: border-box;
-  background-image: $dialog-container-gradient;
-  box-shadow: $dialog-container-box-shadow;
-  backdrop-filter: blur(4px);
-  border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 2em;
+	box-sizing: border-box;
+	background-image: $dialog-container-gradient;
+	box-shadow: $dialog-container-box-shadow;
+	backdrop-filter: blur(4px);
+	border-radius: 10px;
 
-  margin-top: 250px;
+	margin-top: 250px;
 
-  @include down($breakpoint-sm) {
-    margin-top: 150px;
-  }
+	@include down($breakpoint-sm) {
+		margin-top: 150px;
+	}
 
-  @include height-down($breakpoint-sm) {
-    margin-top: 140px;
-  }
+	@include height-down($breakpoint-sm) {
+		margin-top: 140px;
+	}
 
-  @include down($breakpoint-xs) {
-    margin-top: 130px;
-  }
+	@include down($breakpoint-xs) {
+		margin-top: 130px;
+	}
 }
 
 .dialogText {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .spinner {
-  margin-bottom: 5em;
+	margin-bottom: 5em;
 }
 
 .backButton {
-  margin-top: 1em !important;
-  padding: 1em 3em !important;
-  font-size: large !important;
+	margin-top: 1em !important;
+	padding: 1em 3em !important;
+	font-size: large !important;
 
-  @include down($breakpoint-lg) {
-    padding: 0.5em 1em !important;
-    font-size: medium !important;
-  }
+	@include down($breakpoint-lg) {
+		padding: 0.5em 1em !important;
+		font-size: medium !important;
+	}
 }

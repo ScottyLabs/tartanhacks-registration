@@ -1,113 +1,113 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import './variables.scss';
+@import './mixins.scss';
 
 .dialog {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 50%;
-  border-radius: 25px;
-  padding: 2em;
-  margin: 0 auto;
-  flex-direction: column;
-  background-image: $dialog-container-gradient;
-  box-shadow: $dialog-container-box-shadow;
-  backdrop-filter: blur(4px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 50%;
+	border-radius: 25px;
+	padding: 2em;
+	margin: 0 auto;
+	flex-direction: column;
+	background-image: $dialog-container-gradient;
+	box-shadow: $dialog-container-box-shadow;
+	backdrop-filter: blur(4px);
 
-  @include down($breakpoint-md) {
-    width: 80%;
-  }
+	@include down($breakpoint-md) {
+		width: 80%;
+	}
 
-  @include down($breakpoint-sm) {
-    width: 90%;
-  }
+	@include down($breakpoint-sm) {
+		width: 90%;
+	}
 }
 
 .dialogContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .link {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .link:hover {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .statusHeaderText {
-  margin-bottom: 0.5em !important;
-  color: $text-color-primary;
+	margin-bottom: 0.5em !important;
+	color: $text-color-primary;
 }
 
 .dialogText {
-  margin-bottom: 1em;
-  color: $text-color-primary;
-  width: 100%;
-  text-align: center;
+	margin-bottom: 1em;
+	color: $text-color-primary;
+	width: 100%;
+	text-align: center;
 }
 
 .bodyText {
-  color: $text-color-primary;
+	color: $text-color-primary;
 }
 
 .statusText {
-  margin-bottom: 1em !important;
-  color: $text-color-primary;
-  font-weight: 600 !important;
+	margin-bottom: 1em !important;
+	color: $text-color-primary;
+	font-weight: 600 !important;
 }
 
 .buttonBox {
-  display: flex;
-  flex-direction: row;
+	display: flex;
+	flex-direction: row;
 
-  @include down($breakpoint-sm) {
-    flex-direction: column;
-    gap: 0.5em;
-    align-items: center;
-  }
+	@include down($breakpoint-sm) {
+		flex-direction: column;
+		gap: 0.5em;
+		align-items: center;
+	}
 }
 
 .buttonSpacer {
-  width: 10px;
+	width: 10px;
 }
 
 .deadline {
-  font-weight: bold;
-  @include font-size($button-font-sizes);
+	font-weight: bold;
+	@include font-size($button-font-sizes);
 }
 
 .appStoreLinks {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1em;
-  gap: 0.5em;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1em;
+	gap: 0.5em;
 }
 
 .dialogHeader {
-  color: $gradient-color-start;
+	color: $gradient-color-start;
 }
 
 .dashboardLink {
-  color: $text-color-alt;
+	color: $text-color-alt;
 }
 
 .dashboardButton {
-  padding: 1em 3em !important;
-  font-size: large !important;
+	padding: 1em 3em !important;
+	font-size: large !important;
 
-  @include down($breakpoint-lg) {
-    padding: 0.5em 1em !important;
-    font-size: medium !important;
-  }
+	@include down($breakpoint-lg) {
+		padding: 0.5em 1em !important;
+		font-size: medium !important;
+	}
 }
 
 .confirmButtons {
-  display: flex;
-  flex-direction: row;
-  gap: 1em;
+	display: flex;
+	flex-direction: row;
+	gap: 1em;
 }

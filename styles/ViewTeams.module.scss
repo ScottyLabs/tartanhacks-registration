@@ -1,74 +1,74 @@
-@import "./variables.scss";
-@import "./mixins.scss";
+@import './variables.scss';
+@import './mixins.scss';
 
 .newTeamButton {
-  padding: 1em 5em !important;
-  font-size: large !important;
+	padding: 1em 5em !important;
+	font-size: large !important;
 
-  @include down($breakpoint-lg) {
-    padding: 0.5em 1em !important;
-    font-size: medium !important;
-  }
+	@include down($breakpoint-lg) {
+		padding: 0.5em 1em !important;
+		font-size: medium !important;
+	}
 }
 .tableHeader {
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding-top: 35px;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding-top: 35px;
 }
 .tableBody {
-  display: grid;
+	display: grid;
 }
 .tableData {
-  table-layout: fixed;
-  width: 100%;
-  text-align: left;
-  border-collapse: separate;
-  border-spacing: 0 33px;
+	table-layout: fixed;
+	width: 100%;
+	text-align: left;
+	border-collapse: separate;
+	border-spacing: 0 33px;
 }
 .tableEntry {
-  display: block;
-  width: 100%;
+	display: block;
+	width: 100%;
 }
 .tableHeaderText {
-  font-weight: 400;
-  background-color: $gradient-color-start;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-size: 28px;
-  @include down($breakpoint-sm) {
-    font-size: 20px;
-  }
+	font-weight: 400;
+	background-color: $gradient-color-start;
+	background-clip: text;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 28px;
+	@include down($breakpoint-sm) {
+		font-size: 20px;
+	}
 }
 .link {
-  background: none;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
+	background: none;
+	border: none;
+	text-decoration: underline;
+	cursor: pointer;
 }
 .buttonForm {
-  width: fit-content;
-  margin: 0 auto;
-  display: inline-flex;
-  justify-content: center;
+	width: fit-content;
+	margin: 0 auto;
+	display: inline-flex;
+	justify-content: center;
 }
 .statusMessageContainer {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .spinnerContainer {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .noTeamsText {
-  font-weight: 600;
-  color: $color-primary;
-  font-size: 25px;
-  text-align: center;
-  @include down($breakpoint-sm) {
-    font-size: 20px;
-    width: 80%;
-    padding-bottom: 20px;
-  }
+	font-weight: 600;
+	color: $color-primary;
+	font-size: 25px;
+	text-align: center;
+	@include down($breakpoint-sm) {
+		font-size: 20px;
+		width: 80%;
+		padding-bottom: 20px;
+	}
 }
