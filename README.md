@@ -1,23 +1,35 @@
 # TartanHacks Registration Site
 
 This is the frontend website for the TartanHacks Registration System.
+
 ## Backend Configuration
 
 1. [Deploy the backend](https://github.com/ScottyLabs/tartanhacks-backend/blob/master/README.md).
 
 2. In `next.config.js`, set the links to the  `local`, `development`, `staging`, and `production` backends.
 
-
 ## Getting Started
-1. Install the dependencies with
+
+Install the dependencies and run the server via [Bun](https://bun.sh):
+
 ```
-npm install
+bun install
+bun run build
+bun start
 ```
 
-2. Then, run the development server:
-```
-npm run dev
-```
+After running these commands, you will see the changes on [http://localhost:3000](http://localhost:3000/)
+
+## Contributing
+
+Claim an [issue](https://github.com/ScottyLabs/tartanhacks-registration/issues) by assigning it to yourself. Then, create a branch for the issue you're working on. Follow the `<feature>` naming convention for your branch.
+
+e.g. `Add-Prettier-Support`
+
+## Merging your PR
+
+After you finish working on your feature, create a new [PR](https://github.com/ScottyLabs/tartanhacks-registration/pulls) and request someone to review it.
+
 
 The website can then be accessed at [http://localhost:3000](http://localhost:3000)
 

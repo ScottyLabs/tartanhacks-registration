@@ -1,26 +1,26 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .tableData {
-  width: 100%;
-  text-align: left;
+	width: 100%;
+	text-align: left;
 }
 .spinnerContainer {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .statusMessageContainer {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 .noTeamsText {
-  font-weight: 600;
-  color: $color-primary;
-  font-size: 25px;
-  text-align: center;
-  @include down($breakpoint-sm) {
-    font-size: 20px;
-    width: 80%;
-    padding-bottom: 20px;
-  }
+	font-weight: 600;
+	color: $color-primary;
+	font-size: 25px;
+	text-align: center;
+	@include down($breakpoint-sm) {
+		font-size: 20px;
+		width: 80%;
+		padding-bottom: 20px;
+	}
 }

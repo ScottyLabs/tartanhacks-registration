@@ -1,32 +1,32 @@
-@import "~/styles/variables.scss";
-@import "~/styles/mixins.scss";
+@import '~/styles/variables.scss';
+@import '~/styles/mixins.scss';
 
 .waveContainer {
-  position: fixed;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-  bottom: 0px;
-  z-index: -1;
+	position: fixed;
+	width: 100%;
+	overflow: hidden;
+	line-height: 0;
+	bottom: 0px;
+	z-index: -1;
 }
 
 .waveSvg {
-  width: 100%;
-  height: 465px;
-  filter: $drop-shadow;
-  @include down($breakpoint-md) {
-    height: 15em;
-  }
+	width: 100%;
+	height: 465px;
+	filter: $drop-shadow;
+	@include down($breakpoint-md) {
+		height: 15em;
+	}
 
-  @include down($breakpoint-sm) {
-    height: 10em;
-  }
+	@include down($breakpoint-sm) {
+		height: 10em;
+	}
 }
 
 .gradientStart {
-  stop-color: $gradient-color-start;
+	stop-color: $gradient-color-start;
 }
 
 .gradientEnd {
-  stop-color: $gradient-color-end;
+	stop-color: $gradient-color-end;
 }

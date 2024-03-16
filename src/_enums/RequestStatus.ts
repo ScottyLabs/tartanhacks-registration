@@ -1,6 +1,6 @@
 export enum RequestStatus {
-  PENDING = "PENDING",
-  SUCCESS = "SUCCESS",
-  ERROR = "ERROR"
-  //    = "EXPIRED"
+	PENDING = 'PENDING',
+	SUCCESS = 'SUCCESS',
+	ERROR = 'ERROR',
+	//    = "EXPIRED"
 }
