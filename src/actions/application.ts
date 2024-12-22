@@ -3,7 +3,7 @@ import { RequestStatus } from 'enums/RequestStatus';
 import {
 	ApplicationForm,
 	BasicFields,
-	EssayFields,
+	TravelFields,
 	ExperienceFields,
 	LogisticsFields,
 	PortfolioFields,
@@ -69,8 +69,8 @@ export const saveBasic = (data: BasicFields): DispatchAction => ({
 	data,
 });
 
-export const saveEssay = (data: EssayFields): DispatchAction => ({
-	type: DispatchActionType.APPLICATION_SAVE_ESSAY,
+export const saveTravel = (data: TravelFields): DispatchAction => ({
+	type: DispatchActionType.APPLICATION_SAVE_TRAVEL,
 	useAPI: false,
 	status: RequestStatus.PENDING,
 	data,

@@ -41,6 +41,8 @@ const BasicSection = ({
 	const [ethnicity, setEthnicity] = useState<Ethnicity | null>(null);
 	const [ethnicityOther, setEthnicityOther] = useState<string>('');
 	const [age, setAge] = useState<string>('');
+	const [city, setCity] = useState<string>('');
+	const [country, setCountry] = useState<string>('');
 
 	// Error fields
 	const [displayNameErrorStatus, setDisplayNameErrorStatus] = useState(false);

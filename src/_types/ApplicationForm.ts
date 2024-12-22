@@ -19,6 +19,8 @@ export interface BasicFields {
 	ethnicity: Ethnicity;
 	ethnicityOther?: string;
 	age?: number;
+	city?: string;
+	country?: string;
 }
 
 export interface SchoolFields {
@@ -47,8 +49,9 @@ export interface PortfolioFields {
 	website?: string;
 }
 
-export interface EssayFields {
-	essays: string[];
+export interface TravelFields {
+	wantsTravelReimbursement: boolean;
+	travelDetails?: string;
 }
 
 export interface LogisticsFields {
@@ -67,5 +70,5 @@ export type ApplicationForm = BasicFields &
 	ExperienceFields &
 	WorkAuthorizationFields &
 	PortfolioFields &
-	EssayFields &
+	TravelFields &
 	LogisticsFields;

@@ -14,7 +14,7 @@ import actions from 'src/actions';
 import RectangleButton from 'src/components/design/RectangleButton';
 import { RootState } from 'types/RootState';
 import BasicSection from './BasicSection';
-import EssaySection from './EssaySection';
+import TravelSection from './TravelSection';
 import ExperienceSection from './ExperienceSection';
 import LogisticsSection from './LogisticsSection';
 import PortfolioSection from './PortfolioSection';
@@ -195,7 +195,7 @@ const ApplicationForm = (): ReactElement => {
 						setValidate={setValidatePortfolio}
 						setValid={setValidPortfolio}
 					/>
-					<EssaySection
+					<TravelSection
 						validate={validateEssay}
 						setValidate={setValidateEssay}
 						setValid={setValidEssay}

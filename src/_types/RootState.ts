@@ -1,7 +1,7 @@
 import { RequestStatus } from 'enums/RequestStatus';
 import {
 	BasicFields,
-	EssayFields,
+	TravelFields,
 	ExperienceFields,
 	LogisticsFields,
 	PortfolioFields,
@@ -42,7 +42,7 @@ export interface RootState {
 		error: string;
 		resume: string;
 		basic: BasicFields;
-		essays: EssayFields;
+		essays: TravelFields;
 		experience: ExperienceFields;
 		logistics: LogisticsFields;
 		portfolio: PortfolioFields;

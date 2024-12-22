@@ -3,7 +3,7 @@ import { RequestStatus } from 'enums/RequestStatus';
 import { combineReducers } from 'redux';
 import {
 	BasicFields,
-	EssayFields,
+	TravelFields,
 	ExperienceFields,
 	LogisticsFields,
 	PortfolioFields,
@@ -67,14 +67,22 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
 	return state;
 };
 
-const essays = (state: EssayFields | null = null, action: DispatchAction) => {
-	if (action.type === DispatchActionType.APPLICATION_SAVE_ESSAY) {
+const travel = (state: TravelFields | null = null, action: DispatchAction) => {
+	if (action.type === DispatchActionType.APPLICATION_SAVE_TRAVEL) {
 		state = action.data;
 	} else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
 		if (action?.data) {
 			const { data } = action;
-			if (data.essays) {
-				state = { essays: data.essays };
+			if (data) {
+				const {
+					wantsTravelReimbursement,
+					travelDetails,
+				} = data as TravelFields;
+
+				state = {
+					wantsTravelReimbursement,
+					travelDetails
+				};
 			}
 		}
 	}
@@ -201,7 +209,7 @@ const status = (state = null, action: DispatchAction) => {
 		case DispatchActionType.APPLICATION_MISSING_RESUME:
 		case DispatchActionType.APPLICATION_SUBMIT_FORM:
 		case DispatchActionType.APPLICATION_SAVE_BASIC:
-		case DispatchActionType.APPLICATION_SAVE_ESSAY:
+		case DispatchActionType.APPLICATION_SAVE_TRAVEL:
 		case DispatchActionType.APPLICATION_SAVE_EXPERIENCE:
 		case DispatchActionType.APPLICATION_SAVE_LOGISTICS:
 		case DispatchActionType.APPLICATION_SAVE_PORTFOLIO:
@@ -218,7 +226,7 @@ const error = (state = null, action: DispatchAction) => {
 		case DispatchActionType.APPLICATION_MISSING_RESUME:
 		case DispatchActionType.APPLICATION_SUBMIT_FORM:
 		case DispatchActionType.APPLICATION_SAVE_BASIC:
-		case DispatchActionType.APPLICATION_SAVE_ESSAY:
+		case DispatchActionType.APPLICATION_SAVE_TRAVEL:
 		case DispatchActionType.APPLICATION_SAVE_EXPERIENCE:
 		case DispatchActionType.APPLICATION_SAVE_LOGISTICS:
 		case DispatchActionType.APPLICATION_SAVE_PORTFOLIO:
@@ -237,7 +245,7 @@ export default combineReducers({
 	error,
 	status,
 	basic,
-	essays,
+	essays: travel,
 	experience,
 	logistics,
 	portfolio,
