@@ -32,9 +32,10 @@ export default function WaitlistAlert({
 				marginTop: '20px',
 			}}
 		>
+		{/* TODO update date */}
 			Unfortunately, due to overwhelming demand, we have reached our
-			capacity for TartanHacks 2024. We will process the waitlist and let
-			you know by February 3rd, 10pm EST.
+			capacity for TartanHacks 2025. We will process the waitlist and let
+			you know by February 3rd, 10pm EST .
 		</Alert>
 	) : (
 		<Alert
@@ -44,7 +45,7 @@ export default function WaitlistAlert({
 			}}
 		>
 			Unfortunately, due to overwhelming demand, we have reached our
-			capacity for TartanHacks 2024. If you&apos;d like to be placed on a
+			capacity for TartanHacks 2025. If you&apos;d like to be placed on a
 			waitlist, please complete the registration process.
 		</Alert>
 	);
