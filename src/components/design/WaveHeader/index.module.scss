@@ -103,11 +103,11 @@
 }
 
 .waveSvgStart {
-	stop-color: $wave-gradient-color-end;
+	stop-color: $wave-gradient-color-start;
 }
 
 .waveSvgEnd {
-	stop-color: $wave-gradient-color-start;
+	stop-color: $wave-gradient-color-end;
 }
 
 .textDark {
