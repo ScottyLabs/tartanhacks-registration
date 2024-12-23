@@ -1,14 +1,13 @@
 // Colors
-$color-theme-blue: #3a5ff3;
-$color-theme-pink: #ff70a1;
-$color-theme-yellow: #f8f0ee;
-$color-theme-purple: #0b3b48;
+$color-primary: #0b3b48;
+$color-primary-darker: #042129;
+$color-primary-lighter: #4a7581;
+$color-secondary: #000;
+$color-contrast: #fff;
 
-$color-primary: $color-theme-blue;
-$color-secondary: $color-theme-blue;
-$color-primary-darker: $color-theme-blue;
-$color-contrast: $color-theme-yellow;
-
+$color-theme-one: #3A5FF3;
+$color-theme-two: #F8F0EE;
+$color-theme-three: #FF70A1;
 
 $body-background-color: #fff;
 
@@ -38,8 +37,8 @@ $color-error: #f44336;
 $gradient-color-start: $color-primary-darker;
 $gradient-color-end: $color-secondary;
 
-$wave-gradient-color-start: $color-theme-blue;
-$wave-gradient-color-end: $color-theme-purple;
+$wave-gradient-color-start: #3A5FF3;
+$wave-gradient-color-end: #0B3B48;
 
 $light-gradient-color-start: #ffffff;
 $light-gradient-color-end: #ffe3e3;

@@ -21,8 +21,14 @@
 	flex-direction: column;
 	margin-bottom: 3em;
 	margin-top: 5em;
-	z-index: 5;
-	background-image: $dialog-container-gradient-lighter;
+
+	background: linear-gradient(337deg, rgba(230, 246, 252, 0.85) 14.4%, rgba(255, 255, 255, 0.85) 88.58%);
+	box-shadow: $dialog-container-box-shadow;
+	backdrop-filter: blur(4px);
+	
+	color: $text-color-primary;
+
+	border-radius: 16px;
 
 	@include down($breakpoint-md) {
 		width: 90%;
@@ -58,8 +64,8 @@
 .header {
 	border-bottom: solid $text-color-primary 2px;
 	text-align: center;
-	font-weight: 400;
 	padding-bottom: 1rem;
+	color: #0372A1;
 }
 
 .formContents {

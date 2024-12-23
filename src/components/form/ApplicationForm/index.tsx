@@ -160,7 +160,7 @@ const ApplicationForm = (): ReactElement => {
 	}, []);
 
 	return (
-		<Paper className={styles.formDialog}>
+		<div className={styles.formDialog}>
 			<Snackbar
 				open={error}
 				autoHideDuration={5000}
@@ -243,7 +243,7 @@ const ApplicationForm = (): ReactElement => {
 					</div>
 				</div>
 			</form>
-		</Paper>
+		</div>
 	);
 };
 

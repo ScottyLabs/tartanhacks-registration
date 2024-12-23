@@ -1,4 +1,4 @@
-import { TextField, Typography } from '@mui/material';
+import { TextField, Typography, FormGroup } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 import { Ethnicity, Gender } from 'enums/Profile';
 import React, {
@@ -153,18 +153,20 @@ const BasicSection = ({
 			<Typography variant="h5" className={styles.sectionHeader}>
 				Personal Info
 			</Typography>
-			<TextField
-				label="Display Name"
-				variant="outlined"
-				error={displayNameErrorStatus}
-				helperText={displayNameHelper}
-				required
-				fullWidth
-				value={displayName}
-				onChange={(e) => {
-					setDisplayName(e.target.value);
-				}}
-			/>
+			<FormGroup>
+				<TextField
+					label="Display Name"
+					variant="outlined"
+					error={displayNameErrorStatus}
+					helperText={displayNameHelper}
+					required
+					fullWidth
+					value={displayName}
+					onChange={(e) => {
+						setDisplayName(e.target.value);
+					}}
+				/>
+			</FormGroup>
 			<TextField
 				label="First Name"
 				variant="outlined"
@@ -254,7 +256,7 @@ const BasicSection = ({
 					label="City"
 					variant="outlined"
 					fullWidth
-					value={age}
+					value={city}
 					onChange={(e) => {
 						setCity(e.target.value);
 					}}
