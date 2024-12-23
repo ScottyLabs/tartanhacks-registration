@@ -10,9 +10,6 @@
 	padding: 2em;
 	margin: 0 auto;
 	flex-direction: column;
-	background-image: $dialog-container-gradient;
-	box-shadow: $dialog-container-box-shadow;
-	backdrop-filter: blur(4px);
 
 	@include down($breakpoint-md) {
 		width: 80%;
@@ -99,6 +96,8 @@
 .dashboardButton {
 	padding: 1em 3em !important;
 	font-size: large !important;
+
+	background-color: $text-color-primary !important;
 
 	@include down($breakpoint-lg) {
 		padding: 0.5em 1em !important;

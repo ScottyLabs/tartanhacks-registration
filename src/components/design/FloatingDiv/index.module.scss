@@ -4,19 +4,19 @@
 .floatingDiv {
 	position: relative;
 	width: 80%;
-	top: 250px;
 	margin: auto;
 	padding-top: 40px;
 	padding-bottom: 40px;
-	margin-bottom: 400px;
+
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
 	box-sizing: border-box;
 
-	background-image: $dialog-container-gradient;
+	background: linear-gradient(337deg, rgba(230, 246, 252, 0.85) 14.4%, rgba(255, 255, 255, 0.85) 88.58%);
 	box-shadow: $dialog-container-box-shadow;
 	backdrop-filter: blur(4px);
+
 	border-radius: 25px;
 
 	@include down($breakpoint-md) {

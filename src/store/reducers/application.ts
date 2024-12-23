@@ -3,12 +3,14 @@ import { RequestStatus } from 'enums/RequestStatus';
 import { combineReducers } from 'redux';
 import {
 	BasicFields,
-	EssayFields,
+	TravelFields,
 	ExperienceFields,
 	LogisticsFields,
 	PortfolioFields,
 	SchoolFields,
 	WorkAuthorizationFields,
+	ConsentFields,
+	DiversityFields
 } from 'types/ApplicationForm';
 import { DispatchAction } from 'types/DispatchAction';
 
@@ -49,6 +51,8 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
 					ethnicityOther,
 					age,
 					middleName,
+					country,
+					city
 				} = data as BasicFields;
 				state = {
 					displayName,
@@ -60,6 +64,8 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
 					ethnicityOther,
 					age,
 					middleName,
+					country,
+					city
 				};
 			}
 		}
@@ -67,14 +73,22 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
 	return state;
 };
 
-const essays = (state: EssayFields | null = null, action: DispatchAction) => {
-	if (action.type === DispatchActionType.APPLICATION_SAVE_ESSAY) {
+const travel = (state: TravelFields | null = null, action: DispatchAction) => {
+	if (action.type === DispatchActionType.APPLICATION_SAVE_TRAVEL) {
 		state = action.data;
 	} else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
 		if (action?.data) {
 			const { data } = action;
-			if (data.essays) {
-				state = { essays: data.essays };
+			if (data) {
+				const {
+					wantsTravelReimbursement,
+					travelDetails,
+				} = data as TravelFields;
+
+				state = {
+					wantsTravelReimbursement,
+					travelDetails
+				};
 			}
 		}
 	}
@@ -147,7 +161,7 @@ const portfolio = (
 		if (action?.data) {
 			const { data } = action;
 			if (data) {
-				const { github, linkedin, resume, design, website } = data;
+				const { github, linkedin, resume, design, website } = data as PortfolioFields;
 				state = { github, linkedin, resume, design, website };
 			}
 		}
@@ -187,7 +201,7 @@ const workAuth = (
 		if (action?.data) {
 			const { data } = action;
 			if (data) {
-				const { workPermission, workLocation, sponsorRanking } = data;
+				const { workPermission, workLocation, sponsorRanking } = data as WorkAuthorizationFields;
 				state = { workPermission, workLocation, sponsorRanking };
 			}
 		}
@@ -195,18 +209,56 @@ const workAuth = (
 	return state;
 };
 
+const diversity = (
+	state: DiversityFields | null = null,
+	action: DispatchAction,
+) => {
+	if (action.type === DispatchActionType.APPLICATION_SAVE_DIVERSITY) {
+		state = action.data;
+	} else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
+		if (action?.data) {
+			const { data } = action;
+			if (data) {
+				const { diversityStatement } = data as DiversityFields;
+				state = { diversityStatement };
+			}
+		}
+	}
+	return state;
+}
+
+const consent = (
+	state: ConsentFields | null = null,
+	action: DispatchAction,
+) => {
+	if (action.type === DispatchActionType.APPLICATION_SAVE_CONSENT) {
+		state = action.data;
+	} else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
+		if (action?.data) {
+			const { data } = action;
+			if (data) {
+				const { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription } = data as ConsentFields;
+				state = { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription };
+			}
+		}
+	}
+	return state;
+}
+
 const status = (state = null, action: DispatchAction) => {
 	switch (action.type) {
 		case DispatchActionType.APPLICATION_UPLOAD_RESUME:
 		case DispatchActionType.APPLICATION_MISSING_RESUME:
 		case DispatchActionType.APPLICATION_SUBMIT_FORM:
 		case DispatchActionType.APPLICATION_SAVE_BASIC:
-		case DispatchActionType.APPLICATION_SAVE_ESSAY:
+		case DispatchActionType.APPLICATION_SAVE_TRAVEL:
 		case DispatchActionType.APPLICATION_SAVE_EXPERIENCE:
 		case DispatchActionType.APPLICATION_SAVE_LOGISTICS:
 		case DispatchActionType.APPLICATION_SAVE_PORTFOLIO:
 		case DispatchActionType.APPLICATION_SAVE_SCHOOL:
 		case DispatchActionType.APPLICATION_SAVE_WORK_AUTH:
+		case DispatchActionType.APPLICATION_SAVE_CONSENT:
+		case DispatchActionType.APPLICATION_SAVE_DIVERSITY:
 			return action.status;
 	}
 	return state;
@@ -218,12 +270,14 @@ const error = (state = null, action: DispatchAction) => {
 		case DispatchActionType.APPLICATION_MISSING_RESUME:
 		case DispatchActionType.APPLICATION_SUBMIT_FORM:
 		case DispatchActionType.APPLICATION_SAVE_BASIC:
-		case DispatchActionType.APPLICATION_SAVE_ESSAY:
+		case DispatchActionType.APPLICATION_SAVE_TRAVEL:
 		case DispatchActionType.APPLICATION_SAVE_EXPERIENCE:
 		case DispatchActionType.APPLICATION_SAVE_LOGISTICS:
 		case DispatchActionType.APPLICATION_SAVE_PORTFOLIO:
 		case DispatchActionType.APPLICATION_SAVE_SCHOOL:
 		case DispatchActionType.APPLICATION_SAVE_WORK_AUTH:
+		case DispatchActionType.APPLICATION_SAVE_CONSENT:
+		case DispatchActionType.APPLICATION_SAVE_DIVERSITY:
 			if (action.status == RequestStatus.ERROR) {
 				return action.data;
 			}
@@ -237,7 +291,9 @@ export default combineReducers({
 	error,
 	status,
 	basic,
-	essays,
+	travel,
+	diversity,
+	consent,
 	experience,
 	logistics,
 	portfolio,

@@ -38,6 +38,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 			</defs>
 		</svg>
 	);
+
 	const inner = new Map<WaveHeaderVariant, ReactElement>();
 	inner.set(
 		'dark',
@@ -45,15 +46,15 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 			<Link href="/">
 				<Logo className={styles.logoLarge} variant="large" />
 			</Link>
-			<Typography variant="body1" className={styles.subtitle}>
+			<span className={clsx(styles.smallsubtitle, styles.byline)}>
 				Feb 7-8, 2025
-			</Typography>
+			</span>
 		</div>,
 	);
 
 	inner.set(
 		'light',
-		<div className={`${styles.headerAssets} ${styles.light}`}>
+		<div className={clsx(styles.headerAssets, styles.light)}>
 			<Link href="/">
 				<Logo className={styles.logo} variant="medium" />
 			</Link>
@@ -61,25 +62,21 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 				<NextLink href="/" passHref>
 					<Link underline="none">
 						<div className={styles.titleContainer}>
-							<Text
-								variant="h1"
-								className={`${styles.title} ${styles.textDark}`}
-							>
-								TartanHacks
-							</Text>
-							<Text
-								variant="h2"
-								className={`${styles.subtitle} ${styles.textDark} ${styles.byline}`}
-							>
-								by ScottyLabs
-							</Text>
+							<div className={styles.subContainer}>
+								<span className={clsx(styles.title, styles.textDark, styles.byline)}>
+									TartanHacks
+								</span>
+								<span className={clsx(styles.subsubtitle, styles.textDark, styles.byline)}>
+									by
+								</span>
+								<span className={clsx(styles.subtitle, styles.textDark, styles.byline)}>
+									ScottyLabs
+								</span>
+							</div>
 						</div>
-						<Text
-							variant="h2"
-							className={`${styles.subtitle} ${styles.textDark}`}
-						>
+						<span className={clsx(styles.subsubtitle, styles.textDark, styles.byline)}>
 							Feb 7-8, 2025
-						</Text>
+						</span>
 					</Link>
 				</NextLink>
 			</div>

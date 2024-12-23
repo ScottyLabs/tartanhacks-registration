@@ -3,12 +3,14 @@ import { RequestStatus } from 'enums/RequestStatus';
 import {
 	ApplicationForm,
 	BasicFields,
-	EssayFields,
+	DiversityFields,
+	TravelFields,
 	ExperienceFields,
 	LogisticsFields,
 	PortfolioFields,
 	SchoolFields,
 	WorkAuthorizationFields,
+	ConsentFields
 } from 'types/ApplicationForm';
 import { DispatchAction } from 'types/DispatchAction';
 
@@ -69,8 +71,8 @@ export const saveBasic = (data: BasicFields): DispatchAction => ({
 	data,
 });
 
-export const saveEssay = (data: EssayFields): DispatchAction => ({
-	type: DispatchActionType.APPLICATION_SAVE_ESSAY,
+export const saveTravel = (data: TravelFields): DispatchAction => ({
+	type: DispatchActionType.APPLICATION_SAVE_TRAVEL,
 	useAPI: false,
 	status: RequestStatus.PENDING,
 	data,
@@ -78,6 +80,13 @@ export const saveEssay = (data: EssayFields): DispatchAction => ({
 
 export const saveExperience = (data: ExperienceFields): DispatchAction => ({
 	type: DispatchActionType.APPLICATION_SAVE_EXPERIENCE,
+	useAPI: false,
+	status: RequestStatus.PENDING,
+	data,
+});
+
+export const saveDiversity = (data: DiversityFields): DispatchAction => ({
+	type: DispatchActionType.APPLICATION_SAVE_DIVERSITY,
 	useAPI: false,
 	status: RequestStatus.PENDING,
 	data,
@@ -108,6 +117,13 @@ export const saveWorkAuth = (
 	data: WorkAuthorizationFields,
 ): DispatchAction => ({
 	type: DispatchActionType.APPLICATION_SAVE_WORK_AUTH,
+	useAPI: false,
+	status: RequestStatus.PENDING,
+	data,
+});
+
+export const saveConsent = (data: ConsentFields): DispatchAction => ({
+	type: DispatchActionType.APPLICATION_SAVE_CONSENT,
 	useAPI: false,
 	status: RequestStatus.PENDING,
 	data,

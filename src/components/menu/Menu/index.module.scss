@@ -90,23 +90,8 @@
 	cursor: pointer;
 }
 
-.menuItem0:hover {
-	background-color: $color-theme-blue;
-}
-
-.menuItem1:hover {
-	background-color: $color-theme-purple;
-	color: black;
-}
-
-.menuItem2:hover {
-	background-color: $color-theme-yellow;
-	color: black;
-}
-
-.menuItem3:hover {
-	background-color: $color-theme-pink;
-	color: black;
+.menuItem:hover {
+	background-color: $color-primary-lighter;
 }
 
 .menuLine {

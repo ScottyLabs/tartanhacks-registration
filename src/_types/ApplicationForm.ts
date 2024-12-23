@@ -19,6 +19,8 @@ export interface BasicFields {
 	ethnicity: Ethnicity;
 	ethnicityOther?: string;
 	age?: number;
+	city?: string;
+	country?: string;
 }
 
 export interface SchoolFields {
@@ -47,8 +49,13 @@ export interface PortfolioFields {
 	website?: string;
 }
 
-export interface EssayFields {
-	essays: string[];
+export interface TravelFields {
+	wantsTravelReimbursement: boolean;
+	travelDetails?: string;
+}
+
+export interface DiversityFields {
+	diversityStatement: string;
 }
 
 export interface LogisticsFields {
@@ -62,10 +69,22 @@ export interface LogisticsFields {
 	notes?: string;
 }
 
+export interface ConsentFields {
+	tartanHacksCodeOfConductAcknowledgement: boolean;
+	tartanHacksMediaReleaseAcknowledgement: boolean;
+	tartanHacksMediaReleaseSignature: string;
+	tartanHacksMediaReleaseDate: Date;
+	mlhCodeOfConductAcknowledgement: boolean;
+	mlhTermsAndConditionsAcknowledgement: boolean;
+	mlhEmailSubscription: boolean;
+}
+
 export type ApplicationForm = BasicFields &
 	SchoolFields &
 	ExperienceFields &
 	WorkAuthorizationFields &
 	PortfolioFields &
-	EssayFields &
-	LogisticsFields;
+	TravelFields &
+	DiversityFields &
+	LogisticsFields &
+	ConsentFields;

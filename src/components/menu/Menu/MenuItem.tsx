@@ -13,24 +13,9 @@ const MenuItem = ({
 	url: string;
 	id: number;
 }): ReactElement => {
-	let linkColorClass;
-	switch (id % 4) {
-		case 0:
-			linkColorClass = styles.menuItem0;
-			break;
-		case 1:
-			linkColorClass = styles.menuItem1;
-			break;
-		case 2:
-			linkColorClass = styles.menuItem2;
-			break;
-		case 3:
-			linkColorClass = styles.menuItem3;
-			break;
-	}
 	return (
 		<NextLink href={url} passHref>
-			<Link className={clsx(styles.link, linkColorClass)}>
+			<Link className={clsx(styles.link)}>
 				<div className={styles.menuItem}>
 					<Typography variant="h5">{text}</Typography>
 				</div>

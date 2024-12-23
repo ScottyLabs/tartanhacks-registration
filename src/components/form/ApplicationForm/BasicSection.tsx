@@ -1,4 +1,4 @@
-import { TextField, Typography } from '@mui/material';
+import { TextField, Typography, FormGroup } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 import { Ethnicity, Gender } from 'enums/Profile';
 import React, {
@@ -13,6 +13,7 @@ import actions from 'src/actions';
 import { BasicFields } from 'types/ApplicationForm';
 import { RootState } from 'types/RootState';
 import styles from './index.module.scss';
+import { getCountries } from 'src/util/getCountries';
 
 const BasicSection = ({
 	validate,
@@ -41,6 +42,8 @@ const BasicSection = ({
 	const [ethnicity, setEthnicity] = useState<Ethnicity | null>(null);
 	const [ethnicityOther, setEthnicityOther] = useState<string>('');
 	const [age, setAge] = useState<string>('');
+	const [city, setCity] = useState<string>('');
+	const [country, setCountry] = useState<string | null>(null);
 
 	// Error fields
 	const [displayNameErrorStatus, setDisplayNameErrorStatus] = useState(false);
@@ -90,7 +93,10 @@ const BasicSection = ({
 				gender: gender as Gender,
 				ethnicity: ethnicity as Ethnicity,
 				middleName,
+				city,
+				country: country as string,
 			};
+
 			data.age = ageNum;
 			if (gender === Gender.OTHER) {
 				data.genderOther = genderOther;
@@ -98,6 +104,7 @@ const BasicSection = ({
 			if (ethnicity == Ethnicity.OTHER) {
 				data.ethnicityOther = ethnicityOther;
 			}
+
 			await dispatch(actions.application.saveBasic(data));
 		}
 
@@ -112,6 +119,16 @@ const BasicSection = ({
 		// eslint-disable-next-line
 	}, [validate]);
 
+	const [countries, setCountries] = useState<string[]>([]);
+
+	useEffect(() => {
+		const queryCountries = async () => {
+			const countriesList = await getCountries();
+			setCountries(countriesList);
+		};
+		queryCountries();
+	}, []);
+
 	useEffect(() => {
 		if (fetchedProfile) {
 			setDisplayName(basicFields?.displayName);
@@ -125,6 +142,8 @@ const BasicSection = ({
 			setGenderOther(basicFields?.genderOther ?? '');
 			setEthnicity(basicFields?.ethnicity);
 			setEthnicityOther(basicFields?.ethnicityOther ?? '');
+			setCity(basicFields?.city ?? '');
+			setCountry(basicFields?.country ?? '');
 		}
 		// eslint-disable-next-line
 	}, [fetchedProfile]);
@@ -134,18 +153,20 @@ const BasicSection = ({
 			<Typography variant="h5" className={styles.sectionHeader}>
 				Personal Info
 			</Typography>
-			<TextField
-				label="Display Name"
-				variant="outlined"
-				error={displayNameErrorStatus}
-				helperText={displayNameHelper}
-				required
-				fullWidth
-				value={displayName}
-				onChange={(e) => {
-					setDisplayName(e.target.value);
-				}}
-			/>
+			<FormGroup>
+				<TextField
+					label="Display Name"
+					variant="outlined"
+					error={displayNameErrorStatus}
+					helperText={displayNameHelper}
+					required
+					fullWidth
+					value={displayName}
+					onChange={(e) => {
+						setDisplayName(e.target.value);
+					}}
+				/>
+			</FormGroup>
 			<TextField
 				label="First Name"
 				variant="outlined"
@@ -230,6 +251,32 @@ const BasicSection = ({
 					setAge(e.target.value);
 				}}
 			/>
+			<div className={styles.fieldRow}>
+				<TextField
+					label="City"
+					variant="outlined"
+					fullWidth
+					value={city}
+					onChange={(e) => {
+						setCity(e.target.value);
+					}}
+				/>
+				<Autocomplete
+					options={countries as string[]}
+					value={country}
+					onChange={(e, value) => {
+						setCountry(value);
+					}}
+					renderInput={(params) => (
+						<TextField
+							variant="outlined"
+							{...params}
+							label="Country"
+							required
+						/>
+					)}
+				/>
+			</div>
 		</div>
 	);
 };
