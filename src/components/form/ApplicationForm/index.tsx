@@ -68,6 +68,7 @@ const ApplicationForm = (): ReactElement => {
 		validatePortfolio,
 		validateSchool,
 		validateWorkAuth,
+		validateConsent,
 	].some(Boolean);
 
 	// Check that all sections are valid

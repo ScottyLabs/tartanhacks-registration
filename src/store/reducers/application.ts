@@ -9,6 +9,8 @@ import {
 	PortfolioFields,
 	SchoolFields,
 	WorkAuthorizationFields,
+	ConsentFields,
+	DiversityFields
 } from 'types/ApplicationForm';
 import { DispatchAction } from 'types/DispatchAction';
 
@@ -203,6 +205,42 @@ const workAuth = (
 	return state;
 };
 
+const diversity = (
+	state: DiversityFields | null = null,
+	action: DispatchAction,
+) => {
+	if (action.type === DispatchActionType.APPLICATION_SAVE_DIVERSITY) {
+		state = action.data;
+	} else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
+		if (action?.data) {
+			const { data } = action;
+			if (data) {
+				const { diversityStatement } = data;
+				state = { diversityStatement };
+			}
+		}
+	}
+	return state;
+}
+
+const consent = (
+	state: ConsentFields | null = null,
+	action: DispatchAction,
+) => {
+	if (action.type === DispatchActionType.APPLICATION_SAVE_CONSENT) {
+		state = action.data;
+	} else if (action.type === DispatchActionType.APPLICATION_GET_PROFILE) {
+		if (action?.data) {
+			const { data } = action;
+			if (data) {
+				const { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription } = data;
+				state = { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription };
+			}
+		}
+	}
+	return state;
+}
+
 const status = (state = null, action: DispatchAction) => {
 	switch (action.type) {
 		case DispatchActionType.APPLICATION_UPLOAD_RESUME:
@@ -245,7 +283,9 @@ export default combineReducers({
 	error,
 	status,
 	basic,
-	essays: travel,
+	travel,
+	diversity,
+	consent,
 	experience,
 	logistics,
 	portfolio,

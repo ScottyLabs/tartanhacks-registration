@@ -54,7 +54,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 
 	inner.set(
 		'light',
-		<div className={`${styles.headerAssets} ${styles.light}`}>
+		<div className={clsx(styles.headerAssets, styles.light)}>
 			<Link href="/">
 				<Logo className={styles.logo} variant="medium" />
 			</Link>
@@ -63,7 +63,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 					<Link underline="none">
 						<div className={styles.titleContainer}>
 							<div className={styles.subContainer}>
-								<span className={clsx(styles.title, styles.textDark)}>
+								<span className={clsx(styles.title, styles.textDark, styles.byline)}>
 									TartanHacks
 								</span>
 								<span className={clsx(styles.subsubtitle, styles.textDark, styles.byline)}>

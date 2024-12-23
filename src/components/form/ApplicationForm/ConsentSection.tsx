@@ -23,9 +23,8 @@ const ConsentSection = ({
 }): ReactElement => {
 	const dispatch = useDispatch();
 
-	const fetchedProfile = useSelector(
-		(state: RootState) => state?.application?.fetchedProfile,
-	);
+	const fetchedProfile = useSelector((state: RootState) => state?.application?.fetchedProfile);
+	const consentFields = useSelector((state: RootState) => state?.application?.consent)
 
 	// Consent
 	const [tartanhacksCodeOfConduct, setTartanhacksCodeOfConduct] = useState<boolean>(false);
@@ -36,14 +35,12 @@ const ConsentSection = ({
 	const [mlhTerms, setMlhTerms] = useState<boolean>(false);
 	const [mlhEmailUpdates, setMlhEmailUpdates] = useState<boolean>(false);
 
-	const consentFields = useSelector((state: RootState) => state?.application?.consent)
-
 	// Error fields
 	const [consentHelper, setConsentHelper] = useState<string | null>(null);
 	const [signatureHelper, setSignatureHelper] = useState<string | null>(null);
 
 	const validateForm = async () => {
-		let valid = false;
+		let valid = true;
 
 		const consents = [
 			tartanhacksCodeOfConduct,
@@ -68,19 +65,19 @@ const ConsentSection = ({
 
 		if (valid) {
 			const data: ConsentFields = {
-				tartanhacksCodeOfConduct,
-				mediaRelease,
-				signature,
-				signatureDate,
-				mlhCodeOfConduct,
-				mlhTerms,
-				mlhEmailUpdates,
+				tartanHacksCodeOfConductAcknowledgement: tartanhacksCodeOfConduct,
+				tartanHacksMediaReleaseAcknowledgement: mediaRelease,
+				tartanHacksMediaReleaseSignature: signature,
+				tartanHacksMediaReleaseDate: signatureDate,
+				mlhCodeOfConductAcknowledgement: mlhCodeOfConduct,
+				mlhTermsAndConditionsAcknowledgement: mlhTerms,
+				mlhEmailSubscription: mlhEmailUpdates,
 			};
 
 			await dispatch(actions.application.saveConsent(data));
 		}
 
-		setValid(true);
+		setValid(valid);
 		setValidate(false);
 	};
 
@@ -93,13 +90,15 @@ const ConsentSection = ({
 
 	useEffect(() => {
 		if (fetchedProfile) {
-			setTartanhacksCodeOfConduct(consentFields.tartanhacksCodeOfConduct);
-			setMediaRelease(consentFields.mediaRelease);
-			setSignature(consentFields.signature);
-			setSignatureDate(new Date(consentFields.signatureDate));
-			setMlhCodeOfConduct(consentFields.mlhCodeOfConduct);
-			setMlhTerms(consentFields.mlhTerms);
-			setMlhEmailUpdates(consentFields.mlhEmailUpdates);
+			console.log(consentFields);
+
+			setTartanhacksCodeOfConduct(consentFields.tartanHacksCodeOfConductAcknowledgement);
+			setMediaRelease(consentFields.tartanHacksMediaReleaseAcknowledgement);
+			setSignature(consentFields.tartanHacksMediaReleaseSignature);
+			setSignatureDate(new Date(consentFields.tartanHacksMediaReleaseDate));
+			setMlhCodeOfConduct(consentFields.mlhCodeOfConductAcknowledgement);
+			setMlhTerms(consentFields.mlhTermsAndConditionsAcknowledgement);
+			setMlhEmailUpdates(consentFields.mlhEmailSubscription);
 		}
 		// eslint-disable-next-line
 	}, [fetchedProfile]);

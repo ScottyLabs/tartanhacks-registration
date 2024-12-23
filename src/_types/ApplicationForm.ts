@@ -70,13 +70,13 @@ export interface LogisticsFields {
 }
 
 export interface ConsentFields {
-	tartanhacksCodeOfConduct: boolean;
-	mediaRelease: boolean;
-	signature: string;
-	signatureDate: Date;
-	mlhCodeOfConduct: boolean;
-	mlhTerms: boolean;
-	mlhEmailUpdates: boolean;
+	tartanHacksCodeOfConductAcknowledgement: boolean;
+	tartanHacksMediaReleaseAcknowledgement: boolean;
+	tartanHacksMediaReleaseSignature: string;
+	tartanHacksMediaReleaseDate: Date;
+	mlhCodeOfConductAcknowledgement: boolean;
+	mlhTermsAndConditionsAcknowledgement: boolean;
+	mlhEmailSubscription: boolean;
 }
 
 export type ApplicationForm = BasicFields &

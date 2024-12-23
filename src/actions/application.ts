@@ -113,17 +113,17 @@ export const saveSchool = (data: SchoolFields): DispatchAction => ({
 	data,
 });
 
-export const saveConsent = (data: ConsentFields): DispatchAction => ({
-	type: DispatchActionType.APPLICATION_SAVE_CONSENT,
+export const saveWorkAuth = (
+	data: WorkAuthorizationFields,
+): DispatchAction => ({
+	type: DispatchActionType.APPLICATION_SAVE_WORK_AUTH,
 	useAPI: false,
 	status: RequestStatus.PENDING,
 	data,
 });
 
-export const saveWorkAuth = (
-	data: WorkAuthorizationFields,
-): DispatchAction => ({
-	type: DispatchActionType.APPLICATION_SAVE_WORK_AUTH,
+export const saveConsent = (data: ConsentFields): DispatchAction => ({
+	type: DispatchActionType.APPLICATION_SAVE_CONSENT,
 	useAPI: false,
 	status: RequestStatus.PENDING,
 	data,
