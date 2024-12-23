@@ -51,6 +51,8 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
 					ethnicityOther,
 					age,
 					middleName,
+					country,
+					city
 				} = data as BasicFields;
 				state = {
 					displayName,
@@ -62,6 +64,8 @@ const basic = (state: BasicFields | null = null, action: DispatchAction) => {
 					ethnicityOther,
 					age,
 					middleName,
+					country,
+					city
 				};
 			}
 		}
@@ -157,7 +161,7 @@ const portfolio = (
 		if (action?.data) {
 			const { data } = action;
 			if (data) {
-				const { github, linkedin, resume, design, website } = data;
+				const { github, linkedin, resume, design, website } = data as PortfolioFields;
 				state = { github, linkedin, resume, design, website };
 			}
 		}
@@ -197,7 +201,7 @@ const workAuth = (
 		if (action?.data) {
 			const { data } = action;
 			if (data) {
-				const { workPermission, workLocation, sponsorRanking } = data;
+				const { workPermission, workLocation, sponsorRanking } = data as WorkAuthorizationFields;
 				state = { workPermission, workLocation, sponsorRanking };
 			}
 		}
@@ -215,7 +219,7 @@ const diversity = (
 		if (action?.data) {
 			const { data } = action;
 			if (data) {
-				const { diversityStatement } = data;
+				const { diversityStatement } = data as DiversityFields;
 				state = { diversityStatement };
 			}
 		}
@@ -233,7 +237,7 @@ const consent = (
 		if (action?.data) {
 			const { data } = action;
 			if (data) {
-				const { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription } = data;
+				const { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription } = data as ConsentFields;
 				state = { tartanHacksCodeOfConductAcknowledgement, tartanHacksMediaReleaseAcknowledgement, tartanHacksMediaReleaseSignature, tartanHacksMediaReleaseDate, mlhCodeOfConductAcknowledgement, mlhTermsAndConditionsAcknowledgement, mlhEmailSubscription };
 			}
 		}
