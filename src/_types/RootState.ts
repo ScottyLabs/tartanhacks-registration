@@ -1,12 +1,14 @@
 import { RequestStatus } from 'enums/RequestStatus';
 import {
 	BasicFields,
+	DiversityFields,
 	TravelFields,
 	ExperienceFields,
 	LogisticsFields,
 	PortfolioFields,
 	SchoolFields,
 	WorkAuthorizationFields,
+	ConsentFields
 } from './ApplicationForm';
 
 export interface RootState {
@@ -42,12 +44,14 @@ export interface RootState {
 		error: string;
 		resume: string;
 		basic: BasicFields;
-		essays: TravelFields;
+		travel: TravelFields;
 		experience: ExperienceFields;
+		diversity: DiversityFields;
 		logistics: LogisticsFields;
 		portfolio: PortfolioFields;
 		school: SchoolFields;
 		workAuth: WorkAuthorizationFields;
+		consent: ConsentFields;
 		fetchedProfile: boolean;
 	};
 	requests: {

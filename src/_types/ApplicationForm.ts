@@ -54,6 +54,10 @@ export interface TravelFields {
 	travelDetails?: string;
 }
 
+export interface DiversityFields {
+	diversityStatement: string;
+}
+
 export interface LogisticsFields {
 	dietaryRestrictions?: string[];
 	shirtSize: ShirtSize;
@@ -65,10 +69,22 @@ export interface LogisticsFields {
 	notes?: string;
 }
 
+export interface ConsentFields {
+	tartanhacksCodeOfConduct: boolean;
+	mediaRelease: boolean;
+	signature: string;
+	signatureDate: Date;
+	mlhCodeOfConduct: boolean;
+	mlhTerms: boolean;
+	mlhEmailUpdates: boolean;
+}
+
 export type ApplicationForm = BasicFields &
 	SchoolFields &
 	ExperienceFields &
 	WorkAuthorizationFields &
 	PortfolioFields &
 	TravelFields &
-	LogisticsFields;
+	DiversityFields &
+	LogisticsFields &
+	ConsentFields;
