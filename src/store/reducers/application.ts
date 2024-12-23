@@ -257,6 +257,8 @@ const status = (state = null, action: DispatchAction) => {
 		case DispatchActionType.APPLICATION_SAVE_PORTFOLIO:
 		case DispatchActionType.APPLICATION_SAVE_SCHOOL:
 		case DispatchActionType.APPLICATION_SAVE_WORK_AUTH:
+		case DispatchActionType.APPLICATION_SAVE_CONSENT:
+		case DispatchActionType.APPLICATION_SAVE_DIVERSITY:
 			return action.status;
 	}
 	return state;
@@ -274,6 +276,8 @@ const error = (state = null, action: DispatchAction) => {
 		case DispatchActionType.APPLICATION_SAVE_PORTFOLIO:
 		case DispatchActionType.APPLICATION_SAVE_SCHOOL:
 		case DispatchActionType.APPLICATION_SAVE_WORK_AUTH:
+		case DispatchActionType.APPLICATION_SAVE_CONSENT:
+		case DispatchActionType.APPLICATION_SAVE_DIVERSITY:
 			if (action.status == RequestStatus.ERROR) {
 				return action.data;
 			}
