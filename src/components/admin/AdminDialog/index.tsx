@@ -27,47 +27,36 @@ const AdminDialog = (): ReactElement => {
 		querySponsors();
 	}, []);
 
-	return (
-		<FloatingDiv>
-			<TabContext value={tabIndex}>
-				<Box>
-					<TabList
-						value={tabIndex}
-						onChange={(e, newIndex: string) =>
-							setTabIndex(newIndex)
-						}
-						className={styles.tabs}
-						variant="scrollable"
-					>
-						<Tab label="Participants" value="0" />
-						<Tab label="Teams" value="1" />
-						<Tab label="Recruiters" value="2" />
-						<Tab label="Sponsors" value="3" />
-						<Tab label="Analytics" value="4" />
-						<Tab label="Check-in Items" value="5" />
-					</TabList>
-				</Box>
-				<TabPanel value="0" className={styles.tabPanel}>
-					<ParticipantTable />
-				</TabPanel>
-				<TabPanel value="1" className={styles.tabPanel}>
-					<Teams />
-				</TabPanel>
-				<TabPanel value="2" className={styles.tabPanel}>
-					<RecruiterCreationForm />
-				</TabPanel>
-				<TabPanel value="3" className={styles.tabPanel}>
-					<SponsorCreationForm />
-				</TabPanel>
-				<TabPanel value="4" className={styles.tabPanel}>
-					<AnalyticsTab />
-				</TabPanel>
-				<TabPanel value="4" className={styles.tabPanel}>
-					<CheckInTable />
-				</TabPanel>
-			</TabContext>
-		</FloatingDiv>
-	);
-};
+  return (
+    <FloatingDiv>
+      <TabContext value={tabIndex}>
+        <Box>
+          <TabList
+            onChange={(e, newIndex: string) => setTabIndex(newIndex)}
+            className={styles.tabs}
+            variant="scrollable"
+            >
+            <Tab label="Participants" value="0" />
+            <Tab label="Recruiters" value="1" />
+            <Tab label="Sponsors" value="2" />
+            <Tab label="Analytics" value="3" />
+          </TabList>
+        </Box>
+        <TabPanel value="0" className={styles.tabPanel}>
+          <ParticipantTable />
+        </TabPanel>
+        <TabPanel value="1" className={styles.tabPanel}>
+          <RecruiterCreationForm />
+        </TabPanel>
+        <TabPanel value="2" className={styles.tabPanel}>
+          <SponsorCreationForm />
+        </TabPanel>
+        <TabPanel value="3" className={styles.tabPanel}>
+          <AnalyticsTab />
+        </TabPanel>
+      </TabContext>
+    </FloatingDiv>
+  )
+}
 
 export default AdminDialog;
