@@ -46,7 +46,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 				<Logo className={styles.logoLarge} variant="large" />
 			</Link>
 			<Typography variant="body1" className={styles.subtitle}>
-				Feb 2-3, 2024
+				Feb 7-8, 2025
 			</Typography>
 		</div>,
 	);
@@ -78,7 +78,7 @@ const WaveHeader = ({ variant }: WaveHeaderProps): ReactElement => {
 							variant="h2"
 							className={`${styles.subtitle} ${styles.textDark}`}
 						>
-							Feb 2-3, 2024
+							Feb 7-8, 2025
 						</Text>
 					</Link>
 				</NextLink>
