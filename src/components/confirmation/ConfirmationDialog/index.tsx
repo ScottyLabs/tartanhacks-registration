@@ -3,6 +3,7 @@ import {
 	Collapse,
 	FormControlLabel,
 	FormGroup,
+	Hidden,
 	IconButton,
 	LinearProgress,
 	Link,
@@ -73,6 +74,7 @@ const ConfirmationDialog = (): ReactElement => {
 					<div className={styles.dialogText}>
 						<FormGroup className={styles.formGroup}>
 							<FormControlLabel
+								sx={{ ".MuiFormControlLabel-asterisk": { display: "none" } }}
 								control={
 									<Checkbox
 										required
