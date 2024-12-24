@@ -26,7 +26,6 @@ const ConfirmationDialog = (): ReactElement => {
 	const [loading, setLoading] = useState(false);
 
 	const [signatureLiability, setSignatureLiability] = useState(false);
-	const [signatureCodeOfConduct, setSignatureCodeOfConduct] = useState(false);
 	const [willMentor, setWillMentor] = useState(false);
 
 	const confirmTime = useSelector(
@@ -43,7 +42,6 @@ const ConfirmationDialog = (): ReactElement => {
 			await dispatch(
 				actions.user.confirm(
 					signatureLiability,
-					signatureCodeOfConduct,
 					willMentor,
 				),
 			);
@@ -95,32 +93,6 @@ const ConfirmationDialog = (): ReactElement => {
 											className={styles.link}
 										>
 											TartanHacks Liability Waiver
-										</Link>
-										.*
-									</Typography>
-								}
-							/>
-							<FormControlLabel
-								control={
-									<Checkbox
-										required
-										checked={signatureCodeOfConduct}
-										onChange={(e) =>
-											setSignatureCodeOfConduct(
-												e.target.checked,
-											)
-										}
-									/>
-								}
-								label={
-									<Typography>
-										I agree with the{' '}
-										<Link
-											target="_blank"
-											href="/THCodeOfConduct.pdf"
-											className={styles.link}
-										>
-											TartanHacks Code of Conduct
 										</Link>
 										.*
 									</Typography>
