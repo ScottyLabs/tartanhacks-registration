@@ -69,13 +69,16 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
 					</TableCell>
 				</TableRow>
 				<TableRow>
-					<TableCell>
-						<Typography variant="h6">Essays</Typography>
-					</TableCell>
+					<TableCell>Age</TableCell>
+					<TableCell>{profile.Age}</TableCell>
 				</TableRow>
 				<TableRow>
-					<TableCell>Essay 1</TableCell>
-					<TableCell>{profile.essays[0]}</TableCell>
+					<TableCell>City</TableCell>
+					<TableCell>{profile.city}</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>Country</TableCell>
+					<TableCell>{profile.country}</TableCell>
 				</TableRow>
 				<TableRow>
 					<TableCell>
@@ -106,7 +109,7 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
 					</TableCell>
 				</TableRow>
 				<TableRow>
-					<TableCell>Number of hackathons attended</TableCell>
+					<TableCell>Years of Hackathon Experience</TableCell>
 					<TableCell>{profile.hackathonExperience}</TableCell>
 				</TableRow>
 				<TableRow>
@@ -153,10 +156,46 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
 				</TableRow>
 				<TableRow>
 					<TableCell>
+						<Typography variant="h6">Travel</Typography>
+					</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>Wants Travel Reimbursement?</TableCell>
+					<TableCell>
+						{profile.wantsTravelReimbursement ? (
+							<Check className={styles.icon} />
+						) : (
+							<Cancel className={styles.icon} />
+						)}
+					</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>Travel Details</TableCell>
+					<TableCell>{profile.travelDetails}</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>
+						<Typography variant="h6">
+							Diversity Statement
+						</Typography>
+					</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>
+						Diversity Statement
+					</TableCell>
+					<TableCell>{profile.diversityStatement}</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>
 						<Typography variant="h6">
 							Logistical Information
 						</Typography>
 					</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>Phone Number</TableCell>
+					<TableCell>{profile.phoneNumber}</TableCell>
 				</TableRow>
 				<TableRow>
 					<TableCell>Dietary Restrictions</TableCell>
@@ -179,16 +218,23 @@ const ProfileContent = ({ profile }: { profile?: any }): ReactElement => {
 					</TableCell>
 				</TableRow>
 				<TableRow>
-					<TableCell>Region</TableCell>
-					<TableCell>{profile.region}</TableCell>
-				</TableRow>
-				<TableRow>
-					<TableCell>Phone Number</TableCell>
-					<TableCell>{profile.phoneNumber}</TableCell>
-				</TableRow>
-				<TableRow>
 					<TableCell>Additional Notes</TableCell>
 					<TableCell>{profile.notes}</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>
+						<Typography variant="h6">Other</Typography>
+					</TableCell>
+				</TableRow>
+				<TableRow>
+					<TableCell>MLH Email Subscription</TableCell>
+					<TableCell>
+						{profile.mlhEmailSubscription ? (
+							<Check className={styles.icon} />
+						) : (
+							<Cancel className={styles.icon} />
+						)}
+					</TableCell>
 				</TableRow>
 			</TableBody>
 		</Table>
