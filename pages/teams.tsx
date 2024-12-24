@@ -150,53 +150,56 @@ export default function ViewTeams(props: SSRDataAuth<TeamData>['props']) {
 			<Menu />
 			<WaveHeader variant="light" />
 			<div>
+
 				<WaveFooter />
-				<FloatingDiv>
-					<ContentHeader title="Team" />
-					{!loading ? (
-						<form
-							className={styles.buttonForm}
-							onClick={async (e) => {
-								e.preventDefault();
-								router.push('/teams/create');
-							}}
-						>
-							<RectangleButton
-								type="submit"
-								className={styles.newTeamButton}
+				<div className={styles.dialog}>
+					<FloatingDiv>
+						<ContentHeader title="Team" />
+						{!loading ? (
+							<form
+								className={styles.buttonForm}
+								onClick={async (e) => {
+									e.preventDefault();
+									router.push('/teams/create');
+								}}
 							>
-								Create new team
-							</RectangleButton>
-						</form>
-					) : null}
-					<Collapse in={loading}>
-						<div className={styles.spinnerContainer}>
-							<CircularProgress />
+								<RectangleButton
+									type="submit"
+									className={styles.newTeamButton}
+								>
+									Create new team
+								</RectangleButton>
+							</form>
+						) : null}
+						<Collapse in={loading}>
+							<div className={styles.spinnerContainer}>
+								<CircularProgress />
+							</div>
+						</Collapse>
+						<div className={styles.tableHeader}>
+							<Typography
+								variant="h4"
+								className={styles.tableHeaderText}
+							>
+								Open Teams
+							</Typography>
 						</div>
-					</Collapse>
-					<div className={styles.tableHeader}>
-						<Typography
-							variant="h4"
-							className={styles.tableHeaderText}
-						>
-							Open Teams
-						</Typography>
-					</div>
-					{emptyMessage}
-					<table className={styles.tableData}>
-						<tbody>
-							{teams
-								.sort((a, b) => +a._id - +b._id)
-								.map((team, idx) => (
-									<TeamTableEntry
-										team={team}
-										key={idx}
-										callback={checkJoinErrorCallback}
-									/>
-								))}
-						</tbody>
-					</table>
-				</FloatingDiv>
+						{emptyMessage}
+						<table className={styles.tableData}>
+							<tbody>
+								{teams
+									.sort((a, b) => +a._id - +b._id)
+									.map((team, idx) => (
+										<TeamTableEntry
+											team={team}
+											key={idx}
+											callback={checkJoinErrorCallback}
+										/>
+									))}
+							</tbody>
+						</table>
+					</FloatingDiv>
+				</div>
 				<Snackbar
 					open={notify === 'error' || notify === 'success'}
 					autoHideDuration={5000}

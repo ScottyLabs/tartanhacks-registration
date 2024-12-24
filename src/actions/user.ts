@@ -92,7 +92,6 @@ export const rejectAll = (): DispatchAction => ({
 
 export const confirm = (
 	signatureLiability: boolean,
-	signatureCodeOfConduct: boolean,
 	willMentor: boolean,
 ): DispatchAction => ({
 	type: DispatchActionType.USER_CONFIRM,
@@ -102,7 +101,6 @@ export const confirm = (
 		method: 'PUT',
 		body: {
 			signatureLiability,
-			signatureCodeOfConduct,
 			willMentor,
 		},
 	},
