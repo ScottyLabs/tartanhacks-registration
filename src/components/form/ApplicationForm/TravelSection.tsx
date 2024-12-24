@@ -31,10 +31,22 @@ const TravelSection = ({
 	const [wantsTravelReimbursement, setWantsTravelReimbursement] = useState<boolean>(false);
 	const [travelDetails, setTravelDetails] = useState<string>('');
 
+	// Error fields
+	const [travelInfoErrorStatus, setTravelInfoErrorStatus] = useState(false);
+	const [travelInfoHelper, setTravelInfoHelper] = useState<string>('');
+
 	const validateForm = async () => {
 		const data: TravelFields = { wantsTravelReimbursement, travelDetails };
 		await dispatch(actions.application.saveTravel(data));
-		setValid(true);
+
+		let valid = true;
+		if (wantsTravelReimbursement && travelDetails.length === 0) {
+			setTravelInfoErrorStatus(true);
+			setTravelInfoHelper('Please provide travel details if you want to apply for travel reimbursement');
+			valid = false;
+		}
+
+		setValid(valid);
 		setValidate(false);
 	};
 
@@ -81,6 +93,8 @@ const TravelSection = ({
 			<TextField
 				label="Travel details"
 				variant="outlined"
+				error={travelInfoErrorStatus}
+				helperText={travelInfoHelper}
 				fullWidth
 				multiline
 				value={travelDetails}
