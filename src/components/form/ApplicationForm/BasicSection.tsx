@@ -245,6 +245,7 @@ const BasicSection = ({
 				error={ageErrorStatus}
 				helperText={ageHelper}
 				variant="outlined"
+				required
 				fullWidth
 				value={age}
 				onChange={(e) => {
