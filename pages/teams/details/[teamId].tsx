@@ -182,7 +182,7 @@ const TeamDescription = () => {
 		<>
 			<Menu />
 			<WaveHeader variant="light" />
-			<div>
+			<div className={styles.dialog}>
 				<WaveFooter />
 				<FloatingDiv>
 					{ownTeamFetched && !isOwnTeam ? (
