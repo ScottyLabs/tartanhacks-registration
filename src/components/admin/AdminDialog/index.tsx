@@ -28,34 +28,36 @@ const AdminDialog = (): ReactElement => {
 	}, []);
 
   return (
-    <FloatingDiv>
-      <TabContext value={tabIndex}>
-        <Box>
-          <TabList
-            onChange={(e, newIndex: string) => setTabIndex(newIndex)}
-            className={styles.tabs}
-            variant="scrollable"
-            >
-            <Tab label="Participants" value="0" />
-            <Tab label="Recruiters" value="1" />
-            <Tab label="Sponsors" value="2" />
-            <Tab label="Analytics" value="3" />
-          </TabList>
-        </Box>
-        <TabPanel value="0" className={styles.tabPanel}>
-          <ParticipantTable />
-        </TabPanel>
-        <TabPanel value="1" className={styles.tabPanel}>
-          <RecruiterCreationForm />
-        </TabPanel>
-        <TabPanel value="2" className={styles.tabPanel}>
-          <SponsorCreationForm />
-        </TabPanel>
-        <TabPanel value="3" className={styles.tabPanel}>
-          <AnalyticsTab />
-        </TabPanel>
-      </TabContext>
-    </FloatingDiv>
+    <div className={styles.dialog}>
+      <FloatingDiv>
+        <TabContext value={tabIndex}>
+          <Box>
+            <TabList
+              onChange={(e, newIndex: string) => setTabIndex(newIndex)}
+              className={styles.tabs}
+              variant="scrollable"
+              >
+              <Tab label="Participants" value="0" />
+              <Tab label="Recruiters" value="1" />
+              <Tab label="Sponsors" value="2" />
+              <Tab label="Analytics" value="3" />
+            </TabList>
+          </Box>
+          <TabPanel value="0" className={styles.tabPanel}>
+            <ParticipantTable />
+          </TabPanel>
+          <TabPanel value="1" className={styles.tabPanel}>
+            <RecruiterCreationForm />
+          </TabPanel>
+          <TabPanel value="2" className={styles.tabPanel}>
+            <SponsorCreationForm />
+          </TabPanel>
+          <TabPanel value="3" className={styles.tabPanel}>
+            <AnalyticsTab />
+          </TabPanel>
+        </TabContext>
+      </FloatingDiv>
+    </div>
   )
 }
 

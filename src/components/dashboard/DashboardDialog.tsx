@@ -47,12 +47,13 @@ const getDialogText = (status: Status): ReactElement => {
 				<div className={styles.dialogText}>
 					<Typography variant="body1">
 						Non-CMU students need to complete their application by
-						11:59pm EST, January 19th.
+						11:59pm EST, January 24th. The deadline to be eligible
+						for travel reimbursement is January 3rd.
 					</Typography>
 				</div>
 				<div className={styles.dialogText}>
 					<Typography variant="body1">
-						CMU students have time until January 26th.
+						CMU students have until January 31st.
 					</Typography>
 				</div>
 			</>
