@@ -90,8 +90,6 @@ const ConsentSection = ({
 
 	useEffect(() => {
 		if (fetchedProfile) {
-			console.log(consentFields);
-
 			setTartanhacksCodeOfConduct(consentFields.tartanHacksCodeOfConductAcknowledgement);
 			setMediaRelease(consentFields.tartanHacksMediaReleaseAcknowledgement);
 			setSignature(consentFields.tartanHacksMediaReleaseSignature);
