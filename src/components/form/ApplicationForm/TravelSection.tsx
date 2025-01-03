@@ -12,9 +12,10 @@ import React, {
 	useEffect,
 	useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import actions from 'src/actions';
 import { TravelFields } from 'types/ApplicationForm';
+import { RootState } from 'types/RootState';
 import styles from './index.module.scss';
 
 const TravelSection = ({
@@ -27,6 +28,12 @@ const TravelSection = ({
 	setValid: Dispatch<SetStateAction<boolean>>;
 }): ReactElement => {
 	const dispatch = useDispatch();
+
+	const fetchedProfile = useSelector(
+		(state: RootState) => state?.application?.fetchedProfile,
+	);
+	const travelFields =
+		useSelector((state: RootState) => state?.application?.travel) ?? {};
 
 	const [wantsTravelReimbursement, setWantsTravelReimbursement] = useState<boolean>(false);
 	const [travelDetails, setTravelDetails] = useState<string>('');
@@ -56,6 +63,14 @@ const TravelSection = ({
 		}
 		// eslint-disable-next-line
 	}, [validate]);
+
+	useEffect(() => {
+		if (fetchedProfile) {
+			setWantsTravelReimbursement(travelFields.wantsTravelReimbursement);
+			setTravelDetails(travelFields.travelDetails ?? "");
+		}
+		// eslint-disable-next-line
+	}, [fetchedProfile]);
 
 	const maxChars = 100;
 
