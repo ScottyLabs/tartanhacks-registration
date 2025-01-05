@@ -77,6 +77,7 @@ const TravelSection = ({
 				<FormControlLabel
 					control={
 						<Checkbox
+							disabled
 							value={wantsTravelReimbursement}
 							checked={wantsTravelReimbursement}
 							onChange={(e, checked) => setWantsTravelReimbursement(checked)}
@@ -97,6 +98,7 @@ const TravelSection = ({
 				helperText={travelInfoHelper}
 				fullWidth
 				multiline
+				disabled
 				value={travelDetails}
 				onChange={(e) => {
 					setTravelDetails(e.target.value.slice(0, maxChars));
