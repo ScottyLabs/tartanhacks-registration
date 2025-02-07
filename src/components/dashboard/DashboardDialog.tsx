@@ -432,7 +432,7 @@ const DashboardDialog = (): ReactElement => {
 					</Collapse>
 					<DialogContentText>
 						Are you sure you want to cancel your registration for
-						TartanHacks 2022?
+						TartanHacks 2025?
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
