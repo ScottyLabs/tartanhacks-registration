@@ -109,6 +109,12 @@
 	}
 }
 
+.chipJudge {
+	&:global(.MuiChip-root) {
+		background-color: $status-color-judge;
+	}
+}
+
 .buttonContainer {
 	display: flex;
 	gap: 5px;

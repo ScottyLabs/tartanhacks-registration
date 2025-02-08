@@ -162,6 +162,17 @@ const ParticipantTable = (): ReactElement => {
 		}
 	};
 
+	const getJudgeChip = (judge: boolean) => {
+		if (judge) {
+			return (
+				<Chip
+					label="JUDGE"
+					className={`${styles.chipMargin} ${styles.chipJudge}`}
+				/>
+			);
+		}
+	};
+
 	const admitUser = async (userId: string) => {
 		try {
 			await dispatch(actions.user.admitUser(userId));
@@ -256,6 +267,7 @@ const ParticipantTable = (): ReactElement => {
 						<div>
 							{getStatusChips(original.status)}
 							{getAdminChip(original.admin)}
+							{getJudgeChip(original.judge)}
 						</div>
 					);
 				},
