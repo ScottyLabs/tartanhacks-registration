@@ -249,6 +249,8 @@ const ParticipantTable = (): ReactElement => {
 		const getParticipants = async () => {
 			setLoading(true);
 			try {
+				await dispatch(actions.sponsors.list());
+
 				const { data } = (await dispatch(
 					actions.user.getParticipants(),
 				)) as {
@@ -262,8 +264,6 @@ const ParticipantTable = (): ReactElement => {
 					return a.email.localeCompare(b.email);
 				});
 				setParticipants(data);
-
-				await dispatch(actions.sponsors.list());
 			} catch (err) {
 				console.error(err);
 			}
