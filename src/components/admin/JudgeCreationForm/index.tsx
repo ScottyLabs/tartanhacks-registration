@@ -70,7 +70,7 @@ const JudgeCreationForm = (): ReactElement => {
 				<div className={styles.formContents}>
 					<Typography variant="body2">
 						If creating multiple judges at once, put
-						each name on a new line
+						each email on a new line
 					</Typography>
 					<TextField
 						label="Judges"
