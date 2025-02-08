@@ -422,8 +422,8 @@ const ParticipantTable = (): ReactElement => {
 						searchString
 							.trim()
 							.toLowerCase() == 'judge'),
-			)
-	}
+			);
+	};
 
 	return (
 		<>

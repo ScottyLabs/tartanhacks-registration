@@ -1,17 +1,13 @@
 import { Box, Tab } from '@mui/material';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { ReactElement, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import actions from 'src/actions';
 import FloatingDiv from 'src/components/design/FloatingDiv';
 import AnalyticsTab from '../Analytics';
-import Teams from '../Teams';
 import ParticipantTable from '../ParticipantTable';
 import RecruiterCreationForm from '../RecruiterCreationForm';
 import SponsorCreationForm from '../SponsorCreationForm';
-import CheckInTable from '../CheckInTable';
 import styles from './index.module.scss';
-import axios from 'axios';
+import JudgeCreationForm from '../JudgeCreationForm';
 
 const AdminDialog = (): ReactElement => {
 	const [tabIndex, setTabIndex] = useState('0');
@@ -41,6 +37,7 @@ const AdminDialog = (): ReactElement => {
               <Tab label="Recruiters" value="1" />
               <Tab label="Sponsors" value="2" />
               <Tab label="Analytics" value="3" />
+			  <Tab label="Judges" value="4" />
             </TabList>
           </Box>
           <TabPanel value="0" className={styles.tabPanel}>
@@ -54,6 +51,9 @@ const AdminDialog = (): ReactElement => {
           </TabPanel>
           <TabPanel value="3" className={styles.tabPanel}>
             <AnalyticsTab />
+          </TabPanel>
+          <TabPanel value="4" className={styles.tabPanel}>
+            <JudgeCreationForm />
           </TabPanel>
         </TabContext>
       </FloatingDiv>

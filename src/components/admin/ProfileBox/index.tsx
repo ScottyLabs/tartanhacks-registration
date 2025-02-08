@@ -308,7 +308,7 @@ const JudgeSettings = ({
 				onClick={async () => {
 					try {
 						await dispatch(
-							actions.user.removeJudge(participant?.email),
+							actions.user.removeJudges([participant?.email]),
 						);
 						if (participant) participant.judge = false;
 						setProfileOpen(false);
@@ -327,7 +327,7 @@ const JudgeSettings = ({
 				type="button"
 				onClick={async () => {
 					try {
-						await dispatch(actions.user.addJudge(participant?.email));
+						await dispatch(actions.user.addJudges([participant?.email]));
 						if (participant) participant.judge = true;
 						setProfileOpen(false);
 					} catch (err) {
