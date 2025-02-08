@@ -8,6 +8,7 @@ import * as requests from './requests';
 import * as recruiters from './recruiters';
 import * as analytics from './analytics';
 import * as checkin from './checkin';
+import * as judges from './judges';
 
 export default {
 	auth,
@@ -20,4 +21,5 @@ export default {
 	recruiters,
 	analytics,
 	checkin,
+	judges,
 };

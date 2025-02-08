@@ -1,9 +1,15 @@
 import { Button, Snackbar, TextField, Typography } from '@mui/material';
 import { Alert } from '@mui/material';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import actions from 'src/actions';
 import styles from './index.module.scss';
+import { Participant } from 'types/Participant';
+
+interface Sponsor {
+	name: string;
+	_id: string;
+}
 
 const JudgeCreationForm = (): ReactElement => {
 	const dispatch = useDispatch();
@@ -16,6 +22,10 @@ const JudgeCreationForm = (): ReactElement => {
 
 	const [success, setSuccess] = useState(false);
 	const [successMessage, setSuccessMessage] = useState('');
+
+	const [judgeList, setJudgeList] = useState<Participant[]>([]);
+	const [sponsorList, setSponsorList] = useState<Sponsor[]>([]);
+	const [invalidated, setInvalidated] = useState(false);
 
 	const createJudges = async () => {
 		setLoading(true);
@@ -35,7 +45,31 @@ const JudgeCreationForm = (): ReactElement => {
 			setErrorMessage(err.data);
 		}
 		setLoading(false);
+		setInvalidated(true);
 	};
+
+	useEffect(() => {
+		const getParticipants = async () => {
+			setLoading(true);
+			try {
+				const { data: sponsor } = (await dispatch(
+					actions.sponsors.list(),
+				));
+				setSponsorList(sponsor);
+
+				const { data } = (await dispatch(
+					actions.judges.list(),
+				)) as {
+					data: Participant[];
+				};
+				setJudgeList(data);
+			} catch (err) {
+				console.error(err);
+			}
+			setInvalidated(false);
+		};
+		getParticipants();
+	}, [invalidated]);
 
 	return (
 		<div className={styles.container}>
@@ -86,6 +120,22 @@ const JudgeCreationForm = (): ReactElement => {
 					</div>
 				</div>
 			</form>
+			<div className={styles.headerContainer}>
+				<Typography variant="h4" className={styles.currentJudgesHeader}>
+					Current Judges
+				</Typography>
+				{judgeList.map((judge) => {
+					const company = sponsorList.find((t) => t._id === judge.company?._id)?.name;
+					return (
+						<div key={judge.email}>
+							{judge.email}
+							{company && ` (${company})`}
+							{judge.admin && ' (Admin)'}
+							{judge.judge && ' (Judge)'}
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 };

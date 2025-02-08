@@ -44,6 +44,7 @@ export enum DispatchActionType {
 	// Judge
 	ADD_JUDGE = 'ADD_JUDGE',
 	REMOVE_JUDGE = 'REMOVE_JUDGE',
+	GET_JUDGES = 'GET_JUDGES',
 
 	// Application form
 	APPLICATION_UPLOAD_RESUME = 'APPLICATION_UPLOAD_RESUME',
