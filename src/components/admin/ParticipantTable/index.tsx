@@ -540,7 +540,11 @@ const ParticipantTable = (): ReactElement => {
 											(row.original.admin &&
 												searchString
 													.trim()
-													.toLowerCase() == 'admin'),
+													.toLowerCase() == 'admin') ||
+											(row.original.judge &&
+												searchString
+													.trim()
+													.toLowerCase() == 'judge'),
 									)
 									.slice(
 										page * rowsPerPage,
