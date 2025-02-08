@@ -383,6 +383,48 @@ const ParticipantTable = (): ReactElement => {
 			},
 		});
 
+	const getRows = () => {
+		return rows
+			.filter(
+				(row) =>
+					// Search by email
+					row.original.email
+						.trim()
+						.toLowerCase()
+						.includes(
+							searchString
+								.trim()
+								.toLowerCase(),
+						) ||
+					// Search by status
+					row.original.status
+						.trim()
+						.toLowerCase()
+						.includes(
+							searchString
+								.trim()
+								.toLowerCase(),
+						) ||
+					// Search for applied status
+					(row.original.status.includes(
+							'COMPLETED_PROFILE',
+						) &&
+						searchString
+							.trim()
+							.toLowerCase() ==
+						'applied') ||
+					// Search for admins
+					(row.original.admin &&
+						searchString
+							.trim()
+							.toLowerCase() == 'admin') ||
+					(row.original.judge &&
+						searchString
+							.trim()
+							.toLowerCase() == 'judge'),
+			)
+	}
+
 	return (
 		<>
 			<Modal
@@ -507,46 +549,7 @@ const ParticipantTable = (): ReactElement => {
 						<TableBody {...getTableBodyProps()}>
 							{
 								// Loop over the table rows
-								rows
-									.filter(
-										(row) =>
-											// Search by email
-											row.original.email
-												.trim()
-												.toLowerCase()
-												.includes(
-													searchString
-														.trim()
-														.toLowerCase(),
-												) ||
-											// Search by status
-											row.original.status
-												.trim()
-												.toLowerCase()
-												.includes(
-													searchString
-														.trim()
-														.toLowerCase(),
-												) ||
-											// Search for applied status
-											(row.original.status.includes(
-												'COMPLETED_PROFILE',
-											) &&
-												searchString
-													.trim()
-													.toLowerCase() ==
-													'applied') ||
-											// Search for admins
-											(row.original.admin &&
-												searchString
-													.trim()
-													.toLowerCase() == 'admin') ||
-											(row.original.judge &&
-												searchString
-													.trim()
-													.toLowerCase() == 'judge'),
-									)
-									.slice(
+								getRows().slice(
 										page * rowsPerPage,
 										page * rowsPerPage + rowsPerPage,
 									)
@@ -590,9 +593,9 @@ const ParticipantTable = (): ReactElement => {
 					</Table>
 				</TableContainer>
 				<TablePagination
-					rowsPerPageOptions={[5, 10, 25]}
+					rowsPerPageOptions={[5, 10, 25, 50]}
 					component="div"
-					count={rows.length}
+					count={getRows().length}
 					rowsPerPage={rowsPerPage}
 					page={page}
 					onPageChange={(e, newPage: number) => setPage(newPage)}
