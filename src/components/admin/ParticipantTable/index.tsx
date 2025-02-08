@@ -29,7 +29,7 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import { Status } from 'enums/Status';
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Column, useTable } from 'react-table';
 import actions from 'src/actions';
 import { Participant } from 'types/Participant';
@@ -42,10 +42,16 @@ import {
 	LockResetOutlined,
 	MoreHorizRounded,
 } from '@mui/icons-material';
+import { RootState } from 'types/RootState';
 
 enum BulkAction {
 	ADMIT_ALL = 'Admit all',
 	REJECT_ALL = 'Reject all',
+}
+
+interface Sponsor {
+	name: string;
+	_id: string;
 }
 
 const ParticipantTable = (): ReactElement => {
@@ -68,6 +74,9 @@ const ParticipantTable = (): ReactElement => {
 	const snackbarDuration = 3000;
 
 	const [searchString, setSearchString] = useState('');
+
+	const sponsors: Sponsor[] =
+		useSelector((state: RootState) => state.sponsors.data) || [];
 
 	const openSnackbar = (msg: string) => {
 		setSnackbarMsg(msg);
@@ -173,6 +182,20 @@ const ParticipantTable = (): ReactElement => {
 		}
 	};
 
+	const getCompanyChip = (company?: string) => {
+		if (company && sponsors) {
+			const sponsorName = sponsors.find(
+				(sponsor) => sponsor._id == company,
+			)?.name;
+			return (
+				<Chip
+					label={sponsorName}
+					className={`${styles.chipMargin}`}
+				/>
+			);
+		}
+	}
+
 	const admitUser = async (userId: string) => {
 		try {
 			await dispatch(actions.user.admitUser(userId));
@@ -239,6 +262,8 @@ const ParticipantTable = (): ReactElement => {
 					return a.email.localeCompare(b.email);
 				});
 				setParticipants(data);
+
+				await dispatch(actions.sponsors.list());
 			} catch (err) {
 				console.error(err);
 			}
@@ -268,6 +293,7 @@ const ParticipantTable = (): ReactElement => {
 							{getStatusChips(original.status)}
 							{getAdminChip(original.admin)}
 							{getJudgeChip(original.judge)}
+							{getCompanyChip(original.company)}
 						</div>
 					);
 				},
@@ -421,7 +447,11 @@ const ParticipantTable = (): ReactElement => {
 					(row.original.judge &&
 						searchString
 							.trim()
-							.toLowerCase() == 'judge'),
+							.toLowerCase() == 'judge') ||
+					(row.original.company &&
+						searchString
+							.trim()
+							.toLowerCase() == 'sponsor'),
 			);
 	};
 
