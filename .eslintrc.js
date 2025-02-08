@@ -33,7 +33,7 @@ module.exports = {
     "no-unexpected-multiline": "error",
     "no-unreachable": "error",
     "object-curly-spacing": ["error", "always"],
-    semi: ["warn", "never"],
+    semi: ["warn", "always"],
     "import/no-anonymous-default-export": ["off"],
     "react-hooks/rules-of-hooks": ["off"],
     "@typescript-eslint/no-explicit-any": ["off"],

@@ -14,6 +14,7 @@ export type TeamMember = {
 	firstName: string;
 	lastName: string;
 	admin: boolean;
+	judge: boolean;
 	company?: string;
 	password: string;
 	status: Status;
