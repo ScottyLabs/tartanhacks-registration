@@ -291,6 +291,56 @@ const AdminSettings = ({
 	}
 };
 
+const JudgeSettings = ({
+	participant,
+	dispatch,
+	setProfileOpen,
+}: {
+	participant?: any;
+	dispatch: Dispatch<any>;
+	setProfileOpen: Dispatch<SetStateAction<boolean>>;
+}): ReactElement => {
+	if (participant?.judge) {
+		return (
+			<RectangleButton
+				className={styles.buttonMargin}
+				type="button"
+				onClick={async () => {
+					try {
+						await dispatch(
+							actions.user.removeJudge(participant?.email),
+						);
+						if (participant) participant.judge = false;
+						setProfileOpen(false);
+					} catch (err) {
+						console.error('Error removing user judge');
+					}
+				}}
+			>
+				Remove Judge
+			</RectangleButton>
+		);
+	} else {
+		return (
+			<RectangleButton
+				className={styles.buttonMargin}
+				type="button"
+				onClick={async () => {
+					try {
+						await dispatch(actions.user.addJudge(participant?.email));
+						if (participant) participant.judge = true;
+						setProfileOpen(false);
+					} catch (err) {
+						console.error('Error making user judge');
+					}
+				}}
+			>
+				Make Judge
+			</RectangleButton>
+		);
+	}
+};
+
 const ProfileBox = React.forwardRef(
 	(
 		{
@@ -349,6 +399,11 @@ const ProfileBox = React.forwardRef(
 								</span>
 							</Typography>
 							<AdminSettings
+								participant={participant}
+								dispatch={dispatch}
+								setProfileOpen={setProfileOpen}
+							/>
+							<JudgeSettings
 								participant={participant}
 								dispatch={dispatch}
 								setProfileOpen={setProfileOpen}

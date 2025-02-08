@@ -136,3 +136,25 @@ export const removeAdmin = (id: string): DispatchAction => ({
 	},
 	status: RequestStatus.PENDING,
 });
+
+export const addJudge = (email: string): DispatchAction => ({
+	type: DispatchActionType.ADD_JUDGE,
+	useAPI: true,
+	request: {
+		path: `/judges/`,
+		method: 'POST',
+		body: [email],
+	},
+	status: RequestStatus.PENDING,
+});
+
+export const removeJudge = (email: string): DispatchAction => ({
+	type: DispatchActionType.REMOVE_JUDGE,
+	useAPI: true,
+	request: {
+		path: `/judges/remove/`,
+		method: 'POST',
+		body: [email],
+	},
+	status: RequestStatus.PENDING,
+});
