@@ -125,6 +125,8 @@ const JudgeCreationForm = (): ReactElement => {
 					Current Judges
 				</Typography>
 				{judgeList.map((judge) => {
+					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+					// @ts-ignore
 					const company = sponsorList.find((t) => t._id === judge.company?._id)?.name;
 					return (
 						<div key={judge.email}>
